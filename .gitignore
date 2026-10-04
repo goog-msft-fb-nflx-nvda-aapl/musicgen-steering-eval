@@ -1,0 +1,9 @@
+.DS_Store
+*.pdf
+__pycache__/
+*.pyc
+audio/
+results/raw/
+*.wav
+*.pt
+*.npy
