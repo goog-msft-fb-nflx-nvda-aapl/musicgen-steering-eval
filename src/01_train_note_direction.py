@@ -2,9 +2,10 @@
 changes vs the example: model size and note are args, outputs go under trained_concepts/<model_tag>/ so runs never collide.
 usage: python 01_train_note_direction.py --model small --note "D#"
 """
-import argparse, json, os, random
+import argparse, io, json, os, random
+import soundfile as sf
 import torch
-from datasets import load_dataset
+from datasets import Audio, load_dataset
 from transformers import AutoProcessor, MusicgenForConditionalGeneration, EncodecModel
 from musicrfm import MusicGenController
 from musicrfm.utils import make_json_serializable
@@ -33,7 +34,8 @@ print("model", name, "decoder layers", nl, "using", len(layers), flush=True)
 ctl = MusicGenController(music_model, music_processor, encodec, encodec_proc, control_method="music_rfm",
                          n_components=a.n_components, rfm_iters=a.rfm_iters, batch_size=16)
 
-ds = load_dataset("meganwei/syntheory", "notes")["train"]
+# decode=False + soundfile: server has no ffmpeg/torchcodec
+ds = load_dataset("meganwei/syntheory", "notes")["train"].cast_column("audio", Audio(decode=False))
 pos = [x for x in ds if x["root_note_name"] == a.note]
 neg = [x for x in ds if x["root_note_name"] != a.note]
 n = min(len(pos), len(neg))
@@ -43,7 +45,10 @@ train, val, test = pos[:i1] + neg[:i1], pos[i1:i2] + neg[i1:i2], pos[i2:] + neg[
 for s in (train, val, test): random.shuffle(s)
 print(f"note {a.note}: {n} pos/{n} neg per class; train {len(train)} val {len(val)} test {len(test)}", flush=True)
 
-def feats(s): return torch.cat([ctl.get_audio_features(x) for x in s], dim=0)
+def dec(x):
+    arr, sr = sf.read(io.BytesIO(x["audio"]["bytes"]), dtype="float32", always_2d=True)
+    return {"audio": {"array": arr.mean(1), "sampling_rate": sr}}
+def feats(s): return torch.cat([ctl.get_audio_features(dec(x)) for x in s], dim=0)
 def labs(s): return torch.tensor([1 if x["root_note_name"] == a.note else 0 for x in s]).reshape(-1, 1)
 tr_d, va_d, te_d = feats(train), feats(val), feats(test)
 
