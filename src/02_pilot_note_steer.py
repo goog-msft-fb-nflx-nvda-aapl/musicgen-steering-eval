@@ -8,7 +8,18 @@ import argparse, json, os, itertools
 import numpy as np, torch, librosa, soundfile as sf
 from transformers import AutoProcessor, MusicgenForConditionalGeneration, EncodecModel
 from musicrfm import MusicGenController
-from musicrfm import generation_utils as gu
+
+def add_hooks(dec, directions, layers, eta):
+    """residual-stream steering: add eta * unit direction to the output of each chosen decoder layer.
+    own implementation because musicrfm.generation_utils.hook_model assumes layer output is a tuple (output[0]);
+    transformers 5.x returns a tensor there, which breaks it."""
+    hs = []
+    for l in layers:
+        v = directions[l][0].reshape(1, 1, -1).to(device="cuda", dtype=next(dec.parameters()).dtype) * eta
+        def hook(m, i, o, v=v):
+            return (o[0] + v,) + tuple(o[1:]) if isinstance(o, tuple) else o + v
+        hs.append(dec.model.decoder.layers[l].register_forward_hook(hook))
+    return hs
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--model", default="small"); ap.add_argument("--note", default="D#")
@@ -53,10 +64,10 @@ os.makedirs(a.out, exist_ok=True)
 rows = []
 for seed, eta in itertools.product(a.gen_seeds, a.etas):
     torch.manual_seed(seed)
-    hooks = gu.hook_model(model.decoder, ctl.directions, layers, eta) if eta > 0 else {}
+    hooks = add_hooks(model.decoder, ctl.directions, layers, eta) if eta > 0 else []
     with torch.no_grad():
         audio = model.generate(**inp, guidance_scale=3.0, max_new_tokens=a.tokens)
-    gu.clear_hooks(hooks)
+    for h in hooks: h.remove()
     for i, w in enumerate(audio[:, 0].cpu().numpy()):
         ch = librosa.feature.chroma_cqt(y=w, sr=sr).mean(1)
         rows.append(dict(seed=seed, eta=eta, prompt=i, argmax=int(ch.argmax()), hit=int(ch.argmax() == tgt),
