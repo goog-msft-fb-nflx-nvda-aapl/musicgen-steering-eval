@@ -1,0 +1,19 @@
+musicrfm/__init__.py:0
+musicrfm/control_toolkits.py:0
+musicrfm/direction_utils.py:1
+musicrfm/generation_utils.py:0
+musicrfm/rfm_controllers.py:0
+musicrfm/utils.py:0
+diff --git a/musicrfm/direction_utils.py b/musicrfm/direction_utils.py
+index 6d53f69..438f5ba 100644
+--- a/musicrfm/direction_utils.py
++++ b/musicrfm/direction_utils.py
+@@ -867,7 +867,7 @@ def get_hidden_states_music(prompts, model, processor, hidden_layers, forward_ba
+             input_ids = batch[0]
+             #print("input id shape", input_ids.shape)
+             outputs = model(input_ids=input_ids, output_hidden_states=True)
+-            num_layers = 48
++            num_layers = model.config.num_hidden_layers  # was hardcoded 48 (large only)
+             out_hidden_states = outputs.hidden_states
+             #print("out_hidden_states", out_hidden_states)
+             #print("out_hidden_states shape", len(out_hidden_states), out_hidden_states[0].shape)
