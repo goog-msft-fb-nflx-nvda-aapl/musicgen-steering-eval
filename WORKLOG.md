@@ -74,3 +74,26 @@ G# 94.8/84.8 | 95.2/82.0 | -8,-7,-5
 G 95.2/87.2 | 95.6/83.6 | -3,-4,-12
 single seed, single split per note, n=250 (SE ~2 points), so layer-to-layer and note-to-note differences of a few points are not resolved. the max over 23 layers is also selected on the test numbers shown, so it is optimistic as a summary. top-3 val layers cluster in -5..-13 for most notes (G is the exception with -3,-4).
 arm comparison (D#) is running on gpu 1 (pid 111449 at 20:22); its results are not in the repo yet.
+
+## 2026-10-15 arm comparison, D#, musicgen-small (src/03_arm_compare.py, ran 2026-10-14 ~5 min on gpu 1)
+config: direction = D# note direction (n_components 12, rfm_iters 30, train seed 42; see 2026-10-14 entries). arms: const8 = top-8 layers by val score, weight 1, inject every step; musicrfm = all 23 layers, weight = minmax(val score)^(1/0.95) (weights: -12 1.0, -8 0.88, -7/-9/-11/-13 0.82, -5/-6/-10 0.75, -4 0.63, -14..-17 0.0, -18..-21 0.16, -1/-2 0.22, -3 0.28, -22 0.11, -23 0.05), per-layer per-step injection p=0.3 (own re-implementation of the paper's description). eta in {0.15, 0.3, 0.45, 0.6}. 20 prompts x 4 generation seeds = 80 paired clips per cell; the same torch+python seed per (seed, eta) so every cell pairs with the unsteered baseline. guidance_scale 3.0, 500 tokens (10 s). evaluator: librosa chroma_cqt time-mean; hit = D# is the argmax pitch class; frac = D# share of chroma energy. gpu 1. raw rows + 27 demo flacs: results/arms/.
+stats: exact McNemar on hit, Wilcoxon signed-rank on frac, Holm across the 8 arm x eta cells vs baseline, Holm across 4 etas for arm-vs-arm.
+
+unsteered baseline: hit 1/80 (0.0125), frac 0.068.
+vs baseline (hit rate; discordant up/down; McNemar p, Holm p | frac; Holm p):
+- const8 0.15: 0.075 (6/1) p=.125, holm .25 | 0.093, holm .0011
+- const8 0.30: 0.287 (23/1) p<1e-4, holm <1e-4 | 0.122, holm <1e-4
+- const8 0.45: 0.175 (14/1) p=.001, holm .0039 | 0.113, holm <1e-4
+- const8 0.60: 0.113 (9/1) p=.0215, holm .0645 | 0.098, holm <1e-4
+- musicrfm 0.15: 0.037 (3/1) p=.625, holm .625 | 0.071, holm .55
+- musicrfm 0.30: 0.188 (14/0) p=1e-4, holm .0006 | 0.101, holm <1e-4
+- musicrfm 0.45: 0.263 (20/0) p<1e-4, holm <1e-4 | 0.118, holm <1e-4
+- musicrfm 0.60: 0.475 (37/0) p<1e-4, holm <1e-4 | 0.158, holm <1e-4
+arm vs arm (musicrfm - const8), same eta, paired: eta 0.15 p=.45 (holm .55); 0.30 p=.18 (holm .55; const8 ahead, 18 vs 10 discordant); 0.45 p=.26 (holm .55; rfm ahead 18 vs 11); 0.60 p<1e-4 (holm <1e-4; musicrfm-only hit 31, const8-only hit 2).
+chroma entropy (bits; uniform 3.585): baseline 3.360, const8 3.375-3.420, musicrfm 3.348-3.393, i.e. no flattening of the chroma at these etas.
+
+observations / interpretation (labelled as such):
+- both configs raise D# prominence over baseline in the paired design. const8 hit rate peaks at eta 0.3 and drops at 0.45 and 0.6; the musicrfm-style config keeps rising through 0.6 (0.475). only the 0.6 arm difference survives Holm.
+- interpretation only, untested: const8 adds eta to 8 layers at every step (about 8*eta per step in total), the musicrfm-style config adds weighted eta with p=0.3 (expected sum of weights about 11.6*0.3 = 3.5 eta per step). the two configs differ in total injected magnitude as well as in layer weighting and injection prob, so this comparison does not isolate which factor matters; a matched-magnitude comparison (plan Q2: pareto front) is needed.
+- the earlier pilot (const8-like, p=1) fell to 0 hits at eta>=1.0; etas above 0.6 were not run here, so the musicrfm-style arm's behaviour beyond 0.6 is unknown.
+- caveats: one note, one model size, chroma-argmax evaluator not validated on labelled audio, no fidelity metric (clap/mad) yet, 20 prompts reused across seeds so the 80 pairs are not independent draws of prompts.
