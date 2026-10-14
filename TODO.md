@@ -13,3 +13,8 @@
 - [ ] decide independent evaluator per concept (see PLAN open items)
 - [ ] pilot: note direction, small, 20x12, eta 0/0.3/0.6, throughput small+large
 - [ ] pitch deck inputs from PLAN.md
+
+- [ ] after train12 finishes: faithful musicrfm config arm (exp weighting kappa .95, p=0.3, eta .15/.3/.45/.6) on D# vs my constant top-8 config, paired
+- [ ] read 2609.22135, 2604.15557, 2504.04479 properly
+- [ ] direction-method interface: mean-diff, logistic, lda next to rfm (needs hidden-state cache; plan one extraction pass)
+- [ ] train12 (C..B except D#) running on gsm-gpu2 tmux ms:train12, logs note_small_*.log

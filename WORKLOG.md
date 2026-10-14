@@ -46,3 +46,7 @@ measured, 40 paired clips per eta (20 prompts x 2 seeds), vs eta=0:
 caveats: 40 pairs are not independent (20 prompts reused across the 2 seeds); p-values are uncorrected across the 4 eta comparisons (not Holm-adjusted); one note, one model size, one layer-selection rule, one evaluator. the chroma-argmax hit is a weak evaluator (time-mean chroma of polyphonic music, no check that D# is the tonic or a salient note); not yet validated on real labeled audio. i have not listened to the clips, and no audio-quality metric (clap/mad) has been computed, so why the eta>=1.0 rows go to 0 hits is not established. interpretation only: the non-monotonic pattern (up at 0.3, weaker at 0.6, none at >=1.0) is what the control-vs-quality tradeoff in PLAN Q2 would need to look at.
 
 infra note: transformers 5.18 returns a tensor from decoder layers (not a tuple), which breaks musicrfm.generation_utils.hook_model (output[0] indexes the batch); the pilot uses its own add_hooks. any future generation code must not use the library hook.
+
+## 2026-10-14 literature check + next jobs
+- survey in SURVEY.md; PLAN.md updated (musicrfm already has chroma/essentia/onset checks, so our novelty is paired stats + fidelity-matched direction-method comparison + decodability vs steerability on music, not "their eval is circular").
+- launched on gsm-gpu2 gpu 2, tmux ms:train12: sequential training of note directions C, C#, D, E, F, F#, G, G#, A, A#, B (musicgen-small, same config as D#), logs ~/musicgen_steer/note_small_<note>.log. one process at a time.

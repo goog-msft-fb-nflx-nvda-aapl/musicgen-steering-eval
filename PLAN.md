@@ -9,6 +9,14 @@ chosen 2026-10-05 from docs/response.md (deep-research reply to docs/RESEARCH_PR
 - Q2: four direction methods behind one interface (mean-difference/caa, logistic-probe normal, lda, rfm top eigenvector), compared at matched quality cost (control accuracy vs mad/clap pareto front), not at one shared eta.
 - Q3: is the layer where a concept is best decodable also where steering works best? layer chosen by probe auc vs layer chosen by measured steering effect on dev prompts, evaluated on held-out prompts (out-of-fold, same discipline as pa1 fusion weights).
 
+## update 2026-10-14 after reading musicrfm and neighbours (details in SURVEY.md)
+
+- Q1 reworded in practice: musicrfm already reports chroma/essentia/onset checks, so a chroma-argmax evaluator alone replicates them. our additions are paired design, significance tests and a validated independent evaluator. do not claim "circular evaluation" as their flaw.
+- new arm: faithful musicrfm config (exp layer weighting kappa 0.95, injection p=0.3, eta0 0.15-0.6) next to my constant-injection top-8 config, since my pilot at eta>=1.0 used p=1.
+- direction methods: musicrfm has no mean-diff/logistic/lda baselines, panda et al only for genre/timbre. that gap is Q2.
+- Q3 has non-music prior art (2609.22135, 2604.15557); frame as testing it on a music generator.
+- optional extension from musicrfm future work: higher rfm eigen-components (already trained, n_components=12).
+
 ## scope changes vs response.md
 
 - main grid on musicgen-small only (full factorial). response proposed small+medium; medium dropped unless time is left.
