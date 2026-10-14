@@ -56,3 +56,21 @@ src/03_arm_compare.py queued in tmux ms:arms; it waits for the train12 window to
 
 ## 2026-10-14 moved jobs to GPU 1
 rule from user: do not share a GPU with other users' processes; use a free GPU. gpu 2 had another user's job (876 MiB), gpu 3 another user's (and gpu 3 is on the broken list), gpu 0 broken. gpu 1 was idle, passed a real matmul check. stopped my own windows (train12, arms) and relaunched on CUDA_VISIBLE_DEVICES=1: tmux ms:train7 = notes F, F#, G, G#, A, A#, B (C, C#, D, D#, E already trained; F was interrupted mid-run and restarted), then ms:arms (03_arm_compare.py, D#) waits for train7 to close. my process on gpu 1: pid 4008731 (5.5 GB at last check). check all gpu indices again before every new launch.
+
+## 2026-10-14 all 12 note directions trained (musicgen-small)
+config identical to the D# run above (src/01_train_note_direction.py --model small, n_components 12, rfm_iters 30, seed 42, per-note balanced 1:1 split 70/15/15, test n=250, layers -1..-23, gpu 2 for C..E and part of F, gpu 1 for F..B after the move). result jsons in results/note_probe/ (one per note).
+per-note test accuracy over layers, max/min across the 23 layers (%): predictor | steering direction; top-3 layers by val score.
+D# 94.4/87.2 | 93.2/84.4 | -12,-8,-7
+A# 94.8/84.8 | 93.6/84.0 | -8,-9,-12
+A 93.2/86.4 | 94.0/85.2 | -9,-10,-6
+B 93.6/82.8 | 94.0/81.6 | -6,-5,-7
+C# 93.2/85.2 | 93.2/86.0 | -7,-11,-8
+C 96.0/86.4 | 96.8/83.6 | -9,-10,-6
+D 94.4/83.6 | 92.8/84.8 | -8,-10,-7
+E 94.0/86.8 | 94.0/84.4 | -13,-7,-12
+F# 92.4/84.8 | 93.6/84.4 | -13,-7,-5
+F 93.6/86.4 | 91.6/78.8 | -6,-5,-7
+G# 94.8/84.8 | 95.2/82.0 | -8,-7,-5
+G 95.2/87.2 | 95.6/83.6 | -3,-4,-12
+single seed, single split per note, n=250 (SE ~2 points), so layer-to-layer and note-to-note differences of a few points are not resolved. the max over 23 layers is also selected on the test numbers shown, so it is optimistic as a summary. top-3 val layers cluster in -5..-13 for most notes (G is the exception with -3,-4).
+arm comparison (D#) is running on gpu 1 (pid 111449 at 20:22); its results are not in the repo yet.
