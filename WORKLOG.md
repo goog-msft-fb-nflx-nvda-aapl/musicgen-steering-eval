@@ -97,3 +97,10 @@ observations / interpretation (labelled as such):
 - interpretation only, untested: const8 adds eta to 8 layers at every step (about 8*eta per step in total), the musicrfm-style config adds weighted eta with p=0.3 (expected sum of weights about 11.6*0.3 = 3.5 eta per step). the two configs differ in total injected magnitude as well as in layer weighting and injection prob, so this comparison does not isolate which factor matters; a matched-magnitude comparison (plan Q2: pareto front) is needed.
 - the earlier pilot (const8-like, p=1) fell to 0 hits at eta>=1.0; etas above 0.6 were not run here, so the musicrfm-style arm's behaviour beyond 0.6 is unknown.
 - caveats: one note, one model size, chroma-argmax evaluator not validated on labelled audio, no fidelity metric (clap/mad) yet, 20 prompts reused across seeds so the 80 pairs are not independent draws of prompts.
+
+## 2026-10-15 queued work (nothing new started until arms11 ends; one process at a time)
+- ms:arms11 (running, gpu 1): src/03_arm_compare.py for notes C..B, both arms, same config as the D# run above.
+- ms:q2 (waits for arms11 to close, then runs sequentially): 04_validate_chroma.py (cpu; chroma-argmax vs labelled syntheory notes, 100 clips/note, writes chroma_validation.json) -> 05_cache_hidden.py --model small (gpu 1; caches mean-pooled hidden states for all 9936 clips, hidden_small.npz) -> 06_direction_methods.py --model small (cpu; meandiff / logistic / lda directions + per-layer val auc/test acc for all 12 notes, into directions_alt/ and results_alt/).
+- 03_arm_compare_v2.py on the server = repo src/03_arm_compare.py with --method {rfm,meandiff,logistic,lda}; rfm behaviour and output names unchanged. it is a separate file so the running arms11 loop keeps using the original.
+- caveat on 06: the split is rebuilt from 01's random call order (seed 42, random.sample on index lists) and is assumed, not verified, to select the same clips as the rfm runs. only split sizes are asserted (for D#).
+- scripts only compile-checked on the mac (py_compile), not run.
