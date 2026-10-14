@@ -20,6 +20,7 @@ ap.add_argument("--gen_seeds", type=int, nargs="+", default=[0, 1, 2, 3])
 ap.add_argument("--arms", nargs="+", default=["const8", "musicrfm"])
 ap.add_argument("--topk", type=int, default=8); ap.add_argument("--kappa", type=float, default=0.95)
 ap.add_argument("--p", type=float, default=0.3); ap.add_argument("--tokens", type=int, default=500)
+ap.add_argument("--method", default="rfm", choices=["rfm", "meandiff", "logistic", "lda"])
 ap.add_argument("--out", default="./arms")
 a = ap.parse_args()
 
@@ -63,9 +64,19 @@ enc = EncodecModel.from_pretrained("facebook/encodec_32khz").to("cuda")
 encp = AutoProcessor.from_pretrained("facebook/encodec_32khz")
 ctl = MusicGenController(model, proc, enc, encp, control_method="music_rfm", n_components=a.n_components, rfm_iters=30, batch_size=16)
 ctl.load(concept=concept, model_name=tag, path=os.path.join(tdir, "directions"))
+if a.method != "rfm":  # directions + val scores from 06_direction_methods.py
+    import pickle
+    nn = a.note.replace("#", "sharp")
+    ctl.directions = pickle.load(open(f"directions_alt/{a.method}/{a.model}/note_{nn}.pkl", "rb"))
+    sc = {int(l): m["train_results"]["score"] for l, m in json.load(open(f"results_alt/{a.method}/{a.model}/note_{nn}.json"))["layer_metrics"].items()}
+    lo, hi = min(sc.values()), max(sc.values())
+    ARMS = {"const8": ({l: 1.0 for l in sorted(sorted(sc, key=lambda l: -sc[l])[:a.topk])}, 1.0),
+            "musicrfm": ({l: ((sc[l] - lo) / (hi - lo)) ** (1 / a.kappa) for l in sc}, a.p)}
 sr = model.config.audio_encoder.sampling_rate
 inp = proc(text=PROMPTS, padding=True, return_tensors="pt").to("cuda")
 os.makedirs(a.out, exist_ok=True)
+
+mtag = "" if a.method == "rfm" else a.method + "_"
 
 def run(arm, eta, seed):
     torch.manual_seed(seed); rng = random.Random(seed)
@@ -78,7 +89,7 @@ def run(arm, eta, seed):
         out.append(dict(arm=arm or "base", eta=eta if arm else 0.0, seed=seed, prompt=i, argmax=int(ch.argmax()), hit=int(ch.argmax() == tgt),
                         frac=float(ch[tgt] / ch.sum()), chroma=ch.round(4).tolist()))
         if i in (0, 5, 10) and seed == a.gen_seeds[0]:
-            sf.write(f"{a.out}/{tag}_{a.note}_{arm or 'base'}_eta{eta if arm else 0.0}_s{seed}_p{i}.flac", w, sr, format="FLAC")
+            sf.write(f"{a.out}/{tag}_{a.note}_{mtag}{arm or 'base'}_eta{eta if arm else 0.0}_s{seed}_p{i}.flac", w, sr, format="FLAC")
     return out
 
 rows = []
@@ -90,5 +101,5 @@ for seed in a.gen_seeds:
         r = [x for x in rows if x["seed"] == seed and x["arm"] == arm]
         print(f"seed {seed} {arm}: " + "  ".join(f"eta{e}:{np.mean([x['hit'] for x in r if x['eta']==e]):.2f}" for e in sorted({x['eta'] for x in r})), flush=True)
 json.dump(dict(args=vars(a), arms={k: dict(layer_weights=v[0], p=v[1]) for k, v in ARMS.items()}, prompts=PROMPTS, rows=rows),
-          open(f"{a.out}/{tag}_{a.note}_arms.json", "w"))
+          open(f"{a.out}/{tag}_{a.note}_arms.json" if a.method == "rfm" else f"{a.out}/{tag}_{a.note}_{a.method}_arms.json", "w"))
 print("done", flush=True)
