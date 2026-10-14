@@ -32,3 +32,17 @@ things i do not trust yet:
 - classification warning "Using floating point y".
 
 next: pilot generation (steer musicgen-small with this D# direction at eta 0/0.3/0.6, 20 prompts, paired seeds, chroma-argmax evaluator) and fix the generation-side layer assumptions first.
+
+## 2026-10-14 pilot: D# steering on musicgen-small (first look, not the full pilot)
+config: src/02_pilot_note_steer.py --model small --note D#; direction = results/note_probe/ D# direction (n_components 12, rfm_iters 30, train seed 42), unit-norm top direction per layer (norm 1.0). steering layers = top-8 by val score: -13,-12,-11,-9,-8,-7,-6,-5. injection: add eta * direction to each chosen decoder layer's output at every step (constant, no layer weights, no inject_chance). generation: guidance_scale 3.0, sampling, 500 tokens (10 s), 20 text prompts (listed in the json) x 2 generation seeds, same torch seed for every eta so baseline and steered are paired, batch of 20. eta in {0, 0.3, 0.6, 1.0, 1.5}. evaluator: librosa chroma_cqt, time-mean, hit = argmax pitch class == D#; frac = D# share of total chroma energy. gpu 2 (shared), OMP/MKL 4 threads. raw rows + 3 flac demos per (seed, eta) in results/pilot/.
+
+measured, 40 paired clips per eta (20 prompts x 2 seeds), vs eta=0:
+- eta 0.3: hit 0.025 -> 0.275 (11 discordant up, 1 down), exact McNemar p=0.0063; frac 0.074 -> 0.130, Wilcoxon p<1e-4
+- eta 0.6: hit 0.025 -> 0.125 (5 up, 1 down), p=0.219; frac 0.074 -> 0.099, Wilcoxon p=0.0018
+- eta 1.0: hit 0.025 -> 0.000, p=1.0; frac 0.074 -> 0.062, p=0.44
+- eta 1.5: hit 0.025 -> 0.000, p=1.0; frac 0.074 -> 0.060, p=0.31
+- uniform chroma would give frac 0.083 and entropy 3.58 bits; mean chroma entropy by eta: 3.335 (0), 3.383 (0.3), 3.446 (0.6), 3.241 (1.0), 3.311 (1.5).
+
+caveats: 40 pairs are not independent (20 prompts reused across the 2 seeds); p-values are uncorrected across the 4 eta comparisons (not Holm-adjusted); one note, one model size, one layer-selection rule, one evaluator. the chroma-argmax hit is a weak evaluator (time-mean chroma of polyphonic music, no check that D# is the tonic or a salient note); not yet validated on real labeled audio. i have not listened to the clips, and no audio-quality metric (clap/mad) has been computed, so why the eta>=1.0 rows go to 0 hits is not established. interpretation only: the non-monotonic pattern (up at 0.3, weaker at 0.6, none at >=1.0) is what the control-vs-quality tradeoff in PLAN Q2 would need to look at.
+
+infra note: transformers 5.18 returns a tensor from decoder layers (not a tuple), which breaks musicrfm.generation_utils.hook_model (output[0] indexes the batch); the pilot uses its own add_hooks. any future generation code must not use the library hook.
