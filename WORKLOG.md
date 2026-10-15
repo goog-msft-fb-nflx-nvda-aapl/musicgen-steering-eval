@@ -125,3 +125,17 @@ test accuracy (%) of the 1-d projection at the layer with best val AUC, mean ove
 
 ### running
 ms:altarms on gsm-gpu2 gpu 2 (idle when checked; passed matmul check; other users on gpus 0,1,3): 03_arm_compare_v2.py for methods logistic, lda, meandiff x 12 notes, same arms/etas/seeds. ~5 min per note -> ~3 h. outputs ~/musicgen_steer/arms/musicgen_small_<note>_<method>_arms.json.
+
+## 2026-10-15 direction methods x arms, pooled over 12 notes (src/analysis_methods.py; runs: ms:altarms, 03_arm_compare_v2.py --method <m>, gpu 2, 36 runs, no tracebacks)
+config as the rfm arm sweep above (musicgen-small, per-note direction from 06_direction_methods.py for logistic/lda/meandiff; unit-norm direction, same layer weighting rule using each method's own val AUC; eta in .15/.3/.45/.6; 20 prompts x 4 seeds x 12 notes = 960 pairs per cell; unsteered baseline identical across method runs, hit 0.083). hit = target note is the chroma argmax.
+pooled hit rate at eta .15/.3/.45/.6:
+- rfm: const8 .414/.636/.765/.714; musicrfm-style .280/.509/.688/.781
+- logistic: const8 .311/.509/.607/.594; musicrfm-style .180/.343/.536/.678
+- lda: const8 .225/.356/.435/.433; musicrfm-style .131/.229/.328/.440
+- meandiff: const8 .773/.939/.974/.932; musicrfm-style .692/.908/.971/.985
+all 32 cells differ from the unsteered baseline (max Holm p 3.4e-4). vs the rfm direction at the same arm/eta (exact McNemar, Holm over 24 cells): meandiff higher in all 8 cells (e.g. musicrfm-style eta .6 .985 vs .781, 206 method-only vs 10 rfm-only hits), logistic and lda lower in all 16 cells (all holm < 1e-6).
+target share of chroma energy (frac) minus unsteered, eta .6: rfm +.125 (const8) / +.150 (musicrfm-style); logistic +.096/+.109; lda +.063/+.067; meandiff +.360/+.295.
+per-note, eta .6, musicrfm-style: meandiff .95-1.00 for every note; rfm .47 (D#) to .95 (C); lda .21 (F#) to .61 (A). const8 meandiff at A# only .51 (other notes .85-1.00).
+decodability (earlier entry) did not order the methods the same way as steering: mean-diff had the lowest probe test accuracy (87.0% mean) yet the highest hit rate; lda/logistic/rfm decoded at ~92-93% and steered less. observation only; one model size, one evaluator.
+what this does NOT show: same nominal eta is not the same perturbation size or the same audio quality. the directions are unit norm but residual-stream geometry differs by method; the large chroma-share gain for meandiff (+.30-.36 of the chroma energy) could be steering or could be degraded audio (e.g. a drone on the target pitch). no fidelity metric has been run on these clips, so the matched-quality comparison (plan Q2) is still open. the chroma evaluator is 86% accurate on clean notes (fifth bias, see above). also: a new VLLM::EngineCore process owned by jtan (pid 796576, 126 GB) appeared on gpu 0 after i stopped the earlier one; not launched by me, left alone.
+next: add clap-based fidelity (text-audio score + embedding distribution distance vs unsteered) and re-generate the same seeds to get it.
