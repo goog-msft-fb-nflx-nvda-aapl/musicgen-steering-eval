@@ -1,8 +1,8 @@
 """regenerate the same (note, method, arm, eta, seed, prompt) clips as 03_arm_compare(_v2).py and add per-clip fidelity features:
-  - CLAP (laion/larger_clap_music via transformers) audio embedding and text-audio cosine score with the generation prompt
+  - CLAP (laion/clap-htsat-fused via transformers; same htsat-fused family as musicrfm 630k-audioset-fusion-best, not necessarily the identical checkpoint) audio embedding and text-audio cosine score with the generation prompt
   - chroma hit/frac again, compared with the earlier json to check the regeneration reproduces (reported as repro_hit_match)
 no audio is kept except a few demo flacs (seed 0, prompts 0/5/10). saves arms_fid/<model>_<note>_<method>_fid.npz.
-note: this checkpoint is not the one musicrfm used (630k-audioset-fusion-best); scores are comparable only within this project.
+note: scores are comparable only within this project.
 usage: python 07_fidelity.py --note "D#" --method meandiff --gen_seeds 0 1
 """
 import argparse, json, os, pickle, random, itertools
@@ -58,7 +58,7 @@ enc = EncodecModel.from_pretrained("facebook/encodec_32khz").to("cuda"); encp = 
 ctl = MusicGenController(model, proc, enc, encp, control_method="music_rfm", n_components=a.n_components, rfm_iters=30, batch_size=16)
 ctl.load(concept=concept, model_name=tag, path=os.path.join(tdir, "directions"))
 if a.method != "rfm": ctl.directions = pickle.load(open(f"directions_alt/{a.method}/{a.model}/note_{nn}.pkl", "rb"))
-clap = ClapModel.from_pretrained("laion/larger_clap_music").to("cuda").eval(); cproc = AutoProcessor.from_pretrained("laion/larger_clap_music")
+clap = ClapModel.from_pretrained("laion/clap-htsat-fused").to("cuda").eval(); cproc = AutoProcessor.from_pretrained("laion/clap-htsat-fused")
 with torch.no_grad():
     t = emb(clap.get_text_features(**cproc(text=PROMPTS, return_tensors="pt", padding=True).to("cuda"))); t = t / t.norm(dim=-1, keepdim=True)
 sr = model.config.audio_encoder.sampling_rate
