@@ -24,3 +24,12 @@
 - [ ] investigate B (const8 flat at ~0.22) and D# (weakest note)
 - [ ] fidelity metric (clap/mad) before any matched-quality comparison; evaluator is only 86% on clean notes (fifth bias)
 - [ ] medium/large confirmation subset (large throughput not measured)
+
+## queue (decided 2026-10-15, do in order; gpu server ends oct 31)
+- [ ] fid sweep (ms:fid, gpu 2) running -> pull npz, analysis_fidelity.py: hit vs clap/mmd pareto per method, drone check
+- [ ] controls: norm-matched random direction; all methods at matched perturbation norm; direction geometry (cosine between methods, variance subspace of logistic/lda)
+- [ ] Q3: per-layer causal steering sweep (dev prompts, eval held-out) vs probe-acc layers vs cheap gradient/attribution predictor of steering effect
+- [ ] other syntheory concepts (chords, scales/modes, tempo) with mean-diff + rfm; then two-concept composition (additive vs interfering)
+- [ ] second evaluator (mert/muq probe on real labeled audio or essentia), check method ranking holds
+- [ ] medium confirmation of best configs (measure throughput first)
+- [ ] write-up inputs from worklog; keep scripts+results pushed; clean server /tmp after each cycle
