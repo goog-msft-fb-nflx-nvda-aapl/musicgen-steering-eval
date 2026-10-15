@@ -72,7 +72,7 @@ def run(arm, eta, seed):
     w = audio[:, 0].float(); rows = []
     with torch.no_grad():
         w48 = AF.resample(w, sr, 48000).cpu().numpy()
-        e = emb(clap.get_audio_features(**cproc(audios=list(w48), sampling_rate=48000, return_tensors="pt").to("cuda"))); e = e / e.norm(dim=-1, keepdim=True)
+        e = emb(clap.get_audio_features(**cproc(audio=list(w48), sampling_rate=48000, return_tensors="pt").to("cuda"))); e = e / e.norm(dim=-1, keepdim=True)
     clapscore = (e * t).sum(-1).cpu().numpy(); E = e.cpu().numpy().astype(np.float16)
     for i, x in enumerate(w.cpu().numpy()):
         ch = librosa.feature.chroma_cqt(y=x, sr=sr).mean(1)
