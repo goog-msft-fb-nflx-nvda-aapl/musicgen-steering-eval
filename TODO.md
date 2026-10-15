@@ -18,3 +18,9 @@
 - [ ] read 2609.22135, 2604.15557, 2504.04479 properly
 - [ ] direction-method interface: mean-diff, logistic, lda next to rfm (needs hidden-state cache; plan one extraction pass)
 - [ ] train12 (C..B except D#) running on gsm-gpu2 tmux ms:train12, logs note_small_*.log
+
+- [x] all-notes rfm arm sweep, chroma validation, alt direction fits (WORKLOG 2026-10-15)
+- [ ] altarms running on gpu 2: logistic/lda/meandiff steering, then analysis_arms-style paired comparison across methods
+- [ ] investigate B (const8 flat at ~0.22) and D# (weakest note)
+- [ ] fidelity metric (clap/mad) before any matched-quality comparison; evaluator is only 86% on clean notes (fifth bias)
+- [ ] medium/large confirmation subset (large throughput not measured)

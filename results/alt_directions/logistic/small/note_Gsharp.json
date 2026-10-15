@@ -1,0 +1,173 @@
+{
+ "layer_metrics": {
+  "-1": {
+   "train_results": {
+    "score": 0.9641974505723205
+   },
+   "test_acc": 89.2,
+   "test_auc": 0.972032
+  },
+  "-2": {
+   "train_results": {
+    "score": 0.9674492715920916
+   },
+   "test_acc": 92.4,
+   "test_auc": 0.979584
+  },
+  "-3": {
+   "train_results": {
+    "score": 0.9731074401664933
+   },
+   "test_acc": 92.4,
+   "test_auc": 0.97632
+  },
+  "-4": {
+   "train_results": {
+    "score": 0.9772697710718002
+   },
+   "test_acc": 93.60000000000001,
+   "test_auc": 0.9823360000000001
+  },
+  "-5": {
+   "train_results": {
+    "score": 0.9824076482830385
+   },
+   "test_acc": 95.6,
+   "test_auc": 0.98784
+  },
+  "-6": {
+   "train_results": {
+    "score": 0.9827328303850157
+   },
+   "test_acc": 94.0,
+   "test_auc": 0.988672
+  },
+  "-7": {
+   "train_results": {
+    "score": 0.9885210718002082
+   },
+   "test_acc": 94.39999999999999,
+   "test_auc": 0.9888
+  },
+  "-8": {
+   "train_results": {
+    "score": 0.9872203433922997
+   },
+   "test_acc": 92.0,
+   "test_auc": 0.984576
+  },
+  "-9": {
+   "train_results": {
+    "score": 0.9828629032258064
+   },
+   "test_acc": 92.0,
+   "test_auc": 0.9858560000000001
+  },
+  "-10": {
+   "train_results": {
+    "score": 0.9882609261186264
+   },
+   "test_acc": 93.2,
+   "test_auc": 0.9870080000000001
+  },
+  "-11": {
+   "train_results": {
+    "score": 0.9827328303850156
+   },
+   "test_acc": 94.39999999999999,
+   "test_auc": 0.9874559999999999
+  },
+  "-12": {
+   "train_results": {
+    "score": 0.9855944328824141
+   },
+   "test_acc": 93.60000000000001,
+   "test_auc": 0.985792
+  },
+  "-13": {
+   "train_results": {
+    "score": 0.9830580124869928
+   },
+   "test_acc": 93.2,
+   "test_auc": 0.985536
+  },
+  "-14": {
+   "train_results": {
+    "score": 0.9679695629552549
+   },
+   "test_acc": 90.0,
+   "test_auc": 0.970944
+  },
+  "-15": {
+   "train_results": {
+    "score": 0.9605554110301767
+   },
+   "test_acc": 88.4,
+   "test_auc": 0.9651200000000001
+  },
+  "-16": {
+   "train_results": {
+    "score": 0.9577588449531738
+   },
+   "test_acc": 86.8,
+   "test_auc": 0.965504
+  },
+  "-17": {
+   "train_results": {
+    "score": 0.9554175338189387
+   },
+   "test_acc": 88.4,
+   "test_auc": 0.969792
+  },
+  "-18": {
+   "train_results": {
+    "score": 0.9647827783558791
+   },
+   "test_acc": 86.8,
+   "test_auc": 0.96288
+  },
+  "-19": {
+   "train_results": {
+    "score": 0.961205775234131
+   },
+   "test_acc": 88.0,
+   "test_auc": 0.968
+  },
+  "-20": {
+   "train_results": {
+    "score": 0.9550923517169614
+   },
+   "test_acc": 89.2,
+   "test_auc": 0.968064
+  },
+  "-21": {
+   "train_results": {
+    "score": 0.9539216961498439
+   },
+   "test_acc": 86.4,
+   "test_auc": 0.954944
+  },
+  "-22": {
+   "train_results": {
+    "score": 0.9584742455775234
+   },
+   "test_acc": 84.39999999999999,
+   "test_auc": 0.9456
+  },
+  "-23": {
+   "train_results": {
+    "score": 0.9508649843912591
+   },
+   "test_acc": 85.6,
+   "test_auc": 0.946496
+  }
+ },
+ "method": "logistic",
+ "note": "G#",
+ "model": "small",
+ "n": [
+  1158,
+  248,
+  250
+ ]
+}
