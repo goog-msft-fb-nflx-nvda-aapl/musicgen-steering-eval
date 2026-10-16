@@ -33,3 +33,4 @@
 - [ ] second evaluator (mert/muq probe on real labeled audio or essentia), check method ranking holds
 - [ ] medium confirmation of best configs (measure throughput first)
 - [ ] write-up inputs from worklog; keep scripts+results pushed; clean server /tmp after each cycle
+- [ ] Q3 sweep running (ms:sweep, gpu 2, launched 2026-10-16, src/09_layer_sweep.py meandiff x 12 notes, ~10 min/note): single-layer causal sweep on dev prompts 0-9 vs probe val score; probe8/causal8/rand8 compared on held-out prompts 10-19. next: pull layer_sweep/*.json, write analysis_layers.py (spearman probe vs causal per note, held-out hit by layer set), then rfm direction, then gradient/attribution predictor
