@@ -27,7 +27,7 @@
 
 ## queue (decided 2026-10-15, do in order; gpu server ends oct 31)
 - [x] fid sweep done, analysed (WORKLOG 2026-10-15 fidelity results)
-- [ ] controls running on gpu 2 (ms:ctl, launched 2026-10-16, random then shuffled, ~72 min); then pull arms_ctl/*_ctl.npz into results/fidelity/npz, rerun analysis_fidelity.py, direction geometry
+- [x] controls done (WORKLOG 2026-10-16); direction geometry (cosine between methods, variance subspace of logistic/lda) still to do, cpu-only on cached hidden states
 - [ ] Q3: per-layer causal steering sweep (dev prompts, eval held-out) vs probe-acc layers vs cheap gradient/attribution predictor of steering effect
 - [ ] other syntheory concepts (chords, scales/modes, tempo) with mean-diff + rfm; then two-concept composition (additive vs interfering)
 - [ ] second evaluator (mert/muq probe on real labeled audio or essentia), check method ranking holds
