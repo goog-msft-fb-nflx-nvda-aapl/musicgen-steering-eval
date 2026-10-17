@@ -66,6 +66,14 @@ ctl.load(concept=concept, model_name=tag, path=os.path.join(tdir, "directions"))
 if a.method != "rfm": ctl.directions = pickle.load(open(f"directions_alt/{a.method}/{a.model}/note_{nn}.pkl", "rb"))
 cfgm = AutoConfig.from_pretrained("m-a-p/MERT-v1-95M", trust_remote_code=True); mert = AutoModel.from_config(cfgm, trust_remote_code=True)
 mert.load_state_dict(torch.load(hf_hub_download("m-a-p/MERT-v1-95M", "pytorch_model.bin"), map_location="cpu", weights_only=True), strict=False); mert = mert.to("cuda").eval()
+# transformers 5 HubertEncoder does not return hidden_states for this remote-code model, so capture every encoder layer's output with hooks (12 layers; feature index = layer output index)
+_cap = []
+def _hk(m, i, o): _cap.append((o[0] if isinstance(o, tuple) else o)[0].mean(0).float().cpu().numpy())
+def mert_feats(x):
+    _cap.clear()
+    with torch.no_grad(): mert(x)
+    return np.stack(_cap)
+for _l in mert.encoder.layers: _l.register_forward_hook(_hk)
 fe = Wav2Vec2FeatureExtractor.from_pretrained("m-a-p/MERT-v1-95M", trust_remote_code=True); P = pickle.load(open("mert_probe.pkl", "rb"))
 sr = model.config.audio_encoder.sampling_rate
 inp = proc(text=PROMPTS, padding=True, return_tensors="pt").to("cuda"); os.makedirs(a.out, exist_ok=True)
@@ -79,7 +87,7 @@ def run(arm, eta, seed):
     w24 = AF.resample(w, sr, 24000).cpu().numpy(); feats = []
     for x in w24:
         xi = fe(x, sampling_rate=24000, return_tensors="pt")["input_values"].to("cuda")
-        with torch.no_grad(): feats.append(mert(xi, output_hidden_states=True).hidden_states[P["layer"]][0].mean(0).cpu().numpy())
+        feats.append(mert_feats(xi)[P["layer"]])
     pr = P["clf"].predict_proba((np.stack(feats) - P["mu"]) / P["sd"])
     for i, x in enumerate(w.cpu().numpy()):
         ch = librosa.feature.chroma_cqt(y=x, sr=sr).mean(1)

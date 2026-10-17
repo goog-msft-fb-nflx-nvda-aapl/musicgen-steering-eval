@@ -20,6 +20,14 @@ mert = AutoModel.from_config(cfg, trust_remote_code=True)
 sd = torch.load(hf_hub_download("m-a-p/MERT-v1-95M", "pytorch_model.bin"), map_location="cpu", weights_only=True)
 print(mert.load_state_dict(sd, strict=False), flush=True)
 mert = mert.to("cuda").eval()
+# transformers 5 HubertEncoder does not return hidden_states for this remote-code model, so capture every encoder layer's output with hooks (12 layers; feature index = layer output index)
+_cap = []
+def _hk(m, i, o): _cap.append((o[0] if isinstance(o, tuple) else o)[0].mean(0).float().cpu().numpy())
+def mert_feats(x):
+    _cap.clear()
+    with torch.no_grad(): mert(x)
+    return np.stack(_cap)
+for _l in mert.encoder.layers: _l.register_forward_hook(_hk)
 fe = Wav2Vec2FeatureExtractor.from_pretrained("m-a-p/MERT-v1-95M", trust_remote_code=True)
 ds = load_dataset("meganwei/syntheory", "notes")["train"].cast_column("audio", Audio(decode=False))
 y = np.array([NOTES.index(n) for n in ds["root_note_name"]]); F = []
@@ -27,8 +35,7 @@ for i in range(len(ds)):
     arr, sr = sf.read(io.BytesIO(ds[i]["audio"]["bytes"]), dtype="float32", always_2d=True)
     w = AF.resample(torch.tensor(arr.mean(1)), sr, 24000)
     x = fe(w.numpy(), sampling_rate=24000, return_tensors="pt")["input_values"].to("cuda")
-    with torch.no_grad(): hs = mert(x, output_hidden_states=True).hidden_states
-    F.append(torch.stack([h[0].mean(0) for h in hs]).cpu().numpy())
+    F.append(mert_feats(x))
     if i % 200 == 0: print(i, len(ds), flush=True)
 F = np.stack(F).astype(np.float32); np.savez("mert_feats.npz", F=F, y=y)
 idx = np.arange(len(y)); tr, rest = train_test_split(idx, test_size=0.3, stratify=y, random_state=42); va, te = train_test_split(rest, test_size=0.5, stratify=y[rest], random_state=42)
