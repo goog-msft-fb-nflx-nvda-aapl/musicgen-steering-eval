@@ -34,3 +34,4 @@
 - [ ] medium confirmation of best configs (measure throughput first)
 - [ ] write-up inputs from worklog; keep scripts+results pushed; clean server /tmp after each cycle
 - [ ] Q3 sweep running (ms:sweep, gpu 2, launched 2026-10-16, src/09_layer_sweep.py meandiff x 12 notes, ~10 min/note): single-layer causal sweep on dev prompts 0-9 vs probe val score; probe8/causal8/rand8 compared on held-out prompts 10-19. next: pull layer_sweep/*.json, write analysis_layers.py (spearman probe vs causal per note, held-out hit by layer set), then rfm direction, then gradient/attribution predictor
+- [ ] sweep_rfm running on gpu 1 (launched 2026-10-17, same 09_layer_sweep.py, rfm directions, val etas .075/.15/.3) parallel to ms:sets on gpu 2 (user allowed parallel runs on free GPUs 1/2 on 2026-10-17; never gpu 0/3, never a gpu with other users)
