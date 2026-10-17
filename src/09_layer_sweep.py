@@ -16,6 +16,7 @@ ap.add_argument("--model", default="small"); ap.add_argument("--note", default="
 ap.add_argument("--method", default="meandiff", choices=["rfm", "meandiff"])
 ap.add_argument("--n_components", type=int, default=12); ap.add_argument("--train_seed", type=int, default=42)
 ap.add_argument("--sweep_etas", type=float, nargs="+", default=[0.6, 1.5]); ap.add_argument("--val_etas", type=float, nargs="+", default=[0.15, 0.3, 0.45])
+ap.add_argument("--stage2_only", action="store_true", help="reuse the saved stage-1 sweep json; evaluate probe8/causal8/rand8/last8/first8 on held-out prompts (adds last8 = the 8 layers closest to the output, first8 = the 8 deepest-negative ids) and write *_sets.json")
 ap.add_argument("--tokens", type=int, default=500); ap.add_argument("--out", default="./layer_sweep")
 a = ap.parse_args()
 
@@ -64,6 +65,12 @@ def gen_hits(ps, layer_w, eta, seed):
     return float(np.mean([int(librosa.feature.chroma_cqt(y=x, sr=sr).mean(1).argmax() == tgt) for x in audio[:, 0].float().cpu().numpy()]))
 
 DEV, TEST = PROMPTS[:10], PROMPTS[10:]
+if a.stage2_only:
+    prev = json.load(open(f"{a.out}/{tag}_{nn}_{a.method}_sweep.json"))
+    sets = {k: v for k, v in prev["sets"].items()}; sets["last8"] = sorted(layers)[-8:]; sets["first8"] = sorted(layers)[:8]
+    cells = {k: {eta: gen_hits(TEST, {l: 1.0 for l in v}, eta, 0) for eta in a.val_etas} for k, v in sets.items()}
+    json.dump(dict(note=a.note, method=a.method, val_etas=a.val_etas, sets=sets, test_hits={k: {str(e): h for e, h in c.items()} for k, c in cells.items()}), open(f"{a.out}/{tag}_{nn}_{a.method}_sets.json", "w"))
+    print({k: [round(h, 3) for h in c.values()] for k, c in cells.items()}, flush=True); print("saved", flush=True); raise SystemExit
 base_dev = gen_hits(DEV, None, 0.0, 0); base_test = gen_hits(TEST, None, 0.0, 0)
 sweep = {l: {eta: gen_hits(DEV, {l: 1.0}, eta, 0) for eta in a.sweep_etas} for l in layers}
 causal = {l: float(np.mean(list(sweep[l].values())) - base_dev) for l in layers}
