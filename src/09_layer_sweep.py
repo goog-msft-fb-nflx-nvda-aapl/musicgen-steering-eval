@@ -68,6 +68,8 @@ DEV, TEST = PROMPTS[:10], PROMPTS[10:]
 if a.stage2_only:
     prev = json.load(open(f"{a.out}/{tag}_{nn}_{a.method}_sweep.json"))
     sets = {k: v for k, v in prev["sets"].items()}; sets["last8"] = sorted(layers)[-8:]; sets["first8"] = sorted(layers)[:8]
+    if os.path.exists("layer_predictors.json"):  # pred8 = top-8 layers by pstd/hnorm of this note (11_layer_predictors.py), chosen from train-clip statistics only
+        pr = [r for r in json.load(open("layer_predictors.json"))["rows"] if r["note"] == a.note]; sets["pred8"] = sorted(r["layer"] for r in sorted(pr, key=lambda r: -r["pstd_over_hnorm"])[:8])
     cells = {k: {eta: gen_hits(TEST, {l: 1.0 for l in v}, eta, 0) for eta in a.val_etas} for k, v in sets.items()}
     json.dump(dict(note=a.note, method=a.method, val_etas=a.val_etas, sets=sets, test_hits={k: {str(e): h for e, h in c.items()} for k, c in cells.items()}), open(f"{a.out}/{tag}_{nn}_{a.method}_sets.json", "w"))
     print({k: [round(h, 3) for h in c.values()] for k, c in cells.items()}, flush=True); print("saved", flush=True); raise SystemExit

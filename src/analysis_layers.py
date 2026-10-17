@@ -34,7 +34,7 @@ if S:
     for e in sorted(S[0]["test_hits"]["probe8"], key=float):
         row = {k: np.array([r["test_hits"][k][e] for r in S]) for k in S[0]["test_hits"]}
         print(f"eta {e}: " + " ".join(f"{k} {v.mean():.3f}" for k, v in row.items()))
-        for a, b in (("causal8", "last8"), ("causal8", "probe8"), ("last8", "probe8"), ("probe8", "rand8")):
+        for a, b in (("causal8", "last8"), ("causal8", "probe8"), ("last8", "probe8"), ("probe8", "rand8")) + ((("pred8", "last8"), ("pred8", "probe8"), ("pred8", "rand8")) if "pred8" in row else ()):
             try: p = wilcoxon(row[a], row[b]).pvalue
             except ValueError: p = 1.0
             print(f"    {a} vs {b}: p {p:.3f}", end="")
