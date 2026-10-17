@@ -4,14 +4,14 @@ usage: python analysis_eval2.py <dir with npz> <out json>"""
 import sys, json, itertools, numpy as np
 from scipy.stats import spearmanr
 NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]; METH = ["rfm", "meandiff", "logistic", "lda"]
-d, outj = sys.argv[1], sys.argv[2]; cells = {}; base = {}; A = []
+d, outj = sys.argv[1], sys.argv[2]; cells = {}; base = []; A = []
 for m in METH:
     for n in NOTES:
         R = json.loads(str(np.load(f"{d}/musicgen_small_{n.replace('#', 'sharp')}_{m}_eval2.npz")["rows"]))
         for r in R:
             (base if r["arm"] == "base" else cells.setdefault((m, r["arm"], r["eta"]), [])).append((r["hit"], r["mert_hit"], r["mert_p"]))
             A.append((r["hit"], r["mert_hit"]))
-A = np.array(A); b = np.array(base[:] if isinstance(base, list) else sum([base], []))
+A = np.array(A); b = np.array(base)
 print("clips", len(A), "chroma/mert hit agreement", round(float((A[:, 0] == A[:, 1]).mean()), 3), "| unsteered hit chroma", round(float(b[:, 0].mean()), 3), "mert", round(float(b[:, 1].mean()), 3), "n", len(b))
 res = {}; print(f"{'method':9s} {'arm':9s} eta   chroma  mert   mert_p(target)")
 for k in sorted(cells):
