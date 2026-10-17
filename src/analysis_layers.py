@@ -26,3 +26,16 @@ L = sorted({int(l) for r in R for l in r["causal"]})
 print("mean causal score (single-layer hit gain, dev) and mean probe val score by layer:")
 for l in L:
     print(f"{l:4d} causal {np.mean([r['causal'][str(l)] for r in R]):+.3f} probe {np.mean([r['probe_val_score'][str(l)] for r in R]):.3f}")
+
+# fixed-layer controls (09_layer_sweep.py --stage2_only -> *_sets.json): probe8/causal8/rand8/last8/first8 on held-out prompts
+S = [json.load(open(f)) for f in sorted(glob.glob(f"{d}/*_{method}_sets.json"))]
+if S:
+    print("\nstage2_only sets,", len(S), "notes, held-out hit pooled; wilcoxon on per-note values")
+    for e in sorted(S[0]["test_hits"]["probe8"], key=float):
+        row = {k: np.array([r["test_hits"][k][e] for r in S]) for k in S[0]["test_hits"]}
+        print(f"eta {e}: " + " ".join(f"{k} {v.mean():.3f}" for k, v in row.items()))
+        for a, b in (("causal8", "last8"), ("causal8", "probe8"), ("last8", "probe8"), ("probe8", "rand8")):
+            try: p = wilcoxon(row[a], row[b]).pvalue
+            except ValueError: p = 1.0
+            print(f"    {a} vs {b}: p {p:.3f}", end="")
+        print()
