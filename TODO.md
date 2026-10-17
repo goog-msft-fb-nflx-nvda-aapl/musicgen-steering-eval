@@ -34,3 +34,4 @@
 - [ ] medium confirmation of best configs (measure throughput first)
 - [ ] write-up inputs from worklog; keep scripts+results pushed; clean server /tmp after each cycle
 - [x] Q3 meandiff+rfm layer sweeps and last8/first8 controls done (WORKLOG 2026-10-17); open: gradient/attribution predictor of steering-effective layers; per-note sweeps are noisy (20 dev clips)
+- [ ] second evaluator: 10a_mert_probe.py running on gpu 2 (ms:mert; note: tmux env lacked HF_HOME so it downloaded syntheory/mert to ~/.cache/huggingface, delete after); then run 10b_second_eval.py (written, untested) for 4 methods x 12 notes on gpus 1+2, compare hit rankings chroma vs mert
