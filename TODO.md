@@ -43,3 +43,8 @@
 - [ ] arms_med (gpu 1, 2026-10-18): 03_arm_compare_v2 --model medium --method meandiff x 12 notes, seeds 0 1, out arms_medium/. then rfm (after train_med2), logistic, lda
 - arms_med1 (gpu 1: meandiff A A# B then rfm x12) and arms_med2 (gpu 2: logistic then lda x12) running 2026-10-18, medium, seeds 0 1, out arms_medium/. medium rfm directions for all 12 notes trained (trained_concepts/musicgen_medium), alt directions done
 - [x] medium fidelity+second evaluator done (WORKLOG 2026-10-18). open: large? higher-eta grid for medium; concept generalization (tempo/chords: needs torchcodec-free decode, datasets cached in hf/datasets); listening check
+
+## ablation round 2026-10-19 (src/run_ablations.sh; launched, one-at-a-time per gpu)
+- [ ] ms:abl_hi (gpu 1): medium, eta .9/1.2/1.6/2.0, meandiff then rfm -> arms_medium_hi/ (~2 h)
+- [ ] ms:abl_g2 (gpu 2): rfm eigendirection index 1,2 on small -> arms_comp1/, arms_comp2/ (~1 h); then train seeds 43,44 for rfm (01) + meandiff (06 --suffix) and re-steer -> arms_seed43/, arms_seed44/ (~3 h). caveat: eigenvector sign is arbitrary for comp>0
+- [ ] after: pull, analysis (extend analysis_methods.py), WORKLOG, push; then weak notes B/D#, listening check, other concepts

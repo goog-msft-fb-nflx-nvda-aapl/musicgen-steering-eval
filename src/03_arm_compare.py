@@ -22,6 +22,8 @@ ap.add_argument("--topk", type=int, default=8); ap.add_argument("--kappa", type=
 ap.add_argument("--p", type=float, default=0.3); ap.add_argument("--tokens", type=int, default=500)
 ap.add_argument("--method", default="rfm", choices=["rfm", "meandiff", "logistic", "lda"])
 ap.add_argument("--out", default="./arms")
+ap.add_argument("--comp", type=int, default=0, help="rfm eigendirection index used for steering (0 = top; ablation)")
+ap.add_argument("--alt_suffix", default="", help="read directions_alt<suffix>/results_alt<suffix> (06 --suffix), e.g. _s43 for a different train seed")
 a = ap.parse_args()
 
 NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
@@ -39,7 +41,7 @@ def add_hooks(dec, directions, layer_w, eta, p, rng):
     own implementation: musicrfm.generation_utils.hook_model breaks on transformers 5 (tensor layer outputs)."""
     hs = []
     for l, w in layer_w.items():
-        v = directions[l][0].reshape(1, 1, -1).to(device="cuda", dtype=next(dec.parameters()).dtype) * (eta * w)
+        v = directions[l][a.comp].reshape(1, 1, -1).to(device="cuda", dtype=next(dec.parameters()).dtype) * (eta * w)
         def hook(m, i, o, v=v):
             if p < 1 and rng.random() >= p: return o
             return (o[0] + v,) + tuple(o[1:]) if isinstance(o, tuple) else o + v
@@ -67,8 +69,8 @@ ctl.load(concept=concept, model_name=tag, path=os.path.join(tdir, "directions"))
 if a.method != "rfm":  # directions + val scores from 06_direction_methods.py
     import pickle
     nn = a.note.replace("#", "sharp")
-    ctl.directions = pickle.load(open(f"directions_alt/{a.method}/{a.model}/note_{nn}.pkl", "rb"))
-    sc = {int(l): m["train_results"]["score"] for l, m in json.load(open(f"results_alt/{a.method}/{a.model}/note_{nn}.json"))["layer_metrics"].items()}
+    ctl.directions = pickle.load(open(f"directions_alt{a.alt_suffix}/{a.method}/{a.model}/note_{nn}.pkl", "rb"))
+    sc = {int(l): m["train_results"]["score"] for l, m in json.load(open(f"results_alt{a.alt_suffix}/{a.method}/{a.model}/note_{nn}.json"))["layer_metrics"].items()}
     lo, hi = min(sc.values()), max(sc.values())
     ARMS = {"const8": ({l: 1.0 for l in sorted(sorted(sc, key=lambda l: -sc[l])[:a.topk])}, 1.0),
             "musicrfm": ({l: ((sc[l] - lo) / (hi - lo)) ** (1 / a.kappa) for l in sc}, a.p)}

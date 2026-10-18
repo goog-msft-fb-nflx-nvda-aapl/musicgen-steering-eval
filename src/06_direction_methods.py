@@ -17,7 +17,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.metrics import roc_auc_score
 
-ap = argparse.ArgumentParser(); ap.add_argument("--model", default="small"); ap.add_argument("--seed", type=int, default=42)
+ap = argparse.ArgumentParser(); ap.add_argument("--model", default="small"); ap.add_argument("--seed", type=int, default=42); ap.add_argument("--suffix", default="", help="output dirs directions_alt<suffix>/results_alt<suffix> (use _s43 etc. for other seeds)")
 a = ap.parse_args()
 Z = np.load(f"hidden_{a.model}.npz"); H = Z["H"].astype(np.float32); layers = [int(l) for l in Z["layers"]]; names = list(Z["root_note_name"])
 NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
@@ -50,8 +50,8 @@ for method in ["meandiff", "logistic", "lda"]:
             p_tr = X(tr) @ d; thr = 0.5 * (p_tr[y(tr) == 1].mean() + p_tr[y(tr) == 0].mean())
             auc_va = roc_auc_score(y(va), X(va) @ d); p_te = X(te) @ d
             lm[str(l)] = dict(train_results=dict(score=float(auc_va)), test_acc=float(((p_te > thr) == y(te)).mean() * 100), test_auc=float(roc_auc_score(y(te), p_te)))
-        for root, obj, dump in (("directions_alt", dirs, lambda o, f: pickle.dump(o, f)), ("results_alt", dict(layer_metrics=lm, method=method, note=note, model=a.model, n=[len(tr), len(va), len(te)]), lambda o, f: f.write(json.dumps(o, indent=1).encode()))):
+        for root, obj, dump in ((f"directions_alt{a.suffix}", dirs, lambda o, f: pickle.dump(o, f)), (f"results_alt{a.suffix}", dict(layer_metrics=lm, method=method, note=note, model=a.model, n=[len(tr), len(va), len(te)]), lambda o, f: f.write(json.dumps(o, indent=1).encode()))):
             os.makedirs(f"{root}/{method}/{a.model}", exist_ok=True)
-            with open(f"{root}/{method}/{a.model}/note_{note.replace('#', 'sharp')}.{'pkl' if root == 'directions_alt' else 'json'}", "wb") as f: dump(obj, f)
+            with open(f"{root}/{method}/{a.model}/note_{note.replace('#', 'sharp')}.{'pkl' if root.startswith('directions_alt') else 'json'}", "wb") as f: dump(obj, f)
         best = max(lm.items(), key=lambda kv: kv[1]["train_results"]["score"])
         print(method, note, "best val-auc layer", best[0], round(best[1]["train_results"]["score"], 3), "test acc there", round(best[1]["test_acc"], 1), flush=True)
