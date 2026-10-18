@@ -49,7 +49,7 @@ sc = {int(l): m["train_results"]["score"] for l, m in res["layer_metrics"].items
 layers = sorted(sorted(sc, key=lambda l: -sc[l])[:a.topk])
 print("steering layers (top-%d by val score):" % a.topk, layers, flush=True)
 
-model = MusicgenForConditionalGeneration.from_pretrained(name).to("cuda").eval()
+model = MusicgenForConditionalGeneration.from_pretrained(os.path.join("models", name.split("/")[-1]) if os.path.isdir(os.path.join("models", name.split("/")[-1])) else name).to("cuda").eval()
 proc = AutoProcessor.from_pretrained(name)
 enc = EncodecModel.from_pretrained("facebook/encodec_32khz").to("cuda")
 encp = AutoProcessor.from_pretrained("facebook/encodec_32khz")

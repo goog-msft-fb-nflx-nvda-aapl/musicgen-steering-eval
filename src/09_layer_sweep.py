@@ -48,7 +48,7 @@ else:
 sc = {int(l): m["train_results"]["score"] for l, m in res["layer_metrics"].items()}; lo, hi = min(sc.values()), max(sc.values())
 layers = sorted(sc)
 
-model = MusicgenForConditionalGeneration.from_pretrained(name).to("cuda").eval(); proc = AutoProcessor.from_pretrained(name)
+model = MusicgenForConditionalGeneration.from_pretrained(os.path.join("models", name.split("/")[-1]) if os.path.isdir(os.path.join("models", name.split("/")[-1])) else name).to("cuda").eval(); proc = AutoProcessor.from_pretrained(name)
 enc = EncodecModel.from_pretrained("facebook/encodec_32khz").to("cuda"); encp = AutoProcessor.from_pretrained("facebook/encodec_32khz")
 ctl = MusicGenController(model, proc, enc, encp, control_method="music_rfm", n_components=a.n_components, rfm_iters=30, batch_size=16)
 ctl.load(concept=concept, model_name=tag, path=os.path.join(tdir, "directions"))

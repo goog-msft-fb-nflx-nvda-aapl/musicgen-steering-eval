@@ -2,7 +2,7 @@
 saves hidden_<model>.npz: H [N, L-1, d] float16, layer ids, and metadata. uses musicrfm's own extraction function so features match 01.
 usage: python 05_cache_hidden.py --model small
 """
-import argparse, io, numpy as np, torch, soundfile as sf
+import os, argparse, io, numpy as np, torch, soundfile as sf
 from datasets import Audio, load_dataset
 from transformers import AutoProcessor, MusicgenForConditionalGeneration, EncodecModel
 from musicrfm import MusicGenController
@@ -11,7 +11,7 @@ from musicrfm import direction_utils as du
 ap = argparse.ArgumentParser(); ap.add_argument("--model", default="small"); ap.add_argument("--chunk", type=int, default=128)
 a = ap.parse_args()
 name = f"facebook/musicgen-{a.model}"
-model = MusicgenForConditionalGeneration.from_pretrained(name).to("cuda").eval()
+model = MusicgenForConditionalGeneration.from_pretrained(os.path.join("models", name.split("/")[-1]) if os.path.isdir(os.path.join("models", name.split("/")[-1])) else name).to("cuda").eval()
 proc = AutoProcessor.from_pretrained(name)
 enc = EncodecModel.from_pretrained("facebook/encodec_32khz").to("cuda"); encp = AutoProcessor.from_pretrained("facebook/encodec_32khz")
 ctl = MusicGenController(model, proc, enc, encp, control_method="music_rfm", n_components=12, rfm_iters=30, batch_size=16)

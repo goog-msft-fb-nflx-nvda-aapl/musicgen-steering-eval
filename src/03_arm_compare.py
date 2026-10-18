@@ -58,7 +58,7 @@ ARMS = {
 }
 for k in a.arms: print(k, "layer weights", {l: round(w, 3) for l, w in ARMS[k][0].items()}, "p", ARMS[k][1], flush=True)
 
-model = MusicgenForConditionalGeneration.from_pretrained(name).to("cuda").eval()
+model = MusicgenForConditionalGeneration.from_pretrained(os.path.join("models", name.split("/")[-1]) if os.path.isdir(os.path.join("models", name.split("/")[-1])) else name).to("cuda").eval()
 proc = AutoProcessor.from_pretrained(name)
 enc = EncodecModel.from_pretrained("facebook/encodec_32khz").to("cuda")
 encp = AutoProcessor.from_pretrained("facebook/encodec_32khz")

@@ -23,7 +23,7 @@ random.seed(a.seed); torch.manual_seed(a.seed)
 dev = "cuda"
 name = f"facebook/musicgen-{a.model}"
 tag = f"musicgen_{a.model}"
-music_model = MusicgenForConditionalGeneration.from_pretrained(name).to(dev)
+music_model = MusicgenForConditionalGeneration.from_pretrained(os.path.join("models", name.split("/")[-1]) if os.path.isdir(os.path.join("models", name.split("/")[-1])) else name).to(dev)
 music_processor = AutoProcessor.from_pretrained(name)
 encodec = EncodecModel.from_pretrained("facebook/encodec_32khz").to(dev)
 encodec_proc = AutoProcessor.from_pretrained("facebook/encodec_32khz")
