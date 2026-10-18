@@ -88,7 +88,8 @@ for seed in a.gen_seeds:
         r, E = run(arm, eta, seed); rows += r; embs.append(E)
     print(f"seed {seed} done", flush=True)
 # reproducibility vs the earlier chroma-only run
-old = json.load(open(f"arms/{tag}_{a.note}_arms.json" if a.method == "rfm" else f"arms/{tag}_{a.note}_{a.method}_arms.json"))["rows"]
+ADIR = "arms" if a.model == "small" else f"arms_{a.model}"
+old = json.load(open(f"{ADIR}/{tag}_{a.note}_arms.json" if a.method == "rfm" else f"{ADIR}/{tag}_{a.note}_{a.method}_arms.json"))["rows"]
 od = {(o["arm"], o["eta"], o["seed"], o["prompt"]): o["hit"] for o in old}
 m = [od[(r["arm"], r["eta"], r["seed"], r["prompt"])] == r["hit"] for r in rows if (r["arm"], r["eta"], r["seed"], r["prompt"]) in od]
 print("repro_hit_match", float(np.mean(m)), "n", len(m), flush=True)
