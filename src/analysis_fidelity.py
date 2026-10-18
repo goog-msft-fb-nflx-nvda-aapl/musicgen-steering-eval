@@ -8,7 +8,7 @@ import sys, glob, json, os, numpy as np
 from scipy.stats import wilcoxon
 NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]; METH = ["rfm", "meandiff", "logistic", "lda", "random", "shuffled"]
 SUF = lambda m: "ctl" if m in ("random", "shuffled") else "fid"
-d, outj = sys.argv[1], sys.argv[2]; outp = sys.argv[3] if len(sys.argv) > 3 else None
+d, outj = sys.argv[1], sys.argv[2]; outp = sys.argv[3] if len(sys.argv) > 3 and sys.argv[3] != "-" else None; MODEL = sys.argv[4] if len(sys.argv) > 4 else "small"  # usage: ... <out json> [out png|-] [small|medium]
 
 def mmd2(X, Y):  # unbiased, rbf, bandwidth = median pairwise dist of pooled
     Z = np.vstack([X, Y]); D = ((Z[:, None] - Z[None]) ** 2).sum(-1); s2 = np.median(D[np.triu_indices(len(Z), 1)]) / 2
@@ -18,10 +18,10 @@ def mmd2(X, Y):  # unbiased, rbf, bandwidth = median pairwise dist of pooled
 
 res = {}
 for m in METH:
-    if not os.path.exists(f"{d}/musicgen_small_C_{m}_{SUF(m)}.npz"): continue
+    if not os.path.exists(f"{d}/musicgen_{MODEL}_C_{m}_{SUF(m)}.npz"): continue
     cells = {}
     for n in NOTES:
-        z = np.load(f"{d}/musicgen_small_{n.replace('#', 'sharp')}_{m}_{SUF(m)}.npz"); E = z["emb"].astype(np.float32); R = json.loads(str(z["rows"]))
+        z = np.load(f"{d}/musicgen_{MODEL}_{n.replace('#', 'sharp')}_{m}_{SUF(m)}.npz"); E = z["emb"].astype(np.float32); R = json.loads(str(z["rows"]))
         for i, r in enumerate(R): cells.setdefault((r["arm"], r["eta"]), []).append((n, r, E[i]))
     base = {(n, r["seed"], r["prompt"]): (r, e) for n, r, e in cells[("base", 0.0)]}
     for (arm, eta), L in sorted(cells.items()):

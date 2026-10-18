@@ -4,10 +4,10 @@ usage: python analysis_eval2.py <dir with npz> <out json>"""
 import sys, json, itertools, numpy as np
 from scipy.stats import spearmanr
 NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]; METH = ["rfm", "meandiff", "logistic", "lda"]
-d, outj = sys.argv[1], sys.argv[2]; cells = {}; base = []; A = []
+d, outj = sys.argv[1], sys.argv[2]; MODEL = sys.argv[3] if len(sys.argv) > 3 else "small"; import os; METH = [m for m in METH if os.path.exists(f"{d}/musicgen_{MODEL}_C_{m}_eval2.npz")]; cells = {}; base = []; A = []
 for m in METH:
     for n in NOTES:
-        R = json.loads(str(np.load(f"{d}/musicgen_small_{n.replace('#', 'sharp')}_{m}_eval2.npz")["rows"]))
+        R = json.loads(str(np.load(f"{d}/musicgen_{MODEL}_{n.replace('#', 'sharp')}_{m}_eval2.npz")["rows"]))
         for r in R:
             (base if r["arm"] == "base" else cells.setdefault((m, r["arm"], r["eta"]), [])).append((r["hit"], r["mert_hit"], r["mert_p"]))
             A.append((r["hit"], r["mert_hit"]))

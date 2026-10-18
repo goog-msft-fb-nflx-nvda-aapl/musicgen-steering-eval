@@ -1,0 +1,341 @@
+{
+ "layer_metrics": {
+  "-1": {
+   "train_results": {
+    "score": 0.9137942247658688
+   },
+   "test_acc": 84.8,
+   "test_auc": 0.937984
+  },
+  "-2": {
+   "train_results": {
+    "score": 0.9229643600416233
+   },
+   "test_acc": 83.6,
+   "test_auc": 0.9388160000000001
+  },
+  "-3": {
+   "train_results": {
+    "score": 0.9184768470343392
+   },
+   "test_acc": 82.39999999999999,
+   "test_auc": 0.93184
+  },
+  "-4": {
+   "train_results": {
+    "score": 0.921078303850156
+   },
+   "test_acc": 85.2,
+   "test_auc": 0.94144
+  },
+  "-5": {
+   "train_results": {
+    "score": 0.9195824661810614
+   },
+   "test_acc": 84.39999999999999,
+   "test_auc": 0.9343999999999999
+  },
+  "-6": {
+   "train_results": {
+    "score": 0.9281022372528617
+   },
+   "test_acc": 86.4,
+   "test_auc": 0.948608
+  },
+  "-7": {
+   "train_results": {
+    "score": 0.9221188865764828
+   },
+   "test_acc": 85.6,
+   "test_auc": 0.944128
+  },
+  "-8": {
+   "train_results": {
+    "score": 0.9243301248699273
+   },
+   "test_acc": 84.39999999999999,
+   "test_auc": 0.937152
+  },
+  "-9": {
+   "train_results": {
+    "score": 0.9350611342351717
+   },
+   "test_acc": 86.8,
+   "test_auc": 0.954944
+  },
+  "-10": {
+   "train_results": {
+    "score": 0.9364594172736733
+   },
+   "test_acc": 87.6,
+   "test_auc": 0.957184
+  },
+  "-11": {
+   "train_results": {
+    "score": 0.9404591571279917
+   },
+   "test_acc": 87.6,
+   "test_auc": 0.9616640000000001
+  },
+  "-12": {
+   "train_results": {
+    "score": 0.945466961498439
+   },
+   "test_acc": 87.6,
+   "test_auc": 0.961152
+  },
+  "-13": {
+   "train_results": {
+    "score": 0.9536615504682622
+   },
+   "test_acc": 86.8,
+   "test_auc": 0.955392
+  },
+  "-14": {
+   "train_results": {
+    "score": 0.9504097294484911
+   },
+   "test_acc": 88.0,
+   "test_auc": 0.950592
+  },
+  "-15": {
+   "train_results": {
+    "score": 0.9375975546305931
+   },
+   "test_acc": 85.2,
+   "test_auc": 0.9380479999999999
+  },
+  "-16": {
+   "train_results": {
+    "score": 0.9399388657648283
+   },
+   "test_acc": 87.2,
+   "test_auc": 0.951168
+  },
+  "-17": {
+   "train_results": {
+    "score": 0.9203629032258064
+   },
+   "test_acc": 84.8,
+   "test_auc": 0.941696
+  },
+  "-18": {
+   "train_results": {
+    "score": 0.9388332466181061
+   },
+   "test_acc": 85.2,
+   "test_auc": 0.9436800000000001
+  },
+  "-19": {
+   "train_results": {
+    "score": 0.9405892299687825
+   },
+   "test_acc": 84.39999999999999,
+   "test_auc": 0.942528
+  },
+  "-20": {
+   "train_results": {
+    "score": 0.9445564516129032
+   },
+   "test_acc": 84.39999999999999,
+   "test_auc": 0.936704
+  },
+  "-21": {
+   "train_results": {
+    "score": 0.9335652965660769
+   },
+   "test_acc": 82.8,
+   "test_auc": 0.924544
+  },
+  "-22": {
+   "train_results": {
+    "score": 0.9247203433922997
+   },
+   "test_acc": 80.0,
+   "test_auc": 0.91584
+  },
+  "-23": {
+   "train_results": {
+    "score": 0.9077458376690947
+   },
+   "test_acc": 80.4,
+   "test_auc": 0.913344
+  },
+  "-24": {
+   "train_results": {
+    "score": 0.8951938085327783
+   },
+   "test_acc": 82.8,
+   "test_auc": 0.921472
+  },
+  "-25": {
+   "train_results": {
+    "score": 0.889730749219563
+   },
+   "test_acc": 83.6,
+   "test_auc": 0.920064
+  },
+  "-26": {
+   "train_results": {
+    "score": 0.9088514568158168
+   },
+   "test_acc": 84.0,
+   "test_auc": 0.927296
+  },
+  "-27": {
+   "train_results": {
+    "score": 0.9122983870967742
+   },
+   "test_acc": 82.0,
+   "test_auc": 0.9152
+  },
+  "-28": {
+   "train_results": {
+    "score": 0.9095018210197711
+   },
+   "test_acc": 82.0,
+   "test_auc": 0.9204479999999999
+  },
+  "-29": {
+   "train_results": {
+    "score": 0.9075507284079085
+   },
+   "test_acc": 80.4,
+   "test_auc": 0.91008
+  },
+  "-30": {
+   "train_results": {
+    "score": 0.9115179500520291
+   },
+   "test_acc": 80.80000000000001,
+   "test_auc": 0.906432
+  },
+  "-31": {
+   "train_results": {
+    "score": 0.9197125390218522
+   },
+   "test_acc": 80.4,
+   "test_auc": 0.9054080000000001
+  },
+  "-32": {
+   "train_results": {
+    "score": 0.9135340790842872
+   },
+   "test_acc": 78.0,
+   "test_auc": 0.9067520000000001
+  },
+  "-33": {
+   "train_results": {
+    "score": 0.9101521852237253
+   },
+   "test_acc": 78.8,
+   "test_auc": 0.9066879999999999
+  },
+  "-34": {
+   "train_results": {
+    "score": 0.9031282518210197
+   },
+   "test_acc": 78.4,
+   "test_auc": 0.896384
+  },
+  "-35": {
+   "train_results": {
+    "score": 0.9019575962539021
+   },
+   "test_acc": 79.2,
+   "test_auc": 0.8974080000000001
+  },
+  "-36": {
+   "train_results": {
+    "score": 0.902542924037461
+   },
+   "test_acc": 78.8,
+   "test_auc": 0.885248
+  },
+  "-37": {
+   "train_results": {
+    "score": 0.9081360561914671
+   },
+   "test_acc": 78.0,
+   "test_auc": 0.889536
+  },
+  "-38": {
+   "train_results": {
+    "score": 0.9007869406867846
+   },
+   "test_acc": 77.60000000000001,
+   "test_auc": 0.886656
+  },
+  "-39": {
+   "train_results": {
+    "score": 0.9029331425598335
+   },
+   "test_acc": 78.8,
+   "test_auc": 0.893248
+  },
+  "-40": {
+   "train_results": {
+    "score": 0.9070954734651405
+   },
+   "test_acc": 78.4,
+   "test_auc": 0.894656
+  },
+  "-41": {
+   "train_results": {
+    "score": 0.9119081685744017
+   },
+   "test_acc": 79.2,
+   "test_auc": 0.900288
+  },
+  "-42": {
+   "train_results": {
+    "score": 0.8855684183142559
+   },
+   "test_acc": 76.0,
+   "test_auc": 0.872
+  },
+  "-43": {
+   "train_results": {
+    "score": 0.8806256503642039
+   },
+   "test_acc": 74.0,
+   "test_auc": 0.857088
+  },
+  "-44": {
+   "train_results": {
+    "score": 0.8591636316337149
+   },
+   "test_acc": 73.2,
+   "test_auc": 0.8445440000000001
+  },
+  "-45": {
+   "train_results": {
+    "score": 0.8653420915712798
+   },
+   "test_acc": 75.6,
+   "test_auc": 0.8570880000000001
+  },
+  "-46": {
+   "train_results": {
+    "score": 0.8932427159209158
+   },
+   "test_acc": 82.0,
+   "test_auc": 0.9091199999999999
+  },
+  "-47": {
+   "train_results": {
+    "score": 0.9163306451612903
+   },
+   "test_acc": 84.0,
+   "test_auc": 0.9376
+  }
+ },
+ "method": "logistic",
+ "note": "A#",
+ "model": "medium",
+ "n": [
+  1158,
+  248,
+  250
+ ]
+}
