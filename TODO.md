@@ -38,3 +38,4 @@
 - [ ] second evaluator: 10a_mert_probe.py running on gpu 2 (ms:mert; note: tmux env lacked HF_HOME so it downloaded syntheory/mert to ~/.cache/huggingface, delete after); then run 10b_second_eval.py (written, untested) for 4 methods x 12 notes on gpus 1+2, compare hit rankings chroma vs mert
 - [x] second evaluator done (WORKLOG 2026-10-17); ranking holds, rfm vs logistic less robust
 - [ ] pred8 held-out test running on gpu 2 (ms:pred8, 2026-10-18; shares gpu 2 only with the user's own yolo jobs at 0% util): meandiff pstd/hnorm top-8 vs last8/probe8/causal8; results overwrite layer_sweep/*_meandiff_sets.json (same cells + pred8)
+- [ ] medium confirmation (2026-10-18): ms:cache_med (gpu 1, 05 --model medium) and ms:train_med (gpu 2, 01 rfm directions for 12 notes, musicgen-medium). then 06 --model medium (cpu), 03_arm_compare(_v2) --model medium for rfm+meandiff, 07 fidelity if time
