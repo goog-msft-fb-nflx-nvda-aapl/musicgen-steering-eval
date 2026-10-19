@@ -1,0 +1,28 @@
+
+== meandiff: per target note, steered (eta>=.3) hit rate and top wrong prediction  [chroma | mert]
+  C   1.00 (wrong: ) | 0.98 (wrong: F# 0.02)
+  C#  0.98 (wrong: G 0.01, C 0.00) | 0.99 (wrong: F# 0.00, E 0.00)
+  D   0.98 (wrong: A 0.01, F 0.00) | 0.98 (wrong: C# 0.01, F# 0.00)
+  D#  0.96 (wrong: A# 0.01, C 0.01) | 0.98 (wrong: C 0.01, F 0.00)
+  E   0.99 (wrong: F 0.01) | 1.00 (wrong: )
+  F   0.99 (wrong: G 0.00, C 0.00) | 1.00 (wrong: F# 0.00)
+  F#  0.96 (wrong: G 0.02, C# 0.01) | 0.98 (wrong: G 0.02, B 0.00)
+  G   1.00 (wrong: C 0.00) | 1.00 (wrong: )
+  G#  0.85 (wrong: G 0.05, D# 0.03) | 0.88 (wrong: G 0.04, C# 0.03)
+  A   0.99 (wrong: C 0.01, G# 0.00) | 0.99 (wrong: F# 0.01)
+  A#  0.89 (wrong: G 0.06, G# 0.02) | 0.93 (wrong: G 0.03, A 0.01)
+  B   0.95 (wrong: G# 0.01, F# 0.01) | 0.97 (wrong: E 0.02, G 0.00)
+
+== rfm: per target note, steered (eta>=.3) hit rate and top wrong prediction  [chroma | mert]
+  C   0.83 (wrong: G 0.13, B 0.01) | 0.77 (wrong: F# 0.10, G 0.04)
+  C#  0.88 (wrong: G# 0.07, A 0.02) | 0.86 (wrong: F# 0.05, G 0.04)
+  D   0.81 (wrong: A 0.12, E 0.02) | 0.70 (wrong: F# 0.11, G 0.08)
+  D#  0.25 (wrong: G 0.23, C 0.14) | 0.29 (wrong: G 0.22, F# 0.14)
+  E   0.73 (wrong: A 0.12, B 0.05) | 0.81 (wrong: A 0.07, G 0.03)
+  F   0.66 (wrong: A 0.16, C 0.05) | 0.68 (wrong: A 0.10, F# 0.05)
+  F#  0.60 (wrong: G 0.14, C# 0.06) | 0.73 (wrong: G 0.08, C# 0.04)
+  G   0.81 (wrong: D 0.12, A# 0.02) | 0.97 (wrong: F# 0.01, C 0.00)
+  G#  0.69 (wrong: G 0.12, D# 0.10) | 0.68 (wrong: G 0.13, D# 0.06)
+  A   0.91 (wrong: E 0.03, C 0.01) | 0.92 (wrong: F# 0.04, C 0.02)
+  A#  0.90 (wrong: D 0.03, F 0.02) | 0.85 (wrong: G 0.03, F# 0.03)
+  B   0.44 (wrong: F# 0.21, D 0.12) | 0.36 (wrong: F# 0.17, E 0.12)
