@@ -91,7 +91,7 @@ def run(arm, eta, seed):
     pr = P["clf"].predict_proba((np.stack(feats) - P["mu"]) / P["sd"])
     for i, x in enumerate(w.cpu().numpy()):
         ch = librosa.feature.chroma_cqt(y=x, sr=sr).mean(1)
-        rows.append(dict(arm=arm or "base", eta=eta if arm else 0.0, seed=seed, prompt=i, hit=int(ch.argmax() == tgt), frac=float(ch[tgt] / ch.sum()), mert_pred=int(pr[i].argmax()), mert_hit=int(pr[i].argmax() == tgt), mert_p=float(pr[i, tgt])))
+        rows.append(dict(arm=arm or "base", eta=eta if arm else 0.0, seed=seed, prompt=i, hit=int(ch.argmax() == tgt), ch_pred=int(ch.argmax()), frac=float(ch[tgt] / ch.sum()), mert_pred=int(pr[i].argmax()), mert_hit=int(pr[i].argmax() == tgt), mert_p=float(pr[i, tgt])))
         if i in (0, 5, 10) and seed == a.gen_seeds[0] and (arm in (None, "musicrfm")):
             sf.write(f"{a.out}/{tag}_{a.note}_{a.method}_{arm or 'base'}_eta{eta if arm else 0.0}_s{seed}_p{i}.flac", x, sr, format="FLAC")
     return rows, None
