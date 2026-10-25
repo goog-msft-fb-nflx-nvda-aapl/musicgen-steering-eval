@@ -11,9 +11,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from transformers import AutoFeatureExtractor, AutoModel
 from common import ROOT, SR, manifest, LABELS
-ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); ap.add_argument("--train_cond", default="acc_norm"); ap.add_argument("--probe_mert", default="probe_A.json"); ap.add_argument("--probe_muq", default="probe_muq_A.json"); a = ap.parse_args()
+ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); ap.add_argument("--train_cond", default="acc_norm"); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--probe_mert", default="probe_A.json"); ap.add_argument("--probe_muq", default="probe_muq_A.json"); a = ap.parse_args()
 G = os.path.join(ROOT, "gen"); picked = [l.split(",") for l in open(os.path.join(G, "picked.txt")).read().split("\n")]
-ids = [p[0] for p in picked]; true = {p[0]: p[1] for p in picked}; ERAS = ["neutral", "1960s", "1980s", "2010s"]; SEEDS = [0, 1]
+ids = [p[0] for p in picked]; true = {p[0]: p[1] for p in picked}; ERAS = ["neutral", "1960s", "1980s", "2010s"]; SEEDS = a.seeds
 rows = manifest("A"); rid = {r["sample_id"]: i for i, r in enumerate(rows)}
 meter = pyln.Meter(SR)
 def norm(y):
@@ -74,4 +74,5 @@ for i, n in enumerate(names):
         other = [t for t in ids if t != s][(ids.index(s) * 3 + int(sd)) % (len(ids) - 1)]
         r["chroma_cos"] = cosf(mixC[s], c); r["chroma_dtw"] = dtw_cos(mixC[s], c); r["chroma_cos_other_song"] = cosf(mixC[other], c); r["chroma_dtw_other_song"] = dtw_cos(mixC[other], c)
     out.append(r)
+np.savez(a.out.replace(".json", "_emb.npz"), names=np.array(names), mert=np.array(emb["mert"]), muq=np.array(emb["muq"]))
 json.dump({"layers": layer, "rows": out}, open(a.out, "w")); print("saved", a.out, len(out))

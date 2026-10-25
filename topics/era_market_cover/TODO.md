@@ -39,7 +39,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [x] EnCodec-resynthesize real accompaniment, re-embed (MERT, MuQ), retrain era probes, rescore generations (WORKLOG 2026-10-25 codec); per-song Delta statistic and ICC still to compute
 - [x] (12-song pass, WORKLOG 2026-10-25 validation) controls a-f; rerun on 24 songs with 3 seeds after generation finishes
 - [x] song-identification, chord, tempo metrics on existing 96 generations (CPU) (WORKLOG 2026-10-25)
-- [ ] Audiobox Aesthetics, COCOLA, KAD (kadtk) on generations
+- [x] Audiobox Aesthetics, KAD-style margin on generations (WORKLOG 2026-10-26); [ ] COCOLA still open
 - [ ] analysis-half metrics: QWK, MAE-decade, log-loss, MDL, control-task selectivity on stored embeddings
 - [x] (24 songs x 2 seeds done 2026-10-26; seed 2 running) scale generation to 24 songs; final qualitative listening round only after the quantitative suite is frozen
 
