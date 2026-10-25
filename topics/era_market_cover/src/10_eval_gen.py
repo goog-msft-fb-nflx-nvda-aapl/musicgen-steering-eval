@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from transformers import AutoFeatureExtractor, AutoModel
 from common import ROOT, SR, manifest, LABELS
-ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); a = ap.parse_args()
+ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); ap.add_argument("--train_cond", default="acc_norm"); ap.add_argument("--probe_mert", default="probe_A.json"); ap.add_argument("--probe_muq", default="probe_muq_A.json"); a = ap.parse_args()
 G = os.path.join(ROOT, "gen"); picked = [l.split(",") for l in open(os.path.join(G, "picked.txt")).read().split("\n")]
 ids = [p[0] for p in picked]; true = {p[0]: p[1] for p in picked}; ERAS = ["neutral", "1960s", "1980s", "2010s"]; SEEDS = [0, 1]
 rows = manifest("A"); rid = {r["sample_id"]: i for i, r in enumerate(rows)}
@@ -29,16 +29,16 @@ clips = {}   # name -> waveform of accompaniment-like signal
 meta = []
 for s in ids:
     z = np.load(os.path.join(ROOT, "stems", "A", s + ".npz")); acc = z["accomp"].astype(np.float32)
-    clips[f"{s}|identity|0"] = acc; clips[f"{s}|dsp_old|0"] = dsp_old(acc); clips[f"{s}|dsp_new|0"] = dsp_new(acc)
+    clips[f"{s}|identity|0"] = acc; clips[f"{s}|identity_codec|0"] = np.load(os.path.join(ROOT, "stems_codec", "A", s + ".npz"))["accomp"].astype(np.float32); clips[f"{s}|dsp_old|0"] = dsp_old(acc); clips[f"{s}|dsp_new|0"] = dsp_new(acc)
     for e in ERAS:
         for sd in SEEDS: clips[f"{s}|{e}|{sd}"] = sf.read(os.path.join(G, f"{s}_{e}_s{sd}_acc.wav"), dtype="float32")[0]
 names = list(clips); print(len(names), "clips", flush=True)
-pj = {"mert": json.load(open(os.path.join(ROOT, "results", "probe_A.json"))), "muq": json.load(open(os.path.join(ROOT, "results", "probe_muq_A.json")))}
-layer = {k: pj[k]["conds"]["acc_norm"]["layer"] for k in pj}
+pj = {"mert": json.load(open(os.path.join(ROOT, "results", a.probe_mert))), "muq": json.load(open(os.path.join(ROOT, "results", a.probe_muq)))}
+layer = {k: pj[k]["conds"][a.train_cond]["layer"] for k in pj}
 split = np.array([r["split"] for r in rows]); y = np.array([LABELS["A"].index(r["label"]) if r["label"] else -1 for r in rows]); tr = np.where(split == "train")[0]
 probes = {}
 for k, pre in (("mert", ""), ("muq", "muq_")):
-    E = np.load(os.path.join(ROOT, "emb", f"A_{pre}acc_norm.npy")).astype(np.float32)[:, layer[k]]
+    E = np.load(os.path.join(ROOT, "emb", f"A_{pre}{a.train_cond}.npy")).astype(np.float32)[:, layer[k]]
     probes[k] = make_pipeline(StandardScaler(), LogisticRegression(C=0.01, max_iter=3000)).fit(E[tr], y[tr])
 emb = {"mert": [], "muq": []}
 proc = AutoFeatureExtractor.from_pretrained("m-a-p/MERT-v2-30s", trust_remote_code=True); mert = AutoModel.from_pretrained("m-a-p/MERT-v2-30s", trust_remote_code=True).eval().cuda()

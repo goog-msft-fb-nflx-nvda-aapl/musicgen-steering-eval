@@ -21,7 +21,7 @@ rng = np.random.default_rng(0); boots = rng.integers(0, len(va), size=(2000, len
 for c in a.conds:
     f = os.path.join(a.emb, f"{a.ds}_{a.prefix}{c}.npy")
     if not os.path.exists(f): continue
-    E = np.load(f).astype(np.float32); L = E.shape[1]; layers = a.layers or list(range(L))
+    E = np.load(f).astype(np.float32); assert np.isfinite(E).all(), f"non-finite values in {f}"; L = E.shape[1]; layers = a.layers or list(range(L))
     best = (-1, None, None); curve = {}
     for l in layers:
         for C in (0.01, 0.1, 1.0):

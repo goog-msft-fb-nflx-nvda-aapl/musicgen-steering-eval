@@ -1,0 +1,56 @@
+layers used {'mert': 18, 'muq': 9} | songs 12 | true decades [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
+
+== era presence, mert decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over 12 songs)
+  identity  2.57
+  identity_codec 2.70
+  dsp_old   2.46
+  dsp_new   2.68
+  neutral   2.81
+  1960s     3.06
+  1980s     2.28
+  2010s     3.21
+  identity vs true decade: spearman 0.82 | identity_codec: 0.82
+  2010s - 1960s: mean diff +0.14, songs with a>b 7/12, wilcoxon p=0.5693
+  1980s - 1960s: mean diff -0.79, songs with a>b 0/12, wilcoxon p=0.0005
+  2010s - 1980s: mean diff +0.93, songs with a>b 12/12, wilcoxon p=0.0005
+  1960s - neutral: mean diff +0.25, songs with a>b 9/12, wilcoxon p=0.2036
+  2010s - neutral: mean diff +0.40, songs with a>b 10/12, wilcoxon p=0.0425
+  dsp_new - dsp_old: mean diff +0.23, songs with a>b 8/12, wilcoxon p=0.1514
+  identity_codec - identity: mean diff +0.13, songs with a>b 8/12, wilcoxon p=0.2036
+  probability mass on target decade (prompt era / identity-like baselines):
+   prompt 1960s: 0.001  (neutral prompt mass on 1960s: 0.016; chance 0.167)
+   prompt 1980s: 0.825  (neutral prompt mass on 1980s: 0.498; chance 0.167)
+   prompt 2010s: 0.151  (neutral prompt mass on 2010s: 0.068; chance 0.167)
+  top-1 predicted decade equals prompt decade: {'1960s': 0.0, '1980s': 0.96, '2010s': 0.17}
+
+== era presence, muq decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over 12 songs)
+  identity  2.48
+  identity_codec 2.40
+  dsp_old   1.90
+  dsp_new   2.52
+  neutral   3.43
+  1960s     3.43
+  1980s     2.62
+  2010s     3.56
+  identity vs true decade: spearman 0.81 | identity_codec: 0.85
+  2010s - 1960s: mean diff +0.13, songs with a>b 8/12, wilcoxon p=0.4697
+  1980s - 1960s: mean diff -0.81, songs with a>b 0/12, wilcoxon p=0.0005
+  2010s - 1980s: mean diff +0.94, songs with a>b 12/12, wilcoxon p=0.0005
+  1960s - neutral: mean diff -0.00, songs with a>b 6/12, wilcoxon p=0.9697
+  2010s - neutral: mean diff +0.13, songs with a>b 8/12, wilcoxon p=0.4238
+  2010s - neutral: mean diff +0.13, songs with a>b 8/12, wilcoxon p=0.4238
+  dsp_new - dsp_old: mean diff +0.62, songs with a>b 12/12, wilcoxon p=0.0005
+  identity_codec - identity: mean diff -0.09, songs with a>b 5/12, wilcoxon p=0.5693
+  probability mass on target decade (prompt era / identity-like baselines):
+   prompt 1960s: 0.094  (neutral prompt mass on 1960s: 0.068; chance 0.167)
+   prompt 1980s: 0.571  (neutral prompt mass on 1980s: 0.089; chance 0.167)
+   prompt 2010s: 0.240  (neutral prompt mass on 2010s: 0.190; chance 0.167)
+  top-1 predicted decade equals prompt decade: {'1960s': 0.0, '1980s': 0.79, '2010s': 0.21}
+
+== melody/harmony preservation (chroma cosine, original mix vs generated remix; control = other song's remix)
+  neutral  frame-aligned 0.778 (other-song 0.630)   dtw 0.845 (other-song 0.777)
+  1960s    frame-aligned 0.815 (other-song 0.693)   dtw 0.883 (other-song 0.831)
+  1980s    frame-aligned 0.849 (other-song 0.769)   dtw 0.907 (other-song 0.875)
+  2010s    frame-aligned 0.793 (other-song 0.715)   dtw 0.882 (other-song 0.845)
+  dtw own - other: mean +0.048, clips with own>other 85/96, wilcoxon p=1.6e-14
+  frame-aligned own - other: mean +0.107, own>other 91/96, wilcoxon p=2.1e-16

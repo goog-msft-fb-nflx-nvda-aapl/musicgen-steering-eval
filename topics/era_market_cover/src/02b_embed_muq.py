@@ -27,6 +27,6 @@ for c in a.conds:
         with torch.inference_mode(): o = m(x, output_hidden_states=True)
         E.append(torch.stack([h.float().mean(1) for h in o["hidden_states"]]).squeeze(1).cpu().numpy().astype(np.float16))
         if i % 300 == 0: print(a.ds, c, i, len(rows), E[-1].shape, flush=True)
-    E = np.stack(E)
+    E = np.stack(E); assert np.isfinite(E.astype(np.float32)).all(), f"non-finite embeddings for {c}"
     if not a.limit: np.save(out, E)
     print("saved", c, E.shape, flush=True)

@@ -40,6 +40,6 @@ for cond in a.conds:
         hs = torch.stack([((h * m).sum(1) / m.sum(1).clamp_min(1)) if m is not None else h.mean(1) for h in o.hidden_states]).squeeze(1)
         E.append(hs.cpu().numpy().astype(np.float16))
         if i % 200 == 0: print(a.ds, cond, i, len(rows), hs.shape, flush=True)
-    E = np.stack(E)
+    E = np.stack(E); assert np.isfinite(E.astype(np.float32)).all(), f"non-finite embeddings for {cond}"
     if not a.limit: np.save(out, E)
     print("saved", cond, E.shape, flush=True)

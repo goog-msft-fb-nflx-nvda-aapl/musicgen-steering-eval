@@ -36,7 +36,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [ ] upload embeddings/stats to private HF dataset (token on Mac and server)
 
 ## Metrics plan (SURVEY_metrics.md, 2026-10-25) in order
-- [ ] EnCodec-resynthesize real train/val accompaniment, re-embed (MERT, MuQ), retrain era probes, rescore generations with Delta vs neutral
+- [x] EnCodec-resynthesize real accompaniment, re-embed (MERT, MuQ), retrain era probes, rescore generations (WORKLOG 2026-10-25 codec); per-song Delta statistic and ICC still to compute
 - [ ] controls a-f (positive/negative/DSP/sensitivity/seed ICC/encoder agreement), apply acceptance criteria
 - [x] song-identification, chord, tempo metrics on existing 96 generations (CPU) (WORKLOG 2026-10-25)
 - [ ] Audiobox Aesthetics, COCOLA, KAD (kadtk) on generations
