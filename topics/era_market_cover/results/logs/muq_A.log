@@ -1,0 +1,140 @@
+/home/jtan/miniconda3/envs/musicgen_steer/lib/python3.11/site-packages/torch/nn/utils/weight_norm.py:143: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+A mix_norm 0 1290 (13, 1024)
+A mix_norm 300 1290 (13, 1024)
+A mix_norm 600 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A mix_norm 900 1290 (13, 1024)
+A mix_norm 1200 1290 (13, 1024)
+saved mix_norm (1290, 13, 1024)
+A voc_norm 0 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A voc_norm 300 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A voc_norm 600 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A voc_norm 900 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A voc_norm 1200 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+saved voc_norm (1290, 13, 1024)
+A acc_norm 0 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A acc_norm 300 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A acc_norm 600 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A acc_norm 900 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A acc_norm 1200 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+saved acc_norm (1290, 13, 1024)
+A mix_raw 0 1290 (13, 1024)
+A mix_raw 300 1290 (13, 1024)
+A mix_raw 600 1290 (13, 1024)
+A mix_raw 900 1290 (13, 1024)
+A mix_raw 1200 1290 (13, 1024)
+saved mix_raw (1290, 13, 1024)
+A acc_raw 0 1290 (13, 1024)
+A acc_raw 300 1290 (13, 1024)
+A acc_raw 600 1290 (13, 1024)
+A acc_raw 900 1290 (13, 1024)
+A acc_raw 1200 1290 (13, 1024)
+saved acc_raw (1290, 13, 1024)
+A voc_raw 0 1290 (13, 1024)
+A voc_raw 300 1290 (13, 1024)
+A voc_raw 600 1290 (13, 1024)
+A voc_raw 900 1290 (13, 1024)
+A voc_raw 1200 1290 (13, 1024)
+saved voc_raw (1290, 13, 1024)
+A recomb_norm 0 1290 (13, 1024)
+A recomb_norm 300 1290 (13, 1024)
+A recomb_norm 600 1290 (13, 1024)
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+A recomb_norm 900 1290 (13, 1024)
+A recomb_norm 1200 1290 (13, 1024)
+saved recomb_norm (1290, 13, 1024)

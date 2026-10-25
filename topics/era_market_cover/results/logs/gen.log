@@ -1,0 +1,28 @@
+[transformers] Model config: pad_token_id must be `None` or an integer within the vocabulary (between 0 and 2047), got 2048. This may result in unexpected behavior.
+[transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 2047), got 2048. This may result in unexpected behavior.
+Loading weights:   0%|          | 0/709 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 270/709 [00:00<00:00, 2686.14it/s]Loading weights:  76%|███████▌  | 539/709 [00:00<00:00, 2117.87it/s]Loading weights: 100%|██████████| 709/709 [00:00<00:00, 2378.27it/s]
+A_007e1d02fd77 1960s neutral 1 1
+A_007e1d02fd77 1960s 1960s 1 2
+A_007e1d02fd77 1960s 1980s 0 3
+A_007e1d02fd77 1960s 1980s 1 4
+A_007e1d02fd77 1960s 2010s 0 5
+A_007e1d02fd77 1960s 2010s 1 6
+A_06ca1db3bf92 1960s neutral 0 7
+A_06ca1db3bf92 1960s neutral 1 8
+A_06ca1db3bf92 1960s 1960s 0 9
+A_06ca1db3bf92 1960s 1960s 1 10
+A_06ca1db3bf92 1960s 1980s 0 11
+A_06ca1db3bf92 1960s 1980s 1 12
+A_06ca1db3bf92 1960s 2010s 0 13
+A_06ca1db3bf92 1960s 2010s 1 14
+A_01321d0221ab 1970s neutral 0 15
+A_01321d0221ab 1970s neutral 1 16
+A_01321d0221ab 1970s 1960s 0 17
+A_01321d0221ab 1970s 1960s 1 18
+A_01321d0221ab 1970s 1980s 0 19
+A_01321d0221ab 1970s 1980s 1 20
+A_01321d0221ab 1970s 2010s 0 21
+A_01321d0221ab 1970s 2010s 1 22
+A_046e6b7f8480 1970s neutral 0 23
+A_046e6b7f8480 1970s neutral 1 24
+A_046e6b7f8480 1970s 1960s 0 25

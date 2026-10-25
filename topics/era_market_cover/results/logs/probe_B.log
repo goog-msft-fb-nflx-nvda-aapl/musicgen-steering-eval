@@ -1,0 +1,7 @@
+B mix_raw layer 14 C 0.01 cv 0.590 val 0.578
+B mix_norm layer 14 C 0.01 cv 0.583 val 0.578
+B voc_raw layer 15 C 0.01 cv 0.551 val 0.549
+B voc_norm layer 15 C 0.01 cv 0.565 val 0.588
+B acc_raw layer 13 C 0.01 cv 0.427 val 0.412
+B acc_norm layer 14 C 0.01 cv 0.425 val 0.382
+B recomb_norm layer 14 C 0.01 cv 0.586 val 0.569

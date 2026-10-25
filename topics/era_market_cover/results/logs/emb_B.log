@@ -1,0 +1,115 @@
+Loading weights:   0%|          | 0/876 [00:00<?, ?it/s]Loading weights: 100%|██████████| 876/876 [00:00<00:00, 17632.26it/s]
+[transformers] `use_return_dict` is deprecated! Use `return_dict` instead!
+B mix_raw 0 1002 torch.Size([24, 1024])
+B mix_raw 200 1002 torch.Size([24, 1024])
+B mix_raw 400 1002 torch.Size([24, 1024])
+B mix_raw 600 1002 torch.Size([24, 1024])
+B mix_raw 800 1002 torch.Size([24, 1024])
+B mix_raw 1000 1002 torch.Size([24, 1024])
+saved mix_raw (1002, 24, 1024)
+B mix_norm 0 1002 torch.Size([24, 1024])
+B mix_norm 200 1002 torch.Size([24, 1024])
+B mix_norm 400 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B mix_norm 600 1002 torch.Size([24, 1024])
+B mix_norm 800 1002 torch.Size([24, 1024])
+B mix_norm 1000 1002 torch.Size([24, 1024])
+saved mix_norm (1002, 24, 1024)
+B voc_raw 0 1002 torch.Size([24, 1024])
+B voc_raw 200 1002 torch.Size([24, 1024])
+B voc_raw 400 1002 torch.Size([24, 1024])
+B voc_raw 600 1002 torch.Size([24, 1024])
+B voc_raw 800 1002 torch.Size([24, 1024])
+B voc_raw 1000 1002 torch.Size([24, 1024])
+saved voc_raw (1002, 24, 1024)
+B voc_norm 0 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B voc_norm 200 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B voc_norm 400 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B voc_norm 600 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B voc_norm 800 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B voc_norm 1000 1002 torch.Size([24, 1024])
+saved voc_norm (1002, 24, 1024)
+B acc_raw 0 1002 torch.Size([24, 1024])
+B acc_raw 200 1002 torch.Size([24, 1024])
+B acc_raw 400 1002 torch.Size([24, 1024])
+B acc_raw 600 1002 torch.Size([24, 1024])
+B acc_raw 800 1002 torch.Size([24, 1024])
+B acc_raw 1000 1002 torch.Size([24, 1024])
+saved acc_raw (1002, 24, 1024)
+B acc_norm 0 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B acc_norm 200 1002 torch.Size([24, 1024])
+B acc_norm 400 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B acc_norm 600 1002 torch.Size([24, 1024])
+B acc_norm 800 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B acc_norm 1000 1002 torch.Size([24, 1024])
+saved acc_norm (1002, 24, 1024)
+B recomb_norm 0 1002 torch.Size([24, 1024])
+B recomb_norm 200 1002 torch.Size([24, 1024])
+B recomb_norm 400 1002 torch.Size([24, 1024])
+/home/jtan/era_market/venv/lib/python3.11/site-packages/pyloudnorm/normalize.py:62: UserWarning: Possible clipped samples in output.
+  warnings.warn("Possible clipped samples in output.")
+B recomb_norm 600 1002 torch.Size([24, 1024])
+B recomb_norm 800 1002 torch.Size([24, 1024])
+B recomb_norm 1000 1002 torch.Size([24, 1024])
+saved recomb_norm (1002, 24, 1024)
