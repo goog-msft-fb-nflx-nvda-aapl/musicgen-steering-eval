@@ -14,3 +14,37 @@ Newest entries at the bottom. Every entry states config, data and the measured r
 - Launched tmux `era` on the server: separate A then B, then embed A then B (all 7 conditions). Done flag: `~/era_market/stems_emb.done`. Estimated 40 min separation + embedding time.
 - Added `src/03_stats.py` (9 signal statistics per clip for mix, vocal and accompaniment: LUFS, loudness range, crest factor, RMS, bandwidth, centroid, rolloff-85, zcr, noise floor), `src/05_langid.py` (openai/whisper-small language-token posterior over 100 languages on the vocal stem and the mix), `src/run_analysis.sh` (waits for `stems_emb.done`, then stats, language ID, probes). Language ID smoke test passed (3 clips).
 - tmux on server: `era` (separate A then B, then embed), `era2` (waits, then analysis chain, writes `analysis.done`), `era3` (separate B in parallel on GPU 1; the script skips clips already separated). Measured about 20 clips/min per process on the shared GPUs, so separation takes roughly 1 to 1.5 hours.
+
+## 2026-10-25 first results: stem-wise probes (MERT-v2-30s, validation split)
+Config: `src/04_probe.py`. Features: MERT-v2-30s, time-mean per layer (24 x 1024). Probe: standardized logistic regression; layer and C chosen by 5-fold CV on the train split only (CV is not artist-grouped, so it only selects hyperparameters), then scored once on the validation split (A: n=132, 22 per class; B: n=102, 17 per class). 95% CI = bootstrap over clips (2000). McNemar = exact, paired on the same validation clips, uncorrected for multiple comparisons. Chance: 1/6 = 0.167. Separation: HT Demucs (vocals vs drums+bass+other), norm = -23 LUFS per signal. Clips come from YouTube so all audio is lossy and old recordings are transfers.
+
+Validation accuracy (best layer in brackets):
+| condition | A decade | B market |
+|---|---|---|
+| mix_raw | 0.515 [L17] (CI 0.43-0.60) | 0.578 [L14] (0.48-0.68) |
+| mix_norm | 0.500 [L17] | 0.578 [L14] |
+| vocals_raw | 0.394 [L20] | 0.549 [L15] |
+| vocals_norm | 0.288 [L10] | 0.588 [L15] |
+| accomp_raw | 0.508 [L10] | 0.412 [L13] |
+| accomp_norm | 0.432 [L12] | 0.382 [L14] |
+| recombined_norm | 0.508 [L17] | 0.569 [L14] |
+Paired McNemar (validation): decade, mix_norm vs vocals_norm 41 vs 13 clips p=0.0002; accomp_raw vs vocals_norm 39 vs 10 p<0.0001; mix vs accomp not significant (p>=0.09). Market, mix_norm vs accomp_norm 25 vs 5 p=0.0003; vocals_norm vs accomp_norm 32 vs 11 p=0.002; mix vs vocals not significant. Recombined (vocals+accomp re-summed) is not distinguishable from the original mix in either task (accuracy 0.508 vs 0.515 and 0.569 vs 0.578), so separation processing itself does not change the probe result here.
+
+Shortcut baselines (`src/03_stats.py`, `src/05_langid.py`, `src/06_extra_probes.py`; same protocol):
+| input | A decade | B market |
+|---|---|---|
+| 9 signal statistics, mix (LUFS, loudness range, crest factor, RMS, bandwidth, centroid, rolloff, zcr, noise floor) | 0.311 | 0.255 |
+| signal statistics, vocal stem / accomp stem | 0.227 / 0.303 | 0.225 / 0.225 |
+| Whisper-small language posterior, vocal stem | 0.273 | **0.529** |
+| Whisper-small language posterior, mix | 0.318 | **0.539** |
+| accomp_norm embedding + vocal language posterior | 0.462 | 0.529 |
+| mix_norm embedding + vocal language posterior | 0.485 | 0.578 |
+Market: language posterior alone (0.53) is not significantly different from the full-mix embedding probe (0.578) by McNemar on 102 clips; adding the vocal-stem language posterior to the accomp embedding raises accuracy from 0.382 to 0.529 (19 vs 4 clips, p=0.003) and adding it to the mix embedding does not change accuracy (0.578). Decade: signal statistics and language posteriors reach 0.23-0.32, above chance but far below the embeddings (p<=0.002 vs mix_norm).
+
+Per-class validation recall and confusions: `results/confusion_summary.txt`. Decade: errors are mostly adjacent decades (mix_norm within-one-decade accuracy 0.841, mean absolute decade error 0.75; 2000s is the weakest class at 0.27 recall, confused with 1990s and 2010s). Vocal stem decade error is larger (mean 1.23, within-one 0.705). Market: Brazil and Spain are easiest (mix 0.94, 0.65), Germany/US/Italy hardest; US->Germany and UK->US are the top mix confusions.
+
+Reading (interpretation, one encoder, small validation sets, uncorrected pairwise tests):
+- Decade information in this setup sits mostly in the accompaniment: accompaniment alone matches the mix, the vocal stem is clearly worse (but above chance). Market information sits mostly in the vocals and is largely explained by language: the vocal stem matches the mix, accompaniment is much worse, and a language-ID posterior alone almost reaches the mix accuracy.
+- The accompaniment still carries some market information (0.38-0.41 vs chance 0.167) that is not language, since the accompaniment stem has no singing language except separation bleed; bleed of vocals into the accompaniment stem was not measured.
+- Simple signal statistics do not explain the decade result (0.31 vs 0.50), but the loudness cue is partly removed already by the -23 LUFS normalization used in all norm conditions; raw and normalized conditions are not significantly different.
+- Caveats: validation n is 102 to 132 so CIs span about +-9 points and differences below about 10 points are not resolved; 16+ pairwise tests were not corrected; label noise from reissues (Discogs release year) is not handled; PA1 test labels are hidden so there is no untouched test split here.
