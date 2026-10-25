@@ -9,3 +9,5 @@ Files
 - `SURVEY.md`: the survey result once available.
 
 The earlier MusicGen steering project stays at the repository root; this folder is a separate topic.
+- `SURVEY.md`: merged survey with reliability notes.
+- `survey1/`: raw replies from three deep-research tools. The Gemini reply contains citations that could not be verified; see `SURVEY.md`.
