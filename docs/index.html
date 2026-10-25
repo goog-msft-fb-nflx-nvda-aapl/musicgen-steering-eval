@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steering MusicGen by Note</title>
+<style>
+:root{--bg:#f6f4ee;--fg:#1b2430;--mut:#4a5563;--card:#fff;--line:#d9d5ca;--acc:#b4410b}
+@media (prefers-color-scheme:dark){:root{--bg:#1b2430;--fg:#f6f4ee;--mut:#c9d1db;--card:#243244;--line:#3a4a60;--acc:#f2a65a}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+h1{font-family:Georgia,serif;font-size:2rem;line-height:1.2;margin:0 0 8px}
+h2{font-family:Georgia,serif;margin:40px 0 8px}
+p,li{color:var(--mut)} a{color:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}
+.video{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+table{border-collapse:collapse;width:100%} th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);color:var(--fg)}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0}
+label{display:flex;flex-direction:column;font-size:.85rem;color:var(--mut);gap:4px}
+select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+audio{width:100%} .tag{font-size:.85rem;color:var(--acc);font-weight:600}
+</style>
+</head>
+<body>
+<main>
+<h1>Does concept steering in MusicGen survive a fair evaluation?</h1>
+<p>Course project, CommE5070 (Deep Learning for Music Analysis and Generation, NTU). We add a learned direction inside a frozen MusicGen so the generated music is pulled toward a target note, then test whether that holds up under paired, significance-tested evaluation. Status: mid-progress. We welcome people who want to join or extend this.</p>
+<p><a href="https://github.com/goog-msft-fb-nflx-nvda-aapl/musicgen-steering-eval">Code, logs and results on GitHub</a> · <a href="https://youtu.be/aaZ89FoZe_U">Mid-progress video</a></p>
+
+<div class="video"><iframe src="https://www.youtube.com/embed/aaZ89FoZe_U" title="Mid-progress report" allowfullscreen></iframe></div>
+
+<h2>Listen: unsteered vs steered</h2>
+<p>Pick a target note, a direction method, a steering strength (eta) and a prompt. Clips are MusicGen small, MusicRFM-style arm, generation seed 0. The unsteered clip uses the same seed and prompt.</p>
+<div class="card">
+<div class="row">
+<label>Target note<select id="note"><option>C</option><option value="Dsharp">D#</option><option>G</option><option>B</option></select></label>
+<label>Method<select id="method"><option value="meandiff">mean-difference</option><option value="rfm">RFM</option><option value="logistic">logistic</option><option value="lda">LDA</option></select></label>
+<label>eta<select id="eta"><option>0.3</option><option>0.6</option></select></label>
+<label>Prompt<select id="prompt"><option value="0">a relaxing jazz song with piano</option><option value="5">ambient pad music, calm and spacious</option></select></label>
+</div>
+<p class="tag">Unsteered</p><audio id="base" controls preload="none"></audio>
+<p class="tag" id="stlabel">Steered</p><audio id="steered" controls preload="none"></audio>
+<p id="hint">Reference pitch for the target note:</p><button id="tone">Play reference tone</button>
+</div>
+
+<h2>Headline numbers so far</h2>
+<p>Share of clips whose detected note equals the target. MusicGen small, MusicRFM-style arm, eta 0.6, 12 notes, 960 paired clips per method. Unsteered baseline 0.083.</p>
+<div class="card"><table>
+<tr><th>Method</th><th>Hit rate</th></tr>
+<tr><td>Mean-difference</td><td>0.985</td></tr><tr><td>RFM top direction</td><td>0.781</td></tr>
+<tr><td>Logistic regression</td><td>0.678</td></tr><tr><td>LDA</td><td>0.440</td></tr>
+</table></div>
+<ul>
+<li>The ordering holds on MusicGen medium and under a second, independent evaluator (a frozen MERT note probe).</li>
+<li>A random direction leaves the hit rate at baseline (0.067 to 0.115).</li>
+<li>Probe score does not predict which layers steer best; the last 8 layers match a per-note causal search.</li>
+<li>Not yet shown: no listening test, one concept family (root notes), one model family. Hit rate here is measured by automatic evaluators, so judge by ear with the clips above.</li>
+</ul>
+
+<h2>Reproduce or extend</h2>
+<p>Everything is in the repository: <code>src/</code> (pipeline), <code>results/</code> (per-clip results and summaries), <code>WORKLOG.md</code> (every run with its config), <code>artifacts/</code> (trained directions). Analysis scripts <code>src/analysis_*.py</code> run on the stored results without a GPU.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+function upd(){
+  const n=$("note").value,m=$("method").value,e=$("eta").value,p=$("prompt").value;
+  $("base").src="audio/C_meandiff_base_eta0.0_s0_p"+p+".mp3";
+  $("steered").src="audio/"+n+"_"+m+"_musicrfm_eta"+e+"_s0_p"+p+".mp3";
+  $("stlabel").textContent="Steered toward "+$("note").selectedOptions[0].text+" ("+$("method").selectedOptions[0].text+", eta "+e+")";
+}
+["note","method","eta","prompt"].forEach(i=>$(i).addEventListener("change",upd)); upd();
+const F={C:261.63,Dsharp:311.13,G:392.0,B:493.88};
+$("tone").onclick=()=>{const c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();
+  o.frequency.value=F[$("note").value];g.gain.value=.15;o.connect(g);g.connect(c.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+1.5);o.stop(c.currentTime+1.5);};
+</script>
+</body>
+</html>

@@ -11,3 +11,13 @@ video/*.mp4
 video/audio/
 video/frames/*.png
 video/seg_*
+video/audio_k/
+video/segk_*
+video/test/
+!docs/audio/
+!docs/audio/*.mp3
+CLAUDE.md
+docs/RESEARCH_PROMPT.md
+docs/SPEAKER_NOTES_PROMPT.md
+docs/response.md
+video/frames/*.html
