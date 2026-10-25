@@ -2,7 +2,7 @@
 
 Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results). Data: PA1 Discogs-VI clips (A: 6 decades, 1026 train + 132 val labeled; B: 6 markets in the 1980s, 798 train + 102 val labeled; test labels hidden; splits are artist-disjoint; 30 s mono 24 kHz). Server dir `~/era_market` (venv `~/era_market/venv`, data `~/era_market/data/ex`). GPU access ends 2026-10-31; after that analysis runs on cached embeddings on the Mac.
 
-## Now
+## Now (2026-10-25: MuQ probes done, generation 107/96+ files present, evaluation of generated audio next)
 - [x] unzip data on server, smoke test HTDemucs (2292 clips) and MERT-v2-30s under transformers 5
 - [x] 01 separate all clips into vocals / accompaniment (24 kHz mono, fp16 npz), log runtime per clip
 - [x] 02 embed 7 conditions with MERT-v2-30s (mix raw/norm, vocals raw/norm, accompaniment raw/norm, recombined)

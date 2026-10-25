@@ -12,14 +12,14 @@ from common import LABELS, manifest
 
 ap = argparse.ArgumentParser(); ap.add_argument("--ds", required=True); ap.add_argument("--emb", default=os.path.expanduser("~/era_market/emb"))
 ap.add_argument("--out", required=True); ap.add_argument("--conds", nargs="+", default=["mix_raw", "mix_norm", "voc_raw", "voc_norm", "acc_raw", "acc_norm", "recomb_norm"])
-ap.add_argument("--layers", type=int, nargs="*", default=None); a = ap.parse_args()
+ap.add_argument("--layers", type=int, nargs="*", default=None); ap.add_argument("--prefix", default="", help="embedding file prefix, e.g. muq_"); a = ap.parse_args()
 rows = manifest(a.ds); lab = LABELS[a.ds]
 split = np.array([r["split"] for r in rows]); y = np.array([lab.index(r["label"]) if r["label"] else -1 for r in rows])
 tr, va = np.where(split == "train")[0], np.where(split == "validation")[0]
 res = {"ds": a.ds, "n_train": len(tr), "n_val": len(va), "conds": {}}; preds = {}
 rng = np.random.default_rng(0); boots = rng.integers(0, len(va), size=(2000, len(va)))
 for c in a.conds:
-    f = os.path.join(a.emb, f"{a.ds}_{c}.npy")
+    f = os.path.join(a.emb, f"{a.ds}_{a.prefix}{c}.npy")
     if not os.path.exists(f): continue
     E = np.load(f).astype(np.float32); L = E.shape[1]; layers = a.layers or list(range(L))
     best = (-1, None, None); curve = {}
