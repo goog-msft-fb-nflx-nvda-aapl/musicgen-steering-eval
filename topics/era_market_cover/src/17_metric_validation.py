@@ -13,14 +13,14 @@ for enc in ("mert", "muq"):
         lo, hi = boot(d); print(f"  {enc} {e}: {d.mean():+.3f} [{lo:+.3f}, {hi:+.3f}]  >0 in {(d>0).sum()}/{len(d)}  p={wilcoxon(d).pvalue:.4f}")
 print("\n== seed ICC(1,1) of the expected decade over the 2 seeds of each (song, prompt) (groups =", len(songs) * 4, ")")
 for enc in ("mert", "muq"):
-    X = np.array([[r[f"{enc}_exp_decade"] for r in R if r["clip"] == s and r["cond"] == e and r["seed"] in (0, 1)] for s in songs for e in ("neutral", "1960s", "1980s", "2010s")])
+    X = np.array([[r[f"{enc}_exp_decade"] for r in R if r["clip"] == s and r["cond"] == e and r["seed"] in (0, 1, 2)] for s in songs for e in ("neutral", "1960s", "1980s", "2010s")])
     k = X.shape[1]; msb = k * X.mean(1).var(ddof=1); msw = X.var(1, ddof=1).mean(); print(f"  {enc}: ICC {(msb - msw) / (msb + (k - 1) * msw):.3f}")
-    Y = np.array([[r[f"{enc}_probs"][2] for r in R if r["clip"] == s and r["cond"] == "1980s" and r["seed"] in (0, 1)] for s in songs]); msb = k * Y.mean(1).var(ddof=1); msw = Y.var(1, ddof=1).mean(); print(f"        P(1980s | 1980s prompt) ICC {(msb - msw) / (msb + (k - 1) * msw):.3f}")
+    Y = np.array([[r[f"{enc}_probs"][2] for r in R if r["clip"] == s and r["cond"] == "1980s" and r["seed"] in (0, 1, 2)] for s in songs]); msb = k * Y.mean(1).var(ddof=1); msw = Y.var(1, ddof=1).mean(); print(f"        P(1980s | 1980s prompt) ICC {(msb - msw) / (msb + (k - 1) * msw):.3f}")
 print("\n== sensitivity: crossfade original(codec) -> generated, P(target decade) vs alpha (mean over songs and seeds), spearman(alpha, P) averaged over (song, prompt)")
 al = c["alphas"]
 for enc in ("mert", "muq"):
     for e, t in TD.items():
-        cur = np.array([[np.mean([c["probs"][enc][f"sens|{s}|{e}|{sd}|{a}"][t] for sd in (0, 1) if f"sens|{s}|{e}|{sd}|{a}" in c["probs"][enc]]) for a in al] for s in songs])
+        cur = np.array([[np.mean([c["probs"][enc][f"sens|{s}|{e}|{sd}|{a}"][t] for sd in (0, 1, 2) if f"sens|{s}|{e}|{sd}|{a}" in c["probs"][enc]]) for a in al] for s in songs])
         rho = np.mean([spearmanr(al, cu)[0] for cu in cur if np.ptp(cu) > 0]); print(f"  {enc} {e}: curve {np.round(cur.mean(0), 3).tolist()}  mean per-song spearman {rho:+.2f}")
 print("\n== negative controls: noise through the probes (mean prob per decade, chance 0.167)")
 for enc in ("mert", "muq"):

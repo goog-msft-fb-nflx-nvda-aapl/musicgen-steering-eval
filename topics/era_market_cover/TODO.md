@@ -41,7 +41,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [x] song-identification, chord, tempo metrics on existing 96 generations (CPU) (WORKLOG 2026-10-25)
 - [x] Audiobox Aesthetics, KAD-style margin on generations (WORKLOG 2026-10-26); [ ] COCOLA still open
 - [ ] analysis-half metrics: QWK, MAE-decade, log-loss, MDL, control-task selectivity on stored embeddings
-- [x] (24 songs x 2 seeds done 2026-10-26; seed 2 running) scale generation to 24 songs; final qualitative listening round only after the quantitative suite is frozen
+- [x] (24 songs x 3 seeds done 2026-10-26) scale generation to 24 songs; final qualitative listening round only after the quantitative suite is frozen
 
 ## From course materials (COURSE_MATERIALS_NOTES.md)
 - [ ] guidance-scale sweep (1, 3, 5, 7) for MusicGen-Melody: style strength vs content preservation
