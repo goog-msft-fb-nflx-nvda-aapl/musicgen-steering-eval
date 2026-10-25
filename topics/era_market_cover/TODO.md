@@ -12,7 +12,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 
 ## Next (results so far in WORKLOG 2026-10-25: decade lives in accompaniment, market in vocals/language)
 - [ ] artist-grouped confidence: bootstrap over validation with multiple-comparison correction; second seed of probe selection
-- [ ] vocal-bleed check: how much vocal energy remains in the accompaniment stem (and instrumental-only subset via vocal RMS ratio)
+- [x] vocal-bleed check (WORKLOG 2026-10-25); instrumental-only subset still too small to test (tercile n=34-44)
 - [ ] second encoder (MAEST, MuQ) to see if the stem pattern is encoder specific
 - [ ] layer-wise curves per condition (data in probe json `layer_cv_best_by_layer`) as a figure
 - [ ] second encoder family for evaluation of generated covers (MAEST or MuQ) so the era probe is not the analysis encoder

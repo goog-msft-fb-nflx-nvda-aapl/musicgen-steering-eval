@@ -1,0 +1,8 @@
+== A: vocal share of energy mean 0.35 (min 0.00, max 1.00); language posterior of ACCOMPANIMENT stem -> label: cv 0.307 val 0.326 (chance 0.167)
+   mix_norm  val acc by vocal-share tercile (low/mid/high, n=[44, 44, 44]): [0.409, 0.591, 0.5]  spearman(vocal share, correct)=0.05
+   voc_norm  val acc by vocal-share tercile (low/mid/high, n=[44, 44, 44]): [0.295, 0.318, 0.25]  spearman(vocal share, correct)=-0.07
+   acc_norm  val acc by vocal-share tercile (low/mid/high, n=[44, 44, 44]): [0.25, 0.568, 0.477]  spearman(vocal share, correct)=0.13
+== B: vocal share of energy mean 0.36 (min 0.00, max 1.00); language posterior of ACCOMPANIMENT stem -> label: cv 0.267 val 0.235 (chance 0.167)
+   mix_norm  val acc by vocal-share tercile (low/mid/high, n=[34, 34, 34]): [0.353, 0.647, 0.735]  spearman(vocal share, correct)=0.24
+   voc_norm  val acc by vocal-share tercile (low/mid/high, n=[34, 34, 34]): [0.412, 0.676, 0.676]  spearman(vocal share, correct)=0.19
+   acc_norm  val acc by vocal-share tercile (low/mid/high, n=[34, 34, 34]): [0.294, 0.412, 0.441]  spearman(vocal share, correct)=0.07
