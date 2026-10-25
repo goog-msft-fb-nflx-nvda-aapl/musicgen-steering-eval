@@ -1,6 +1,6 @@
 layers used {'mert': 18, 'muq': 9} | songs 12 | true decades [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
 
-== era presence, mert decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over 12 songs)
+== era presence, mert decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over songs)
   identity  2.57
   identity_codec 2.70
   dsp_old   2.46
@@ -23,7 +23,7 @@ layers used {'mert': 18, 'muq': 9} | songs 12 | true decades [0, 0, 1, 1, 2, 2, 
    prompt 2010s: 0.151  (neutral prompt mass on 2010s: 0.068; chance 0.167)
   top-1 predicted decade equals prompt decade: {'1960s': 0.0, '1980s': 0.96, '2010s': 0.17}
 
-== era presence, muq decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over 12 songs)
+== era presence, muq decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over songs)
   identity  2.48
   identity_codec 2.40
   dsp_old   1.90
@@ -37,7 +37,6 @@ layers used {'mert': 18, 'muq': 9} | songs 12 | true decades [0, 0, 1, 1, 2, 2, 
   1980s - 1960s: mean diff -0.81, songs with a>b 0/12, wilcoxon p=0.0005
   2010s - 1980s: mean diff +0.94, songs with a>b 12/12, wilcoxon p=0.0005
   1960s - neutral: mean diff -0.00, songs with a>b 6/12, wilcoxon p=0.9697
-  2010s - neutral: mean diff +0.13, songs with a>b 8/12, wilcoxon p=0.4238
   2010s - neutral: mean diff +0.13, songs with a>b 8/12, wilcoxon p=0.4238
   dsp_new - dsp_old: mean diff +0.62, songs with a>b 12/12, wilcoxon p=0.0005
   identity_codec - identity: mean diff -0.09, songs with a>b 5/12, wilcoxon p=0.5693

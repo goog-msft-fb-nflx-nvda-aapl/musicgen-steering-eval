@@ -8,12 +8,12 @@ def per_song(cond, key):
     return np.array([np.mean([r[key] for r in R if r["clip"] == s and r["cond"] == cond]) for s in songs])
 print("layers used", d["layers"], "| songs", len(songs), "| true decades", sorted(true.values()))
 for enc in ("mert", "muq"):
-    k = f"{enc}_exp_decade"; print(f"\n== era presence, {enc} decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over 12 songs)")
+    k = f"{enc}_exp_decade"; print(f"\n== era presence, {enc} decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over songs)")
     for c in ("identity", "identity_codec", "dsp_old", "dsp_new", "neutral", "1960s", "1980s", "2010s"): print(f"  {c:9s} {per_song(c, k).mean():.2f}")
     print("  identity vs true decade: spearman", round(float(spearmanr(per_song("identity", k), [true[s] for s in songs])[0]), 2), "| identity_codec:", round(float(spearmanr(per_song("identity_codec", k), [true[s] for s in songs])[0]), 2) if any(r["cond"]=="identity_codec" for r in R) else "n/a")
     for a, b in (("2010s", "1960s"), ("1980s", "1960s"), ("2010s", "1980s"), ("1960s", "neutral"), ("2010s", "neutral"), ("dsp_new", "dsp_old"), ("identity_codec", "identity")):
         x, y = per_song(a, k), per_song(b, k); p = wilcoxon(x, y).pvalue if np.any(x != y) else 1.0
-        print(f"  {a} - {b}: mean diff {np.mean(x - y):+.2f}, songs with a>b {int((x > y).sum())}/12, wilcoxon p={p:.4f}")
+        print(f"  {a} - {b}: mean diff {np.mean(x - y):+.2f}, songs with a>b {int((x > y).sum())}/{len(songs)}, wilcoxon p={p:.4f}")
     pk = f"{enc}_probs"; print("  probability mass on target decade (prompt era / identity-like baselines):")
     for c, t in TD.items(): print(f"   prompt {c}: {np.mean([r[pk][t] for r in R if r['cond']==c]):.3f}  (neutral prompt mass on {c}: {np.mean([r[pk][t] for r in R if r['cond']=='neutral']):.3f}; chance 0.167)")
     print("  top-1 predicted decade equals prompt decade:", {c: round(float(np.mean([int(np.argmax(r[pk])) == t for r in R if r["cond"] == c])), 2) for c, t in TD.items()})
