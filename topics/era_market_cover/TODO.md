@@ -34,3 +34,11 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [ ] retrain the era probe with generated-style augmentation or compare to neutral-prompt anchor only
 - [ ] more songs and prompt variants (2000s/1990s/1970s), guidance sweep; Discogs-VI cliques as real-reference targets
 - [ ] upload embeddings/stats to private HF dataset (token on Mac and server)
+
+## Metrics plan (SURVEY_metrics.md, 2026-10-25) in order
+- [ ] EnCodec-resynthesize real train/val accompaniment, re-embed (MERT, MuQ), retrain era probes, rescore generations with Delta vs neutral
+- [ ] controls a-f (positive/negative/DSP/sensitivity/seed ICC/encoder agreement), apply acceptance criteria
+- [ ] song-identification, chord, tempo metrics on existing 96 generations (CPU)
+- [ ] Audiobox Aesthetics, COCOLA, KAD (kadtk) on generations
+- [ ] analysis-half metrics: QWK, MAE-decade, log-loss, MDL, control-task selectivity on stored embeddings
+- [ ] scale generation to 24 songs; final qualitative listening round only after the quantitative suite is frozen
