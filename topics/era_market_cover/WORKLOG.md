@@ -58,3 +58,15 @@ Config: per clip vocal energy share = rms(vocal stem) / (rms(vocal) + rms(accomp
 - Language posterior of the accompaniment stem predicts market at 0.235 validation accuracy (cv 0.267; chance 0.167), versus 0.529 for the vocal stem. Reading (interpretation): little language information is left in the accompaniment stem, so the 0.38-0.41 market accuracy of accompaniment-only probes is probably not explained by bleed of sung language; it could still come from vocal timbre bleed or from musical cues. Not tested directly.
 - Same posterior on decade: 0.326 (cv 0.307), which is about the level of the other weak shortcut baselines (0.27-0.32).
 - Vocal share per clip: mean 0.35 (A) and 0.36 (B), full range 0 to 1 (some clips have almost no separated vocal). Validation accuracy by vocal-share tercile (n=34 to 44 per tercile, so differences below about 15 points are not resolved): market mix_norm 0.35 / 0.65 / 0.74, vocal 0.41 / 0.68 / 0.68, accompaniment 0.29 / 0.41 / 0.44 (low / mid / high); decade accompaniment 0.25 / 0.57 / 0.48. Market accuracy of the mix rises with vocal share (spearman 0.24 between vocal share and correctness), consistent with the language reading; the least-vocal tercile is also the least accurate for the accompaniment decade probe, which was not expected and is not explained (could be quiet or old recordings where separation finds little vocal).
+
+## 2026-10-25 second encoder: MuQ stem probes (`src/04_probe.py --prefix muq_`, `results/probe_muq_{A,B}.json`)
+Config as for MERT-v2 (standardized logistic regression, layer and C by 5-fold CV on train, scored once on validation, bootstrap CI, exact McNemar). MuQ-large-msd-iter, 13 hidden states of 1024-d, time-mean.
+Validation accuracy (norm conditions; layer in brackets):
+| condition | A decade | B market |
+|---|---|---|
+| mix_norm | 0.477 [L8] (CI 0.40-0.56) | 0.471 [L3] (0.37-0.57) |
+| vocals_norm | 0.318 [L2] (0.24-0.40) | 0.471 [L2] (0.37-0.56) |
+| accomp_norm | 0.424 [L9] (0.34-0.51) | 0.392 [L8] (0.29-0.49) |
+| recombined_norm | 0.485 | 0.461 |
+Paired McNemar: decade mix vs vocals 33 vs 12 clips, p=0.0025; mix vs accomp p=0.17; vocals vs accomp 20 vs 34, p=0.076. Market: mix vs vocals 15 vs 15, p=1.0; mix vs accomp 20 vs 12, p=0.22; vocals vs accomp p=0.24.
+Reading (interpretation): the same ordering as with MERT-v2 appears with an independent self-supervised encoder, so the pattern (decade carried by the accompaniment more than by the vocals, market carried by the vocals at least as much as by the accompaniment) is not specific to MERT-v2. The effect sizes are smaller and several contrasts are not significant with n=102 to 132; in particular the market accompaniment deficit (0.39 vs 0.47) is not resolved with MuQ, whereas with MERT-v2 it was (0.38 vs 0.58, p=0.0003). MuQ overall accuracy is below MERT-v2 (0.48 vs 0.50-0.52 decade, 0.47 vs 0.58 market). Recombined audio is again indistinguishable from the original mix.
