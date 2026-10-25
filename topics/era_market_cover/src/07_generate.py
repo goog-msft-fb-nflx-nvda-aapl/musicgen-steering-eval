@@ -10,7 +10,7 @@ ERAS = {"neutral": "a song recording",
         "1980s": "a 1980s synth pop recording, gated reverb drums, drum machine, DX7 synthesizer, chorus guitar, glossy digital production",
         "2010s": "a 2010s modern pop production, heavy sub bass, punchy compressed drums, wide polished synths, loud streaming-era mastering"}
 ap = argparse.ArgumentParser(); ap.add_argument("--n", type=int, default=12); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--limit_gen", type=int, default=0)
-ap.add_argument("--guidance", type=float, default=3.0); a = ap.parse_args()
+ap.add_argument("--guidance", type=float, default=3.0); ap.add_argument("--reverse", action="store_true", help="process songs in reverse order (to run a second worker)"); a = ap.parse_args()
 rows = [r for r in manifest("A") if r["split"] == "validation"]
 per = a.n // 6; pick = []
 for lab in LABELS["A"]: pick += [r for r in rows if r["label"] == lab][:per]       # per decade, first ones in manifest order
@@ -18,7 +18,7 @@ mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid)
 model = MusicgenMelodyForConditionalGeneration.from_pretrained(mid, torch_dtype=torch.float16).to("cuda").eval()
 os.makedirs(os.path.join(ROOT, "gen"), exist_ok=True); n = 0
 with open(os.path.join(ROOT, "gen", "picked.txt"), "w") as f: f.write("\n".join(r["sample_id"] + "," + r["label"] for r in pick))
-for r in pick:
+for r in (pick[::-1] if a.reverse else pick):
     mix = sf.read(r["path"], dtype="float32")[0]; z = np.load(os.path.join(ROOT, "stems", "A", r["sample_id"] + ".npz"))
     voc, acc0 = z["vocals"].astype(np.float32), z["accomp"].astype(np.float32)
     m32 = AF.resample(torch.from_numpy(mix), SR, 32000).numpy()
