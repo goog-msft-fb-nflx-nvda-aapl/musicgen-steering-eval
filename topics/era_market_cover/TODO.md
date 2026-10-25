@@ -16,8 +16,8 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [ ] second encoder (MAEST, MuQ) to see if the stem pattern is encoder specific
 - [ ] layer-wise curves per condition (data in probe json `layer_cv_best_by_layer`) as a figure
 - [ ] second encoder family for evaluation of generated covers (MAEST or MuQ) so the era probe is not the analysis encoder
-- [ ] MusicGen-Melody accompaniment regeneration: 5 to 12 songs x 3 target eras, keep original vocal stem, remix
-- [ ] melody preservation metrics (chroma DTW, RPA on vocal pitch track), era probe on generated audio, DSP-only "old" baseline
+- [x] (first pass, 12 songs, WORKLOG 2026-10-25) MusicGen-Melody accompaniment regeneration: 5 to 12 songs x 3 target eras, keep original vocal stem, remix
+- [x] (chroma only) melody preservation metrics (chroma DTW, RPA on vocal pitch track), era probe on generated audio, DSP-only "old" baseline
 - [ ] decide on Discogs-VI-YT clique experiment (needs audio download by a teammate)
 
 ## Later / Mac only
@@ -27,3 +27,10 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 ## Constraints
 - keep data under `~/era_market` (jtan space), do not touch other users, one or two jobs at a time, GPU 1 or 2 only
 - PA1 audio is licensed for the course: do not commit audio or embeddings; commit scripts and result tables only
+
+## Open after first generation pass
+- [ ] listening test / at least informal listening of gen/ remixes (audio is on the server, not in git)
+- [ ] DSP baseline sensitivity: why MuQ moves with filters and MERT does not
+- [ ] retrain the era probe with generated-style augmentation or compare to neutral-prompt anchor only
+- [ ] more songs and prompt variants (2000s/1990s/1970s), guidance sweep; Discogs-VI cliques as real-reference targets
+- [ ] upload embeddings/stats to private HF dataset (token on Mac and server)
