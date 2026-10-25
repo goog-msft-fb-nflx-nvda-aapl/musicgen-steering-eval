@@ -1,0 +1,24 @@
+<!doctype html><meta charset=utf-8><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>html,body{margin:0;background:#000}section{position:relative;box-sizing:border-box;width:1920px;height:1080px;overflow:hidden}
+section>*{margin:0}h1,h2,h3,p,ul,li{margin:0}ul{padding-left:40px}li{margin:0}table{border-collapse:collapse;width:100%}th,td{padding:14px 20px;border-bottom:1px solid #C9C4B6;vertical-align:top}
+section:not([data-s]){}</style><section data-s id="evaluators" data-transition="fade" style="background:#F6F4EE;color:#1B2430;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Q1: the ranking survives a second evaluator</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#FFFFFF;border:1px solid #D9D5CA;padding:40px;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;color:#B4410B">Chroma argmax</p>
+<p style="font-size:96px;font-weight:600;line-height:1.1">86.3%</p>
+<p style="font-size:28px;color:#4A5563">accuracy on clean labelled notes (95% CI 84.2 to 88.1); biased toward fifths.</p>
+</div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D9D5CA;padding:40px;border-radius:16px;display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;color:#B4410B">MERT note probe</p>
+<p style="font-size:96px;font-weight:600;line-height:1.1">90.6%</p>
+<p style="font-size:28px;color:#4A5563">test accuracy on SynTheory notes; frozen MERT-v1-95M, independent of MusicGen.</p>
+</div>
+</div>
+<ul style="font-size:32px;display:flex;flex-direction:column;gap:12px">
+<li>Method ordering (mean-diff, RFM, logistic, LDA) holds under both evaluators, on small and medium.</li>
+<li>Random directions leave the hit rate at baseline.</li>
+<li>Where steering fails, the predicted note is mostly a fifth, a fourth or a semitone away. The MERT probe shows the same pattern, so it is not only chroma bias.</li>
+</ul>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#6B7280">7 / 11</p>
+</section>

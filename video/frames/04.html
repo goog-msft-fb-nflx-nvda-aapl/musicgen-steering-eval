@@ -1,0 +1,25 @@
+<!doctype html><meta charset=utf-8><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>html,body{margin:0;background:#000}section{position:relative;box-sizing:border-box;width:1920px;height:1080px;overflow:hidden}
+section>*{margin:0}h1,h2,h3,p,ul,li{margin:0}ul{padding-left:40px}li{margin:0}table{border-collapse:collapse;width:100%}th,td{padding:14px 20px;border-bottom:1px solid #C9C4B6;vertical-align:top}
+section:not([data-s]){}</style><section data-s id="setup" data-transition="fade" style="background:#1B2430;color:#F6F4EE;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Experimental setup</h2>
+<div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px;background:#243244;padding:36px;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#F2A65A">Model and concept</h3>
+<p style="font-size:30px;color:#DCE2EA">MusicGen small (24 layers), medium for confirmation. 12 root notes, 20 text prompts, 2 to 4 generation seeds, 480 paired clips per cell.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#243244;padding:36px;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#F2A65A">Four directions</h3>
+<p style="font-size:30px;color:#DCE2EA">RFM top eigendirection, mean-difference, logistic regression, shrinkage LDA. All unit norm, trained on SynTheory notes.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#243244;padding:36px;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#F2A65A">Two injection arms</h3>
+<p style="font-size:30px;color:#DCE2EA">const8: top 8 layers, weight 1. MusicRFM-style: all layers, probe-weighted, injected with probability 0.3. Strength eta 0.15 to 0.6 (up to 2.0 on medium).</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;background:#243244;padding:36px;border-radius:16px">
+<h3 style="font-size:36px;font-weight:600;color:#F2A65A">Evaluation</h3>
+<p style="font-size:30px;color:#DCE2EA">Chroma argmax, a MERT note probe, CLAP for fidelity. Exact McNemar tests on paired clips, Holm correction, Wilcoxon on per-note values.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#9AA6B5">4 / 11</p>
+</section>

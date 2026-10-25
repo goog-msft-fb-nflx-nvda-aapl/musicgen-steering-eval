@@ -1,0 +1,15 @@
+<!doctype html><meta charset=utf-8><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>html,body{margin:0;background:#000}section{position:relative;box-sizing:border-box;width:1920px;height:1080px;overflow:hidden}
+section>*{margin:0}h1,h2,h3,p,ul,li{margin:0}ul{padding-left:40px}li{margin:0}table{border-collapse:collapse;width:100%}th,td{padding:14px 20px;border-bottom:1px solid #C9C4B6;vertical-align:top}
+section:not([data-s]){}</style><section data-s id="ablations" data-transition="fade" style="background:#F6F4EE;color:#1B2430;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Ablations: how robust is the ordering?</h2>
+<table style="font-size:30px;color:#1B2430">
+<tr><th style="width:26%;text-align:left">Ablation</th><th style="width:44%;text-align:left">Result</th><th style="width:30%;text-align:left">Effect on ordering</th></tr>
+<tr><td>Medium, eta up to 2.0</td><td>Mean-diff 0.83 to 0.94, RFM 0.43 to 0.64</td><td>Unchanged</td></tr>
+<tr><td>RFM eigen-component</td><td>Top direction beats components 1 and 2 in every cell</td><td>Top one is the fair RFM</td></tr>
+<tr><td>Training seeds 42, 43, 44</td><td>RFM varies by up to 0.11; mean-diff varies little</td><td>Unchanged</td></tr>
+<tr><td>Target-note confusion</td><td>RFM weak on D# (0.25) and B (0.44); mean-diff at least 0.85 on every note</td><td>Unchanged</td></tr>
+</table>
+<p style="font-size:28px;color:#4A5563">Each cell is 480 paired clips; small model unless stated.</p>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#6B7280">9 / 11</p>
+</section>

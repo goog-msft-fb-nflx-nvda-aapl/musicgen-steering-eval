@@ -7,3 +7,7 @@ results/raw/
 *.wav
 *.pt
 *.npy
+video/*.mp4
+video/audio/
+video/frames/*.png
+video/seg_*

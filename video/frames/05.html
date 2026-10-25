@@ -1,0 +1,19 @@
+<!doctype html><meta charset=utf-8><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>html,body{margin:0;background:#000}section{position:relative;box-sizing:border-box;width:1920px;height:1080px;overflow:hidden}
+section>*{margin:0}h1,h2,h3,p,ul,li{margin:0}ul{padding-left:40px}li{margin:0}table{border-collapse:collapse;width:100%}th,td{padding:14px 20px;border-bottom:1px solid #C9C4B6;vertical-align:top}
+section:not([data-s]){}</style><section data-s id="methods" data-transition="fade" style="background:#F6F4EE;color:#1B2430;font-family:'IBM Plex Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;line-height:1.1">Q2: mean-difference steers best, LDA worst</h2>
+<p style="font-size:32px;color:#4A5563">Share of clips whose detected note matches the target. Small model, MusicRFM-style arm, eta 0.6, 12 notes, 960 paired clips per method. Unsteered baseline: 0.083.</p>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#1B2430;color:#F6F4EE;padding:40px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;color:#F2A65A">Mean-difference</p><p style="font-size:96px;font-weight:600;line-height:1.1">0.985</p></div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D9D5CA;padding:40px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;color:#B4410B">RFM top direction</p><p style="font-size:96px;font-weight:600;line-height:1.1">0.781</p></div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D9D5CA;padding:40px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;color:#B4410B">Logistic</p><p style="font-size:96px;font-weight:600;line-height:1.1">0.678</p></div>
+<div style="flex:1;background:#FFFFFF;border:1px solid #D9D5CA;padding:40px;border-radius:16px;display:flex;flex-direction:column;gap:8px"><p style="font-size:24px;color:#B4410B">LDA</p><p style="font-size:96px;font-weight:600;line-height:1.1">0.440</p></div>
+</div>
+<ul style="font-size:30px;color:#1B2430;display:flex;flex-direction:column;gap:8px">
+<li>Mean-difference beats RFM in all 8 arm-by-eta cells; logistic and LDA are below RFM in all 16 (Holm-corrected McNemar, p &lt; 1e-6).</li>
+<li>Same ordering on medium, but medium needs larger eta, and RFM plateaus near 0.55 to 0.64 while mean-difference reaches 0.83 to 0.94.</li>
+<li>Mean-difference has the lowest probe accuracy (87.0%) yet steers most.</li>
+</ul>
+<p style="position:absolute;left:128px;bottom:64px;font-size:24px;color:#6B7280">5 / 11</p>
+</section>
