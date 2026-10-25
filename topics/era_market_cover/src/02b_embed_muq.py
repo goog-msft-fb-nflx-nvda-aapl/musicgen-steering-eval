@@ -13,6 +13,7 @@ def norm(y, t=-23.0):
 rows = manifest(a.ds); rows = rows[:a.limit] if a.limit else rows
 def wave(r, c):
     if c.startswith("mix"): y = sf.read(r["path"], dtype="float32")[0]
+    elif c.startswith("acccodec"): y = np.load(os.path.join(ROOT, "stems_codec", a.ds, r["sample_id"] + ".npz"))["accomp"].astype(np.float32)
     else:
         z = np.load(os.path.join(ROOT, "stems", a.ds, r["sample_id"] + ".npz")); v = z["vocals"].astype(np.float32); ac = z["accomp"].astype(np.float32)
         y = v if c.startswith("voc") else ac if c.startswith("acc") else v + ac

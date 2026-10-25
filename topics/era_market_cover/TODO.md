@@ -38,7 +38,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 ## Metrics plan (SURVEY_metrics.md, 2026-10-25) in order
 - [ ] EnCodec-resynthesize real train/val accompaniment, re-embed (MERT, MuQ), retrain era probes, rescore generations with Delta vs neutral
 - [ ] controls a-f (positive/negative/DSP/sensitivity/seed ICC/encoder agreement), apply acceptance criteria
-- [ ] song-identification, chord, tempo metrics on existing 96 generations (CPU)
+- [x] song-identification, chord, tempo metrics on existing 96 generations (CPU) (WORKLOG 2026-10-25)
 - [ ] Audiobox Aesthetics, COCOLA, KAD (kadtk) on generations
 - [ ] analysis-half metrics: QWK, MAE-decade, log-loss, MDL, control-task selectivity on stored embeddings
 - [ ] scale generation to 24 songs; final qualitative listening round only after the quantitative suite is frozen

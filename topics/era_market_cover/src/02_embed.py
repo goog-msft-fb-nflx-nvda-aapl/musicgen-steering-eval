@@ -22,6 +22,7 @@ os.makedirs(os.path.join(ROOT, "emb"), exist_ok=True)
 
 def wave(r, cond):
     if cond.startswith("mix"): y = sf.read(r["path"], dtype="float32")[0]
+    elif cond.startswith("acccodec"): y = np.load(os.path.join(ROOT, "stems_codec", a.ds, r["sample_id"] + ".npz"))["accomp"].astype(np.float32)
     else:
         z = np.load(os.path.join(ROOT, "stems", a.ds, r["sample_id"] + ".npz")); v = z["vocals"].astype(np.float32); c = z["accomp"].astype(np.float32)
         y = v if cond.startswith("voc") else c if cond.startswith("acc") else v + c

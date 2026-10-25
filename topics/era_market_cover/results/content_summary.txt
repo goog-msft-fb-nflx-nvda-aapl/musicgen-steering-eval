@@ -1,0 +1,16 @@
+96 generations, 12 songs; chance: top-1 0.083, MRR 0.259
+neutral  n= 24 top-1 0.750 (binom vs 1/12 p=3.1e-15)  MRR 0.856  chord agree 0.310 vs rotation floor 0.024  dBPM 13.4  sim_own 0.835
+1960s    n= 24 top-1 0.917 (binom vs 1/12 p=4.2e-22)  MRR 0.958  chord agree 0.300 vs rotation floor 0.024  dBPM 13.4  sim_own 0.859
+1980s    n= 24 top-1 0.917 (binom vs 1/12 p=4.2e-22)  MRR 0.958  chord agree 0.306 vs rotation floor 0.024  dBPM 17.1  sim_own 0.876
+2010s    n= 24 top-1 0.875 (binom vs 1/12 p=3.4e-20)  MRR 0.931  chord agree 0.290 vs rotation floor 0.025  dBPM 12.6  sim_own 0.883
+all      n= 96 top-1 0.865 (binom vs 1/12 p=3.5e-75)  MRR 0.926  chord agree 0.301 vs rotation floor 0.024  dBPM 14.1  sim_own 0.863
+chord lift over rotation floor: mean +0.277, positive in 96/96, wilcoxon p=1.8e-17
+  rr           1960s - neutral: +0.103 (songs higher 3/12, wilcoxon p=0.109)
+  rr           1980s - neutral: +0.103 (songs higher 3/12, wilcoxon p=0.197)
+  rr           2010s - neutral: +0.075 (songs higher 3/12, wilcoxon p=0.465)
+  chord_agree  1960s - neutral: -0.010 (songs higher 4/12, wilcoxon p=0.519)
+  chord_agree  1980s - neutral: -0.004 (songs higher 4/12, wilcoxon p=0.470)
+  chord_agree  2010s - neutral: -0.020 (songs higher 4/12, wilcoxon p=0.233)
+  dbpm         1960s - neutral: -0.050 (songs higher 5/12, wilcoxon p=0.878)
+  dbpm         1980s - neutral: +3.725 (songs higher 8/12, wilcoxon p=0.059)
+  dbpm         2010s - neutral: -0.828 (songs higher 5/12, wilcoxon p=0.959)
