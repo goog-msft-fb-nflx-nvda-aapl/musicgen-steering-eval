@@ -51,3 +51,5 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [ ] basic-pitch / CREPE melody metrics on the accompaniment lead line
 - [ ] sparse autoencoder on stem embeddings (course idea 5, explainability), optional
 - [ ] demo clip set for the oral presentation (audio required even for analysis); keep audio out of the public repo
+- [ ] learnable layer-weighted-sum probe (MERT paper protocol) as robustness check of per-layer CV choice
+- [ ] HPSS split of accompaniment stem (harmonic vs percussive), probe both parts for decade (cheap, CPU)
