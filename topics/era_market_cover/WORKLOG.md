@@ -237,5 +237,5 @@ Delta P(target decade) vs neutral prompt, mean over 24 songs [songs >0], Wilcoxo
 - base: 1960s -.034 [13] p=.53 / +.001 [15] p=.58; 1980s +.615 [24] / +.442 [24]; 2010s +.354 [23] / +.115 [19] (p=.008)
 - LoRA: 1960s +.422 [20] p<.001 / +.297 [21]; 1980s +.250 [20] / +.170 [19]; 2010s +.186 [18] / +.134 [19]
 LoRA 3 seeds: 1960s +.396 / +.296; 1980s +.246 / +.220; 2010s +.171 / +.102 (all p<.0001).
-Content (remix vs original): song-id top-1 base .906 (n=96) vs LoRA .865 (seed 0, n=96), .896 (3 seeds, n=192); chord agreement .335 vs .355/.355. NOTE: lora_content has n=192 not 288 for 3 seeds — content script scope not checked yet.
+Content (remix vs original): song-id top-1 base .906 (seed 0, n=96) vs LoRA .865 (seed 0, n=96) and .878 (3 seeds, n=288); chord agreement .335 vs .355 / .355. (13_content_metrics.py defaults to SEEDS=0,1; rerun with SEEDS=0,1,2.)
 Interpretation: the 1960s prompt, ineffective in the base model, now shifts the probe; 1980s/2010s effects shrink (adapter is trained to all decades, so contrasts to neutral are more even). Energy of the effect is spread more evenly across decades rather than larger overall. One adapter, one run; no hyperparameter search.

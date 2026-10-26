@@ -56,3 +56,10 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 
 ## 2026-10-26 evening
 - MERT loader bug fixed and everything MERT recomputed (WORKLOG 2026-10-26 evening). Open: Discogs-EffNet tagger, basic-pitch, Fx-Encoder++/Diff-MST, SAE, listening test, oral presentation (8 min) and ISMIR-template report with individual contributions appendix, final server /tmp cleanup, re-cut slides/video with corrected MERT numbers.
+
+## 2026-10-27
+- [x] probe-architecture ablation; encoder comparison (Whisper, AST, CLAP); LoRA fine-tune of MusicGen-Melody (WORKLOG 2026-10-27)
+- [ ] LoRA follow-ups: second adapter (different rank / steps), per-era-only adapters; third generator if time
+- [ ] listening test: static page built (src/44_build_public_listening.py), needs participants; analysis `python src/43_listening_test.py --analyze <csv ...>`; response collection parked
+- [ ] artist-grouped bootstrap impossible (no artist ids); Diff-MST not installed; Discogs-VI-YT clique needs audio from a teammate
+- [ ] final presentation (8 min) and ISMIR-template report with contributions appendix; no bug history in either
