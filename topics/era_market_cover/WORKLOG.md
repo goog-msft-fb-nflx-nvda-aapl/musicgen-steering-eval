@@ -215,3 +215,6 @@ Server outputs in `results/`; configs as in the scripts named below. Generation 
 10. Listening test built, not run (`src/43_listening_test.py`; audio in gitignored `data_local/listening/`): 24 2AFC pairs. Needs participants.
 
 Still open: artist-grouped bootstrap (no artist ids), Diff-MST (not installed), Discogs-VI-YT clique (needs audio), listening test participants, Drive sync verification (`drive2`), HF re-upload, server cleanup.
+
+## 2026-10-27: mid-progress video
+Published: https://youtu.be/JPDp9j9sH0M (6 min 46 s, Kokoro af_heart narration; sources in `video/`).
