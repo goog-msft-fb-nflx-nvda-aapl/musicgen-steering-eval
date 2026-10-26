@@ -1,0 +1,19 @@
+config: 24 val songs of dataset A, seed 0, MusicGen-Melody 1.5B, guidance scale g; era probes trained on EnCodec-resynthesized accompaniment (acccodec_norm)
+
+== Delta P(target decade), mert: mean over songs [songs with Delta>0 / 24], wilcoxon p
+  g=1: 1960s -0.031 [12/24] p=0.7257 | 1980s +0.203 [17/24] p=0.0340 | 2010s +0.086 [20/24] p=0.0001
+  g=3: 1960s -0.019 [6/24] p=0.0042 | 1980s +0.374 [21/24] p=0.0000 | 2010s +0.072 [17/24] p=0.0072
+  g=5: 1960s -0.018 [12/24] p=0.7898 | 1980s +0.346 [21/24] p=0.0000 | 2010s +0.135 [19/24] p=0.0035
+  g=7: 1960s +0.008 [16/24] p=0.2076 | 1980s +0.369 [23/24] p=0.0000 | 2010s +0.152 [20/24] p=0.0014
+
+== Delta P(target decade), muq: mean over songs [songs with Delta>0 / 24], wilcoxon p
+  g=1: 1960s -0.058 [8/24] p=0.1434 | 1980s +0.096 [15/24] p=0.0425 | 2010s +0.145 [22/24] p=0.0000
+  g=3: 1960s +0.001 [15/24] p=0.5838 | 1980s +0.442 [24/24] p=0.0000 | 2010s +0.115 [19/24] p=0.0079
+  g=5: 1960s +0.040 [16/24] p=0.0564 | 1980s +0.353 [23/24] p=0.0000 | 2010s +0.137 [18/24] p=0.0012
+  g=7: 1960s +0.072 [21/24] p=0.0016 | 1980s +0.407 [24/24] p=0.0000 | 2010s +0.199 [20/24] p=0.0006
+
+== content preservation (remix vs original mix), mean over 24 songs x 4 prompts
+  g=1: n=96 top1 0.562 MRR 0.693 chord agreement 0.283 (rotation floor 0.026) |dBPM| 17.3
+  g=3: n=96 top1 0.906 MRR 0.943 chord agreement 0.335 (rotation floor 0.022) |dBPM| 12.0
+  g=5: n=96 top1 0.927 MRR 0.957 chord agreement 0.341 (rotation floor 0.021) |dBPM| 14.2
+  g=7: n=96 top1 0.906 MRR 0.948 chord agreement 0.337 (rotation floor 0.022) |dBPM| 14.3

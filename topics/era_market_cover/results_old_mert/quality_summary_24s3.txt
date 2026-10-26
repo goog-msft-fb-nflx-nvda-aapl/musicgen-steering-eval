@@ -1,0 +1,21 @@
+24 songs; Audiobox Aesthetics axes: PQ production quality, PC production complexity, CE content enjoyment, CU content usefulness (0-10)
+cond                 PQ      PC      CE      CU
+identity           7.43    5.92    7.36    7.57
+identity_codec     7.44    5.82    7.43    7.61
+dsp_old            6.60    5.85    7.04    7.02
+dsp_new            6.54    5.96    6.92    6.90
+neutral            7.07    4.92    6.97    7.48
+1960s              7.14    5.56    7.21    7.62
+1980s              7.67    5.63    6.94    7.86
+2010s              7.82    5.75    7.01    7.88
+white noise        4.97    2.08    2.64    5.64
+PQ 1960s - neutral: +0.07 (songs higher 12/24, wilcoxon p=0.527)
+PQ 1980s - neutral: +0.60 (songs higher 21/24, wilcoxon p=0.000)
+PQ 2010s - neutral: +0.75 (songs higher 23/24, wilcoxon p=0.000)
+PQ neutral generation - original accompaniment: -0.36 (songs higher 5/24, p=0.0096)
+PQ codec-resynthesized original - original: +0.02 (p=0.8996)
+CE 1960s - neutral: +0.24 (songs higher 16/24, wilcoxon p=0.009)
+CE 1980s - neutral: -0.03 (songs higher 10/24, wilcoxon p=0.643)
+CE 2010s - neutral: +0.04 (songs higher 11/24, wilcoxon p=0.922)
+CE neutral generation - original accompaniment: -0.39 (songs higher 6/24, p=0.0079)
+CE codec-resynthesized original - original: +0.07 (p=0.3596)

@@ -1,0 +1,13 @@
+== production-only chains on real accompaniment (fx): Delta P(target decade) vs neutral, mean [songs>0 /24] wilcoxon p
+  mert: 1960s +0.053 [21] p=0.0009 | 1980s -0.036 [5] p=0.0211 | 2010s +0.273 [24] p=0.0000
+  muq: 1960s +0.045 [24] p=0.0000 | 1980s +0.002 [11] p=0.6634 | 2010s +0.110 [24] p=0.0000
+== MusicGen-Melody g=3, seed 0: Delta P(target decade) vs neutral, mean [songs>0 /24] wilcoxon p
+  mert: 1960s -0.034 [13] p=0.5271 | 1980s +0.615 [24] p=0.0000 | 2010s +0.354 [23] p=0.0000
+  muq: 1960s +0.001 [15] p=0.5838 | 1980s +0.442 [24] p=0.0000 | 2010s +0.115 [19] p=0.0079
+
+== content preservation, n=288 remixes (24 songs x 4 prompts x 3 seeds)
+  song-id top-1 0.892, MRR 0.936, chord agreement 0.336 (rotation floor 0.022), |dBPM| 13.4
+  neutral  top-1 0.847 chord 0.344
+  1960s    top-1 0.917 chord 0.339
+  1980s    top-1 0.903 chord 0.340
+  2010s    top-1 0.903 chord 0.319

@@ -1,27 +1,27 @@
-layers used {'mert': 18, 'muq': 9} | songs 24 | true decades [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5]
+layers used {'mert': 22, 'muq': 9} | songs 24 | true decades [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5]
 
 == era presence, mert decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over songs)
-  identity  3.01
-  identity_codec 2.84
-  dsp_old   2.92
-  dsp_new   3.17
-  neutral   3.34
-  1960s     3.64
-  1980s     2.77
-  2010s     3.72
-  identity vs true decade: spearman 0.6 | identity_codec: 0.63
-  2010s - 1960s: mean diff +0.07, songs with a>b 16/24, wilcoxon p=0.1600
-  1980s - 1960s: mean diff -0.88, songs with a>b 0/24, wilcoxon p=0.0000
-  2010s - 1980s: mean diff +0.95, songs with a>b 23/24, wilcoxon p=0.0000
-  1960s - neutral: mean diff +0.30, songs with a>b 21/24, wilcoxon p=0.0002
-  2010s - neutral: mean diff +0.37, songs with a>b 19/24, wilcoxon p=0.0003
-  dsp_new - dsp_old: mean diff +0.24, songs with a>b 20/24, wilcoxon p=0.0004
-  identity_codec - identity: mean diff -0.17, songs with a>b 10/24, wilcoxon p=0.1974
+  identity  2.63
+  identity_codec 2.47
+  dsp_old   2.29
+  dsp_new   2.56
+  neutral   3.35
+  1960s     3.32
+  1980s     2.74
+  2010s     4.26
+  identity vs true decade: spearman 0.74 | identity_codec: 0.78
+  2010s - 1960s: mean diff +0.94, songs with a>b 23/24, wilcoxon p=0.0000
+  1980s - 1960s: mean diff -0.58, songs with a>b 2/24, wilcoxon p=0.0000
+  2010s - 1980s: mean diff +1.52, songs with a>b 24/24, wilcoxon p=0.0000
+  1960s - neutral: mean diff -0.03, songs with a>b 9/24, wilcoxon p=0.5271
+  2010s - neutral: mean diff +0.92, songs with a>b 24/24, wilcoxon p=0.0000
+  dsp_new - dsp_old: mean diff +0.26, songs with a>b 18/24, wilcoxon p=0.0115
+  identity_codec - identity: mean diff -0.16, songs with a>b 11/24, wilcoxon p=0.2897
   probability mass on target decade (prompt era / identity-like baselines):
-   prompt 1960s: 0.002  (neutral prompt mass on 1960s: 0.011; chance 0.167)
-   prompt 1980s: 0.594  (neutral prompt mass on 1980s: 0.219; chance 0.167)
-   prompt 2010s: 0.231  (neutral prompt mass on 2010s: 0.126; chance 0.167)
-  top-1 predicted decade equals prompt decade: {'1960s': 0.0, '1980s': 0.76, '2010s': 0.19}
+   prompt 1960s: 0.099  (neutral prompt mass on 1960s: 0.101; chance 0.167)
+   prompt 1980s: 0.683  (neutral prompt mass on 1980s: 0.090; chance 0.167)
+   prompt 2010s: 0.534  (neutral prompt mass on 2010s: 0.207; chance 0.167)
+  top-1 predicted decade equals prompt decade: {'1960s': 0.03, '1980s': 0.9, '2010s': 0.75}
 
 == era presence, muq decade probe on accompaniment (expected decade index 0=1960s..5=2010s; mean over songs)
   identity  2.45

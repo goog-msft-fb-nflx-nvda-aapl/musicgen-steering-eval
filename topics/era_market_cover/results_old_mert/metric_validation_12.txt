@@ -1,0 +1,27 @@
+== Delta_X = P(X | prompt X) - P(X | neutral), mean over songs [95% bootstrap CI over songs], songs with Delta>0, exact Wilcoxon
+  mert 1960s: -0.014 [-0.029, -0.002]  >0 in 3/12  p=0.0522
+  mert 1980s: +0.327 [+0.207, +0.453]  >0 in 10/12  p=0.0024
+  mert 2010s: +0.082 [+0.024, +0.148]  >0 in 9/12  p=0.0269
+  muq 1960s: +0.026 [-0.021, +0.077]  >0 in 5/12  p=0.6772
+  muq 1980s: +0.482 [+0.400, +0.572]  >0 in 12/12  p=0.0005
+  muq 2010s: +0.051 [-0.046, +0.152]  >0 in 8/12  p=0.3804
+
+== seed ICC(1,1) of the expected decade over the 2 seeds of each (song, prompt) (groups = 48 )
+  mert: ICC 0.432
+        P(1980s | 1980s prompt) ICC -0.050
+  muq: ICC 0.480
+        P(1980s | 1980s prompt) ICC 0.236
+
+== sensitivity: crossfade original(codec) -> generated, P(target decade) vs alpha (mean over songs and seeds), spearman(alpha, P) averaged over (song, prompt)
+  mert 1960s: curve [0.013, 0.006, 0.001, 0.001, 0.001]  mean per-song spearman -0.06
+  mert 1980s: curve [0.151, 0.089, 0.164, 0.35, 0.661]  mean per-song spearman +0.76
+  mert 2010s: curve [0.143, 0.319, 0.374, 0.333, 0.238]  mean per-song spearman +0.18
+  muq 1960s: curve [0.19, 0.166, 0.071, 0.047, 0.094]  mean per-song spearman +0.08
+  muq 1980s: curve [0.15, 0.121, 0.114, 0.232, 0.571]  mean per-song spearman +0.57
+  muq 2010s: curve [0.192, 0.223, 0.179, 0.136, 0.24]  mean per-song spearman +0.16
+
+== negative controls: noise through the probes (mean prob per decade, chance 0.167)
+  mert white: [0.0, 0.0, 0.002, 0.19, 0.805, 0.002] (argmax decades [0, 0, 0, 0, 12, 0])
+  mert pink: [0.0, 0.009, 0.001, 0.266, 0.584, 0.141] (argmax decades [0, 0, 0, 0, 12, 0])
+  muq white: [0.001, 0.095, 0.002, 0.001, 0.9, 0.0] (argmax decades [0, 0, 0, 0, 12, 0])
+  muq pink: [0.072, 0.005, 0.001, 0.687, 0.234, 0.0] (argmax decades [0, 0, 0, 12, 0, 0])

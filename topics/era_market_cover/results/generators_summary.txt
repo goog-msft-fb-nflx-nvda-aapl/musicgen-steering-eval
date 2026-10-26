@@ -1,0 +1,20 @@
+
+## MusicGen-Melody (melody+text)
+  mert Delta: 1960s -0.001 [13/24] p=0.9664 | 1980s +0.593 [24/24] p=0.0000 | 2010s +0.328 [24/24] p=0.0000
+  muq Delta: 1960s +0.006 [14/24] p=0.7469 | 1980s +0.414 [24/24] p=0.0000 | 2010s +0.094 [18/24] p=0.0072
+  CLAP zero-shot Delta: 1960s -0.098 [6/24] p=0.0249 | 1980s +0.109 [22/24] p=0.0000 | 2010s +0.507 [24/24] p=0.0000
+  content (n=288): song-id top-1 0.892, MRR 0.936, chord agreement 0.336 (floor 0.022), |dBPM| 13.4
+  COCOLA (both) margin matched-mismatched: original_codec +6.00, neutral +2.13, 1960s +2.69, 1980s +2.22, 2010s +2.32
+
+## MuseControlLite (melody+text)
+  mert Delta: 1960s +0.015 [13/24] p=0.4559 | 1980s +0.014 [15/24] p=0.1434 | 2010s +0.171 [23/24] p=0.0000
+  muq Delta: 1960s +0.071 [19/24] p=0.0003 | 1980s +0.052 [21/24] p=0.0000 | 2010s +0.069 [20/24] p=0.0003
+  CLAP zero-shot Delta: 1960s +0.194 [22/24] p=0.0000 | 1980s -0.000 [16/24] p=0.0315 | 2010s +0.010 [10/24] p=0.5457
+  content (n=288): song-id top-1 1.000, MRR 1.000, chord agreement 0.372 (floor 0.021), |dBPM| 25.7
+  COCOLA (both) margin matched-mismatched: original_codec +6.00, neutral +0.52, 1960s +0.50, 1980s +0.47, 2010s +0.40
+
+## MusicGen-Melody text-only
+  mert Delta: 1960s +0.244 [24/24] p=0.0000 | 1980s +0.369 [24/24] p=0.0000 | 2010s -0.117 [0/24] p=0.0000
+  muq Delta: 1960s +0.073 [24/24] p=0.0000 | 1980s +0.628 [24/24] p=0.0000 | 2010s -0.144 [0/24] p=0.0000
+  CLAP zero-shot Delta: 1960s -0.492 [1/24] p=0.0000 | 1980s +0.273 [24/24] p=0.0000 | 2010s +0.631 [24/24] p=0.0000
+  content (n=288): song-id top-1 0.188, MRR 0.303, chord agreement 0.205 (floor 0.030), |dBPM| 17.5

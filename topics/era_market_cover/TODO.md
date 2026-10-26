@@ -11,10 +11,10 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [x] 05 Whisper language ID on vocals and mix, language-only baseline for market, nested comparison with embeddings
 
 ## Next (results so far in WORKLOG 2026-10-25: decade lives in accompaniment, market in vocals/language)
-- [ ] artist-grouped confidence: bootstrap over validation with multiple-comparison correction; second seed of probe selection
+- [x] (second/third CV seed done; artist-grouped impossible, no artist ids) artist-grouped confidence: bootstrap over validation with multiple-comparison correction; second seed of probe selection
 - [x] vocal-bleed check (WORKLOG 2026-10-25); instrumental-only subset still too small to test (tercile n=34-44)
-- [ ] second encoder (MAEST, MuQ) to see if the stem pattern is encoder specific
-- [ ] layer-wise curves per condition (data in probe json `layer_cv_best_by_layer`) as a figure
+- [x] second encoder (MAEST, MuQ) to see if the stem pattern is encoder specific
+- [x] layer-wise curves per condition (data in probe json `layer_cv_best_by_layer`) as a figure
 - [ ] second encoder family for evaluation of generated covers (MAEST or MuQ) so the era probe is not the analysis encoder
 - [x] (first pass, 12 songs, WORKLOG 2026-10-25) MusicGen-Melody accompaniment regeneration: 5 to 12 songs x 3 target eras, keep original vocal stem, remix
 - [x] (chroma only) melody preservation metrics (chroma DTW, RPA on vocal pitch track), era probe on generated audio, DSP-only "old" baseline
@@ -33,23 +33,26 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [ ] DSP baseline sensitivity: why MuQ moves with filters and MERT does not
 - [ ] retrain the era probe with generated-style augmentation or compare to neutral-prompt anchor only
 - [ ] more songs and prompt variants (2000s/1990s/1970s), guidance sweep; Discogs-VI cliques as real-reference targets
-- [ ] upload embeddings/stats to private HF dataset (token on Mac and server)
+- [x] upload embeddings/stats to private HF dataset (token on Mac and server)
 
 ## Metrics plan (SURVEY_metrics.md, 2026-10-25) in order
 - [x] EnCodec-resynthesize real accompaniment, re-embed (MERT, MuQ), retrain era probes, rescore generations (WORKLOG 2026-10-25 codec); per-song Delta statistic and ICC still to compute
 - [x] (12-song pass, WORKLOG 2026-10-25 validation) controls a-f; rerun on 24 songs with 3 seeds after generation finishes
 - [x] song-identification, chord, tempo metrics on existing 96 generations (CPU) (WORKLOG 2026-10-25)
-- [x] Audiobox Aesthetics, KAD-style margin on generations (WORKLOG 2026-10-26); [ ] COCOLA still open
-- [ ] analysis-half metrics: QWK, MAE-decade, log-loss, MDL, control-task selectivity on stored embeddings
+- [x] Audiobox Aesthetics, KAD-style margin on generations (WORKLOG 2026-10-26); COCOLA done 2026-10-26
+- [x] analysis-half metrics: QWK, MAE-decade, log-loss, MDL, control-task selectivity on stored embeddings
 - [x] (24 songs x 3 seeds done 2026-10-26) scale generation to 24 songs; final qualitative listening round only after the quantitative suite is frozen
 
 ## From course materials (COURSE_MATERIALS_NOTES.md)
 - [x] guidance-scale sweep (1, 3, 5, 7), seed 0, WORKLOG 2026-10-26 (Audiobox/KAD not rerun per scale)
-- [ ] parametric production-only control (EQ + compressor + reverb) replacing the crude DSP filter; check Fx-Encoder++ / Diff-MST availability as era production metric and non-generative baseline
-- [ ] MuseControlLite (Stable Audio Open) as second generator
-- [ ] BS-RoFormer or UVR as second separator; lead vs backing vocals for the market result
+- [x] parametric production-only control (EQ + compressor + reverb) replacing the crude DSP filter; check Fx-Encoder++ / Diff-MST availability as era production metric and non-generative baseline
+- [x] MuseControlLite (Stable Audio Open) as second generator
+- [x] BS-RoFormer or UVR as second separator; lead vs backing vocals for the market result
 - [ ] basic-pitch / CREPE melody metrics on the accompaniment lead line
 - [ ] sparse autoencoder on stem embeddings (course idea 5, explainability), optional
 - [ ] demo clip set for the oral presentation (audio required even for analysis); keep audio out of the public repo
-- [ ] learnable layer-weighted-sum probe (MERT paper protocol) as robustness check of per-layer CV choice
-- [ ] HPSS split of accompaniment stem (harmonic vs percussive), probe both parts for decade (cheap, CPU)
+- [x] learnable layer-weighted-sum probe (MERT paper protocol) as robustness check of per-layer CV choice
+- [x] HPSS split of accompaniment stem (harmonic vs percussive), probe both parts for decade (cheap, CPU)
+
+## 2026-10-26 evening
+- MERT loader bug fixed and everything MERT recomputed (WORKLOG 2026-10-26 evening). Open: Discogs-EffNet tagger, basic-pitch, Fx-Encoder++/Diff-MST, SAE, listening test, oral presentation (8 min) and ISMIR-template report with individual contributions appendix, final server /tmp cleanup, re-cut slides/video with corrected MERT numbers.
