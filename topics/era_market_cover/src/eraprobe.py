@@ -22,7 +22,8 @@ def embed_waves(waves, layer):
     """waves: dict name -> float32 24 kHz mono. returns {'mert': {name: vec}, 'muq': {name: vec}}"""
     from transformers import AutoFeatureExtractor, AutoModel
     out = {"mert": {}, "muq": {}}; W = {n: norm(w) for n, w in waves.items()}
-    proc = AutoFeatureExtractor.from_pretrained("m-a-p/MERT-v2-30s", trust_remote_code=True); mert = AutoModel.from_pretrained("m-a-p/MERT-v2-30s", trust_remote_code=True).eval().cuda()
+    from mert_util import load_mert
+    proc, mert = load_mert()
     for n, w in W.items():
         inp = proc(w, sampling_rate=proc.sampling_rate, return_tensors="pt").to("cuda")
         with torch.inference_mode(): o = mert(**inp, output_hidden_states=True)

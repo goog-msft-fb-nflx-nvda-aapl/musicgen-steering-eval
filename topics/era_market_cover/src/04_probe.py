@@ -12,7 +12,7 @@ from common import LABELS, manifest
 
 ap = argparse.ArgumentParser(); ap.add_argument("--ds", required=True); ap.add_argument("--emb", default=os.path.expanduser("~/era_market/emb"))
 ap.add_argument("--out", required=True); ap.add_argument("--conds", nargs="+", default=["mix_raw", "mix_norm", "voc_raw", "voc_norm", "acc_raw", "acc_norm", "recomb_norm"])
-ap.add_argument("--layers", type=int, nargs="*", default=None); ap.add_argument("--prefix", default="", help="embedding file prefix, e.g. muq_"); a = ap.parse_args()
+ap.add_argument("--layers", type=int, nargs="*", default=None); ap.add_argument("--prefix", default="", help="embedding file prefix, e.g. muq_"); ap.add_argument("--cv_seed", type=int, default=0, help="random_state of the train-CV folds used to pick layer and C"); a = ap.parse_args()
 rows = manifest(a.ds); lab = LABELS[a.ds]
 split = np.array([r["split"] for r in rows]); y = np.array([lab.index(r["label"]) if r["label"] else -1 for r in rows])
 tr, va = np.where(split == "train")[0], np.where(split == "validation")[0]
@@ -26,7 +26,7 @@ for c in a.conds:
     for l in layers:
         for C in (0.01, 0.1, 1.0):
             m = make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=2000))
-            s = cross_val_score(m, E[tr, l], y[tr], cv=StratifiedKFold(5, shuffle=True, random_state=0)).mean()
+            s = cross_val_score(m, E[tr, l], y[tr], cv=StratifiedKFold(5, shuffle=True, random_state=a.cv_seed)).mean()
             curve[f"{l}_{C}"] = float(s)
             if s > best[0]: best = (s, l, C)
     s, l, C = best

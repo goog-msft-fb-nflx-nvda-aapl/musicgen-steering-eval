@@ -13,10 +13,12 @@ def norm(y, t=-23.0):
 rows = manifest(a.ds); rows = rows[:a.limit] if a.limit else rows
 def wave(r, c):
     if c.startswith("mix"): y = sf.read(r["path"], dtype="float32")[0]
+    elif c.startswith(("accharm", "accperc")):
+        y = np.load(os.path.join(ROOT, "stems_derived", "harm" if c.startswith("accharm") else "perc", a.ds, r["sample_id"] + ".npz"))["x"].astype(np.float32)
     elif c.startswith("acccodec"): y = np.load(os.path.join(ROOT, "stems_codec", a.ds, r["sample_id"] + ".npz"))["accomp"].astype(np.float32)
     else:
-        z = np.load(os.path.join(ROOT, "stems", a.ds, r["sample_id"] + ".npz")); v = z["vocals"].astype(np.float32); ac = z["accomp"].astype(np.float32)
-        y = v if c.startswith("voc") else ac if c.startswith("acc") else v + ac
+        z = np.load(os.path.join(ROOT, "stems_bsr" if c.startswith("bsr_") else "stems", a.ds, r["sample_id"] + ".npz")); v = z["vocals"].astype(np.float32); ac = z["accomp"].astype(np.float32)
+        k = c[4:] if c.startswith("bsr_") else c; y = v if k.startswith("voc") else ac if k.startswith("acc") else v + ac
     return norm(y) if c.endswith("norm") else y
 for c in a.conds:
     out = os.path.join(ROOT, "emb", f"{a.ds}_muq_{c}.npy")

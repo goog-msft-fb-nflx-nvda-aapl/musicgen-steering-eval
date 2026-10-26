@@ -10,7 +10,7 @@ ERAS = {"neutral": "a song recording",
         "1980s": "a 1980s synth pop recording, gated reverb drums, drum machine, DX7 synthesizer, chorus guitar, glossy digital production",
         "2010s": "a 2010s modern pop production, heavy sub bass, punchy compressed drums, wide polished synths, loud streaming-era mastering"}
 ap = argparse.ArgumentParser(); ap.add_argument("--n", type=int, default=12); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--limit_gen", type=int, default=0)
-ap.add_argument("--guidance", type=float, default=3.0); ap.add_argument("--reverse", action="store_true", help="process songs in reverse order (to run a second worker)"); a = ap.parse_args()
+ap.add_argument("--guidance", type=float, default=3.0); ap.add_argument("--no_melody", action="store_true", help="text-only baseline: do not pass the melody (chroma) condition"); ap.add_argument("--reverse", action="store_true", help="process songs in reverse order (to run a second worker)"); a = ap.parse_args()
 rows = [r for r in manifest("A") if r["split"] == "validation"]
 per = a.n // 6; pick = []
 for lab in LABELS["A"]: pick += [r for r in rows if r["label"] == lab][:per]       # per decade, first ones in manifest order
@@ -26,7 +26,7 @@ for r in (pick[::-1] if a.reverse else pick):
         for seed in a.seeds:
             fp = os.path.join(ROOT, os.environ.get("GENDIR", "gen"), f"{r['sample_id']}_{era}_s{seed}")
             if os.path.exists(fp + "_remix.wav"): continue
-            inp = proc(audio=m32, sampling_rate=32000, text=[prompt], padding=True, return_tensors="pt").to("cuda")
+            inp = (proc(text=[prompt], padding=True, return_tensors="pt") if a.no_melody else proc(audio=m32, sampling_rate=32000, text=[prompt], padding=True, return_tensors="pt")).to("cuda")
             inp = {k: (v.half() if v.dtype == torch.float32 else v) for k, v in inp.items()}
             torch.manual_seed(seed)
             with torch.no_grad(): out = model.generate(**inp, do_sample=True, guidance_scale=a.guidance, max_new_tokens=1500)

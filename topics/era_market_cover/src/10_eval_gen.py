@@ -41,7 +41,8 @@ for k, pre in (("mert", ""), ("muq", "muq_")):
     E = np.load(os.path.join(ROOT, "emb", f"A_{pre}{a.train_cond}.npy")).astype(np.float32)[:, layer[k]]
     probes[k] = make_pipeline(StandardScaler(), LogisticRegression(C=0.01, max_iter=3000)).fit(E[tr], y[tr])
 emb = {"mert": [], "muq": []}
-proc = AutoFeatureExtractor.from_pretrained("m-a-p/MERT-v2-30s", trust_remote_code=True); mert = AutoModel.from_pretrained("m-a-p/MERT-v2-30s", trust_remote_code=True).eval().cuda()
+from mert_util import load_mert
+proc, mert = load_mert()   # fixes uninitialized rotary inv_freq (see mert_util.py)
 W = {n: norm(clips[n]) for n in names}
 for n in names:   # MERT first, before the muq package is imported (importing it changed MERT outputs to NaN when both were loaded)
     inp = proc(W[n], sampling_rate=proc.sampling_rate, return_tensors="pt").to("cuda")

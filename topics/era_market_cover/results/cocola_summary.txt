@@ -1,0 +1,40 @@
+24 songs, COCOLA_HP_v1, 5 s windows (6 per clip)
+
+== mode both: matched score | mismatched floor | margin (matched - mismatched), mean over songs
+  original        +55.368 | +49.245 | +6.123  (songs margin>0: 22/24)
+  original_codec  +55.241 | +49.244 | +5.997  (songs margin>0: 21/24)
+  neutral         +50.750 | +48.618 | +2.132  (songs margin>0: 17/24)
+  1960s           +51.249 | +48.564 | +2.685  (songs margin>0: 17/24)
+  1980s           +51.554 | +49.330 | +2.224  (songs margin>0: 16/24)
+  2010s           +51.725 | +49.409 | +2.316  (songs margin>0: 18/24)
+  margin neutral - original_codec: -3.865 [1/24] wilcoxon p=0.0000
+  margin 1980s - neutral: +0.092 [14/24] wilcoxon p=0.7048
+  margin 2010s - neutral: +0.184 [14/24] wilcoxon p=0.5646
+  margin 1960s - neutral: +0.554 [16/24] wilcoxon p=0.3449
+  margin 2010s - 1980s: +0.092 [14/24] wilcoxon p=0.4908
+
+== mode harm: matched score | mismatched floor | margin (matched - mismatched), mean over songs
+  original        +54.746 | +50.401 | +4.346  (songs margin>0: 18/24)
+  original_codec  +54.458 | +50.054 | +4.404  (songs margin>0: 19/24)
+  neutral         +49.954 | +47.934 | +2.020  (songs margin>0: 15/24)
+  1960s           +51.027 | +48.804 | +2.223  (songs margin>0: 16/24)
+  1980s           +51.079 | +48.916 | +2.163  (songs margin>0: 17/24)
+  2010s           +50.641 | +48.742 | +1.898  (songs margin>0: 16/24)
+  margin neutral - original_codec: -2.384 [5/24] wilcoxon p=0.0001
+  margin 1980s - neutral: +0.143 [13/24] wilcoxon p=0.6231
+  margin 2010s - neutral: -0.122 [11/24] wilcoxon p=0.7683
+  margin 1960s - neutral: +0.202 [14/24] wilcoxon p=0.7048
+  margin 2010s - 1980s: -0.264 [9/24] wilcoxon p=0.1434
+
+== mode perc: matched score | mismatched floor | margin (matched - mismatched), mean over songs
+  original        +56.886 | +50.665 | +6.221  (songs margin>0: 19/24)
+  original_codec  +56.611 | +50.602 | +6.009  (songs margin>0: 19/24)
+  neutral         +51.802 | +49.969 | +1.833  (songs margin>0: 16/24)
+  1960s           +51.752 | +49.252 | +2.500  (songs margin>0: 16/24)
+  1980s           +52.598 | +50.317 | +2.281  (songs margin>0: 16/24)
+  2010s           +53.161 | +50.947 | +2.215  (songs margin>0: 17/24)
+  margin neutral - original_codec: -4.177 [2/24] wilcoxon p=0.0000
+  margin 1980s - neutral: +0.448 [14/24] wilcoxon p=0.3449
+  margin 2010s - neutral: +0.382 [13/24] wilcoxon p=0.5088
+  margin 1960s - neutral: +0.668 [15/24] wilcoxon p=0.2643
+  margin 2010s - 1980s: -0.066 [12/24] wilcoxon p=0.9441

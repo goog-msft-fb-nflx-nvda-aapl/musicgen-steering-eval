@@ -1,0 +1,9 @@
+== positive control: real validation clips of dataset A (n=132), chance 1/6 = 0.167
+  acc: zero-shot top-1 0.242, spearman(expected decade, true decade) 0.302, mean |expected-true| 1.82 decades, predicted-decade histogram [45, 79, 1, 4, 0, 3]
+  mix: zero-shot top-1 0.235, spearman(expected decade, true decade) 0.321, mean |expected-true| 1.67 decades, predicted-decade histogram [67, 37, 0, 19, 1, 8]
+
+== generated accompaniment, mean over seeds, 24 songs: Delta P(target decade | prompt) - P(target | neutral)
+  1960s: -0.098 [6/24] wilcoxon p=0.0249   (neutral P=0.750, prompt P=0.652)
+  1980s: +0.109 [22/24] wilcoxon p=0.0000   (neutral P=0.017, prompt P=0.126)
+  2010s: +0.507 [24/24] wilcoxon p=0.0000   (neutral P=0.019, prompt P=0.526)
+  expected decade index: identity 0.89, identity_codec 1.16, neutral 0.41, 1960s 0.52, 1980s 1.97, 2010s 3.57
