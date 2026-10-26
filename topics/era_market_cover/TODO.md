@@ -44,7 +44,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [x] (24 songs x 3 seeds done 2026-10-26) scale generation to 24 songs; final qualitative listening round only after the quantitative suite is frozen
 
 ## From course materials (COURSE_MATERIALS_NOTES.md)
-- [ ] guidance-scale sweep (1, 3, 5, 7) for MusicGen-Melody: style strength vs content preservation
+- [x] guidance-scale sweep (1, 3, 5, 7), seed 0, WORKLOG 2026-10-26 (Audiobox/KAD not rerun per scale)
 - [ ] parametric production-only control (EQ + compressor + reverb) replacing the crude DSP filter; check Fx-Encoder++ / Diff-MST availability as era production metric and non-generative baseline
 - [ ] MuseControlLite (Stable Audio Open) as second generator
 - [ ] BS-RoFormer or UVR as second separator; lead vs backing vocals for the market result

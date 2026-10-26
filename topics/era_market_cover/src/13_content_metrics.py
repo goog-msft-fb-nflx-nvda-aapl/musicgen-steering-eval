@@ -7,7 +7,7 @@ import argparse, json, os, numpy as np, soundfile as sf, librosa
 from scipy.signal import butter, sosfilt
 from common import ROOT, SR, manifest
 ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); a = ap.parse_args()
-G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]
+G = os.path.join(ROOT, os.environ.get("GENDIR", "gen")); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]
 rows = {r["sample_id"]: r for r in manifest("A")}; ERAS = ["neutral", "1960s", "1980s", "2010s"]; HP = butter(4, 261, btype="high", fs=SR, output="sos")
 def chroma(y): return librosa.feature.chroma_cqt(y=sosfilt(HP, y).astype(np.float32), sr=SR, hop_length=1024)
 def dtw_sim(A, B):
@@ -26,7 +26,7 @@ for s in ids:
 out = []
 for s in ids:
     for e in ERAS:
-        for sd in (0, 1):
+        for sd in [int(x) for x in os.environ.get("SEEDS", "0,1").split(",")]:
             g = sf.read(os.path.join(G, f"{s}_{e}_s{sd}_remix.wav"), dtype="float32")[0]; Cg = chroma(g); cg = chords(Cg)
             sims = {t: dtw_sim(O[t]["C"], Cg)[0] for t in ids}; order = sorted(ids, key=lambda t: -sims[t]); rank = order.index(s) + 1
             _, wp = dtw_sim(O[s]["C"], Cg); ag = float(np.mean(O[s]["ch"][wp[:, 0]] == cg[wp[:, 1]])); fl = float(np.mean([np.mean(O[s]["ch"][wp[:, 0]] == rot(cg, k)[wp[:, 1]]) for k in range(1, 12)]))

@@ -16,15 +16,15 @@ per = a.n // 6; pick = []
 for lab in LABELS["A"]: pick += [r for r in rows if r["label"] == lab][:per]       # per decade, first ones in manifest order
 mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid)
 model = MusicgenMelodyForConditionalGeneration.from_pretrained(mid, torch_dtype=torch.float16).to("cuda").eval()
-os.makedirs(os.path.join(ROOT, "gen"), exist_ok=True); n = 0
-with open(os.path.join(ROOT, "gen", "picked.txt"), "w") as f: f.write("\n".join(r["sample_id"] + "," + r["label"] for r in pick))
+os.makedirs(os.path.join(ROOT, os.environ.get("GENDIR", "gen")), exist_ok=True); n = 0
+with open(os.path.join(ROOT, os.environ.get("GENDIR", "gen"), "picked.txt"), "w") as f: f.write("\n".join(r["sample_id"] + "," + r["label"] for r in pick))
 for r in (pick[::-1] if a.reverse else pick):
     mix = sf.read(r["path"], dtype="float32")[0]; z = np.load(os.path.join(ROOT, "stems", "A", r["sample_id"] + ".npz"))
     voc, acc0 = z["vocals"].astype(np.float32), z["accomp"].astype(np.float32)
     m32 = AF.resample(torch.from_numpy(mix), SR, 32000).numpy()
     for era, prompt in ERAS.items():
         for seed in a.seeds:
-            fp = os.path.join(ROOT, "gen", f"{r['sample_id']}_{era}_s{seed}")
+            fp = os.path.join(ROOT, os.environ.get("GENDIR", "gen"), f"{r['sample_id']}_{era}_s{seed}")
             if os.path.exists(fp + "_remix.wav"): continue
             inp = proc(audio=m32, sampling_rate=32000, text=[prompt], padding=True, return_tensors="pt").to("cuda")
             inp = {k: (v.half() if v.dtype == torch.float32 else v) for k, v in inp.items()}
