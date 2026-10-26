@@ -1,0 +1,5 @@
+Remix-level ablation: MusicGen g=3 seed 0, accompaniment scaled relative to default (RMS of original accompaniment), vocal stem unchanged; n=96 remixes per level
+  acc -12 dB: song-id top-1 0.948, MRR 0.965, chord agreement 0.344, |dBPM| 11.4
+  acc -6 dB: song-id top-1 0.948, MRR 0.967, chord agreement 0.343, |dBPM| 11.9
+  acc +0 dB: song-id top-1 0.906, MRR 0.943, chord agreement 0.335, |dBPM| 12.0
+  acc +6 dB: song-id top-1 0.885, MRR 0.928, chord agreement 0.327, |dBPM| 12.4

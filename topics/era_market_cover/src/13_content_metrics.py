@@ -8,7 +8,7 @@ from scipy.signal import butter, sosfilt
 from common import ROOT, SR, manifest
 ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); a = ap.parse_args()
 G = os.path.join(ROOT, os.environ.get("GENDIR", "gen")); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]
-rows = {r["sample_id"]: r for r in manifest("A")}; ERAS = ["neutral", "1960s", "1980s", "2010s"]; HP = butter(4, 261, btype="high", fs=SR, output="sos")
+rows = {r["sample_id"]: r for r in manifest(os.environ.get("DS", "A"))}; ERAS = os.environ.get("ERAS", "neutral,1960s,1980s,2010s").split(","); HP = butter(4, 261, btype="high", fs=SR, output="sos")
 def chroma(y): return librosa.feature.chroma_cqt(y=sosfilt(HP, y).astype(np.float32), sr=SR, hop_length=1024)
 def dtw_sim(A, B):
     D, wp = librosa.sequence.dtw(X=A, Y=B, metric="cosine"); return float(1 - D[-1, -1] / len(wp)), wp[::-1]

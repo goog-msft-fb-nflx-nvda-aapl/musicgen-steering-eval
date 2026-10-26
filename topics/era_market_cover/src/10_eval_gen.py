@@ -13,7 +13,7 @@ from transformers import AutoFeatureExtractor, AutoModel
 from common import ROOT, SR, manifest, LABELS
 ap = argparse.ArgumentParser(); ap.add_argument("--out", required=True); ap.add_argument("--train_cond", default="acc_norm"); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--probe_mert", default="probe_A.json"); ap.add_argument("--probe_muq", default="probe_muq_A.json"); a = ap.parse_args()
 G = os.path.join(ROOT, os.environ.get("GENDIR", "gen")); picked = [l.split(",") for l in open(os.path.join(G, "picked.txt")).read().split("\n")]
-ids = [p[0] for p in picked]; true = {p[0]: p[1] for p in picked}; ERAS = ["neutral", "1960s", "1980s", "2010s"]; SEEDS = a.seeds
+ids = [p[0] for p in picked]; true = {p[0]: p[1] for p in picked}; ERAS = os.environ.get("ERAS", "neutral,1960s,1980s,2010s").split(","); SEEDS = a.seeds
 rows = manifest("A"); rid = {r["sample_id"]: i for i, r in enumerate(rows)}
 meter = pyln.Meter(SR)
 def norm(y):

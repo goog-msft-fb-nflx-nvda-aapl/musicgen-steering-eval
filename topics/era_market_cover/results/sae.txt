@@ -1,0 +1,12 @@
+A mert_ mix_norm {'layer': 12, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.477, 'n_latents_F_above_perm_max': 55, 'top16_val_acc': 0.265, 'top64_val_acc': 0.273, 'top256_val_acc': 0.356}
+A mert_ voc_norm {'layer': 20, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.394, 'n_latents_F_above_perm_max': 13, 'top16_val_acc': 0.242, 'top64_val_acc': 0.273, 'top256_val_acc': 0.265}
+A mert_ acc_norm {'layer': 12, 'r2': 0.999, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.485, 'n_latents_F_above_perm_max': 54, 'top16_val_acc': 0.288, 'top64_val_acc': 0.318, 'top256_val_acc': 0.341}
+A muq_ mix_norm {'layer': 8, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.477, 'n_latents_F_above_perm_max': 22, 'top16_val_acc': 0.22, 'top64_val_acc': 0.25, 'top256_val_acc': 0.288}
+A muq_ voc_norm {'layer': 2, 'r2': 0.999, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.318, 'n_latents_F_above_perm_max': 6, 'top16_val_acc': 0.212, 'top64_val_acc': 0.205, 'top256_val_acc': 0.22}
+A muq_ acc_norm {'layer': 9, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.424, 'n_latents_F_above_perm_max': 8, 'top16_val_acc': 0.242, 'top64_val_acc': 0.265, 'top256_val_acc': 0.295}
+B mert_ mix_norm {'layer': 18, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.588, 'n_latents_F_above_perm_max': 174, 'top16_val_acc': 0.363, 'top64_val_acc': 0.412, 'top256_val_acc': 0.461}
+B mert_ voc_norm {'layer': 16, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.608, 'n_latents_F_above_perm_max': 117, 'top16_val_acc': 0.304, 'top64_val_acc': 0.412, 'top256_val_acc': 0.48}
+B mert_ acc_norm {'layer': 14, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.422, 'n_latents_F_above_perm_max': 41, 'top16_val_acc': 0.225, 'top64_val_acc': 0.314, 'top256_val_acc': 0.392}
+B muq_ mix_norm {'layer': 3, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.471, 'n_latents_F_above_perm_max': 38, 'top16_val_acc': 0.255, 'top64_val_acc': 0.225, 'top256_val_acc': 0.314}
+B muq_ voc_norm {'layer': 2, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.471, 'n_latents_F_above_perm_max': 10, 'top16_val_acc': 0.206, 'top64_val_acc': 0.284, 'top256_val_acc': 0.255}
+B muq_ acc_norm {'layer': 8, 'r2': 1.0, 'active_latents_per_clip': 32.0, 'dense_probe_val_acc': 0.392, 'n_latents_F_above_perm_max': 16, 'top16_val_acc': 0.216, 'top64_val_acc': 0.216, 'top256_val_acc': 0.275}

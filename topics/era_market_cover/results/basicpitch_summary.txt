@@ -1,0 +1,10 @@
+## gen
+  onset_f1: matched 0.340, other-song floor 0.339, songs matched>floor 13/24, wilcoxon p=0.9888; by prompt: neutral 0.366, 1960s 0.372, 1980s 0.367, 2010s 0.254
+  note_f1: matched 0.041, other-song floor 0.013, songs matched>floor 20/24, wilcoxon p=0.0000; by prompt: neutral 0.046, 1960s 0.047, 1980s 0.048, 2010s 0.024
+## mcl_gen
+  onset_f1: matched 0.379, other-song floor 0.355, songs matched>floor 14/24, wilcoxon p=0.4389; by prompt: neutral 0.374, 1960s 0.376, 1980s 0.380, 2010s 0.384
+  note_f1: matched 0.053, other-song floor 0.020, songs matched>floor 19/24, wilcoxon p=0.0001; by prompt: neutral 0.054, 1960s 0.053, 1980s 0.054, 2010s 0.053
+## gen_textonly
+  onset_f1: matched 0.263, other-song floor 0.264, songs matched>floor 12/24, wilcoxon p=0.9218; by prompt: neutral 0.295, 1960s 0.244, 1980s 0.343, 2010s 0.172
+  note_f1: matched 0.009, other-song floor 0.009, songs matched>floor 14/24, wilcoxon p=0.7898; by prompt: neutral 0.011, 1960s 0.007, 1980s 0.016, 2010s 0.004
+notes per clip (original / generated): 213.0 {'gen': 190.0, 'mcl_gen': 211.0, 'gen_textonly': 102.0}

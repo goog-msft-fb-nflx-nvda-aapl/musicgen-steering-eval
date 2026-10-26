@@ -1,0 +1,122 @@
+{
+ "A/mert_mix_norm": {
+  "layer": 12,
+  "r2": 0.9998449087142944,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.4772727272727273,
+  "n_latents_F_above_perm_max": 55,
+  "top16_val_acc": 0.26515151515151514,
+  "top64_val_acc": 0.2727272727272727,
+  "top256_val_acc": 0.3560606060606061
+ },
+ "A/mert_voc_norm": {
+  "layer": 20,
+  "r2": 0.9996989369392395,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.3939393939393939,
+  "n_latents_F_above_perm_max": 13,
+  "top16_val_acc": 0.24242424242424243,
+  "top64_val_acc": 0.2727272727272727,
+  "top256_val_acc": 0.26515151515151514
+ },
+ "A/mert_acc_norm": {
+  "layer": 12,
+  "r2": 0.9994673132896423,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.48484848484848486,
+  "n_latents_F_above_perm_max": 54,
+  "top16_val_acc": 0.2878787878787879,
+  "top64_val_acc": 0.3181818181818182,
+  "top256_val_acc": 0.3409090909090909
+ },
+ "A/muq_mix_norm": {
+  "layer": 8,
+  "r2": 0.9998775124549866,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.4772727272727273,
+  "n_latents_F_above_perm_max": 22,
+  "top16_val_acc": 0.2196969696969697,
+  "top64_val_acc": 0.25,
+  "top256_val_acc": 0.2878787878787879
+ },
+ "A/muq_voc_norm": {
+  "layer": 2,
+  "r2": 0.9993444681167603,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.3181818181818182,
+  "n_latents_F_above_perm_max": 6,
+  "top16_val_acc": 0.21212121212121213,
+  "top64_val_acc": 0.20454545454545456,
+  "top256_val_acc": 0.2196969696969697
+ },
+ "A/muq_acc_norm": {
+  "layer": 9,
+  "r2": 0.9998809695243835,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.42424242424242425,
+  "n_latents_F_above_perm_max": 8,
+  "top16_val_acc": 0.24242424242424243,
+  "top64_val_acc": 0.26515151515151514,
+  "top256_val_acc": 0.29545454545454547
+ },
+ "B/mert_mix_norm": {
+  "layer": 18,
+  "r2": 0.9999178051948547,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.5882352941176471,
+  "n_latents_F_above_perm_max": 174,
+  "top16_val_acc": 0.3627450980392157,
+  "top64_val_acc": 0.4117647058823529,
+  "top256_val_acc": 0.46078431372549017
+ },
+ "B/mert_voc_norm": {
+  "layer": 16,
+  "r2": 0.9999261498451233,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.6078431372549019,
+  "n_latents_F_above_perm_max": 117,
+  "top16_val_acc": 0.30392156862745096,
+  "top64_val_acc": 0.4117647058823529,
+  "top256_val_acc": 0.4803921568627451
+ },
+ "B/mert_acc_norm": {
+  "layer": 14,
+  "r2": 0.9998847246170044,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.4215686274509804,
+  "n_latents_F_above_perm_max": 41,
+  "top16_val_acc": 0.22549019607843138,
+  "top64_val_acc": 0.3137254901960784,
+  "top256_val_acc": 0.39215686274509803
+ },
+ "B/muq_mix_norm": {
+  "layer": 3,
+  "r2": 0.9999331831932068,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.47058823529411764,
+  "n_latents_F_above_perm_max": 38,
+  "top16_val_acc": 0.2549019607843137,
+  "top64_val_acc": 0.22549019607843138,
+  "top256_val_acc": 0.3137254901960784
+ },
+ "B/muq_voc_norm": {
+  "layer": 2,
+  "r2": 0.9997919201850891,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.47058823529411764,
+  "n_latents_F_above_perm_max": 10,
+  "top16_val_acc": 0.20588235294117646,
+  "top64_val_acc": 0.28431372549019607,
+  "top256_val_acc": 0.2549019607843137
+ },
+ "B/muq_acc_norm": {
+  "layer": 8,
+  "r2": 0.9999343752861023,
+  "active_latents_per_clip": 32.0,
+  "dense_probe_val_acc": 0.39215686274509803,
+  "n_latents_F_above_perm_max": 16,
+  "top16_val_acc": 0.21568627450980393,
+  "top64_val_acc": 0.21568627450980393,
+  "top256_val_acc": 0.27450980392156865
+ }
+}

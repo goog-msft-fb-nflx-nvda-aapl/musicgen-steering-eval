@@ -48,8 +48,8 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [x] parametric production-only control (EQ + compressor + reverb) replacing the crude DSP filter; check Fx-Encoder++ / Diff-MST availability as era production metric and non-generative baseline
 - [x] MuseControlLite (Stable Audio Open) as second generator
 - [x] BS-RoFormer or UVR as second separator; lead vs backing vocals for the market result
-- [ ] basic-pitch / CREPE melody metrics on the accompaniment lead line
-- [ ] sparse autoencoder on stem embeddings (course idea 5, explainability), optional
+- [x] basic-pitch / CREPE melody metrics on the accompaniment lead line
+- [x] sparse autoencoder on stem embeddings (course idea 5, explainability), optional
 - [ ] demo clip set for the oral presentation (audio required even for analysis); keep audio out of the public repo
 - [x] learnable layer-weighted-sum probe (MERT paper protocol) as robustness check of per-layer CV choice
 - [x] HPSS split of accompaniment stem (harmonic vs percussive), probe both parts for decade (cheap, CPU)

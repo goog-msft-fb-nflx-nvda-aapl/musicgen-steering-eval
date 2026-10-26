@@ -198,3 +198,20 @@ Chains are our own approximations of era production (not validated): 1960s band-
 
 ### 7. Not done / limits
 Artist-grouped bootstrap (the manifest has no artist column; splits are artist-disjoint by the organizers), Discogs-EffNet style tagger (needs essentia-tensorflow), basic-pitch lead-line metric, Fx-Encoder++/Diff-MST (not installed), sparse autoencoder; listening test. Features (no audio) of A/B and all result files were uploaded to the private HF dataset `era-market-features` (README upload failed its metadata validation; data files present). Demo clips (original / MusicGen / MuseControlLite for 3 songs) are in `data_local/demo/` (gitignored; licensed audio).
+
+
+## 2026-10-26 night: remaining items from the "not done" list (all measured; interpretation labelled)
+Server outputs in `results/`; configs as in the scripts named below. Generation settings as before (MusicGen-Melody g=3, 24 val songs A, 3 seeds, codec-matched probes MERT L22 / MuQ L9) unless stated.
+
+1. Holm correction over the stem-probe McNemar tests (`src/35_holm.py`, `results/holm_summary.txt`): significant after correction A MuQ mix-vs-voc (.012), voc-vs-recomb (.0098); B MERT mix-vs-acc (.038), voc-vs-acc (.022), acc-vs-recomb (.020). A MERT voc-vs-acc (raw p=.073) does not survive.
+2. Remix-level ablation (`src/38_remix_level.py`, `remixlevel_summary.txt`, seed 0, n=96 per level): accompaniment -12/-6/0/+6 dB gives song-id top-1 .948/.948/.906/.885, chord agreement .344/.343/.335/.327.
+3. Sparse autoencoder (`src/39_sae.py`, `sae.txt`): TopK-32, 2048 latents (a first ReLU+L1 4096-latent version was dense and discarded). Reconstruction R2 ~1 (memorisation); top-k latents probe worse than the dense embedding. No interpretable-feature claim made.
+4. basic-pitch note metrics (`src/40_basicpitch.py`, `41_basicpitch_summary.py`, `basicpitch_summary.txt`): note F1 vs original, matched vs other-song floor: MusicGen .041 vs .013 (p<1e-4), MuseControlLite .053 vs .020, text-only .009 vs .009; onset F1 close to floor (~.34).
+5. Discogs-EffNet tagger (`src/36_discogs_tagger.py`, `discogs_eval.json`): decade probe val acc .523 on codec accompaniment. Delta: 1960s -.064, 1980s +.282 (24/24), 2010s +.138 (24/24). Top tags moved by the 1980s prompt: Synthwave +.267, Synth-pop +.244.
+6. Fx-Encoder++ (`src/42_fx_encoder.py`, `fx_encoder.json`): decade probe val acc .326 (codec) / .295 (original). Delta MusicGen 1980s +.048, 2010s +.086, 1960s -.004; production-chain control 1960s +.118.
+7. Audiobox + KAD for other settings (`quality_*.json`, `kad_*.json`): PQ 2010s minus neutral g=1 +1.13, g=5 +.88, g=7 +.73; MuseControlLite negative (-.43/-.58/-.78).
+8. Extra era prompts (`prompts_eval.json`, `prompts_content.json`), change in expected decade vs neutral, MERT / MuQ: 1970s +.667 (23/24) / +.195 (14/24); 1990s +.208 / -.043; 2000s +.637 / +.264; 1960s_b -.056 / -.282; 1960s_c -.836 / -.745. Reference identity-codec shift is -.880 / -.974, so 1960s_c may largely reflect the codec round trip (not tested separately). Content unchanged: song-id top-1 .85-.94, chord agreement .33-.36.
+9. Market-targeted covers on dataset B (`market_eval.json`, `market_summary.txt`), Delta P(target market) vs neutral, MERT / MuQ: US +.035 / +.128; UK +.038 / +.009 (n.s.); Brazil -.012 (n.s.) / +.279 (24/24); Spain -.053 / -.029 (n.s.); Germany +.089 / +.144; Italy +.082 / -.021 (n.s.). Probe accuracy on real clips of the target markets is low (.25 / .21 vs chance .167), so absolute probabilities are weak evidence; the two probes disagree on Brazil and Italy.
+10. Listening test built, not run (`src/43_listening_test.py`; audio in gitignored `data_local/listening/`): 24 2AFC pairs. Needs participants.
+
+Still open: artist-grouped bootstrap (no artist ids), Diff-MST (not installed), Discogs-VI-YT clique (needs audio), listening test participants, Drive sync verification (`drive2`), HF re-upload, server cleanup.
