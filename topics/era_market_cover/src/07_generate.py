@@ -31,6 +31,9 @@ per = a.n // 6; pick = []
 for lab in LABELS[a.ds]: pick += [r for r in rows if r["label"] == lab][:per]       # per decade, first ones in manifest order
 mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid)
 model = MusicgenMelodyForConditionalGeneration.from_pretrained(mid, torch_dtype=torch.float16).to("cuda").eval()
+if os.environ.get("LORA"):   # fine-tuned adapters from 48_lora_musicgen.py, merged into the base weights
+    from peft import PeftModel
+    model = PeftModel.from_pretrained(model, os.path.join(ROOT, "lora", os.environ["LORA"])).merge_and_unload().eval()
 os.makedirs(os.path.join(ROOT, os.environ.get("GENDIR", "gen")), exist_ok=True); n = 0
 with open(os.path.join(ROOT, os.environ.get("GENDIR", "gen"), "picked.txt"), "w") as f: f.write("\n".join(r["sample_id"] + "," + r["label"] for r in pick))
 for r in (pick[::-1] if a.reverse else pick):
