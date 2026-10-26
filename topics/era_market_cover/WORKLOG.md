@@ -218,3 +218,10 @@ Still open: artist-grouped bootstrap (no artist ids), Diff-MST (not installed), 
 
 ## 2026-10-27: mid-progress video
 Published: https://youtu.be/JPDp9j9sH0M (6 min 46 s, Kokoro af_heart narration; sources in `video/`).
+
+## 2026-10-27: probe-architecture ablation (`src/45_probe_models.py`, `results/probe_models_{A,B}.json`)
+Same stored mean-pooled embeddings; layer chosen by 3-fold CV on train; val accuracy (A n=132, B n=102; one run each, so differences of a few points are within noise). 
+- Dataset A decade: single-layer LR mix .523 / vocals .402 / accompaniment .485 (MERT); top-3-layer concat mix .545, vocals .402, accompaniment .477; RBF-SVM and MLP lower (.33-.49). Stem fusion (concat voc+acc) .462, (mix+voc+acc) .477, late average .455. MERT+MuQ concat on mix .515. All four stems of both encoders concatenated .455.
+- Dataset B market: LR mix .618 / vocals .569 / accompaniment .431; concat top-3 vocals .618; SVM mix .637; stem fusion mix+voc+acc .647; MERT+MuQ concat on mix .647; everything concatenated .608.
+- Reading (interpretation): none of the richer probes (MLP, SVM, layer concat, stem or encoder fusion) gives a clear gain over the single-layer linear probe; the stem ordering (A: accompaniment about equal to mix; B: vocals above accompaniment) is unchanged. The layer picked by 3-fold CV differs from the 5-fold choice used earlier (mix .523 vs .477), a reminder that single-split differences of this size are noise.
+- Server cleanup: removed superseded buggy-embedding folders, temp dirs and pip cache (free disk 94 -> 119 GB); kept stems, embeddings, venvs and generation outputs (all backed up on the restricted Drive except `gen_lvl_*`).
