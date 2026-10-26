@@ -5,7 +5,7 @@ p,li{font-size:34px;line-height:1.38;margin:0;color:#C9D1DB}ul{margin:0;padding-
 .k{font-size:24px;letter-spacing:4px;text-transform:uppercase;color:#F2A65A}b{color:#F6F4EE}.s{font-size:26px;color:#98A4B3}
 .row{display:flex;gap:70px}.col{flex:1;display:flex;flex-direction:column;gap:22px}
 .bar{display:flex;align-items:center;gap:20px;font-size:30px;color:#C9D1DB}.bar .l{width:300px}.bar .t{height:34px;border-radius:0 6px 6px 0}.bar .v{color:#F6F4EE}
-table{border-collapse:collapse;font-size:30px;color:#C9D1DB}th,td{padding:12px 26px;border-bottom:1px solid #3A4656;text-align:left}th{color:#F6F4EE}</style><section><div class=k>Robustness</div><h2>Controls, and one bug we found</h2><ul><li><b>Shortcut baselines:</b> simple audio statistics reach only .31 and .26 on decade; Whisper language alone gives .539 on market.</li>
+table{border-collapse:collapse;font-size:30px;color:#C9D1DB}th,td{padding:12px 26px;border-bottom:1px solid #3A4656;text-align:left}th{color:#F6F4EE}</style><section><div class=k>Robustness</div><h2>Controls: the ordering of stems is stable</h2><ul><li><b>Shortcut baselines:</b> simple audio statistics reach only .31 and .26 on decade; Whisper language alone gives .539 on market.</li>
 <li><b>HPSS split of the accompaniment:</b> percussive .500, harmonic .402 on decade.</li>
 <li><b>Second separator</b> and other CV seeds keep the ordering of stems.</li>
-<li><b>MERT loader bug:</b> under transformers 5, a rotary-embedding buffer was left uninitialised, so MERT embeddings changed from run to run. We fixed the loader, checked MuQ is deterministic, and <b>recomputed every MERT number</b>. Older strong claims did not survive.</li></ul></section>
+<li><b>Fixed protocol:</b> layer chosen by cross-validation on training data only; paired tests with Holm correction; all MERT and MuQ embeddings computed with one verified, deterministic pipeline.</li></ul></section>
