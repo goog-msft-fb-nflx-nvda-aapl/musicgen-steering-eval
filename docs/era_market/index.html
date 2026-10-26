@@ -16,14 +16,15 @@ p,li{color:var(--mut)} a{color:var(--acc)}
 .video{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden}
 .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .t{overflow-x:auto}table{border-collapse:collapse;width:100%} th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);color:var(--fg)}
-.s{font-size:.9rem}
+.s{font-size:.9rem}.row{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0}label{display:flex;flex-direction:column;font-size:.85rem;color:var(--mut);gap:4px}select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
 </style>
 </head>
 <body>
 <main>
 <h1>Which stem carries the era of a song, and can we regenerate it?</h1>
 <p>Course project, CommE5070 (Deep Learning for Music Analysis and Generation, NTU), music generation track. We study which stem, vocal or accompaniment, carries release-decade and release-market cues, then keep the original vocal and regenerate the accompaniment in another era's style with MusicGen-Melody. Mid-progress report. <a href="../">Our first project (MusicGen steering)</a>.</p>
-<div class="card video"><iframe src="https://www.youtube.com/embed/JPDp9j9sH0M" title="Mid-progress video" allowfullscreen></iframe></div>
+<div class="card video"><iframe src="https://www.youtube.com/embed/JPDp9j9sH0M" title="Mid-progress video" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<p class="s"><a href="https://youtu.be/JPDp9j9sH0M">Watch on YouTube</a></p>
 
 <h2>Which stem carries the cue</h2>
 <p>Linear probes on frozen MERT and MuQ layers, validation accuracy, six classes (chance .167). Paired tests with Holm correction.</p>
@@ -51,12 +52,41 @@ p,li{color:var(--mut)} a{color:var(--acc)}
 <li>Market covers are mixed: Germany and the US move with both probes, Brazil only with MuQ.</li>
 </ul>
 
+
+<h2>Explore the results</h2>
+<div class="card">
+<div class="row"><label>View<select id="v"><option value="probe">Stem probes (accuracy)</option><option value="era">Era covers (change in target-era probability)</option></select></label>
+<label id="l1">Task<select id="task"><option value="decade">Release decade (A)</option><option value="market">Release market (B)</option></select></label>
+<label>Encoder<select id="enc"></select></label></div>
+<div id="bars" aria-live="polite"></div>
+<p class="s" id="note"></p></div>
+
+<h2>Listen: same song, different era prompt</h2>
+<p>Generated accompaniment only (no vocals), 12-second excerpts made by MusicGen-Melody from the melody of a course clip and a text prompt. Loudness-matched. Pick a song and compare.</p>
+<div class="card"><div class="row"><label>Song<select id="song"></select></label></div><div id="aud"></div></div>
+
 <h2>Limits and next steps</h2>
-<p>24 songs and three seeds; no artist ids for artist-grouped intervals; decade labels are release years. No human listening yet; a 24-pair forced-choice listening test is prepared.</p>
+<p>24 songs and three seeds; no artist ids for artist-grouped intervals; decade labels are release years. No human listening study yet; a 24-pair forced-choice listening test is prepared.</p>
 <p><b>We are looking for teammates</b> for the listening study and the report.</p>
 
 <h2>Code and notes</h2>
-<p class="s"><a href="https://github.com/goog-msft-fb-nflx-nvda-aapl/musicgen-steering-eval/tree/main/topics/era_market_cover">Code, results and worklog on GitHub</a>. The page contains no dataset audio.</p>
+<p class="s"><a href="https://github.com/goog-msft-fb-nflx-nvda-aapl/musicgen-steering-eval/tree/main/topics/era_market_cover">Code, results and worklog on GitHub</a>. The audio on this page is generated accompaniment only (no vocals, no original dataset audio).</p>
 </main>
+<script>
+const D={"probe": {"decade": {"MERT": {"Mix": 0.477, "Vocals": 0.394, "Accompaniment": 0.485, "Recombined": 0.485}, "MuQ": {"Mix": 0.477, "Vocals": 0.318, "Accompaniment": 0.424}}, "market": {"MERT": {"Mix": 0.588, "Vocals": 0.608, "Accompaniment": 0.422, "Recombined": 0.608}, "MuQ": {"Mix": 0.471, "Vocals": 0.471, "Accompaniment": 0.392}}}, "era": {"MERT": {"1960s": -0.001, "1980s": 0.593, "2010s": 0.328}, "MuQ": {"1960s": 0.006, "1980s": 0.414, "2010s": 0.094}, "Discogs-EffNet": {"1960s": -0.064, "1980s": 0.282, "2010s": 0.138}}, "songs": [{"neutral": "audio/90cfd0b219.mp3", "1960s": "audio/581d59e547.mp3", "1980s": "audio/f3fe5726cb.mp3", "2010s": "audio/74cd50b8f8.mp3"}, {"neutral": "audio/e99921d85e.mp3", "1960s": "audio/870ef623d5.mp3", "1980s": "audio/9f2af0de5c.mp3", "2010s": "audio/0482025c37.mp3"}, {"neutral": "audio/522801706c.mp3", "1960s": "audio/5181ccba6e.mp3", "1980s": "audio/7596843d37.mp3", "2010s": "audio/4630b7ccb7.mp3"}, {"neutral": "audio/a32d6623c7.mp3", "1960s": "audio/b469a9ccd9.mp3", "1980s": "audio/ce939b3ec1.mp3", "2010s": "audio/e3a82c7a1f.mp3"}, {"neutral": "audio/e5e82dee82.mp3", "1960s": "audio/20b5931202.mp3", "1980s": "audio/b640bb0d4b.mp3", "2010s": "audio/f807f176aa.mp3"}, {"neutral": "audio/b065e686d9.mp3", "1960s": "audio/02829f855c.mp3", "1980s": "audio/0b377cd2f5.mp3", "2010s": "audio/200401841c.mp3"}, {"neutral": "audio/2b432147a0.mp3", "1960s": "audio/9ef4ba78f3.mp3", "1980s": "audio/d776f3c803.mp3", "2010s": "audio/bc175f0dee.mp3"}, {"neutral": "audio/f9695ade96.mp3", "1960s": "audio/dd2d16f624.mp3", "1980s": "audio/596851282e.mp3", "2010s": "audio/9034ace1ed.mp3"}]};const $=i=>document.getElementById(i);
+function fill(sel,opts){sel.innerHTML=opts.map(o=>`<option>${o}</option>`).join('')}
+function bars(rows,max,signed){return rows.map(([k,v])=>{const w=Math.abs(v)/max*100;return `<div style="display:flex;align-items:center;gap:10px;margin:8px 0"><span style="width:130px;color:var(--fg)">${k}</span><span style="flex:1;background:var(--line);height:18px;border-radius:4px;position:relative"><span style="position:absolute;${signed&&v<0?'right:50%':'left:'+(signed?'50%':'0')};width:${signed?w/2:w}%;height:100%;background:${v<0?'#8a8f98':'var(--acc)'};border-radius:4px"></span></span><b style="width:64px;text-align:right;color:var(--fg)">${v>0&&signed?'+':''}${v.toFixed(3)}</b></div>`}).join('')}
+function render(){const v=$('v').value;$('l1').hidden=v!=='probe';
+if(v==='probe'){const e=Object.keys(D.probe[$('task').value]);if($('enc').dataset.v!=='probe'){fill($('enc'),e);$('enc').dataset.v='probe'}
+const r=D.probe[$('task').value][$('enc').value]||D.probe[$('task').value][e[0]];$('bars').innerHTML=bars(Object.entries(r),.7,false);
+$('note').textContent='Linear probe on frozen layers, validation accuracy, six classes (chance .167).'}
+else{const e=Object.keys(D.era);if($('enc').dataset.v!=='era'){fill($('enc'),e);$('enc').dataset.v='era'}
+$('bars').innerHTML=bars(Object.entries(D.era[$('enc').value]),.7,true);$('note').textContent='Evaluator shown in the Encoder menu. Mean over 24 songs and three seeds, era prompt minus neutral prompt.'}}
+['v','task','enc'].forEach(i=>$(i).onchange=()=>{if(i==='v')$('enc').dataset.v='';render()});
+fill($('enc'),Object.keys(D.probe.decade));$('enc').dataset.v='probe';
+function songs(){const s=+$('song').value||0;$('aud').innerHTML=['neutral','1960s','1980s','2010s'].map(e=>`<p class="s" style="margin:12px 0 4px;color:var(--fg)">${e==='neutral'?'Neutral prompt':e+' prompt'}</p><audio controls preload="none" style="width:100%" src="${D.songs[s][e]}"></audio>`).join('');
+document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',()=>document.querySelectorAll('audio').forEach(o=>{if(o!==a)o.pause()})))}
+$('song').innerHTML=D.songs.map((_,i)=>`<option value="${i}">Song ${i+1}</option>`).join('');$('song').onchange=songs;songs();render();
+</script>
 </body>
 </html>
