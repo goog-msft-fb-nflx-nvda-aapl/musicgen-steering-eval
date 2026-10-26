@@ -230,3 +230,12 @@ Same stored mean-pooled embeddings; layer chosen by 3-fold CV on train; val accu
 Protocol as the probe ablation: per (encoder, condition) layer by 3-fold CV on TRAIN, linear probe C=0.01, val acc with 2000-resample bootstrap 95% CI. A n=132 (chance .167), B n=102 (chance .167). Encoders: MERT-v2-30s, MuQ-large, Whisper-medium encoder, AST-AudioSet, CLAP-htsat-fused (MERT-v1-330M and larger_clap_music not used: pickle-only weights).
 Val acc mix/voc/acc. A: MERT .523/.402/.485; MuQ .477/.318/.409; Whisper .242/.326/.318; AST .455/.348/.402; CLAP .394/.303/.371. B: MERT .618/.569/.431; MuQ .471/.471/.392; Whisper .500/.520/.304; AST .363/.333/.343; CLAP .333/.324/.294.
 Interpretation: MERT is best or tied-best on every condition; Whisper is competitive only on B vocals/mix (voice/language cue), weak on A. Stem ordering (A: mix>acc>voc; B: mix>=voc>acc) holds for MERT; CIs overlap widely.
+
+## 2026-10-27 LoRA fine-tune of MusicGen-Melody on era accompaniment (src/48_lora_musicgen.py; adapters ~/era_market/lora/v1; results/lora_eval.json, lora_content.json)
+Config: dataset-A TRAIN stems (1026 clips), text = clip's own decade prompt (10% neutral dropout), chroma from original mix, 10 s crops, LoRA r=16 on decoder q/k/v/out_proj (9.4M trainable), 3000 steps, bs 8, lr 1e-4, model kept in eval mode. Generation: 24 val songs x {neutral,1960s,1980s,2010s} x seeds 0-2, guidance 3, merged adapters. Scoring as base: codec-matched MERT L22 / MuQ L9 probes.
+Delta P(target decade) vs neutral prompt, mean over 24 songs [songs >0], Wilcoxon p. Seed 0 only, MERT / MuQ:
+- base: 1960s -.034 [13] p=.53 / +.001 [15] p=.58; 1980s +.615 [24] / +.442 [24]; 2010s +.354 [23] / +.115 [19] (p=.008)
+- LoRA: 1960s +.422 [20] p<.001 / +.297 [21]; 1980s +.250 [20] / +.170 [19]; 2010s +.186 [18] / +.134 [19]
+LoRA 3 seeds: 1960s +.396 / +.296; 1980s +.246 / +.220; 2010s +.171 / +.102 (all p<.0001).
+Content (remix vs original): song-id top-1 base .906 (n=96) vs LoRA .865 (seed 0, n=96), .896 (3 seeds, n=192); chord agreement .335 vs .355/.355. NOTE: lora_content has n=192 not 288 for 3 seeds — content script scope not checked yet.
+Interpretation: the 1960s prompt, ineffective in the base model, now shifts the probe; 1980s/2010s effects shrink (adapter is trained to all decades, so contrasts to neutral are more even). Energy of the effect is spread more evenly across decades rather than larger overall. One adapter, one run; no hyperparameter search.
