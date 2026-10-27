@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from common import ROOT, SR, LABELS, manifest
 from mert_util import load_mert
-ds = sys.argv[1]; K = int(sys.argv[2]) if len(sys.argv) > 2 else 3; lab = LABELS[ds]; rows = manifest(ds); rng = np.random.default_rng(0)
+STEMS = os.environ.get("STEMS", "stems"); ds = sys.argv[1]; K = int(sys.argv[2]) if len(sys.argv) > 2 else 3; lab = LABELS[ds]; rows = manifest(ds); rng = np.random.default_rng(0)
 y = np.array([lab.index(r["label"]) if r["label"] else -1 for r in rows]); split = np.array([r["split"] for r in rows]); P = json.load(open(os.path.join(ROOT, "results", f"probe_{ds}.json")))["conds"]["mix_norm"]
 X = np.load(os.path.join(ROOT, "emb", f"{ds}_mix_norm.npy"))[:, P["layer"]].astype(np.float32); tr = np.where(split == "train")[0]; va = np.where(split == "validation")[0]
 probe = make_pipeline(StandardScaler(), LogisticRegression(C=P["C"], max_iter=3000)).fit(X[tr], y[tr])
@@ -22,7 +22,7 @@ for i in va:
 proc, model = load_mert(); meter = pyln.Meter(SR)
 def norm(v, target=-23.0):
     l = meter.integrated_loudness(v.astype(np.float64)); return np.clip(pyln.normalize.loudness(v.astype(np.float64), l, target), -1, 1).astype(np.float32) if np.isfinite(l) and np.abs(v).max() > 1e-4 else v
-stem = lambda k: np.load(os.path.join(ROOT, "stems", ds, rows[k]["sample_id"] + ".npz"))
+stem = lambda k: np.load(os.path.join(ROOT, STEMS, ds, rows[k]["sample_id"] + ".npz"))
 Z = {}; E = []
 for n, (i, j) in enumerate(pairs):
     for k in (i, j):
@@ -34,7 +34,7 @@ for n, (i, j) in enumerate(pairs):
     hs = torch.stack([((h * m).sum(1) / m.sum(1).clamp_min(1)) if m is not None else h.mean(1) for h in o.hidden_states]).squeeze(1); E.append(hs[P["layer"]].float().cpu().numpy())
     if n % 100 == 0: print(n, len(pairs), flush=True)
 E = np.array(E); pr = probe.predict_proba(E); vi = np.array([p[0] for p in pairs]); aj = np.array([p[1] for p in pairs]); lv, la = y[vi], y[aj]; pred = pr.argmax(1)
-res = {"ds": ds, "n_pairs": len(pairs), "K": K, "probe_layer": P["layer"], "val_acc_real_mix": float((probe.predict(X[va]) == y[va]).mean()), "val_acc_same_clip_recomb": float((probe.predict(Xr[va]) == y[va]).mean())}
+res = {"ds": ds, "stems": STEMS, "n_pairs": len(pairs), "K": K, "probe_layer": P["layer"], "val_acc_real_mix": float((probe.predict(X[va]) == y[va]).mean()), "val_acc_same_clip_recomb": float((probe.predict(Xr[va]) == y[va]).mean())}
 res["pred_eq_vocal_label"] = float((pred == lv).mean()); res["pred_eq_accomp_label"] = float((pred == la).mean()); res["pred_other"] = float(((pred != lv) & (pred != la)).mean())
 pv = pr[np.arange(len(pairs)), lv]; pa = pr[np.arange(len(pairs)), la]; res["mean_P_vocal_label"] = float(pv.mean()); res["mean_P_accomp_label"] = float(pa.mean())
 clips = np.unique(vi); d = pv - pa
@@ -50,4 +50,4 @@ if ds == "A":
         idx = np.concatenate([byc[c] for c in cs]); b = np.linalg.lstsq(A[idx], ed[idx], rcond=None)[0]; return float(b[2] - b[1])
     res["accomp_minus_vocal_beta"] = reg(clips); res["ci95_accomp_minus_vocal_beta"] = boot(reg)
 res["per_vocal_label"] = {lab[k]: {"pred_eq_vocal": float((pred == lv)[lv == k].mean()), "pred_eq_accomp": float((pred == la)[lv == k].mean()), "n": int((lv == k).sum())} for k in range(len(lab))}
-json.dump(res, open(os.path.join(ROOT, "results", f"shuffle_remix_{ds}.json"), "w"), indent=1); print(json.dumps(res, indent=1))
+json.dump(res, open(os.path.join(ROOT, "results", f"shuffle_remix_{ds}" + ("" if STEMS == "stems" else "_" + STEMS) + ".json"), "w"), indent=1); print(json.dumps(res, indent=1))
