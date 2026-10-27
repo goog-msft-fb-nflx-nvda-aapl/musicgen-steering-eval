@@ -78,7 +78,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G02 | CFG scale 1, 3, 5, 7 | done | `cfg*_eval.json`, `cfg_summary.txt` |
 | G03 | text-only (no melody) baseline | done | `textonly_*.json` |
 | G04 | extra prompts (1970s, 1990s, 2000s, 1960s b/c) | done | `prompts_eval.json` |
-| G05 | prompt elaboration (single word vs sentence vs full description) | todo (GPU ~30 min) | - |
+| G05 | prompt elaboration (decade word / short / keyword tags vs the detailed sentence) | run | `src/65_prompt_variants.py` |
 | G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | todo | - |
 | G07 | sampling parameters (temperature, top-k, top-p), entropy-matched (HW2) | todo | - |
 | G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | run | `src/60_delta_guidance.py` |
@@ -103,7 +103,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | E05 | distribution / quality: KAD-style margin, Audiobox, COCOLA | done for base, MCL, cfg, text-only; run for LoRA, ACE | `kad_*.json`, `quality_*.json` |
 | E06 | Fx-Encoder++ production metric | done (base) | `fx_encoder.json` |
 | E07 | HW3 metrics FD-VGG, KL-PaSST, CLAP-music checkpoint (av-benchmark) against per-decade real references | todo (check install; PA3 session is resolving the sources) | - |
-| E08 | LALM judge (Qwen2-Audio-7B-Instruct, MQAScore-style): positive control on 132 real val clips, then generators | run | `src/61_lalm_era.py` |
+| E08 | LALM judge (Qwen2-Audio-7B-Instruct, MQAScore-style): positive control on 132 real val clips, then generators | done (weak judge: real-clip accuracy near chance, Spearman .45-.67) | `lalm_era.json`, `lalm_summary.txt` |
 | E09 | identity metrics: chroma-DTW song-ID, chord agreement, tempo | done | `content_*.json` |
 | E10 | basic-pitch lead-line metrics | done | `basicpitch.json` |
 | E11 | Discogs-VINet song-identity | done | `vinet_identity.json` |
