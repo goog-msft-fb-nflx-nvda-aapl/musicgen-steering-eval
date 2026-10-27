@@ -23,7 +23,7 @@ rc = []
 for s in ids:
     z = np.load(os.path.join(ROOT, "stems", "A", s + ".npz")); rc.append(score(emb(z["vocals"].astype(np.float32) + z["accomp"].astype(np.float32)), s))
 res["recomb_original_stems"] = {"cos": float(np.mean([r[0] for r in rc])), "top1": float(np.mean([r[1] for r in rc]))}
-res["dirs"] = {}
+OUT = os.path.join(ROOT, "results", "vinet_identity.json"); old = json.load(open(OUT)) if os.path.exists(OUT) else {}; res["dirs"] = old.get("dirs", {})   # merge with earlier runs
 for d in sys.argv[1:]:
     fs = sorted(glob.glob(os.path.join(ROOT, d, "*_remix.wav"))); R = defaultdict(list)
     for f in fs:
