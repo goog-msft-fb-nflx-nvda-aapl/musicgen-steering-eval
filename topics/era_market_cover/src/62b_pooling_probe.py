@@ -16,7 +16,7 @@ for cond in ("mix_norm", "voc_norm", "acc_norm"):
     out["conds"][cond] = {}
     for name, f in V.items():
         best = (-1, None)
-        for l in range(25):
+        for l in range(mean.shape[1]):
             X = f(l); s = cross_val_score(make_pipeline(StandardScaler(), LogisticRegression(C=0.01, max_iter=2000)), X[tr], y[tr], cv=StratifiedKFold(3, shuffle=True, random_state=0)).mean()
             if s > best[0]: best = (s, l)
         l = best[1]; X = f(l); m = make_pipeline(StandardScaler(), LogisticRegression(C=0.01, max_iter=3000)).fit(X[tr], y[tr]); ok = (m.predict(X[va]) == y[va]).astype(float); bs = [ok[rng.integers(0, len(ok), len(ok))].mean() for _ in range(2000)]

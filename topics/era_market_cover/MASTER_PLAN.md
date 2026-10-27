@@ -23,7 +23,7 @@ Rules for this document: only measured items are called done; "proxy", "interpre
 | Stem separator | HTDemucs (primary), BS-RoFormer (check) | Separator artifacts? | A06, A07, A13 (both separators), cross-separator transfer shows vocal probes lose 0.08-0.13 |
 | Loudness normalization | -23 LUFS | Does it matter? | A05 (raw vs norm rows) |
 | Encoder | MERT-v2-30s (primary), MuQ, Whisper-medium enc., AST, CLAP | Why MERT? | A02 (MERT best or tied on every condition; CIs overlap) |
-| Pooling over time | mean of hidden states | Mean pooling hides temporal cues | **Gap A17** (mean vs mean+std vs max, 10 s segments) |
+| Pooling over time | mean of hidden states | Mean pooling hides temporal cues | A17 (mean pooling best or tied in all six rows) |
 | Layer choice | per-condition layer by 3-fold CV on train; also learnable layer-weighted sum | Selection on validation? | A03 (CV only; lws probe agrees), A04 |
 | Probe | logistic regression, C=0.01 on standardized features | Capacity, regularization | A04 (SVM, MLP, concat, fusion: no clear gain); A18/A19 (C grid, learning curve: conclusions insensitive to C; accuracy not saturated for A) |
 | Era generation backbone | MusicGen-Melody 1.5B (fp16), not claimed SOTA | Why this generator? | G12/G13 compare with MuseControlLite and ACE-Step 1.5; survey: no verified benchmark for era-controlled covers |
@@ -63,7 +63,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | A14 | cue ablation: fixed probe and retrained probe | done | `cue_ablation_*.json`, `cue_retrain_*.json` |
 | A15 | CV seeds, bootstrap, McNemar, Holm | done | `probe_cvseed*`, `holm_summary.txt` |
 | A16 | sparse autoencoder on stem embeddings | done | `sae.json` |
-| A17 | pooling / time resolution (mean, mean+std, max; 10 s segments) | todo (GPU re-embedding, ~1 h) | - |
+| A17 | pooling / time resolution (mean, std, max, mean+std, mean+max, 3 segments) | done | `pooling_*.json` |
 | A18 | probe regularization sensitivity table (C grid) | done | `probe_sensitivity_*.json` |
 | A19 | learning curve (accuracy vs number of training clips) | done | `probe_sensitivity_*.json` |
 | A20 | probe on pooled train+val with artist-agnostic repeated CV vs validation-only | done in part (gap analyses) | `gap_*.json` |

@@ -1,5 +1,5 @@
 """Pooling ablation, step 1 (GPU): re-embed every clip (HTDemucs stems, loudness-normalized -23 LUFS, same conditions as 02_embed.py) with MERT-v2-30s and save time-pooling statistics besides the mean:
-emb_pool/<ds>_<cond>_{std,max}.npy (N, 25, 1024) float16 = per-layer standard deviation / maximum over time frames; emb_pool/<ds>_<cond>_seg3.npy (N, 3, 25, 1024) = mean over each third of the clip (10 s).
+emb_pool/<ds>_<cond>_{std,max}.npy (N, 24, 1024) float16 = per-layer standard deviation / maximum over time frames; emb_pool/<ds>_<cond>_seg3.npy (N, 3, 24, 1024) = mean over each third of the clip (10 s).
 conds: mix_norm, voc_norm, acc_norm. usage: python 62_pooling_embed.py A|B"""
 import sys, os, numpy as np, torch, soundfile as sf, pyloudnorm as pyln
 from common import ROOT, SR, manifest
