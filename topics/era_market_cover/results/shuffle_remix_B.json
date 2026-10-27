@@ -1,0 +1,58 @@
+{
+ "ds": "B",
+ "n_pairs": 306,
+ "K": 3,
+ "probe_layer": 18,
+ "val_acc_real_mix": 0.5882352941176471,
+ "val_acc_same_clip_recomb": 0.5980392156862745,
+ "pred_eq_vocal_label": 0.5,
+ "pred_eq_accomp_label": 0.1830065359477124,
+ "pred_other": 0.31699346405228757,
+ "mean_P_vocal_label": 0.4222274422645569,
+ "mean_P_accomp_label": 0.18227337300777435,
+ "mean_P_vocal_minus_accomp": 0.23995403945446014,
+ "ci95_cluster_bootstrap_over_vocal_clips": [
+  0.15849339291453363,
+  0.32207509726285927
+ ],
+ "ci95_pred_eq_vocal": [
+  0.4215686274509804,
+  0.5816993464052288
+ ],
+ "ci95_pred_eq_accomp": [
+  0.13071895424836602,
+  0.23529411764705882
+ ],
+ "per_vocal_label": {
+  "US": {
+   "pred_eq_vocal": 0.45098039215686275,
+   "pred_eq_accomp": 0.21568627450980393,
+   "n": 51
+  },
+  "UK": {
+   "pred_eq_vocal": 0.49019607843137253,
+   "pred_eq_accomp": 0.23529411764705882,
+   "n": 51
+  },
+  "Brazil": {
+   "pred_eq_vocal": 0.803921568627451,
+   "pred_eq_accomp": 0.0392156862745098,
+   "n": 51
+  },
+  "Spain": {
+   "pred_eq_vocal": 0.6862745098039216,
+   "pred_eq_accomp": 0.11764705882352941,
+   "n": 51
+  },
+  "Germany": {
+   "pred_eq_vocal": 0.23529411764705882,
+   "pred_eq_accomp": 0.29411764705882354,
+   "n": 51
+  },
+  "Italy": {
+   "pred_eq_vocal": 0.3333333333333333,
+   "pred_eq_accomp": 0.19607843137254902,
+   "n": 51
+  }
+ }
+}

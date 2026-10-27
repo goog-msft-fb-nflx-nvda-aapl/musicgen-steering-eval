@@ -1,0 +1,68 @@
+{
+ "ds": "A",
+ "n_pairs": 396,
+ "K": 3,
+ "probe_layer": 12,
+ "val_acc_real_mix": 0.4772727272727273,
+ "val_acc_same_clip_recomb": 0.49242424242424243,
+ "pred_eq_vocal_label": 0.16414141414141414,
+ "pred_eq_accomp_label": 0.3484848484848485,
+ "pred_other": 0.48737373737373735,
+ "mean_P_vocal_label": 0.16477777063846588,
+ "mean_P_accomp_label": 0.29878225922584534,
+ "mean_P_vocal_minus_accomp": -0.13400450348854065,
+ "ci95_cluster_bootstrap_over_vocal_clips": [
+  -0.1790561258792877,
+  -0.08836922813206918
+ ],
+ "ci95_pred_eq_vocal": [
+  0.12121212121212122,
+  0.20959595959595959
+ ],
+ "ci95_pred_eq_accomp": [
+  0.29545454545454547,
+  0.398989898989899
+ ],
+ "expected_decade_regression": {
+  "intercept": 1.5358941776212742,
+  "beta_vocal_source_decade": 0.12123022374540621,
+  "beta_accomp_source_decade": 0.40952833604596217
+ },
+ "accomp_minus_vocal_beta": 0.28829811230055596,
+ "ci95_accomp_minus_vocal_beta": [
+  0.21317692901480517,
+  0.3569830976983173
+ ],
+ "per_vocal_label": {
+  "1960s": {
+   "pred_eq_vocal": 0.030303030303030304,
+   "pred_eq_accomp": 0.3787878787878788,
+   "n": 66
+  },
+  "1970s": {
+   "pred_eq_vocal": 0.045454545454545456,
+   "pred_eq_accomp": 0.3484848484848485,
+   "n": 66
+  },
+  "1980s": {
+   "pred_eq_vocal": 0.19696969696969696,
+   "pred_eq_accomp": 0.3939393939393939,
+   "n": 66
+  },
+  "1990s": {
+   "pred_eq_vocal": 0.15151515151515152,
+   "pred_eq_accomp": 0.4090909090909091,
+   "n": 66
+  },
+  "2000s": {
+   "pred_eq_vocal": 0.4090909090909091,
+   "pred_eq_accomp": 0.2727272727272727,
+   "n": 66
+  },
+  "2010s": {
+   "pred_eq_vocal": 0.15151515151515152,
+   "pred_eq_accomp": 0.2878787878787879,
+   "n": 66
+  }
+ }
+}
