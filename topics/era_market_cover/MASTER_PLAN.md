@@ -30,7 +30,7 @@ Rules for this document: only measured items are called done; "proxy", "interpre
 | What is regenerated | accompaniment only; original vocal kept; RMS-matched | Why not regenerate the vocal too? | By design (market lives in the vocals; content must stay). Remix level ablation G10 |
 | Prompts | 4 hand-written era prompts; 5 extra prompts | Prompt sensitivity, prompt engineering | G04 (5 extra prompts); **Gap G05** (prompt elaboration), **Gap G06** (LLM / recaption prompts, HW3 idea) |
 | Guidance | CFG scale 3 default; sweep 1, 3, 5, 7 | Why 3? | G02; G08 era-contrast (delta) guidance running |
-| Sampling | MusicGen default top-k 250, temperature 1 | Entropy-matched sampling (HW2 idea) | **Gap G07** |
+| Sampling | transformers 5.x library defaults for do_sample=True: temperature 1.0, top_k 50, top_p 1.0 (checked in the library source; Meta's reference MusicGen uses top_k 250) | Entropy-matched sampling (HW2 idea) | G07 running (`68_sampling_params.py`: top_k 250, top_p 0.9, temperature 0.8 / 1.2) |
 | Test-time selection | none yet | Best-of-N + independent reranker (HW3 idea) | **Gap G09** |
 | Melody conditioning | chroma of the original mix | Is it needed? | G03 (text-only baseline: identity collapses, VINet top-1 .21 vs .72) |
 | Era evaluator | codec-matched MERT L22 / MuQ L9 probes trained on EnCodec-resynthesized real accompaniment | Circularity, domain shift | E01 codec matching, E02 negative controls, E03 identity-codec rows; independent evaluators E04-E08 |
@@ -80,7 +80,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G04 | extra prompts (1970s, 1990s, 2000s, 1960s b/c) | done | `prompts_eval.json` |
 | G05 | prompt elaboration (decade word / short / keyword tags vs the detailed sentence) | run | `src/65_prompt_variants.py` |
 | G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | todo | - |
-| G07 | sampling parameters (temperature, top-k, top-p), entropy-matched (HW2) | todo | - |
+| G07 | sampling parameters (top_k 250, top_p 0.9, temperature 0.8 / 1.2 vs library default top_k 50, T=1); entropy matching (HW2) not done | run | `src/68_sampling_params.py` |
 | G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | run | `src/60_delta_guidance.py` |
 | G02b | CFG sweep (1, 3, 5, 7) with seeds 1 and 2 (the existing sweep is seed 0 only) | todo (GPU ~40 min) | - |
 | G08b | guidance-scale sweep on MuseControlLite (default only so far); APG / negative-prompt variants on the diffusion loop (HW3 slides) once the plain CFG step exists | todo | - |
