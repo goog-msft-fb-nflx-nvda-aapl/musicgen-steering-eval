@@ -1,0 +1,310 @@
+{
+ "ds": "A",
+ "cartography": {
+  "definition": "ambiguous: variability >= 67th percentile; hard: confidence <= 33rd percentile (and not ambiguous); else easy",
+  "epochs": 30,
+  "mean_conf": 0.5609467029571533,
+  "final_train_acc": 0.7300194931773879,
+  "region_counts": {
+   "easy": 429,
+   "ambiguous": 339,
+   "hard": 258
+  },
+  "region_by_class": {
+   "1960s": {
+    "easy": 134,
+    "ambiguous": 24,
+    "hard": 13
+   },
+   "1970s": {
+    "easy": 102,
+    "ambiguous": 47,
+    "hard": 22
+   },
+   "1980s": {
+    "easy": 56,
+    "ambiguous": 64,
+    "hard": 51
+   },
+   "1990s": {
+    "easy": 29,
+    "ambiguous": 78,
+    "hard": 64
+   },
+   "2000s": {
+    "easy": 40,
+    "ambiguous": 64,
+    "hard": 67
+   },
+   "2010s": {
+    "easy": 68,
+    "ambiguous": 62,
+    "hard": 41
+   }
+  },
+  "spearman_conf_vs_oof_n_wrong": {
+   "rho": -0.7564098455701901,
+   "p": 5.4429565320265436e-191,
+   "n": 1026
+  }
+ },
+ "inlp": {
+  "mix_norm": {
+   "trace": [
+    {
+     "iter": 0,
+     "target_acc": 0.4772727272727273,
+     "lang_acc": 0.8787878787878788,
+     "rank_removed": 0
+    },
+    {
+     "iter": 1,
+     "target_acc": 0.4772727272727273,
+     "lang_acc": 0.9015151515151515,
+     "rank_removed": 3
+    },
+    {
+     "iter": 2,
+     "target_acc": 0.4772727272727273,
+     "lang_acc": 0.8787878787878788,
+     "rank_removed": 5
+    },
+    {
+     "iter": 3,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8939393939393939,
+     "rank_removed": 7
+    },
+    {
+     "iter": 4,
+     "target_acc": 0.4772727272727273,
+     "lang_acc": 0.8787878787878788,
+     "rank_removed": 9
+    },
+    {
+     "iter": 5,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8787878787878788,
+     "rank_removed": 11
+    },
+    {
+     "iter": 6,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8712121212121212,
+     "rank_removed": 13
+    },
+    {
+     "iter": 7,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8636363636363636,
+     "rank_removed": 15
+    },
+    {
+     "iter": 8,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8636363636363636,
+     "rank_removed": 17
+    }
+   ],
+   "random_same_rank": {
+    "rank": 17,
+    "mean": 0.4992424242424242,
+    "min": 0.48484848484848486,
+    "max": 0.5151515151515151
+   },
+   "language_majority_val": 0.8484848484848485
+  },
+  "voc_norm": {
+   "trace": [
+    {
+     "iter": 0,
+     "target_acc": 0.3939393939393939,
+     "lang_acc": 0.8939393939393939,
+     "rank_removed": 0
+    },
+    {
+     "iter": 1,
+     "target_acc": 0.38636363636363635,
+     "lang_acc": 0.9090909090909091,
+     "rank_removed": 2
+    },
+    {
+     "iter": 2,
+     "target_acc": 0.38636363636363635,
+     "lang_acc": 0.9090909090909091,
+     "rank_removed": 4
+    },
+    {
+     "iter": 3,
+     "target_acc": 0.3787878787878788,
+     "lang_acc": 0.9242424242424242,
+     "rank_removed": 6
+    },
+    {
+     "iter": 4,
+     "target_acc": 0.38636363636363635,
+     "lang_acc": 0.9242424242424242,
+     "rank_removed": 8
+    },
+    {
+     "iter": 5,
+     "target_acc": 0.38636363636363635,
+     "lang_acc": 0.9166666666666666,
+     "rank_removed": 10
+    },
+    {
+     "iter": 6,
+     "target_acc": 0.38636363636363635,
+     "lang_acc": 0.8939393939393939,
+     "rank_removed": 12
+    },
+    {
+     "iter": 7,
+     "target_acc": 0.38636363636363635,
+     "lang_acc": 0.9015151515151515,
+     "rank_removed": 14
+    },
+    {
+     "iter": 8,
+     "target_acc": 0.38636363636363635,
+     "lang_acc": 0.8939393939393939,
+     "rank_removed": 16
+    }
+   ],
+   "random_same_rank": {
+    "rank": 16,
+    "mean": 0.38636363636363635,
+    "min": 0.3787878787878788,
+    "max": 0.4090909090909091
+   },
+   "language_majority_val": 0.8484848484848485
+  },
+  "acc_norm": {
+   "trace": [
+    {
+     "iter": 0,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8560606060606061,
+     "rank_removed": 0
+    },
+    {
+     "iter": 1,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8636363636363636,
+     "rank_removed": 2
+    },
+    {
+     "iter": 2,
+     "target_acc": 0.49242424242424243,
+     "lang_acc": 0.8636363636363636,
+     "rank_removed": 4
+    },
+    {
+     "iter": 3,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8636363636363636,
+     "rank_removed": 6
+    },
+    {
+     "iter": 4,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8712121212121212,
+     "rank_removed": 8
+    },
+    {
+     "iter": 5,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8636363636363636,
+     "rank_removed": 10
+    },
+    {
+     "iter": 6,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8787878787878788,
+     "rank_removed": 12
+    },
+    {
+     "iter": 7,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8787878787878788,
+     "rank_removed": 14
+    },
+    {
+     "iter": 8,
+     "target_acc": 0.48484848484848486,
+     "lang_acc": 0.8787878787878788,
+     "rank_removed": 16
+    }
+   ],
+   "random_same_rank": {
+    "rank": 16,
+    "mean": 0.48636363636363633,
+    "min": 0.4696969696969697,
+    "max": 0.5
+   },
+   "language_majority_val": 0.8484848484848485
+  }
+ },
+ "cross_separator": {
+  "voc_norm": {
+   "train_htdemucs_test_htdemucs": {
+    "acc": 0.3939393939393939,
+    "ci95": [
+     0.3106060606060606,
+     0.4772727272727273
+    ]
+   },
+   "train_htdemucs_test_bsr": {
+    "acc": 0.3106060606060606,
+    "ci95": [
+     0.23484848484848486,
+     0.3939393939393939
+    ]
+   },
+   "train_bsr_test_bsr": {
+    "acc": 0.3939393939393939,
+    "ci95": [
+     0.3106060606060606,
+     0.48484848484848486
+    ]
+   },
+   "train_bsr_test_htdemucs": {
+    "acc": 0.26515151515151514,
+    "ci95": [
+     0.19696969696969696,
+     0.3409090909090909
+    ]
+   }
+  },
+  "acc_norm": {
+   "train_htdemucs_test_htdemucs": {
+    "acc": 0.48484848484848486,
+    "ci95": [
+     0.3939393939393939,
+     0.5757575757575758
+    ]
+   },
+   "train_htdemucs_test_bsr": {
+    "acc": 0.4772727272727273,
+    "ci95": [
+     0.3939393939393939,
+     0.5681818181818182
+    ]
+   },
+   "train_bsr_test_bsr": {
+    "acc": 0.5151515151515151,
+    "ci95": [
+     0.4318181818181818,
+     0.5984848484848485
+    ]
+   },
+   "train_bsr_test_htdemucs": {
+    "acc": 0.4772727272727273,
+    "ci95": [
+     0.38636363636363635,
+     0.5607954545454534
+    ]
+   }
+  }
+ }
+}
