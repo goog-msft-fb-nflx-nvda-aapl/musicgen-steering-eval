@@ -58,8 +58,12 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - MERT loader bug fixed and everything MERT recomputed (WORKLOG 2026-10-26 evening). Open: Discogs-EffNet tagger, basic-pitch, Fx-Encoder++/Diff-MST, SAE, listening test, oral presentation (8 min) and ISMIR-template report with individual contributions appendix, final server /tmp cleanup, re-cut slides/video with corrected MERT numbers.
 
 ## 2026-10-27
-- [x] probe-architecture ablation; encoder comparison (Whisper, AST, CLAP); LoRA fine-tune of MusicGen-Melody (WORKLOG 2026-10-27)
-- [ ] LoRA follow-ups: second adapter (different rank / steps), per-era-only adapters; third generator if time
-- [ ] listening test: static page built (src/44_build_public_listening.py), needs participants; analysis `python src/43_listening_test.py --analyze <csv ...>`; response collection parked
-- [ ] artist-grouped bootstrap impossible (no artist ids); Diff-MST not installed; Discogs-VI-YT clique needs audio from a teammate
-- [ ] final presentation (8 min) and ISMIR-template report with contributions appendix; no bug history in either
+- [x] probe-architecture ablation; encoder comparison (Whisper, AST, CLAP); LoRA fine-tune of MusicGen-Melody (3000 and 1000 steps); gap analyses (song-level hardness, style proxy, language vs market); shuffle-and-remix (two separators); LEACE and INLP language erasure; cartography; cross-separator transfer; vocal-share strata (WORKLOG 2026-10-27, TA_COVERAGE.md)
+- [x] survey 3 read and spot-checked (SURVEY3.md); survey prompt v3 written
+- [ ] Discogs-VI metadata (`~/era_market/dvi/main.zip` downloading on the server): confirm per-version fields; if release country and artist fields exist, measure release-country multiplicity per version/clique; otherwise report absence
+- [ ] human blind listening test (era judgment, melody retention, quality): page built (src/44_build_public_listening.py), needs participants; analysis `python src/43_listening_test.py --analyze <csv ...>`
+- [ ] Discogs-VINet (or other CSI embedding) as song-identity metric next to chroma-DTW; check install
+- [ ] second era-conditioned generation route (example-conditioned or ACE-Step 1.5 cover mode) after checking licenses and weights
+- [ ] LoRA follow-ups: per-era adapters or other rank; compare with v1 (3000 steps) and v2 (1000 steps)
+- [ ] impossible with PA1 (no artist/Discogs ids): artist-grouped bootstrap, remaster/reissue check; Diff-MST not installed; Discogs-VI-YT audio needs YouTube download (ask course staff)
+- [ ] final presentation (8 min) and ISMIR-template report with contributions appendix; no bug history in either; every number re-checked against result files
