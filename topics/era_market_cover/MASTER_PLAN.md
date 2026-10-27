@@ -60,7 +60,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | A11 | genre/style proxy: tags-only probe, clusters, LEACE erasure | done | `gap_*.json`, `style_erasure_*.json` |
 | A12 | hard songs: clips wrong in all stems, cartography | done | `gap_*_clips.csv`, `extra_controls_*.json` |
 | A13 | shuffle-and-remix (causal-style stem test), 2 separators | done | `shuffle_remix_*.json` |
-| A14 | cue ablation: fixed probe (done), retrained probe (run) | done / run | `cue_ablation_*.json`, `cue_retrain_*.json` |
+| A14 | cue ablation: fixed probe and retrained probe | done | `cue_ablation_*.json`, `cue_retrain_*.json` |
 | A15 | CV seeds, bootstrap, McNemar, Holm | done | `probe_cvseed*`, `holm_summary.txt` |
 | A16 | sparse autoencoder on stem embeddings | done | `sae.json` |
 | A17 | pooling / time resolution (mean, mean+std, max; 10 s segments) | todo (GPU re-embedding, ~1 h) | - |
