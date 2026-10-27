@@ -57,6 +57,8 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 ## 2026-10-26 evening
 - MERT loader bug fixed and everything MERT recomputed (WORKLOG 2026-10-26 evening). Open: Discogs-EffNet tagger, basic-pitch, Fx-Encoder++/Diff-MST, SAE, listening test, oral presentation (8 min) and ISMIR-template report with individual contributions appendix, final server /tmp cleanup, re-cut slides/video with corrected MERT numbers.
 
+## Master plan: see MASTER_PLAN.md (sources, component register, experiment registry with IDs, ranked next steps)
+
 ## 2026-10-27
 - [x] probe-architecture ablation; encoder comparison (Whisper, AST, CLAP); LoRA fine-tune of MusicGen-Melody (3000 and 1000 steps); gap analyses (song-level hardness, style proxy, language vs market); shuffle-and-remix (two separators); LEACE and INLP language erasure; cartography; cross-separator transfer; vocal-share strata (WORKLOG 2026-10-27, TA_COVERAGE.md)
 - [x] survey 3 read and spot-checked (SURVEY3.md); survey prompt v3 written

@@ -1,0 +1,120 @@
+### venv Python 3.11.17
+accelerate==1.15.0
+concept-erasure==0.2.4
+demucs==4.1.0
+huggingface_hub==1.33.0
+librosa==0.11.0
+muq==0.1.0
+nnaudio==0.3.4
+numpy==2.4.6
+peft==0.21.2
+pyloudnorm==0.2.0
+safetensors==0.8.0
+scikit-learn==1.9.1
+scipy==1.17.1
+soundfile==0.14.0
+torch==2.5.1+cu124
+torchaudio==2.5.1+cu124
+torchvision==0.20.1
+transformers==5.18.0
+### venv_mcl Python 3.11.17
+accelerate==1.15.0
+diffusers @ git+https://github.com/fundwotsai2001/diffusers.git@005980c6ef4830b746caf1b4a42bf9facb3cf092
+huggingface_hub==0.36.2
+librosa==0.11.0
+numpy==2.4.6
+pyloudnorm==0.2.0
+safetensors==0.8.0
+scikit-learn==1.9.1
+scipy==1.17.1
+soundfile==0.14.0
+torch==2.6.0+cu124
+torchaudio==2.6.0+cu124
+torchsde==0.2.6
+transformers==4.46.1
+### venv_ace Python 3.11.17
+accelerate==1.15.0
+diffusers==0.39.0
+huggingface_hub==0.36.2
+librosa==0.11.0
+numpy==2.4.6
+peft==0.21.2
+safetensors==0.8.0
+scikit-learn==1.9.1
+scipy==1.17.1
+soundfile==0.14.0
+torch==2.10.0+cu128
+torch-einops-utils==0.2.0
+torchao==0.16.0
+torchaudio==2.10.0+cu128
+torchcodec==0.17.0
+torchmetrics==1.9.0
+transformers==4.57.6
+### venv_ess Python 3.11.17
+essentia-tensorflow==2.1b6.dev1389
+librosa==0.11.0
+numpy==2.4.6
+scikit-learn==1.9.1
+scipy==1.17.1
+soundfile==0.14.0
+### venv2 Python 3.11.17
+huggingface_hub==1.33.0
+librosa==0.11.0
+numpy==2.4.6
+safetensors==0.8.0
+scikit-learn==1.9.1
+scipy==1.17.1
+soundfile==0.14.0
+torch==2.5.1+cu124
+torchaudio==2.5.1+cu124
+transformers==5.18.0
+### venv_ext Python 3.11.17
+huggingface_hub==1.33.0
+librosa==0.11.0
+numpy==2.4.6
+safetensors==0.8.0
+scikit-learn==1.9.1
+scipy==1.17.1
+soundfile==0.14.0
+torch==2.5.1+cu124
+torchaudio==2.5.1+cu124
+torchmetrics==1.9.0
+transformers==5.18.0
+### venv_sep Python 3.11.17
+librosa==0.11.0
+numpy==2.4.6
+scikit-learn==1.9.1
+scipy==1.17.1
+soundfile==0.14.0
+torch==2.6.0+cu124
+torchaudio==2.6.0+cu124
+torchvision==0.29.1
+### driver
+550.163.01, NVIDIA H200 NVL
+### HF snapshots (revision hashes of cached model repos)
+models--facebook--musicgen-melody 68d653a95788ec0d2b0abccab22c0b3a200c2d90
+models--m-a-p--MERT-v2-30s 0c0c8c6f6e04dcc39d96f94e0be9978a74848906
+models--OpenMuQ--MuQ-large-msd-iter 0562a57814f6f8bbd9fdea0a25921a2fce1a841a
+models--openai--whisper-medium abdf7c39ab9d0397620ccaea8974cc764cd0953e
+models--MIT--ast-finetuned-audioset-10-10-0.4593 f826b80d28226b62986cc218e5cec390b1096902
+models--laion--clap-htsat-fused 365dea6ef167def6676140ed93bbc43f84dabb28
+models--laion--clap-htsat-unfused 79b58ed25fc00386262a2bea4b19fd21dc4310a0
+models--stabilityai--stable-audio-open-1.0 f21265c1e2710b3bd2386596943f0007f55f802e
+models--Qwen--Qwen2-Audio-7B-Instruct 0a095220c30b7b31434169c3086508ef3ea5bf0a
+models--facebook--audiobox-aesthetics 9b1dd8e5df9af7216e836a98974fe3b82c56ded6
+models--facebook--encodec_32khz d0c45384f6c44db055f78200cfdcb9c1c8706727
+models--adefossez--HTDemucs bf35a81b663819a8255c8fefee17f9d812b786b5
+### ext repos (git HEAD)
+ACE-Step-1.5 ca1e85fe9430179831e6bc6be790c332190a3866
+Fx-Encoder_PlusPlus 7b1e1f7efaa8a7c212ae4d62c01a5bac5f61c47b
+MuseControlLite 306f561f790b397824259c73bd41fb2acb23a73a
+cocola b3ac9480cd1594d990a1d2dfabbab7cf15af8dfa
+### ACE-Step checkpoint snapshot
+Qwen3-Embedding-0.6B
+README.md.lock
+README.md.metadata
+### data manifests sha256
+620a94cb3f974d377420fbe0b1f9068358206b67fe3ccd2d77bd96117fd1de60  /home/jtan/era_market/data/ex/dataset_A/manifest.csv
+4531d4b4d0ac16268ee118a203bed0d99c46ed3e0f052f842d859382e731b76d  /home/jtan/era_market/data/ex/dataset_B/manifest.csv
+### VINet ckpt sha256
+9d0b1d5cdd459a22b1062f69f0ef12ff59d0681a5d90d338827598dc55e8bf13  /home/jtan/era_market/ext/Discogs-VINet/logs/checkpoints/Discogs-VINet/model_checkpoint.pth
