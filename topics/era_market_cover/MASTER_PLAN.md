@@ -87,7 +87,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G09 | best-of-N sampling with an independent selector (LALM judge or CLAP) plus identity constraint (HW3) | todo, after E08 | - |
 | G10 | accompaniment level in the remix (-12..+6 dB) | done | `remixlvl_*.json` |
 | G11 | LoRA on era accompaniment: v1 (r16, 3000), v2 (r16, 1000), v3 (r4, 3000) | done | `lora*_eval.json` |
-| G11b | LoRA training-seed replicates v1s1, v1s2 | run | `lora_v1s{1,2}_*` |
+| G11b | LoRA training-seed replicates v1s1, v1s2 | done | `lora_v1s{1,2}_*`, `gens_summary_lora_seeds.txt` |
 | G11c | LoRA target modules (attention only vs + feed-forward), lr, text dropout, training on mix chroma vs none | todo | - |
 | G12 | MuseControlLite (Stable Audio Open + melody adapter) | done | `mcl_*.json` |
 | G13 | ACE-Step 1.5 cover mode, strengths .2/.5/.8/1.0 | done | `ace_c*_*.json`, VAE control `ace_vae_id_*.json` |
