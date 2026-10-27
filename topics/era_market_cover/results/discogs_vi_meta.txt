@@ -1,0 +1,15 @@
+versions 1911611; cliques 348796; missing country 15053 (0.008); missing/invalid year 257587 (0.135)
+top countries: [('US', 580258), ('UK', 198199), ('Germany', 147171), ('France', 107407), ('Europe', 92793), ('Italy', 81396), ('Brazil', 57502), ('Spain', 54997), ('Netherlands', 53267), ('Sweden', 49496), ('Canada', 49253), ('Japan', 42884), ('Australia', 37713), ('Mexico', 25158), ('Switzerland', 24615)]
+six dataset-B markets (Discogs names US, UK, Brazil, Spain, Germany, Italy): {'US': 580258, 'UK': 198199, 'Brazil': 57502, 'Spain': 54997, 'Germany': 147171, 'Italy': 81396}
+versions per release decade: [(1950, 96691), (1960, 223208), (1970, 283050), (1980, 225106), (1990, 264015), (2000, 282581), (2010, 180528), (2020, 41738)]
+cliques with >=2 versions: 348796
+distinct release countries per clique: mean 2.42, share with >=2 0.621, >=3 0.240; distinct release decades per clique: mean 1.99, share with >=2 0.600, >=3 0.217
+1980s versions in the six markets inside cliques with >=2 versions: 126385; share whose clique has a 1980s version in a DIFFERENT one of the six markets: 0.441; share whose clique has a version outside the 1980s: 0.880
+most frequent (market, other market) pairs among those: [(('US', 'UK'), 17913), (('US', 'Germany'), 13731), (('UK', 'US'), 11914), (('US', 'Italy'), 8959), (('UK', 'Germany'), 7287), (('Germany', 'US'), 6975), (('US', 'Spain'), 6867), (('Germany', 'UK'), 5991), (('UK', 'Italy'), 3966), (('Germany', 'Italy'), 3629)]
+release country != artist's most frequent release country (artists with >=5 versions): 0.290 over 101603 versions
+  releases in US: 0.187 (n=24980); 1980s only: 0.248 (n=1491)
+  releases in UK: 0.295 (n=14993); 1980s only: 0.332 (n=1577)
+  releases in Brazil: 0.104 (n=1953); 1980s only: 0.184 (n=223)
+  releases in Spain: 0.428 (n=1672); 1980s only: 0.481 (n=160)
+  releases in Germany: 0.323 (n=7322); 1980s only: 0.338 (n=730)
+  releases in Italy: 0.339 (n=5012); 1980s only: 0.618 (n=1054)

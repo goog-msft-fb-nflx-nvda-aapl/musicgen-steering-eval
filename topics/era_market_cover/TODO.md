@@ -60,7 +60,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 ## 2026-10-27
 - [x] probe-architecture ablation; encoder comparison (Whisper, AST, CLAP); LoRA fine-tune of MusicGen-Melody (3000 and 1000 steps); gap analyses (song-level hardness, style proxy, language vs market); shuffle-and-remix (two separators); LEACE and INLP language erasure; cartography; cross-separator transfer; vocal-share strata (WORKLOG 2026-10-27, TA_COVERAGE.md)
 - [x] survey 3 read and spot-checked (SURVEY3.md); survey prompt v3 written
-- [ ] Discogs-VI metadata (`~/era_market/dvi/main.zip` downloading on the server): confirm per-version fields; if release country and artist fields exist, measure release-country multiplicity per version/clique; otherwise report absence
+- [x] Discogs-VI metadata statistics (WORKLOG 2026-10-27, results/discogs_vi_meta.txt); artist origin field absent, proxy used
 - [ ] human blind listening test (era judgment, melody retention, quality): page built (src/44_build_public_listening.py), needs participants; analysis `python src/43_listening_test.py --analyze <csv ...>`
 - [ ] Discogs-VINet (or other CSI embedding) as song-identity metric next to chroma-DTW; check install
 - [ ] second era-conditioned generation route (example-conditioned or ACE-Step 1.5 cover mode) after checking licenses and weights
