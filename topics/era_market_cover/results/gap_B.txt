@@ -1,0 +1,52 @@
+== dataset B: n=900 pooled train+val, 5-fold OOF x3 seeds (not artist-grouped)
+OOF accuracy: {'mix_norm': 0.591, 'voc_norm': 0.556, 'acc_norm': 0.417}
+clips wrong under 0/1/2/3 of the three stems: [247, 250, 166, 237] ; expected number wrong in all three if stem errors were independent: 95.4
+mix OOF confusion (rows true, cols pred), order ['US', 'UK', 'Brazil', 'Spain', 'Germany', 'Italy']
+[[ 75  30   0   9  24  12]
+ [ 25  72   0   5  35  13]
+ [  0   3 135   2   7   3]
+ [  9  21   0 100   7  13]
+ [ 25  36   3   5  60  21]
+ [ 14  22   0   9  15  90]]
+
+== hard (wrong in all 3 stems) vs easy (right in all 3)
+  vocal share: hard median 0.349 (n=237) vs easy median 0.434 (n=247), Mann-Whitney p=7.37e-09
+  integrated loudness-like stat (stats col 0): hard median -14.469 (n=237) vs easy median -13.101 (n=247), Mann-Whitney p=0.000385
+  top vocal-language (Whisper LID argmax): {'hard': [(np.str_('en'), 193), (np.str_('nn'), 17), (np.str_('la'), 12), (np.str_('es'), 5), (np.str_('pt'), 2), (np.str_('ko'), 1)], 'easy': [(np.str_('pt'), 91), (np.str_('en'), 72), (np.str_('es'), 30), (np.str_('it'), 24), (np.str_('gl'), 8), (np.str_('la'), 7)], 'all': [(np.str_('en'), 489), (np.str_('pt'), 130), (np.str_('es'), 79), (np.str_('it'), 56), (np.str_('la'), 42), (np.str_('nn'), 40)]}
+  OOF acc mix/voc/acc where language=en (n=489): [0.397, 0.358, 0.348]
+  OOF acc mix/voc/acc where language=pt (n=130): [0.977, 0.969, 0.715]
+  OOF acc mix/voc/acc where language=es (n=79): [0.911, 0.873, 0.43]
+  OOF acc mix/voc/acc where language=it (n=56): [0.929, 0.911, 0.446]
+
+== genre/style proxy (Discogs-EffNet on the original mix)
+  OOF acc: style-tags only 0.370; EffNet embedding only 0.386; MERT mix 0.591; MERT mix + tags 0.572 (chance 0.167)
+  MERT+tags vs MERT: only-concat-right 37, only-MERT-right 54
+  most over-represented styles in US: [('Folk, World, & Country---Country', 0.027), ('Folk, World, & Country---Bluegrass', 0.02), ('Latin---Salsa', 0.015), ('Folk, World, & Country---Honky Tonk', 0.012), ('Rock---Garage Rock', 0.012)]
+  most over-represented styles in UK: [('Rock---Punk', 0.052), ('Rock---Oi', 0.029), ('Rock---Mod', 0.025), ('Rock---Indie Rock', 0.02), ('Rock---Power Pop', 0.019)]
+  most over-represented styles in Brazil: [('Latin---MPB', 0.066), ('Latin---Samba', 0.054), ('Latin---Forró', 0.05), ('Latin---Bossanova', 0.033), ('Latin---Baião', 0.023)]
+  most over-represented styles in Spain: [('Folk, World, & Country---Flamenco', 0.023), ('Latin---Rumba', 0.015), ('Rock---Power Pop', 0.01), ('Rock---Pop Rock', 0.009), ('Folk, World, & Country---Catalan Music', 0.009)]
+  most over-represented styles in Germany: [('Jazz---Swing', 0.013), ('Electronic---Euro-Disco', 0.012), ('Jazz---Gypsy Jazz', 0.011), ('Electronic---Synth-pop', 0.01), ('Electronic---Italo-Disco', 0.009)]
+  most over-represented styles in Italy: [('Jazz---Post Bop', 0.025), ('Electronic---Synth-pop', 0.025), ('Jazz---Bop', 0.024), ('Jazz---Hard Bop', 0.024), ('Jazz---Modal', 0.019)]
+  accuracy of MERT mix probe inside 6 EffNet style clusters (n, majority-class share, MERT acc, tags-only acc):
+    cluster 0: n=264 majority share 0.25, MERT 0.655, tags-only 0.386
+    cluster 1: n=76 majority share 0.38, MERT 0.382, tags-only 0.474
+    cluster 2: n=72 majority share 0.29, MERT 0.333, tags-only 0.333
+    cluster 3: n=239 majority share 0.26, MERT 0.669, tags-only 0.314
+    cluster 4: n=51 majority share 0.57, MERT 0.863, tags-only 0.725
+    cluster 5: n=198 majority share 0.33, MERT 0.515, tags-only 0.298
+  styles over-represented in HARD clips: [('Rock---Indie Rock', 0.011), ('Rock---Blues Rock', 0.01), ('Rock---Classic Rock', 0.009), ('Blues---Rhythm & Blues', 0.008), ('Rock---Alternative Rock', 0.008), ('Blues---Delta Blues', 0.008)]
+
+== market vs language (Whisper LID argmax on the vocal stem is a proxy for sung language; native language per market is an assumption fixed by us, not read from the data)
+  US: top languages [(np.str_('en'), 132), (np.str_('es'), 10), (np.str_('nn'), 3), (np.str_('la'), 2)]
+  UK: top languages [(np.str_('en'), 134), (np.str_('nn'), 9), (np.str_('la'), 2), (np.str_('zh'), 1)]
+  Brazil: top languages [(np.str_('pt'), 128), (np.str_('en'), 12), (np.str_('la'), 4), (np.str_('nn'), 2)]
+  Spain: top languages [(np.str_('es'), 61), (np.str_('en'), 49), (np.str_('gl'), 13), (np.str_('la'), 11)]
+  Germany: top languages [(np.str_('en'), 95), (np.str_('de'), 24), (np.str_('nn'), 15), (np.str_('la'), 9)]
+  Italy: top languages [(np.str_('en'), 67), (np.str_('it'), 54), (np.str_('la'), 14), (np.str_('nn'), 7)]
+  native language: n=533; OOF acc mix/voc/acc = [0.743, 0.709, 0.482]
+  English in a non-English market (ES/DE/IT): n=223; OOF acc mix/voc/acc = [0.278, 0.247, 0.269]
+  other detected language: n=144; OOF acc mix/voc/acc = [0.514, 0.465, 0.403]
+  Spain: English-sung n=49 mix acc 0.224; native-language n=61 mix acc 1.000
+  Germany: English-sung n=95 mix acc 0.284; native-language n=24 mix acc 1.000
+  Italy: English-sung n=67 mix acc 0.328; native-language n=54 mix acc 0.963
+  mix-probe errors total 368; US<->UK confusions 55; errors whose true and predicted markets are both in {US,UK,Germany,Italy,Spain} (English dominates vocals): see confusion matrix

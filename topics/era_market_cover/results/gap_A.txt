@@ -1,0 +1,38 @@
+== dataset A: n=1158 pooled train+val, 5-fold OOF x3 seeds (not artist-grouped)
+OOF accuracy: {'mix_norm': 0.507, 'voc_norm': 0.373, 'acc_norm': 0.49}
+clips wrong under 0/1/2/3 of the three stems: [259, 287, 235, 377] ; expected number wrong in all three if stem errors were independent: 182.7
+ordinal: {'mix_norm': {'mean_abs_decade_err': 0.761, 'within1': 0.826}, 'voc_norm': {'mean_abs_decade_err': 1.144, 'within1': 0.714}, 'acc_norm': {'mean_abs_decade_err': 0.822, 'within1': 0.813}}
+mix OOF confusion (rows true, cols pred), order ['1960s', '1970s', '1980s', '1990s', '2000s', '2010s']
+[[142  33   9   5   2   2]
+ [ 31 123  23  10   3   3]
+ [ 18  31  91  31  12  10]
+ [ 13  11  33  69  42  25]
+ [  7   9  18  35  63  61]
+ [  7   5   8  24  50  99]]
+
+== hard (wrong in all 3 stems) vs easy (right in all 3)
+  vocal share: hard median 0.356 (n=377) vs easy median 0.405 (n=259), Mann-Whitney p=0.000631
+  integrated loudness-like stat (stats col 0): hard median -13.378 (n=377) vs easy median -12.967 (n=259), Mann-Whitney p=0.0831
+  top vocal-language (Whisper LID argmax): {'hard': [(np.str_('en'), 317), (np.str_('nn'), 20), (np.str_('la'), 18), (np.str_('es'), 11), (np.str_('jw'), 2), (np.str_('ru'), 2)], 'easy': [(np.str_('en'), 233), (np.str_('es'), 11), (np.str_('nn'), 7), (np.str_('la'), 5), (np.str_('tr'), 1), (np.str_('da'), 1)], 'all': [(np.str_('en'), 989), (np.str_('nn'), 57), (np.str_('es'), 44), (np.str_('la'), 38), (np.str_('jw'), 5), (np.str_('haw'), 4)]}
+  OOF acc mix/voc/acc where language=en (n=989): [0.512, 0.385, 0.494]
+  OOF acc mix/voc/acc where language=nn (n=57): [0.509, 0.281, 0.404]
+  OOF acc mix/voc/acc where language=es (n=44): [0.545, 0.432, 0.568]
+  OOF acc mix/voc/acc where language=la (n=38): [0.368, 0.263, 0.421]
+
+== genre/style proxy (Discogs-EffNet on the original mix)
+  OOF acc: style-tags only 0.455; EffNet embedding only 0.513; MERT mix 0.507; MERT mix + tags 0.505 (chance 0.167)
+  MERT+tags vs MERT: only-concat-right 74, only-MERT-right 76
+  most over-represented styles in 1960s: [('Rock---Rock & Roll', 0.041), ('Jazz---Hard Bop', 0.039), ('Rock---Doo Wop', 0.037), ('Blues---Rhythm & Blues', 0.033), ('Funk / Soul---Rhythm & Blues', 0.032)]
+  most over-represented styles in 1970s: [('Funk / Soul---Funk', 0.037), ('Funk / Soul---Soul', 0.033), ('Funk / Soul---Disco', 0.02), ('Folk, World, & Country---Country', 0.016), ('Rock---Psychedelic Rock', 0.014)]
+  most over-represented styles in 1980s: [('Rock---Punk', 0.042), ('Rock---Pop Rock', 0.019), ('Rock---AOR', 0.018), ('Rock---Soft Rock', 0.017), ('Rock---Oi', 0.017)]
+  most over-represented styles in 1990s: [('Rock---Hard Rock', 0.013), ('Hip Hop---Gangsta', 0.011), ('Hip Hop---RnB/Swing', 0.01), ('Electronic---House', 0.01), ('Rock---Heavy Metal', 0.009)]
+  most over-represented styles in 2000s: [('Rock---Alternative Rock', 0.021), ('Folk, World, & Country---Bluegrass', 0.02), ('Folk, World, & Country---Folk', 0.014), ('Rock---Indie Rock', 0.014), ('Pop---K-pop', 0.012)]
+  most over-represented styles in 2010s: [('Rock---Alternative Rock', 0.034), ('Rock---Indie Rock', 0.025), ('Rock---Acoustic', 0.011), ('Rock---Neofolk', 0.011), ('Rock---Brit Pop', 0.011)]
+  accuracy of MERT mix probe inside 6 EffNet style clusters (n, majority-class share, MERT acc, tags-only acc):
+    cluster 0: n=153 majority share 0.60, MERT 0.621, tags-only 0.647
+    cluster 1: n=220 majority share 0.20, MERT 0.409, tags-only 0.405
+    cluster 2: n=125 majority share 0.35, MERT 0.440, tags-only 0.424
+    cluster 3: n=165 majority share 0.25, MERT 0.515, tags-only 0.370
+    cluster 4: n=460 majority share 0.20, MERT 0.533, tags-only 0.450
+    cluster 5: n=35 majority share 0.29, MERT 0.486, tags-only 0.514
+  styles over-represented in HARD clips: [('Folk, World, & Country---Bluegrass', 0.014), ('Blues---Country Blues', 0.01), ('Folk, World, & Country---Folk', 0.01), ('Blues---Delta Blues', 0.01), ('Jazz---Bop', 0.009), ('Jazz---Post Bop', 0.009)]
