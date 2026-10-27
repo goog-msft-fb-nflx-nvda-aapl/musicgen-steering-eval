@@ -78,11 +78,11 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G02 | CFG scale 1, 3, 5, 7 | done | `cfg*_eval.json`, `cfg_summary.txt` |
 | G03 | text-only (no melody) baseline | done | `textonly_*.json` |
 | G04 | extra prompts (1970s, 1990s, 2000s, 1960s b/c) | done | `prompts_eval.json` |
-| G05 | prompt elaboration (decade word / short / keyword tags vs the detailed sentence) | run | `src/65_prompt_variants.py` |
+| G05 | prompt elaboration (decade word / short / keyword tags vs the detailed sentence) | done | `src/65_prompt_variants.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | todo | - |
-| G07 | sampling parameters (top_k 250, top_p 0.9, temperature 0.8 / 1.2 vs library default top_k 50, T=1); entropy matching (HW2) not done | run | `src/68_sampling_params.py` |
-| G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | run | `src/60_delta_guidance.py` |
-| G02b | CFG sweep (1, 3, 5, 7) with seeds 1 and 2 (the existing sweep is seed 0 only) | todo (GPU ~40 min) | - |
+| G07 | sampling parameters (top_k 250, top_p 0.9, temperature 0.8 / 1.2 vs library default top_k 50, T=1); entropy matching (HW2) not done | done (entropy matching not done) | `src/68_sampling_params.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
+| G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | done (g=3,5) | `src/60_delta_guidance.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
+| G02b | CFG sweep (1, 3, 5, 7) with seeds 1 and 2 (the existing sweep is seed 0 only) | done | `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G08b | guidance-scale sweep on MuseControlLite (default only so far); APG / negative-prompt variants on the diffusion loop (HW3 slides) once the plain CFG step exists | todo | - |
 | G09 | best-of-N sampling with an independent selector (LALM judge or CLAP) plus identity constraint (HW3) | todo, after E08 | - |
 | G10 | accompaniment level in the remix (-12..+6 dB) | done | `remixlvl_*.json` |

@@ -384,3 +384,29 @@ Same recipe as v1 (r=16, 3000 steps, bs 8, lr 1e-4, training seed 0/1/2 changes 
 - mean of the three: +.392 / +.253 / +.120 | +.255 / +.207 / +.077; standard deviation across training seeds (n=3) .024 / .015 / .052 | .046 / .015 / .028; range .048 / .028 / .104 | .091 / .029 / .055
 Content (song-id top-1 / chord agreement): seed 0 .878 / .355; seed 1 .882 / .364; seed 2 .858 / .362.
 Comparison with the other runs, in units of the three-seed standard deviation (rough, sd from n=3): v2 (1000 steps): MERT 1960s -0.6, 1980s -2.4, 2010s -0.6; MuQ +0.1, -0.8, -1.0; so the step-count differences are mostly within seed variation (the 2010s effect alone ranges .068 to .171 across training seeds). v3 (r=4): MERT 1960s -4.7, 1980s +1.2, 2010s -0.3; MuQ -2.6, +2.2, -1.7; so the lower 1960s effect of the rank-4 adapter lies outside the seed spread in both probes, while its 1980s and 2010s values are within about 2 sd. Interpretation: across training seeds the pattern 1960s > 1980s > 2010s and every effect being positive are stable; the 2010s effect is the least reproducible (range of .104 in MERT); the rank-4 adapter has a smaller 1960s effect than any rank-16 run.
+
+## 2026-10-28 generation ablations G08 / G02b / G05 / G07 (summary: results/gens_summary_g08_g02b_g05_g07.txt, tool src/56_summarize_gens.py)
+Statistic: per-song Δ P(target decade | era prompt) − P(target decade | neutral prompt), codec-matched MERT / MuQ probes, 24 songs, Wilcoxon; [k/24] = songs with Δ>0. Content = song-id top-1 and chord agreement. Seeds: cfg3 = seed 0 only (n=96 clips); cfg1/5/7, delta, pv: seeds 0–2 (n=288); sp: seeds 0–1 (n=192). Probe values are a proxy for era perception, not human judgement.
+
+| run | MERT 1960s / 1980s / 2010s | MuQ 1960s / 1980s / 2010s | top1 / chord |
+|---|---|---|---|
+| CFG 1 | +.116 / +.211 / +.035 | +.027 / +.089 / +.118 | .618 / .291 |
+| CFG 3 (default, seed 0) | −.034 / +.615 / +.354 | +.001 / +.442 / +.115 | .906 / .335 |
+| CFG 5 | +.049 / +.593 / +.474 | +.053 / +.400 / +.088 | .910 / .341 |
+| CFG 7 | +.111 / +.562 / +.487 | +.076 / +.378 / +.153 | .896 / .334 |
+| delta g=3 | +.153 / +.566 / +.131 | +.206 / +.413 / +.130 | .688 / .313 |
+| delta g=5 | +.281 / +.663 / +.266 | +.253 / +.558 / +.228 | .653 / .310 |
+| prompt: decade word | +.008 / +.315 / +.003 | −.017 / +.257 / −.021 | .889 / .344 |
+| prompt: short | −.033 / +.087 / −.013 | −.034 / +.125 / −.044 | .899 / .344 |
+| prompt: keyword tags | −.054 / +.621 / +.477 | −.036 / +.438 / +.194 | .885 / .339 |
+| top_k 250 | +.064 / +.463 / +.386 | +.042 / +.317 / +.091 | .911 / .347 |
+| T 0.8 | −.034 / +.609 / +.320 | −.004 / +.387 / +.028 | .880 / .329 |
+| T 1.2 | −.014 / +.524 / +.351 | −.014 / +.322 / +.100 | .911 / .347 |
+| top_p 0.9 (k0p09, label as run) | +.006 / +.527 / +.316 | +.033 / +.395 / +.048 | .917 / .341 |
+
+Observations (measured, interpretation labelled):
+- Delta guidance gives the largest 1960s and 2010s probe shifts of all MusicGen runs (g=5: 1960s +.281 MERT, +.253 MuQ) but identity drops (top-1 .65–.69 vs .89–.91; chord agreement .31 vs .33–.34). Interpretation: the contrast term trades melody identity for era strength; Pareto position vs CFG needs an identity-matched comparison (VINet not yet run on these dirs).
+- Higher CFG (5, 7) raises the 1960s effect over CFG 3 in both probes while top-1 is unchanged (.91/.90); CFG 1 loses identity (.618). 
+- Prompt elaboration: the detailed sentence and the keyword tags carry the effect; a bare decade word or short prompt gives 1980s only (+.09 to +.32), no 2010s effect.
+- Sampling parameters: top_k 250 / T 1.2 / top_p 0.9 change the probe effect by less than the differences between prompt forms; no setting produces a significant 1960s effect in both probes except top_k 250 (p=.001 / .025). Seeds 0–1 only; no seed-spread estimate for these runs, so small differences are not interpreted.
+- Caveat: cfg3 is seed 0 only (n=96) while the other CFG rows have 3 seeds; a CFG 3 re-run with seeds 1,2 is not in this table.
