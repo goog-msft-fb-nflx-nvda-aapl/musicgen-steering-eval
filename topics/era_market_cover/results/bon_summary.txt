@@ -1,0 +1,18 @@
+== 1960s: 24 songs x N=8 candidates
+  selector judge           minus random: P_MERT +0.046 (p=0.021) | P_MuQ +0.055 (p=0.015) | P_judge +0.108 (p=0.000) | identity sim -0.001 (p=0.900) | song-id top1 +0.021 (p=0.157)
+  selector identity        minus random: P_MERT -0.008 (p=0.229) | P_MuQ +0.006 (p=0.317) | P_judge -0.006 (p=0.264) | identity sim +0.016 (p=0.000) | song-id top1 +0.021 (p=0.157)
+  selector judge+identity  minus random: P_MERT +0.029 (p=0.218) | P_MuQ +0.038 (p=0.345) | P_judge +0.076 (p=0.000) | identity sim +0.008 (p=0.000) | song-id top1 +0.021 (p=0.157)
+  selector oracle_MERT     minus random: P_MERT +0.176 (p=0.000) | P_MuQ +0.109 (p=0.000) | P_judge +0.036 (p=0.049) | identity sim +0.004 (p=0.241) | song-id top1 -0.021 (p=0.655)
+  random-candidate means: {'mert': 0.122, 'muq': 0.087, 'judge': 0.132, 'sim': 0.866, 'top1': 0.938}
+== 1980s: 24 songs x N=8 candidates
+  selector judge           minus random: P_MERT +0.034 (p=0.160) | P_MuQ +0.009 (p=0.833) | P_judge +0.206 (p=0.000) | identity sim -0.001 (p=0.390) | song-id top1 +0.021 (p=0.458)
+  selector identity        minus random: P_MERT +0.018 (p=0.229) | P_MuQ +0.002 (p=0.989) | P_judge +0.067 (p=0.021) | identity sim +0.016 (p=0.000) | song-id top1 +0.021 (p=0.528)
+  selector judge+identity  minus random: P_MERT +0.050 (p=0.079) | P_MuQ +0.037 (p=0.360) | P_judge +0.130 (p=0.000) | identity sim +0.014 (p=0.000) | song-id top1 +0.062 (p=0.072)
+  selector oracle_MERT     minus random: P_MERT +0.231 (p=0.000) | P_MuQ +0.201 (p=0.000) | P_judge +0.057 (p=0.128) | identity sim +0.002 (p=0.584) | song-id top1 +0.021 (p=0.458)
+  random-candidate means: {'mert': 0.671, 'muq': 0.468, 'judge': 0.741, 'sim': 0.881, 'top1': 0.896}
+== 2010s: 24 songs x N=8 candidates
+  selector judge           minus random: P_MERT -0.027 (p=0.747) | P_MuQ -0.041 (p=0.152) | P_judge +0.123 (p=0.000) | identity sim +0.001 (p=0.456) | song-id top1 -0.094 (p=0.066)
+  selector identity        minus random: P_MERT -0.059 (p=0.143) | P_MuQ -0.014 (p=0.509) | P_judge +0.006 (p=0.877) | identity sim +0.013 (p=0.000) | song-id top1 +0.031 (p=0.357)
+  selector judge+identity  minus random: P_MERT -0.026 (p=0.565) | P_MuQ -0.007 (p=0.747) | P_judge +0.088 (p=0.000) | identity sim +0.008 (p=0.000) | song-id top1 -0.094 (p=0.066)
+  selector oracle_MERT     minus random: P_MERT +0.239 (p=0.000) | P_MuQ +0.055 (p=0.178) | P_judge +0.019 (p=0.229) | identity sim +0.002 (p=0.375) | song-id top1 +0.073 (p=0.066)
+  random-candidate means: {'mert': 0.544, 'muq': 0.269, 'judge': 0.259, 'sim': 0.891, 'top1': 0.885}
