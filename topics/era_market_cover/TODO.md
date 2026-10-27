@@ -63,7 +63,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [x] Discogs-VI metadata statistics (WORKLOG 2026-10-27, results/discogs_vi_meta.txt); artist origin field absent, proxy used
 - [ ] human blind listening test (era judgment, melody retention, quality): page built (src/44_build_public_listening.py), needs participants; analysis `python src/43_listening_test.py --analyze <csv ...>`
 - [x] Discogs-VINet song-identity metric (WORKLOG 2026-10-27, results/vinet_identity.json)
-- [ ] second era-conditioned generation route (example-conditioned or ACE-Step 1.5 cover mode) after checking licenses and weights
-- [ ] LoRA follow-ups: per-era adapters or other rank; compare with v1 (3000 steps) and v2 (1000 steps)
+- [x] second/third generator: ACE-Step 1.5 cover mode run and scored (WORKLOG 2026-10-28); open: other ACE-Step tasks (repaint, lego) and base/sft checkpoints
+- [x] LoRA rank/step check v1, v2, v3 (WORKLOG); open: repeated training seeds to separate run-to-run variation
 - [ ] impossible with PA1 (no artist/Discogs ids): artist-grouped bootstrap, remaster/reissue check; Diff-MST not installed; Discogs-VI-YT audio needs YouTube download (ask course staff)
 - [ ] final presentation (8 min) and ISMIR-template report with contributions appendix; no bug history in either; every number re-checked against result files
