@@ -37,7 +37,7 @@ Rules for this document: only measured items are called done; "proxy", "interpre
 | Content metrics | chroma-DTW song-ID, chords, tempo, basic-pitch, Discogs-VINet | Validated against humans? | E09-E11 (automatic only); no human test (skipped by decision) |
 | Distribution metric | KAD-style MMD margin (own implementation), Audiobox, COCOLA | Why not FAD? | E05; HW3 metrics FD-VGG / KL-PaSST not run (**Gap E07**) |
 | LoRA fine-tune | r=16 attention q,k,v,out; 3000 steps, bs 8, lr 1e-4, 10% neutral-prompt dropout, eval mode | Rank, steps, seeds, targets | G11 (v1,v2,v3), G11b seeds running; **Gap G11c** (target modules, lr, dropout) |
-| Language proxy | Whisper LID argmax on vocal stem | LID accuracy on singing | Proxy only; **Gap A23** (validate LID vs known-language subset) |
+| Language proxy | Whisper LID argmax on vocal stem | LID accuracy on singing | Proxy only; A24 (second LID model: same LEACE result); no ground-truth language exists (A23) |
 | Style (genre) proxy | Discogs-EffNet 400 style tags on the original mix | Not ground-truth genre | A11, proxy named as proxy |
 | Concept removal | LEACE (rank = groups), INLP, random same-rank controls | Linear only; correlated concepts | A10, A11; stated as upper bounds |
 | Human evaluation | none | Perceived era / melody | Skipped by decision (limitation); LALM judge E08 is the training-free substitute |
@@ -69,8 +69,8 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | A20 | probe on pooled train+val with artist-agnostic repeated CV vs validation-only | done in part (gap analyses) | `gap_*.json` |
 | A21 | artist-grouped bootstrap | impossible (no ids) | limitation |
 | A22 | Discogs-VI metadata label semantics | done | `discogs_vi_meta.txt` |
-| A23 | validate Whisper LID on a known-language subset (e.g. clips whose language is evident from the market, B Brazil pt / Spain es) as a proxy check | todo (CPU) | - |
-| A24 | second language proxy (e.g. faster-whisper large-v3 LID or SpeechBrain) to test proxy dependence of LEACE/INLP results | todo (GPU) | - |
+| A23 | validate Whisper LID against ground-truth language | not possible (no language labels); agreement of two LID models reported in A24 | - |
+| A24 | second language proxy (Whisper large-v3) and LEACE repeated | done | `leace_*_lid3.json` |
 ### B. Generation half (can era cues control a cover?)
 | ID | Question | Status | Evidence |
 |---|---|---|---|

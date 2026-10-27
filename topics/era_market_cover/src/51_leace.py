@@ -10,7 +10,7 @@ from concept_erasure import LeaceEraser
 from common import ROOT, LABELS, manifest
 ds = sys.argv[1]; lab = LABELS[ds]; rows = manifest(ds); rng = np.random.default_rng(0)
 y = np.array([lab.index(r["label"]) if r["label"] else -1 for r in rows]); split = np.array([r["split"] for r in rows]); tr = np.where(split == "train")[0]; va = np.where(split == "validation")[0]
-langs = json.load(open(os.path.join(ROOT, "emb", "lid_langs.json"))); top = np.array([langs[i] for i in np.load(os.path.join(ROOT, "emb", f"{ds}_lid_voc.npy")).argmax(1)])
+LID = os.environ.get("LIDNAME", "lid"); langs = json.load(open(os.path.join(ROOT, "emb", LID + "_langs.json"))); top = np.array([langs[i] for i in np.load(os.path.join(ROOT, "emb", f"{ds}_{LID}_voc.npy")).argmax(1)])
 keep = ["en", "pt", "es", "it", "de"] if ds == "B" else ["en", "es"]; grp = np.array([keep.index(t) if t in keep else len(keep) for t in top]); K = len(keep) + 1
 print("language groups", keep + ["other"], np.bincount(grp[tr], minlength=K), flush=True)
 P = json.load(open(os.path.join(ROOT, "results", f"probe_{ds}.json")))["conds"]
@@ -33,4 +33,4 @@ for c in ("mix_norm", "voc_norm", "acc_norm"):
     r["acc_after_random_rank%d_erasure" % rk] = {"mean": float(np.mean(accs)), "min": float(np.min(accs)), "max": float(np.max(accs))}
     f2, _ = leace(Xtr, onehot(y[tr], len(lab))); r["acc_after_target_label_erasure"], _ = fitscore(f2(Xtr), y[tr], f2(Xva), y[va], C)
     out["conds"][c] = r; print(c, json.dumps({k: (round(v, 3) if isinstance(v, float) else v) for k, v in r.items()}), flush=True)
-json.dump(out, open(os.path.join(ROOT, "results", f"leace_{ds}.json"), "w"), indent=1)
+json.dump(out, open(os.path.join(ROOT, "results", f"leace_{ds}" + ("" if LID == "lid" else "_" + LID) + ".json"), "w"), indent=1)

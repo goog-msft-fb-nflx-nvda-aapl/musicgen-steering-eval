@@ -1,0 +1,87 @@
+{
+ "ds": "A",
+ "language_groups": [
+  "en",
+  "es",
+  "other"
+ ],
+ "train_group_counts": [
+  867,
+  45,
+  114
+ ],
+ "conds": {
+  "mix_norm": {
+   "layer": 12,
+   "C": 0.01,
+   "acc_before": 0.4772727272727273,
+   "ci_before": [
+    0.38636363636363635,
+    0.5606060606060606
+   ],
+   "lang_acc_before": 0.8712121212121212,
+   "lang_majority_val": 0.8257575757575758,
+   "eraser_rank": 3,
+   "acc_after_language_erasure": 0.4621212121212121,
+   "ci_after": [
+    0.37859848484848485,
+    0.553030303030303
+   ],
+   "lang_acc_after": 0.8257575757575758,
+   "acc_after_random_rank2_erasure": {
+    "mean": 0.4821212121212122,
+    "min": 0.4621212121212121,
+    "max": 0.5
+   },
+   "acc_after_target_label_erasure": 0.16666666666666666
+  },
+  "voc_norm": {
+   "layer": 20,
+   "C": 0.01,
+   "acc_before": 0.3939393939393939,
+   "ci_before": [
+    0.31799242424242424,
+    0.4772727272727273
+   ],
+   "lang_acc_before": 0.9166666666666666,
+   "lang_majority_val": 0.8257575757575758,
+   "eraser_rank": 3,
+   "acc_after_language_erasure": 0.38636363636363635,
+   "ci_after": [
+    0.30303030303030304,
+    0.4621212121212121
+   ],
+   "lang_acc_after": 0.8257575757575758,
+   "acc_after_random_rank2_erasure": {
+    "mean": 0.3971212121212121,
+    "min": 0.38636363636363635,
+    "max": 0.4090909090909091
+   },
+   "acc_after_target_label_erasure": 0.16666666666666666
+  },
+  "acc_norm": {
+   "layer": 12,
+   "C": 0.01,
+   "acc_before": 0.48484848484848486,
+   "ci_before": [
+    0.3939393939393939,
+    0.5681818181818182
+   ],
+   "lang_acc_before": 0.8333333333333334,
+   "lang_majority_val": 0.8257575757575758,
+   "eraser_rank": 3,
+   "acc_after_language_erasure": 0.5075757575757576,
+   "ci_after": [
+    0.4166666666666667,
+    0.5909090909090909
+   ],
+   "lang_acc_after": 0.8257575757575758,
+   "acc_after_random_rank2_erasure": {
+    "mean": 0.483030303030303,
+    "min": 0.4772727272727273,
+    "max": 0.49242424242424243
+   },
+   "acc_after_target_label_erasure": 0.16666666666666666
+  }
+ }
+}
