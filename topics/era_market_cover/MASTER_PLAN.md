@@ -82,6 +82,8 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | todo | - |
 | G07 | sampling parameters (temperature, top-k, top-p), entropy-matched (HW2) | todo | - |
 | G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | run | `src/60_delta_guidance.py` |
+| G02b | CFG sweep (1, 3, 5, 7) with seeds 1 and 2 (the existing sweep is seed 0 only) | todo (GPU ~40 min) | - |
+| G08b | guidance-scale sweep on MuseControlLite (default only so far); APG / negative-prompt variants on the diffusion loop (HW3 slides) once the plain CFG step exists | todo | - |
 | G09 | best-of-N sampling with an independent selector (LALM judge or CLAP) plus identity constraint (HW3) | todo, after E08 | - |
 | G10 | accompaniment level in the remix (-12..+6 dB) | done | `remixlvl_*.json` |
 | G11 | LoRA on era accompaniment: v1 (r16, 3000), v2 (r16, 1000), v3 (r4, 3000) | done | `lora*_eval.json` |
