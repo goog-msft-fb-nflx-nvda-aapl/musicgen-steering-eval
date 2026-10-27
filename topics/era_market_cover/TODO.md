@@ -62,7 +62,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [x] survey 3 read and spot-checked (SURVEY3.md); survey prompt v3 written
 - [x] Discogs-VI metadata statistics (WORKLOG 2026-10-27, results/discogs_vi_meta.txt); artist origin field absent, proxy used
 - [ ] human blind listening test (era judgment, melody retention, quality): page built (src/44_build_public_listening.py), needs participants; analysis `python src/43_listening_test.py --analyze <csv ...>`
-- [ ] Discogs-VINet (or other CSI embedding) as song-identity metric next to chroma-DTW; check install
+- [x] Discogs-VINet song-identity metric (WORKLOG 2026-10-27, results/vinet_identity.json)
 - [ ] second era-conditioned generation route (example-conditioned or ACE-Step 1.5 cover mode) after checking licenses and weights
 - [ ] LoRA follow-ups: per-era adapters or other rank; compare with v1 (3000 steps) and v2 (1000 steps)
 - [ ] impossible with PA1 (no artist/Discogs ids): artist-grouped bootstrap, remaster/reissue check; Diff-MST not installed; Discogs-VI-YT audio needs YouTube download (ask course staff)
