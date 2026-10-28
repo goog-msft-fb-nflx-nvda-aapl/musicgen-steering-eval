@@ -418,3 +418,18 @@ Files: results/gens_summary_cfg3s3_lora_lr.txt, results/bon_summary.txt, results
 - VINet identity (cos / top-1 over 24 songs; neutral reference .65 / .72): delta g=3 era rows .56-.59 / .33-.40, g=5 .55-.58 / .28-.42 (identity clearly lower than CFG at the same probe shift); CFG 1 .59-.62 / .33-.54; CFG 5 and 7 .64-.66 / .67-.79 (no identity loss vs neutral); prompt variants and sampling settings .62-.66 / .50-.75 (tags 1980s .63 / .50). Interpretation: delta guidance buys its larger era shift with lower identity (chroma-conditioned melody leaks less); CFG 5-7 raise the 1960s effect without a VINet identity loss.
 - Best-of-N (8 candidates per song and era, seeds 10-17; selectors compared with a random candidate, paired over 24 songs): judge selector raises independent-probe P by MERT +.046 / MuQ +.055 for 1960s (p=.02 / .015), not significant for 1980s or 2010s; identity selector raises VINet similarity by +.013-.016 (p<.001) without changing era probes; judge+identity keeps most of the judge gain on the judge score but the MERT/MuQ gains are not significant. The MERT-oracle selector (selecting by the evaluator itself, so an upper bound, not an independent result) gives +.18-.24 on MERT. P_judge gains for the judge selector are circular (selected by the same quantity) and are not evidence. The judge was weak on real clips (earlier entry), so the 1960s gain is small and not replicated for other eras.
 - Run notes: bon, cfg3_s3, lr3e5, lr3e4, vin2 finished; vin3 (VINet on the two lr dirs) and drive9 (Drive sync) still running at the time of writing.
+
+## 2026-10-28 LoRA ablations: learning-rate seed replicates, feed-forward targets, prompt dropout (results/gens_summary_lora_abl.txt)
+Config: r16, alpha 2r, 3000 steps, bs 8, lr 1e-4, targets attention q/k/v/out, prompt dropout 0.1 unless stated (`run_lora_abl.sh`, `src/48_lora_musicgen.py --targets attnff --pdrop --seed`). Generation and scoring identical to earlier LoRA runs (24 songs, seeds 0-2 of generation, codec-matched probes). Columns: MERT 1960s/1980s/2010s | MuQ 1960s/1980s/2010s | top-1.
+| run | MERT | MuQ | top-1 |
+|---|---|---|---|
+| v1 (reference) | +.396/+.246/+.171 | +.296/+.220/+.102 | .878 |
+| lr 3e-5 seed 0 | +.320/+.192/+.068 | +.195/+.165/+.071 | .899 |
+| lr 3e-5 seed 1 | +.396/+.280/+.081 | +.257/+.221/+.023 | .878 |
+| lr 3e-4 seed 0 | +.420/+.207/+.215 | +.318/+.192/+.126 | .792 |
+| lr 3e-4 seed 1 | +.380/+.242/+.122 | +.245/+.263/+.088 | .802 |
+| + feed-forward (fc1, fc2) | +.408/+.227/+.108 | +.311/+.150/+.087 | .840 |
+| prompt dropout 0 | +.385/+.296/+.094 | +.282/+.235/+.019 | .861 |
+| prompt dropout 0.3 | +.272/+.241/+.149 | +.178/+.139/+.144 | .899 |
+Observations: (1) with a second training seed, the lr 3e-5 vs 1e-4 difference in 1960s MERT (.320 / .396 / .396) is no longer distinguishable from seed-to-seed variation (earlier entry: sd .015-.052 at lr 1e-4); the earlier statement that the 1960s effect grows with lr is therefore withdrawn. (2) The only consistent lr signal is song-ID top-1: .792 / .802 at lr 3e-4 for both seeds vs .878-.899 at 3e-5 and 1e-4. (3) Feed-forward targets: top-1 .840, probe effects within the range of the lr runs; no evidence of gain. (4) Prompt dropout 0.3 lowers the 1960s effect (MERT +.272, MuQ +.178) and raises 2010s MuQ (+.144); one seed each, so treated as indicative only. 
+Drive: drive9 copied the earlier generator dirs with equal local/Drive counts (577/385); `results` had 30 files created after the copy started, re-sync drive10 started with the new LoRA and best-of-N / CFG dirs.
