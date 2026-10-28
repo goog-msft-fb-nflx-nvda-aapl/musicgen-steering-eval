@@ -1,0 +1,44 @@
+{
+ "real": {
+  "entropy_mean": 4.304338276386261,
+  "entropy_sd_over_songs": 0.5617448284677419,
+  "xent_mean": 4.33138049642245,
+  "xent_sd_over_songs": 0.5651366808769253,
+  "n_songs": 24
+ },
+ "T1.0_k50": {
+  "entropy_mean": 3.7006128827730813,
+  "entropy_sd_over_songs": 0.41303770585822847,
+  "xent_mean": 3.784878502289454,
+  "xent_sd_over_songs": 0.4384191261933426,
+  "n_songs": 24
+ },
+ "T0.8": {
+  "entropy_mean": 2.859975884358088,
+  "entropy_sd_over_songs": 0.48115438637434754,
+  "xent_mean": 2.8841210454702377,
+  "xent_sd_over_songs": 0.5202795823361375,
+  "n_songs": 24
+ },
+ "T1.2": {
+  "entropy_mean": 4.029552002747853,
+  "entropy_sd_over_songs": 0.4278956872258264,
+  "xent_mean": 4.138668557008107,
+  "xent_sd_over_songs": 0.43239257833543837,
+  "n_songs": 24
+ },
+ "k250": {
+  "entropy_mean": 4.242664655049642,
+  "entropy_sd_over_songs": 0.40992181885133844,
+  "xent_mean": 4.347148984670639,
+  "xent_sd_over_songs": 0.4370086217185613,
+  "n_songs": 24
+ },
+ "topp0.9": {
+  "entropy_mean": 3.393242289622625,
+  "entropy_sd_over_songs": 0.4444701633799621,
+  "xent_mean": 3.4210225045681,
+  "xent_sd_over_songs": 0.45582635791994197,
+  "n_songs": 24
+ }
+}
