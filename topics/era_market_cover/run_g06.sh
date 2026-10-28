@@ -1,7 +1,7 @@
 #!/bin/bash
 # G06: LLM-written era prompts. usage: run_g06.sh <gpu> <hf model id> <tag>
 cd ~/era_market; export CUDA_VISIBLE_DEVICES=$1 OMP_NUM_THREADS=6 MKL_NUM_THREADS=6; M=$2; T=$3
-./venv/bin/python src/69_llm_prompts.py $M $T > logs/g06_${T}_prompts.log 2>&1
+[ -f results/llm_prompts_$T.json ] || ./venv/bin/python src/69_llm_prompts.py $M $T > logs/g06_${T}_prompts.log 2>&1   # prompts file may already exist (Ollama-written, 69b)
 for k in 0 1 2 3 4 5 6 7; do
   ./venv/bin/python src/70_prompt_set_gen.py --split train --prompts results/llm_prompts_$T.json --cand $k --outdir gen_g06_${T}_c$k > logs/g06_${T}_c${k}_gen.log 2>&1
   GENDIR=gen_g06_${T}_c$k ./venv/bin/python src/10_eval_gen.py --out results/g06_${T}_c${k}_eval.json --train_cond acccodec_norm --seeds 0 --probe_mert probe_codec_mert_A.json --probe_muq probe_codec_muq_A.json > logs/g06_${T}_c${k}_eval.log 2>&1
