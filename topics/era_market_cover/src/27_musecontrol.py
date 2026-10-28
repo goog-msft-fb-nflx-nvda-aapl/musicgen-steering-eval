@@ -10,8 +10,11 @@ ERAS = {"neutral": "a song recording",
         "1960s": "a 1960s pop and soul recording, mono tape sound, live drums, upright bass, brass and organ, warm analog saturation, limited bandwidth",
         "1980s": "a 1980s synth pop recording, gated reverb drums, drum machine, DX7 synthesizer, chorus guitar, glossy digital production",
         "2010s": "a 2010s modern pop production, heavy sub bass, punchy compressed drums, wide polished synths, loud streaming-era mastering"}
-ap = argparse.ArgumentParser(); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--limit_gen", type=int, default=0); ap.add_argument("--outdir", default="mcl_gen"); a = ap.parse_args()
-cfg = get_config(); cfg["show_result_and_plt"] = False; cfg["condition_type"] = ["melody_stereo"]; cfg["output_dir"] = os.path.join(ROOT, "mcl_work"); os.makedirs(cfg["output_dir"], exist_ok=True)
+ap = argparse.ArgumentParser(); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--limit_gen", type=int, default=0); ap.add_argument("--outdir", default="mcl_gen"); ap.add_argument("--gtext", type=float, default=None); ap.add_argument("--gcon", type=float, default=None); ap.add_argument("--gaudio", type=float, default=None); a = ap.parse_args()
+cfg = get_config(); cfg["show_result_and_plt"] = False
+for k, v in (("guidance_scale_text", a.gtext), ("guidance_scale_con", a.gcon), ("guidance_scale_audio", a.gaudio)):
+    if v is not None: cfg[k] = v   # G08b sweep; defaults of the repo config (7.0, 1.5, 1.0) when not given
+cfg["condition_type"] = ["melody_stereo"]; cfg["output_dir"] = os.path.join(ROOT, "mcl_work"); os.makedirs(cfg["output_dir"], exist_ok=True)
 G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; rows = {r["sample_id"]: r for r in manifest("A")}
 out = os.path.join(ROOT, a.outdir); os.makedirs(out, exist_ok=True); open(os.path.join(out, "picked.txt"), "w").write(open(os.path.join(G, "picked.txt")).read())
 ext, tck = initialize_condition_extractors(cfg); model = setup_MuseControlLite(cfg, torch.float16, tck).to("cuda"); n = 0

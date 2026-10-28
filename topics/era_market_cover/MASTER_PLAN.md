@@ -79,16 +79,16 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G03 | text-only (no melody) baseline | done | `textonly_*.json` |
 | G04 | extra prompts (1970s, 1990s, 2000s, 1960s b/c) | done | `prompts_eval.json` |
 | G05 | prompt elaboration (decade word / short / keyword tags vs the detailed sentence) | done | `src/65_prompt_variants.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
-| G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | todo | - |
+| G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | running (Qwen3-8B and Qwen2.5-7B-Instruct, `run_g06.sh`, `src/69-71`) | - |
 | G07 | sampling parameters (top_k 250, top_p 0.9, temperature 0.8 / 1.2 vs library default top_k 50, T=1); entropy matching (HW2) not done | done (entropy matching not done) | `src/68_sampling_params.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | done (g=3,5) | `src/60_delta_guidance.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G02b | CFG sweep (1, 3, 5, 7) with seeds 1 and 2 (the existing sweep is seed 0 only) | done | `results/gens_summary_g08_g02b_g05_g07.txt` |
-| G08b | guidance-scale sweep on MuseControlLite (default only so far); APG / negative-prompt variants on the diffusion loop (HW3 slides) once the plain CFG step exists | todo | - |
+| G08b | guidance-scale sweep on MuseControlLite (default only so far); APG / negative-prompt variants on the diffusion loop (HW3 slides) once the plain CFG step exists | text/condition guidance sweep running (`run_mcl_g.sh`); APG / negative-prompt variants todo | - |
 | G09 | best-of-N sampling with an independent selector (LALM judge or CLAP) plus identity constraint (HW3) | done (8 candidates, seeds 10-17, 3 eras) | `src/67_bestofn_analysis.py`, `results/bon_summary.txt` |
 | G10 | accompaniment level in the remix (-12..+6 dB) | done | `remixlvl_*.json` |
 | G11 | LoRA on era accompaniment: v1 (r16, 3000), v2 (r16, 1000), v3 (r4, 3000) | done | `lora*_eval.json` |
 | G11b | LoRA training-seed replicates v1s1, v1s2 | done | `lora_v1s{1,2}_*`, `gens_summary_lora_seeds.txt` |
-| G11c | LoRA target modules (attention only vs + feed-forward), lr, text dropout, training on mix chroma vs none | lr (3e-5, 1e-4, 3e-4; seed 0, plus seed 1 for 3e-5 and 3e-4), target modules (attention vs + feed-forward) and prompt dropout (0, 0.1, 0.3) done, one training seed each; chroma-conditioning ablation todo | `run_lora_lr.sh`, `results/gens_summary_cfg3s3_lora_lr.txt`, `results/gens_summary_lora_abl.txt` |
+| G11c | LoRA target modules (attention only vs + feed-forward), lr, text dropout, training on mix chroma vs none | lr (3e-5, 1e-4, 3e-4; seed 0, plus seed 1 for 3e-5 and 3e-4), target modules (attention vs + feed-forward) and prompt dropout (0, 0.1, 0.3) done, one training seed each; chroma-conditioning ablation (text-only LoRA, `run_lora_nomel.sh`) running | `run_lora_lr.sh`, `results/gens_summary_cfg3s3_lora_lr.txt`, `results/gens_summary_lora_abl.txt` |
 | G12 | MuseControlLite (Stable Audio Open + melody adapter) | done | `mcl_*.json` |
 | G13 | ACE-Step 1.5 cover mode, strengths .2/.5/.8/1.0 | done | `ace_c*_*.json`, VAE control `ace_vae_id_*.json` |
 | G14 | market-targeted covers on dataset B | done | `market_*.json` |
@@ -113,7 +113,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 |---|---|---|
 | R01 | `repro/environment.txt`: package versions per venv, HF revision hashes, third-party repo commits, manifest and checkpoint hashes | done 2026-10-28 |
 | R02 | run registry: script -> command -> output (this file + WORKLOG headings; shell drivers `src/run_*.sh`) | partly; to complete with a single `repro/RUNS.md` generated from the shell scripts |
-| R03 | determinism check: re-embed a sample twice in separate processes and compare; seeds fixed (`torch.manual_seed`) for generation; list non-deterministic parts (GPU kernels) | todo |
+| R03 | determinism check: re-embed a sample twice in separate processes and compare; seeds fixed (`torch.manual_seed`) for generation; list non-deterministic parts (GPU kernels) | done |
 | R04 | clean-environment regeneration of the main tables from `results/*.json` on the Mac (no GPU) via one script | todo |
 | R05 | data and licence statement: PA1 audio and Demucs stems not published; only features and generated accompaniment demos | done (CLAUDE.md, Pages) |
 
