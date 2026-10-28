@@ -1,0 +1,6 @@
+1960s: chosen candidate 3 score +0.117 (mean over all 8 candidates +0.015, min -0.044, max +0.117); MERT +0.114 MuQ +0.121
+  prompt: Record an instrumental backing track in the 1960s style, featuring acoustic guitar, bass, drums, and keyboards, with a distinct, warm, and nostalgic 1960s sound, typical of vintage studio recordings.
+1980s: chosen candidate 3 score +0.347 (mean over all 8 candidates +0.254, min +0.123, max +0.347); MERT +0.398 MuQ +0.295
+  prompt: Record an instrumental backing track in the 1980s style, featuring prominent synthesizer and drum sounds, with a warm and rich drum machine rhythm, and a mix of bright and heavy basslines.
+2010s: chosen candidate 3 score +0.093 (mean over all 8 candidates -0.034, min -0.165, max +0.093); MERT +0.249 MuQ -0.063
+  prompt: Record an instrumental backing track featuring a mix of electronic and organic elements, using a warm, analog-inspired production style, typical of 2010s productions, with a prominent emphasis on synthesizers and drums.

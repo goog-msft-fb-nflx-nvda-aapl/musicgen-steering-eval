@@ -1,0 +1,37 @@
+{
+ "model": "ollama:llama3.2:1b",
+ "instruction": "Write one text prompt for a text-to-music model. The prompt asks for an instrumental backing track recorded and produced in {dec}. Describe the instruments, rhythm, and the recording, mixing and mastering style typical of {dec}, in a single sentence of at most 30 words. Do not mention artists, song titles, lyrics or vocals. Output only the prompt.",
+ "sampling": "temperature 0.8, top_p 0.95, seeds 0-7",
+ "prompts": {
+  "1960s": [
+   "Record a psychedelic instrumental backing track featuring a combination of acoustic guitar, bass, and saxophone, with a prominent organ riff and driving beat, typical of 1960s studio recordings.",
+   "Instrumental electronic rock backing track with driving beat, prominent bass, and fuzzy guitar, featuring layered harmonies and textured orchestration typical of 1960s studio recordings.",
+   "Record and produce an instrumental backing track in the 1960s style, featuring a mix of acoustic guitar, bass, drums, keyboards, and horns, with a strong emphasis on rhythm and classic production techniques, typical of the era.",
+   "Record an instrumental backing track in the 1960s style, featuring acoustic guitar, bass, drums, and keyboards, with a distinct, warm, and nostalgic 1960s sound, typical of vintage studio recordings.",
+   "Create an instrumental backing track in the style of 1960s recording, with prominent use of acoustic guitar, lush orchestral arrangements, and lush instrumentation typical of the era's lush production.",
+   "Record an instrumental backing track in the style of the 1960s, featuring a combination of acoustic guitar, bass, and drum machine, with a distinctive warm and lush sound typical of that era.",
+   "Record an instrumental backing track featuring a mix of acoustic guitar, bass, drums, and horns, with a prominent use of reverb and tape saturation, typical of the 1960s studio recording style.",
+   "Create a 1960s-style instrumental backing track featuring a prominent bass guitar, crunchy electric guitars, a driving drum pattern, and lush orchestral arrangements, utilizing a warm, tape-heavy recording and mixing style."
+  ],
+  "1980s": [
+   "Record a dense, textured instrumental backing track in the style of a 1980s production, featuring a prominent bassline, driving rhythm, and lush instrumentation, with a warm, analog-era sound.",
+   "A recording of an instrumental track featuring a combination of synthesizers, guitars, drums, bass, and keyboards, with a driving rhythm, prominent use of reverb and delay, and a warm, analog-inspired sound typical of 1980s production.",
+   "Record a 1980s-style instrumental backing track featuring a mix of synthesizers, guitars, bass, drums, and keyboards, with a prominent use of atmospheric soundscapes, reverb, and distortion.",
+   "Record an instrumental backing track in the 1980s style, featuring prominent synthesizer and drum sounds, with a warm and rich drum machine rhythm, and a mix of bright and heavy basslines.",
+   "Record an instrumental backing track featuring a mix of acoustic guitar, synthesizers, and drums, with a prominent bassline and prominent use of 80s-era sound effects, typical of the era's distinctive recording and mixing style.",
+   "Create an instrumental backing track in the 1980s style, featuring a prominent guitar riff, driving bassline, and synth pad textures, produced with a mix of analog and digital tools.",
+   "Record an instrumental backing track featuring a mix of electric guitars, synthesizers, and drums, with a driving rhythm and warm, analog-inspired production style, typical of 1980s post-punk and new wave.",
+   "Create a 1980s-inspired instrumental backing track featuring a prominent bass guitar, pulsing synthesizers, driving drums, and a distinctive drum machine pattern, mixed with a warm and rich vocal style typical of the decade."
+  ],
+  "2010s": [
+   "Record and produce an instrumental backing track in the 2010s, featuring a prominent piano and bass-driven rhythm, with a mix of atmospheric synths, driving drums, and lush strings.",
+   "Instrumental backing track recorded and produced in the 2010s, featuring prominent use of live drums, ambient synth pads, and filtered bass, with a mix of driving electronic beats and atmospheric textures.",
+   "Record a 2010s instrumental backing track with a mix of acoustic guitar, bass, drum machine, and ambient synth pads, in a warm and textured production style, typical of the era's electronic and ambient genres.",
+   "Record an instrumental backing track featuring a mix of electronic and organic elements, using a warm, analog-inspired production style, typical of 2010s productions, with a prominent emphasis on synthesizers and drums.",
+   "Record an instrumental backing track featuring a combination of acoustic guitar, bass, drums, and keyboards, with a driving kick drum and prominent use of distortion, characteristic of 2010s production.",
+   "Record an instrumental backing track featuring a rich blend of atmospheric synths, driving drum patterns, and melodic guitar textures, characteristic of 2010s electronic pop production.",
+   "A 2010s instrumental backing track featuring a blend of electronic and organic elements, with a driving beat, atmospheric synths, and a mix of acoustic and programmed drum patterns.",
+   "Create a 2010s-inspired instrumental backing track featuring a combination of acoustic guitar, bass, drums, and percussion, with a driving rhythm and lush, ambient textures, typical of the era's production style."
+  ]
+ }
+}

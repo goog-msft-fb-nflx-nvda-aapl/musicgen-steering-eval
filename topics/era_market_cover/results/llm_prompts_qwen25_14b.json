@@ -1,0 +1,37 @@
+{
+ "model": "ollama:qwen2.5:14b",
+ "instruction": "Write one text prompt for a text-to-music model. The prompt asks for an instrumental backing track recorded and produced in {dec}. Describe the instruments, rhythm, and the recording, mixing and mastering style typical of {dec}, in a single sentence of at most 30 words. Do not mention artists, song titles, lyrics or vocals. Output only the prompt.",
+ "sampling": "temperature 0.8, top_p 0.95, seeds 0-7",
+ "prompts": {
+  "1960s": [
+   "Create an instrumental track with a vintage 1960s sound, featuring electric guitar, bass, drums, and organ, with a lively rhythm, warm analog recording, and authentic tape compression effects.",
+   "Create an instrumental track with a blend of acoustic guitar, bass, and drums, featuring a folk-rock rhythm, recorded with analog tape, mixed with stereo separation, and mastered with warmth and depth typical of 1960s production.",
+   "Create an instrumental backing track with a blend of electric guitars, bass, drums, and organ, featuring a swinging rhythm and warm, analog tape sound typical of 1960s recording studios.",
+   "Create an instrumental backing track with a mix of electric guitar, bass, drums, and Hammond organ, featuring a swinging rhythm and a warm analog sound typical of 1960s recording techniques.",
+   "Create an instrumental backing track with a Fender Rhodes piano, bass guitar, and brushes on a snare drum, recorded with tape hiss and saturated warmth typical of 1960s analog recording.",
+   "Create an instrumental track with a blend of clean guitars, rhythmic bass, and drums, featuring organ and strings, recorded with vintage microphones, showcasing 1960s analog tape compression and warmth.",
+   "Create an instrumental backing track with a rhythmic blend of electric guitar, bass, and drums, featuring a sitar and organ, recorded with vintage analog equipment in a lively, resonant studio.",
+   "Create an instrumental backing track with a rhythm guitar, bass, drums, and Hammond organ, recorded in a warm, analog style with tape hiss and natural reverb."
+  ],
+  "1980s": [
+   "Create an instrumental backing track with synthesizers, electric pianos, and drum machines, featuring a syncopated rhythm and 1980s recording techniques with prominent reverb and analog effects.",
+   "Create an instrumental backing track with synthesizers, electric guitars, and drum machines, featuring a catchy beat and layered sounds, characteristic of 1980s recording, mixing, and mastering techniques.",
+   "Create an 1980s instrumental track with synths, electric piano, and drum machines, featuring a steady beat and prominent bass, recorded with analog equipment and warm, rich reverb.",
+   "Create an instrumental track with synthesizers, electric guitars, and drum machines, featuring a disco-influenced rhythm, recorded with analog equipment and mastered with prominent bass and treble.",
+   "Create an instrumental track with synthesizers, electric guitars, and drum machines, featuring a pulsating rhythm and 1980s analog recording quality with prominent reverb and echo effects.",
+   "Create an instrumental backing track with synthesizers, electric pianos, and drum machines, featuring a rhythmic 808 kick, snare, and hi-hats, recorded with tape saturation and mastered with analog warmth.",
+   "Create an instrumental track from the 1980s with synthesizers, electric guitars, and drums, featuring a prominent bassline and rhythmic patterns, recorded with analog equipment, and mixed/mastered with reverb and tape saturation.",
+   "Create an 1980s instrumental track with electric guitars, synthesizers, drum machines, and bass, featuring gated reverb drums and prominent analog synth pads, recorded with plenty of tape hiss."
+  ],
+  "2010s": [
+   "Create an instrumental backing track with a blend of electronic drums, synth leads, and warm analog bass, typical of 2010s production, with a polished yet slightly lo-fi edge in mixing and mastering.",
+   "Create an instrumental backing track with a blend of electronic and acoustic elements, featuring electric guitar, drums, synthesizers, and bass, with a steady beat and subtle reverb, characteristic of 2010s production.",
+   "Create an instrumental track with a blend of electronic synths, warm analog bass, and crisp drums, typical of 2010s production, with polished yet subtle reverb and EQ.",
+   "Create an instrumental track with a blend of electronic synths, distorted electric guitars, and heavy percussion, characteristic of 2010s recording, mixing with clear separation and mastering that emphasizes bass and treble.",
+   "Create an instrumental track with a blend of electronic synths, live drums, and bass, featuring a rhythmic 808 kick, snappy snares, and warm analog tones, typical of 2010s production.",
+   "Create an instrumental backing track with a blend of electronic synths, electric guitars, and live drums, featuring a steady hip-hop beat with subtle bass drops, recorded with a warm, slightly compressed mix and mastered for loudness.",
+   "Create an instrumental track from the 2010s with electronic drums, synth bass, and guitar, featuring a steady beat and atmospheric synths, recorded with a modern clarity and warmth, mastered for loudness and punch.",
+   "Create an instrumental track with a blend of electronic and acoustic elements, featuring drums, bass, synthesizers, and guitar, recorded with a polished, modern sound typical of 2010s production."
+  ]
+ }
+}

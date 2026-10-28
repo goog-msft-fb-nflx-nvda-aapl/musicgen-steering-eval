@@ -79,7 +79,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G03 | text-only (no melody) baseline | done | `textonly_*.json` |
 | G04 | extra prompts (1970s, 1990s, 2000s, 1960s b/c) | done | `prompts_eval.json` |
 | G05 | prompt elaboration (decade word / short / keyword tags vs the detailed sentence) | done | `src/65_prompt_variants.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
-| G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | running (Qwen3-8B and Qwen2.5-7B-Instruct, `run_g06.sh`, `src/69-71`) | - |
+| G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | done (4 prompt writers: Qwen3-8B, Qwen2.5-7B-Instruct, Qwen2.5-14B, Llama-3.2-1B; `run_g06.sh`, `src/69-71`) | `results/gens_summary_g06_all.txt`, `results/g06_*_selection.txt`, `results/llm_prompts_*.json` |
 | G07 | sampling parameters (top_k 250, top_p 0.9, temperature 0.8 / 1.2 vs library default top_k 50, T=1); entropy matching (HW2) not done | done (entropy matching not done) | `src/68_sampling_params.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | done (g=3,5) | `src/60_delta_guidance.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G02b | CFG sweep (1, 3, 5, 7) with seeds 1 and 2 (the existing sweep is seed 0 only) | done | `results/gens_summary_g08_g02b_g05_g07.txt` |
