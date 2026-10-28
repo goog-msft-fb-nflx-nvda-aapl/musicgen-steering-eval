@@ -469,7 +469,7 @@ Protocol as in the G06 design record: decade-name-only instruction, 8 candidates
 Validation Δ P(target decade) vs neutral, MERT | MuQ, 1960s / 1980s / 2010s; selection-score columns are train-song means (selected vs mean over all 8 candidates), VINet cos / top-1 over the three era rows (neutral reference .65 / .72):
 | writer | MERT | MuQ | top-1 / chord | VINet era rows |
 |---|---|---|---|---|
-| hand-written (CFG 3, 3 seeds) | −.001 / +.593 / +.328 | +.006 / +.414 / +.094 | .892 / .336 | .65 / .72-.81 (from earlier table) |
+| hand-written (CFG 3, 3 seeds) | −.001 / +.593 / +.328 | +.006 / +.414 / +.094 | .892 / .336 | .64-.65 / .62-.81 (gen/, 3 era rows) |
 | Qwen3-8B | +.179 / +.579 / +.268 | +.163 / +.323 / −.002 | .882 / .343 | .64-.65 / .64-.68 |
 | Qwen2.5-7B-Instruct | +.196 / +.506 / +.360 | +.096 / +.322 / +.185 | .889 / .342 | .63-.65 / .64-.69 |
 | Qwen2.5-14B (Ollama) | +.037 / +.332 / +.169 | +.086 / +.227 / +.095 | .882 / .338 | .65-.66 / .65-.71 |
