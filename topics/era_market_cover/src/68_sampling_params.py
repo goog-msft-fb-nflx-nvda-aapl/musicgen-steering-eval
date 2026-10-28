@@ -9,7 +9,7 @@ ERAS = {"neutral": "a song recording",
         "1960s": "a 1960s pop and soul recording, mono tape sound, live drums, upright bass, brass and organ, warm analog saturation, limited bandwidth",
         "1980s": "a 1980s synth pop recording, gated reverb drums, drum machine, DX7 synthesizer, chorus guitar, glossy digital production",
         "2010s": "a 2010s modern pop production, heavy sub bass, punchy compressed drums, wide polished synths, loud streaming-era mastering"}
-CFG = {"k250": dict(top_k=250), "k0p09": dict(top_k=0, top_p=0.9), "t08": dict(temperature=0.8, top_k=50), "t12": dict(temperature=1.2, top_k=50)}
+CFG = {"k250": dict(top_k=250), "k0p09": dict(top_k=0, top_p=0.9), "t08": dict(temperature=0.8, top_k=50), "t12": dict(temperature=1.2, top_k=50), "t12k250": dict(temperature=1.2, top_k=250), "t14k250": dict(temperature=1.4, top_k=250)}   # last two: entropy-matching candidates (src/72_entropy_match.py)
 ap = argparse.ArgumentParser(); ap.add_argument("--config", required=True, choices=list(CFG)); ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); a = ap.parse_args()
 G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; rows = {r["sample_id"]: r for r in manifest("A")}
 out = os.path.join(ROOT, a.outdir); os.makedirs(out, exist_ok=True); shutil.copy(os.path.join(G, "picked.txt"), os.path.join(out, "picked.txt"))
