@@ -2,6 +2,15 @@
 
 Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results). Data: PA1 Discogs-VI clips (A: 6 decades, 1026 train + 132 val labeled; B: 6 markets in the 1980s, 798 train + 102 val labeled; test labels hidden; splits are artist-disjoint; 30 s mono 24 kHz). Server dir `~/era_market` (venv `~/era_market/venv`, data `~/era_market/data/ex`). GPU access ends 2026-10-31; after that analysis runs on cached embeddings on the Mac.
 
+## Status 2026-10-29 (authoritative list: the registry tables in `MASTER_PLAN.md`; results with configs in `WORKLOG.md`)
+Done since the lists below were written: G02b, G05-G09, G11b/c (lr, targets, prompt dropout, no-chroma; training-seed replicates), G08b (MuseControlLite sweep, negative-prompt guidance), entropy-matched sampling (steps 1-2), E08/E11 for most generation sets, R01, R03.
+Open (GPU access ends 2026-10-31):
+- [ ] running: negative-prompt g=5, LoRA lr 3e-4 seed 2, VINet identity for those (check `neg_g5.done`, `lora_lr3e4s2.done`, `vinet4.done`)
+- [ ] E07 FD-VGG / KL-PaSST / CLAP-music (needs av-benchmark install; PA3 session)
+- [ ] Discogs tagger (E04) rerun for the newer generators; G15 other ACE-Step tasks (low priority)
+- [ ] R02 `repro/RUNS.md` from the shell drivers; R04 one script on the Mac regenerating the main tables from `results/*.json`
+- [ ] Mac only after access ends: consolidated figures, 8-minute presentation, report; listening test skipped by decision
+
 ## Now (2026-10-25: MuQ probes done, generation 107/96+ files present, evaluation of generated audio next)
 - [x] unzip data on server, smoke test HTDemucs (2292 clips) and MERT-v2-30s under transformers 5
 - [x] 01 separate all clips into vocals / accompaniment (24 kHz mono, fp16 npz), log runtime per clip
@@ -25,7 +34,7 @@ Context: `SURVEY.md` (design), `WORKLOG.md` (what ran, with configs and results)
 - [ ] listening test (2AFC, about 12 listeners) if time
 
 ## Constraints
-- keep data under `~/era_market` (jtan space), do not touch other users, one or two jobs at a time, GPU 1 or 2 only
+- keep data under `~/era_market` (jtan space), do not touch other users, spread jobs over all four GPUs (user instruction 2026-10-28; GPU 0 carries another user's job, check free memory), never overwrite a shell script that is running
 - PA1 audio is licensed for the course: do not commit audio or embeddings; commit scripts and result tables only
 
 ## Open after first generation pass

@@ -80,10 +80,10 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | G04 | extra prompts (1970s, 1990s, 2000s, 1960s b/c) | done | `prompts_eval.json` |
 | G05 | prompt elaboration (decade word / short / keyword tags vs the detailed sentence) | done | `src/65_prompt_variants.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G06 | LLM-written / recaptioned era prompts (HW3 slide 14), chosen on TRAIN-side songs, tested on the 24 val songs | done (4 prompt writers: Qwen3-8B, Qwen2.5-7B-Instruct, Qwen2.5-14B, Llama-3.2-1B; `run_g06.sh`, `src/69-71`) | `results/gens_summary_g06_all.txt`, `results/g06_*_selection.txt`, `results/llm_prompts_*.json` |
-| G07 | sampling parameters (top_k 250, top_p 0.9, temperature 0.8 / 1.2 vs library default top_k 50, T=1); entropy matching (HW2) not done | done (entropy matching not done) | `src/68_sampling_params.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
-| G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | done (g=3,5) | `src/60_delta_guidance.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
+| G07 | sampling parameters (top_k 250, top_p 0.9, temperature 0.8 / 1.2 vs library default top_k 50, T=1); entropy matching (HW2): teacher-forced entropy of real vs generated accompaniment, then top_k 250 and T1.2/T1.4 + k250 configs | done (entropy measurement and two matched configs; results/entropy_match_run1.json, entropy_match_run2.json, sp_t*k250_*) | `src/68_sampling_params.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
+| G08 | era-contrast (delta) CFG: logits = L(neutral) + g (L(era) - L(neutral)), melody in both branches | done (g=3,5; also + top_k 250 at g=3) | `src/60_delta_guidance.py`, `results/gens_summary_g08_g02b_g05_g07.txt` |
 | G02b | CFG sweep (1, 3, 5, 7) with seeds 1 and 2 (the existing sweep is seed 0 only) | done | `results/gens_summary_g08_g02b_g05_g07.txt` |
-| G08b | guidance-scale sweep on MuseControlLite (default only so far); APG / negative-prompt variants on the diffusion loop (HW3 slides) once the plain CFG step exists | text/condition guidance sweep running (`run_mcl_g.sh`); APG / negative-prompt variants todo | - |
+| G08b | guidance sweep on MuseControlLite; negative-prompt guidance on MusicGen (opposite-era contrast, g=3, g=5, + top_k 250); APG not applicable to the discrete-token MusicGen path (APG is a diffusion-sampler technique) and not done for MuseControlLite | MuseControlLite sweep done; negative prompt g=3 and g=3+k250 done, g=5 running | `src/60b_negprompt_guidance.py`, `results/neg_g3*_*.json` |
 | G09 | best-of-N sampling with an independent selector (LALM judge or CLAP) plus identity constraint (HW3) | done (8 candidates, seeds 10-17, 3 eras) | `src/67_bestofn_analysis.py`, `results/bon_summary.txt` |
 | G10 | accompaniment level in the remix (-12..+6 dB) | done | `remixlvl_*.json` |
 | G11 | LoRA on era accompaniment: v1 (r16, 3000), v2 (r16, 1000), v3 (r4, 3000) | done | `lora*_eval.json` |
@@ -127,3 +127,4 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 
 ## 5. Known limitations to state in the paper
 Validation-only reporting on small splits (A 132, B 102); no artist or album grouping available; language and genre are proxies; probes are trained on codec-resynthesized real audio and may still shift on other decoders (ACE VAE round trip measured, other generators not); generation evaluated on 24 songs; no human perceptual test; LoRA rank/steps differences are single-run unless G11b shows small seed variance; third-party survey claims marked "recalled" in `SURVEY3.md` are not verified.
+
