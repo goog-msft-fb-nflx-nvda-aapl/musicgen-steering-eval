@@ -11,7 +11,7 @@ ERAS = {"1960s": "a 1960s pop and soul recording, mono tape sound, live drums, u
         "1980s": "a 1980s synth pop recording, gated reverb drums, drum machine, DX7 synthesizer, chorus guitar, glossy digital production",
         "2010s": "a 2010s modern pop production, heavy sub bass, punchy compressed drums, wide polished synths, loud streaming-era mastering"}
 NEUTRAL = "a song recording"
-ap = argparse.ArgumentParser(); ap.add_argument("--g", type=float, default=3.0); ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2]); ap.add_argument("--limit", type=int, default=0); a = ap.parse_args()
+ap = argparse.ArgumentParser(); ap.add_argument("--g", type=float, default=3.0); ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--top_k", type=int, default=50); a = ap.parse_args()
 G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; rows = {r["sample_id"]: r for r in manifest("A")}
 out = os.path.join(ROOT, a.outdir); os.makedirs(out, exist_ok=True); shutil.copy(os.path.join(G, "picked.txt"), os.path.join(out, "picked.txt"))
 for f in glob.glob(os.path.join(G, "*_neutral_s*_*.wav")):
@@ -37,7 +37,7 @@ for s in ids:
             STATE["neutral"] = {"input_ids": tok["input_ids"][1:2].to("cuda"), "attention_mask": tok["attention_mask"][1:2].to("cuda")}
             inp = {"input_ids": tok["input_ids"][0:1].to("cuda"), "attention_mask": tok["attention_mask"][0:1].to("cuda"), "input_features": feat.to("cuda").half()}
             torch.manual_seed(seed)
-            with torch.no_grad(): o = model.generate(**inp, do_sample=True, guidance_scale=a.g, max_new_tokens=1500)
+            with torch.no_grad(): o = model.generate(**inp, do_sample=True, top_k=a.top_k, guidance_scale=a.g, max_new_tokens=1500)
             g = AF.resample(o[0, 0].float().cpu(), 32000, SR).numpy()[:len(voc)]; g = np.pad(g, (0, len(voc) - len(g))); g = g * (np.sqrt((acc0 ** 2).mean()) / (np.sqrt((g ** 2).mean()) + 1e-9))
             sf.write(fp + "_acc.wav", g, SR); sf.write(fp + "_remix.wav", np.clip(voc + g, -1, 1), SR); n += 1; print(s, era, seed, n, flush=True)
             if a.limit and n >= a.limit: raise SystemExit
