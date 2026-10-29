@@ -1,0 +1,37 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "instruction": "Write one text prompt for a text-to-music model. The prompt asks for an instrumental backing track recorded and produced in {dec}. Describe the instruments, rhythm, and the recording, mixing and mastering style typical of {dec}, in a single sentence of at most 30 words. Do not mention artists, song titles, lyrics or vocals. Output only the prompt.",
+ "sampling": "temperature 0.8, top_p 0.95, seeds 8-15",
+ "prompts": {
+  "1960s": [
+   "Create an instrumental backing track with electric guitar, bass, drums, and keyboard, featuring a swinging rhythm and jazzy undertones, recorded in analog with a warm, vintage sound, typical of the 1960s.",
+   "Create an instrumental backing track with electric guitar, bass, drums, and piano, featuring a swinging jazz-rock rhythm; recorded live, with warm analog sound, using vintage equipment, and mastered for maximum clarity and depth of the era.",
+   "Create an instrumental backing track with guitar, bass, drums, and organ, featuring a swinging rhythm and jazzy undertones, recorded live with minimal effects, then mixed warmly and mastered with vintage EQ and compression techniques typical of the 1960s.",
+   "Create an instrumental backing track with acoustic guitars, electric pianos, and bass guitar, featuring swing rhythms and chord progressions, recorded live with minimal overdubs, crisp yet warm analog sound, and dynamic mastering.",
+   "Create an instrumental backing track from the 1960s with electric guitar riffs, bass lines, and drums driven by a vintage analog sound, featuring reverb-heavy production and clean, crisp instrumentation.",
+   "Create an instrumental backing track with electric guitar riffs, bass lines, and drum beats, using 1960s recording techniques, with warm analog sounds, minimal reverb, and vintage equalization.",
+   "Create an instrumental backing track from the 1960s with electric guitar, bass, drums, and piano; use a swinging rhythm, jazz-fusion feel, and warm, analog recording style with minimal reverb.",
+   "Request an instrumental backing track with the sound of electric guitar, bass, drums, and piano in a swinging jazz-rock style, featuring thick reverb, warm tones, and a bouncy 4/4 rhythm, mastered with classic analog compression for a polished yet organic 1960s studio sound."
+  ],
+  "1980s": [
+   "Create an instrumental backing track with synthesizers, electric guitars, and drums, featuring 80s pop rock rhythms, warm analog sound, and polished production with clear bass and defined highs.",
+   "Create an instrumental backing track with synthesizers, electric guitars, and drum machines, featuring a driving rhythmic groove and 8-bit sound effects, mixed with warm analog tones and mastered for loudness and clarity, typical of 1980s pop music production.",
+   "Create an instrumental backing track with synthesizers, electric guitars, and drum machines, featuring a rhythmic groove and80s pop production, with clear, polished mastering for a vintage feel.",
+   "Create an instrumental backing track with synthesizers, electric guitars, and drum machines, featuring catchy basslines and disco beats, recorded with warm analog sounds, rich in reverb, and mastered with 1980s pop production techniques.",
+   "Create an instrumental backing track with synthesizers, drum machines, and electric guitars, featuring 80s pop-rock rhythms, warm analog sounds, and polished production techniques characteristic of the era.",
+   "Create an instrumental backing track with synthesizers, drum machines, and electric guitars, featuring a steady 4/4 rhythm and lush, compressed sound, typical of 1980s pop production.",
+   "Create an instrumental backing track with synthesizers, drum machines, and electric guitars, featuring a driving 4/4 rhythm and classic 1980s pop-rock sound, recorded, mixed, and mastered with warm analog tones and crisp hi-fi clarity.",
+   "Request an instrumental backing track with synthesizers, drum machines, electric guitars, and bass, featuring 80s pop rock rhythms, warm analog sound, and polished production with minimal compression."
+  ],
+  "2010s": [
+   "Create an instrumental backing track using electric guitars, synths, and drums with a pop/alternative vibe, featuring catchy hooks and a modern production style typical of the mid-2010s, with crisp mixing and subtle mastering.",
+   "Create an instrumental backing track with electronic drum beats, synthesizers, and guitar riffs, recorded in high fidelity with crisp, polished production values characteristic of 2010s pop music.",
+   "Create an instrumental backing track using modern electronic and acoustic instruments, featuring a syncopated rhythm section and atmospheric textures, with a crisp, polished production style characteristic of the late 2010s.",
+   "Create an instrumental backing track with electronic drums, electric guitar, and synthesizers, featuring a syncopated beat and atmospheric pads, mixed with modern clarity and mastering for a polished, contemporary sound of the 2010s.",
+   "Create an instrumental backing track with electronic drums, synthesizers, and acoustic guitars, featuring syncopated rhythms and atmospheric pads, recorded in high fidelity with modern production techniques, typical of the 2010s.",
+   "Create an instrumental backing track with electronic drums, synthetic bass, atmospheric synths, and a steady 4/4 beat, mixed for clear highs and deep lows, mastered with modern compression for punchy dynamics, characteristic of mid-2010s production.",
+   "Create an instrumental backing track with electronic drum pads, synths, and ambient textures, featuring 808 bass and arpeggiated leads, recorded in high fidelity with modern production techniques, mixed to a tight, punchy groove and mastered for clarity and depth.",
+   "Request an instrumental backing track with electronic drum loops, synthesized pads, and electric guitar riffs, featuring crisp production, punchy bass, and atmospheric soundscapes, typical of 2010s pop and indie music."
+  ]
+ }
+}

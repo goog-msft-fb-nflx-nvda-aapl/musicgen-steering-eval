@@ -1,0 +1,37 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "instruction": "Write one text prompt for a text-to-music model. The prompt asks for an instrumental backing track recorded and produced in {dec}. Describe the instruments, rhythm, and the recording, mixing and mastering style typical of {dec}, in a single sentence of at most 30 words. Do not mention artists, song titles, lyrics or vocals. Output only the prompt.",
+ "sampling": "temperature 0.8, top_p 0.95, seeds 8-15",
+ "prompts": {
+  "1960s": [
+   "A 1960s-style instrumental track featuring a driving rhythm section of electric bass, drums, and a fuzzy electric guitar, layered with a soaring lead instrument, recorded on analog equipment with warm, saturated tones, rich reverb, and subtle tape hiss, mixed with dynamic range and mastered for vinyl clarity.",
+   "A 1960s instrumental track featuring a driving rhythm section of electric bass, drums, and piano, layered with a fuzz-toned guitar, recorded on analog equipment with warm tape saturation, mixed with subtle reverb and echo, and mastered for dynamic range and clarity.",
+   "An instrumental 1960s-style backing track featuring a rhythm section of electric piano, bass guitar, and drums, with layered electric guitars and a warm, analog-saturated mix and master.",
+   "A 1960s-style instrumental track featuring a driving electric guitar, punchy bass, and crisp drums, recorded with warm analog equipment, mixed with subtle reverb and compression, and mastered for dynamic clarity and rich tonal depth.",
+   "A retro 1960s instrumental track featuring a driving rhythm section of electric bass and drums, layered with jazzy electric piano and swirling guitar effects, recorded on analog equipment with warm, dynamic compression, rich tape saturation, and a full, immersive mix characteristic of 1960s studio production.",
+   "A 1960s-style instrumental track featuring a driving rhythm section of electric bass, punchy drums, and jangly electric guitar, layered with shimmering reverb and tape saturation, mastered with warm analog warmth and dynamic range compression.",
+   "A 1960s instrumental track featuring a lush string section, driving bassline, shimmering electric piano, and crisp drum kit, recorded on analog tape with warm, saturated tones, rich reverb, and subtle tape hiss, emphasizing dynamic range and studio ambience.",
+   "A 1960s-style instrumental track featuring a driving bassline, crisp snare drum, shimmering electric guitar, and layered strings, recorded with analog equipment, mixed with warm tape saturation, and mastered for dynamic clarity and rich tonal balance."
+  ],
+  "1980s": [
+   "An instrumental 1980s-style backing track featuring synth pads, electric guitar riffs, drum machines, and basslines, with a polished yet dynamic recording, mixing, and mastering style typical of the decade.",
+   "A synth-driven instrumental track from the 1980s featuring a pulsing drum machine, layered electric guitars, and a rich tapestry of analog synths, recorded with warm tape saturation, mixed with dynamic spatial effects, and mastered for punchy, vibrant playback.",
+   "An instrumental 1980s-style backing track featuring synth pads, electric guitars, drum machines, and basslines, with a polished, layered recording, warm analog mixing, and dynamic mastering typical of the decade.",
+   "An 1980s-style instrumental track featuring a synth pad, electric guitar, bass, and drums, with a syncopated rhythm, layered with analog tape saturation, warm compression, and a polished yet gritty mix.",
+   "A synth-driven instrumental track from the 1980s featuring a pulsing drum machine, layered electric guitars, and a rich analog synth pad, recorded with warm tape saturation, mixed with prominent bass and reverb, and mastered for dynamic range and clarity.",
+   "An 80s-style instrumental track featuring synth pads, electric guitars, drum machines, and bass, with a driving rhythm, layered vocals, and a polished, warm mix with heavy compression and analog saturation.",
+   "An instrumental 1980s-style backing track featuring synth pads, electric guitars, drum machines, and bass, with a polished yet dynamic rhythm, recorded on analog gear, mixed with layered effects, and mastered for radio play.",
+   "A synth-driven instrumental track from the 1980s featuring analog synthesizers, drum machines, and electric guitars, with a tight, punchy rhythm, layered with warm tape saturation, dynamic compression, and a polished yet gritty mix and master."
+  ],
+  "2010s": [
+   "An instrumental backing track from the 2010s featuring layered electric guitars, punchy drum machines, and synthesized bass, with a polished yet dynamic recording style, rich mixing, and high-quality mastering.",
+   "A 2010s instrumental track featuring layered electric guitars, punchy drum samples, and synth pads, with a mid-tempo rhythm, polished yet dynamic recording, and a mix emphasizing clarity and depth, mastered for wide stereo imaging and modern loudness.",
+   "An instrumental backing track from the 2010s featuring layered electric guitars, punchy drum machines, and synths, with a mid-tempo rhythm, recorded in a polished yet organic style, mixed with clear dynamics and mastered for wide stereo imaging.",
+   "An instrumental backing track from the 2010s featuring electric guitars, synthesizers, and drum machines, with a mid-tempo rhythm, polished digital recording, and a mix emphasizing clarity and stereo width, mastered for modern streaming platforms.",
+   "Create an instrumental backing track from the 2010s featuring layered electric guitars, punchy drum machines, ambient synths, and a driving rhythm, recorded with analog warmth, mixed with dynamic range compression, and mastered for clarity and punch.",
+   "An instrumental backing track from the 2010s featuring layered electric guitars, punchy drum machines, synth pads, and basslines, recorded with analog warmth, mixed with dynamic range compression, and mastered for digital clarity and punch.",
+   "An instrumental track from the 2010s featuring layered electric guitars, punchy drum samples, subtle basslines, and ambient synths, recorded with analog warmth, mixed with a clean, dynamic range, and mastered for wide stereo imaging and loudness.",
+   "A 2010s-style instrumental track featuring layered electric guitars, punchy drum machines, subtle basslines, and ambient synths, recorded with digital audio workstations, mixed with bright, clear tones, and mastered for wide dynamic range and loudness."
+  ]
+ }
+}

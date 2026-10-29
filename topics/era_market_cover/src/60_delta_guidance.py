@@ -14,9 +14,13 @@ NEUTRAL = "a song recording"
 ap = argparse.ArgumentParser(); ap.add_argument("--g", type=float, default=3.0); ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--top_k", type=int, default=50); a = ap.parse_args()
 G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; rows = {r["sample_id"]: r for r in manifest("A")}
 out = os.path.join(ROOT, a.outdir); os.makedirs(out, exist_ok=True); shutil.copy(os.path.join(G, "picked.txt"), os.path.join(out, "picked.txt"))
-for f in glob.glob(os.path.join(G, "*_neutral_s*_*.wav")):
+NS = os.path.join(ROOT, os.environ.get("NEUTRAL_SRC", "gen"))   # LoRA runs: NEUTRAL_SRC=gen_lora (neutral rows of the same adapter)
+for f in glob.glob(os.path.join(NS, "*_neutral_s*_*.wav")):
     if int(os.path.basename(f).split("_s")[1][0]) in a.seeds: shutil.copy(f, out)
 mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid); model = MusicgenMelodyForConditionalGeneration.from_pretrained(mid, torch_dtype=torch.float16).to("cuda").eval()
+if os.environ.get("LORA"):   # adapters from 48_lora_musicgen.py merged into the base weights, as in 07_generate.py
+    from peft import PeftModel
+    model = PeftModel.from_pretrained(model, os.path.join(ROOT, "lora", os.environ["LORA"])).merge_and_unload().eval()
 STATE = {}; orig = MusicgenMelodyForConditionalGeneration._prepare_encoder_hidden_states_kwargs_for_generation
 def patched(self, inputs_tensor, model_kwargs, model_input_name, generation_config):
     nb = STATE.get("neutral"); gs = generation_config.guidance_scale

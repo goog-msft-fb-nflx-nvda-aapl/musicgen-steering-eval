@@ -1,0 +1,6 @@
+1960s: chosen candidate 4 score +0.025 (mean over all 8 candidates -0.024, min -0.056, max +0.025); MERT +0.011 MuQ +0.039
+  prompt: A retro 1960s instrumental track featuring a driving rhythm section of electric bass and drums, layered with jazzy electric piano and swirling guitar effects, recorded on analog equipment with warm, dynamic compression, rich tape saturation, and a full, immersive mix characteristic of 1960s studio production.
+1980s: chosen candidate 7 score +0.388 (mean over all 8 candidates +0.291, min +0.182, max +0.388); MERT +0.512 MuQ +0.264
+  prompt: A synth-driven instrumental track from the 1980s featuring analog synthesizers, drum machines, and electric guitars, with a tight, punchy rhythm, layered with warm tape saturation, dynamic compression, and a polished yet gritty mix and master.
+2010s: chosen candidate 4 score +0.059 (mean over all 8 candidates -0.035, min -0.086, max +0.059); MERT +0.160 MuQ -0.042
+  prompt: Create an instrumental backing track from the 2010s featuring layered electric guitars, punchy drum machines, ambient synths, and a driving rhythm, recorded with analog warmth, mixed with dynamic range compression, and mastered for clarity and punch.

@@ -1,0 +1,6 @@
+1960s: chosen candidate 6 score +0.097 (mean over all 8 candidates +0.010, min -0.038, max +0.097); MERT +0.099 MuQ +0.095
+  prompt: Create an instrumental backing track from the 1960s with electric guitar, bass, drums, and piano; use a swinging rhythm, jazz-fusion feel, and warm, analog recording style with minimal reverb.
+1980s: chosen candidate 7 score +0.309 (mean over all 8 candidates +0.230, min +0.148, max +0.309); MERT +0.362 MuQ +0.255
+  prompt: Request an instrumental backing track with synthesizers, drum machines, electric guitars, and bass, featuring 80s pop rock rhythms, warm analog sound, and polished production with minimal compression.
+2010s: chosen candidate 5 score +0.264 (mean over all 8 candidates +0.072, min -0.089, max +0.264); MERT +0.439 MuQ +0.090
+  prompt: Create an instrumental backing track with electronic drums, synthetic bass, atmospheric synths, and a steady 4/4 beat, mixed for clear highs and deep lows, mastered with modern compression for punchy dynamics, characteristic of mid-2010s production.

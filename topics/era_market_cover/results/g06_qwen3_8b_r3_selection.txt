@@ -1,0 +1,6 @@
+1960s: chosen candidate 1 score +0.149 (mean over all 8 candidates -0.003, min -0.047, max +0.149); MERT +0.135 MuQ +0.162
+  prompt: A 1960s-style instrumental track featuring a jazz-inflected brass section, rhythm section with bass and drums, and a lush string arrangement, recorded on analog equipment with warm tape saturation, rich reverb, and dynamic compression typical of the era.
+1980s: chosen candidate 7 score +0.473 (mean over all 8 candidates +0.289, min +0.205, max +0.473); MERT +0.558 MuQ +0.389
+  prompt: An instrumental 1980s synth-pop track featuring analog synths, electric guitars, and a driving drum machine, with a polished, layered recording style, rich reverb, and dynamic compression typical of 80s production.
+2010s: chosen candidate 3 score +0.066 (mean over all 8 candidates -0.007, min -0.090, max +0.066); MERT +0.173 MuQ -0.040
+  prompt: A 2010s instrumental track featuring layered electric guitars, punchy bass, and crisp drum samples, with a mid-tempo rhythm, recorded in a home studio, mixed with subtle reverb and compression, and mastered for digital streaming clarity.
