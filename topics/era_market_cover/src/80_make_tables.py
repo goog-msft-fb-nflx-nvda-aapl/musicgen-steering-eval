@@ -2,7 +2,7 @@
 usage (Mac, from the topic folder): python src/80_make_tables.py"""
 import os, subprocess, sys
 R = "results"
-SETS = {"hand-written CFG3 (seeds 0-2)": ("gen_eval_24s3", None), "delta g3": ("delta_g3", "delta_g3"), "delta g5": ("delta_g5", "delta_g5"), "delta g3 + k250": ("delta_g3k250", "delta_g3k250"),
+SETS = {"hand-written CFG3 (seeds 0-2)": ("cfg3_s3", "cfg3_s3"), "delta g3": ("delta_g3", "delta_g3"), "delta g5": ("delta_g5", "delta_g5"), "delta g3 + k250": ("delta_g3k250", "delta_g3k250"),
         "neg-prompt g3": ("neg_g3", "neg_g3"), "neg-prompt g3 + k250": ("neg_g3k250", "neg_g3k250"), "neg-prompt g5": ("neg_g5", "neg_g5"),
         "sampling T1.2 k250": ("sp_t12k250", "sp_t12k250"), "sampling T1.4 k250": ("sp_t14k250", "sp_t14k250"),
         "LoRA no-chroma s1": ("lora_nomels1", "lora_nomels1"), "LoRA no-chroma s2": ("lora_nomels2", "lora_nomels2"),
