@@ -1,0 +1,17 @@
+"""R04: regenerate the main generation tables from results/*.json only (no GPU, no audio). Calls 56_summarize_gens.py for each (label, eval json, content json) triple that exists and writes results/tables_main.txt.
+usage (Mac, from the topic folder): python src/80_make_tables.py"""
+import os, subprocess, sys
+R = "results"
+SETS = {"hand-written CFG3 (seeds 0-2)": ("gen_eval_24s3", None), "delta g3": ("delta_g3", "delta_g3"), "delta g5": ("delta_g5", "delta_g5"), "delta g3 + k250": ("delta_g3k250", "delta_g3k250"),
+        "neg-prompt g3": ("neg_g3", "neg_g3"), "neg-prompt g3 + k250": ("neg_g3k250", "neg_g3k250"), "neg-prompt g5": ("neg_g5", "neg_g5"),
+        "sampling T1.2 k250": ("sp_t12k250", "sp_t12k250"), "sampling T1.4 k250": ("sp_t14k250", "sp_t14k250"),
+        "LoRA no-chroma s1": ("lora_nomels1", "lora_nomels1"), "LoRA no-chroma s2": ("lora_nomels2", "lora_nomels2"),
+        "LoRA dropout0.3 s1": ("lora_pd3s1", "lora_pd3s1"), "LoRA dropout0.3 s2": ("lora_pd3s2", "lora_pd3s2"), "LoRA lr3e-4 s2": ("lora_lr3e4s2", "lora_lr3e4s2")}
+args = []
+for label, (e, c) in SETS.items():
+    ef = f"{R}/{e}_eval.json" if not e.startswith("gen_") else f"{R}/{e}.json"
+    if not os.path.exists(ef): continue
+    cf = f"{R}/{c}_content.json" if c and os.path.exists(f"{R}/{c}_content.json") else None
+    args.append(label.replace(" ", "_") + "=" + ef + (":" + cf if cf else ""))
+out = subprocess.run([sys.executable, os.path.join(os.path.dirname(__file__), "56_summarize_gens.py")] + args, capture_output=True, text=True, check=True).stdout
+open(f"{R}/tables_main.txt", "w").write(out); print(out)

@@ -114,7 +114,7 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 | R01 | `repro/environment.txt`: package versions per venv, HF revision hashes, third-party repo commits, manifest and checkpoint hashes | done 2026-10-28 |
 | R02 | run registry: script -> command -> output (this file + WORKLOG headings; shell drivers `src/run_*.sh`) | partly; to complete with a single `repro/RUNS.md` generated from the shell scripts |
 | R03 | determinism check: re-embed a sample twice in separate processes and compare; seeds fixed (`torch.manual_seed`) for generation; list non-deterministic parts (GPU kernels) | done |
-| R04 | clean-environment regeneration of the main tables from `results/*.json` on the Mac (no GPU) via one script | todo |
+| R04 | clean-environment regeneration of the main tables from `results/*.json` on the Mac (no GPU) via one script | partly: `src/80_make_tables.py` regenerates the generation tables (`results/tables_main.txt`) from result JSONs on the Mac; probe/stem tables still to add |
 | R05 | data and licence statement: PA1 audio and Demucs stems not published; only features and generated accompaniment demos | done (CLAUDE.md, Pages) |
 
 ## 4. Ranked next steps (one at a time)
