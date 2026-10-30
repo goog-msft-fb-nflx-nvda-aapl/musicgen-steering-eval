@@ -1,0 +1,70 @@
+gen 1960s KL mean 0.797 av-bench 0.797 | CLAP own text 0.2882 av-bench 0.2882
+gen 1980s KL mean 0.8198 av-bench 0.8198 | CLAP own text 0.3761 av-bench 0.3761
+gen 2010s KL mean 0.9796 av-bench 0.9796 | CLAP own text 0.1702 av-bench 0.1702
+gen neutral KL mean 0.9547 av-bench 0.9547 | CLAP own text 0.1773 av-bench 0.1773
+gen 1960s {'delta_kl': [-0.1577, -0.295, -0.0483], 'delta_clap': [0.1295, 0.1022, 0.1575], 'kl_era': 0.797, 'kl_neutral': 0.9547, 'clap_era': 0.2882, 'clap_neutral': 0.1586}
+gen 1980s {'delta_kl': [-0.135, -0.2954, 0.0596], 'delta_clap': [0.2282, 0.1999, 0.2575], 'kl_era': 0.8198, 'kl_neutral': 0.9547, 'clap_era': 0.3761, 'clap_neutral': 0.1478}
+gen 2010s {'delta_kl': [0.0249, -0.1505, 0.2234], 'delta_clap': [0.2241, 0.199, 0.2492], 'kl_era': 0.9796, 'kl_neutral': 0.9547, 'clap_era': 0.1702, 'clap_neutral': -0.0539}
+lora 1960s KL mean 0.8249 av-bench 0.8249 | CLAP own text 0.225 av-bench 0.225
+lora 1980s KL mean 0.6642 av-bench 0.6642 | CLAP own text 0.2055 av-bench 0.2055
+lora 2010s KL mean 0.6977 av-bench 0.6977 | CLAP own text -0.0203 av-bench -0.0203
+lora neutral KL mean 0.7705 av-bench 0.7705 | CLAP own text 0.165 av-bench 0.165
+lora 1960s {'delta_kl': [0.0543, -0.0369, 0.1421], 'delta_clap': [0.0432, 0.0161, 0.0711], 'kl_era': 0.8249, 'kl_neutral': 0.7705, 'clap_era': 0.225, 'clap_neutral': 0.1818}
+lora 1980s {'delta_kl': [-0.1064, -0.2474, 0.0233], 'delta_clap': [0.07, 0.0371, 0.1034], 'kl_era': 0.6642, 'kl_neutral': 0.7705, 'clap_era': 0.2055, 'clap_neutral': 0.1355}
+lora 2010s {'delta_kl': [-0.0728, -0.197, 0.0391], 'delta_clap': [0.0365, 0.0152, 0.0573], 'kl_era': 0.6977, 'kl_neutral': 0.7705, 'clap_era': -0.0203, 'clap_neutral': -0.0568}
+tri_base_m3e5 1960s KL mean 0.6661 av-bench 0.6661 | CLAP own text 0.3187 av-bench 0.3187
+tri_base_m3e5 1980s KL mean 0.7845 av-bench 0.7845 | CLAP own text 0.383 av-bench 0.383
+tri_base_m3e5 2010s KL mean 0.9861 av-bench 0.9861 | CLAP own text 0.1719 av-bench 0.1719
+tri_base_m3e5 neutral KL mean 0.9547 av-bench 0.9547 | CLAP own text 0.1773 av-bench 0.1773
+tri_base_m3e5 1960s {'delta_kl': [-0.2886, -0.4189, -0.1704], 'delta_clap': [0.16, 0.1306, 0.1897], 'kl_era': 0.6661, 'kl_neutral': 0.9547, 'clap_era': 0.3187, 'clap_neutral': 0.1586}
+tri_base_m3e5 1980s {'delta_kl': [-0.1703, -0.3382, 0.0108], 'delta_clap': [0.2352, 0.2062, 0.2627], 'kl_era': 0.7845, 'kl_neutral': 0.9547, 'clap_era': 0.383, 'clap_neutral': 0.1478}
+tri_base_m3e5 2010s {'delta_kl': [0.0314, -0.1408, 0.2205], 'delta_clap': [0.2258, 0.1998, 0.2502], 'kl_era': 0.9861, 'kl_neutral': 0.9547, 'clap_era': 0.1719, 'clap_neutral': -0.0539}
+tri_lora_m3e7 1960s KL mean 0.7366 av-bench 0.7366 | CLAP own text 0.2443 av-bench 0.2443
+tri_lora_m3e7 1980s KL mean 0.561 av-bench 0.561 | CLAP own text 0.2994 av-bench 0.2994
+tri_lora_m3e7 2010s KL mean 0.5671 av-bench 0.5671 | CLAP own text 0.0143 av-bench 0.0143
+tri_lora_m3e7 neutral KL mean 0.7705 av-bench 0.7705 | CLAP own text 0.165 av-bench 0.165
+tri_lora_m3e7 1960s {'delta_kl': [-0.034, -0.1463, 0.0671], 'delta_clap': [0.0625, 0.0316, 0.0945], 'kl_era': 0.7366, 'kl_neutral': 0.7705, 'clap_era': 0.2443, 'clap_neutral': 0.1818}
+tri_lora_m3e7 1980s {'delta_kl': [-0.2095, -0.3504, -0.0947], 'delta_clap': [0.1639, 0.1324, 0.1979], 'kl_era': 0.561, 'kl_neutral': 0.7705, 'clap_era': 0.2994, 'clap_neutral': 0.1355}
+tri_lora_m3e7 2010s {'delta_kl': [-0.2034, -0.3302, -0.0934], 'delta_clap': [0.0711, 0.048, 0.0952], 'kl_era': 0.5671, 'kl_neutral': 0.7705, 'clap_era': 0.0143, 'clap_neutral': -0.0568}
+tri_lora_m3e10 1960s KL mean 0.7527 av-bench 0.7527 | CLAP own text 0.2558 av-bench 0.2558
+tri_lora_m3e10 1980s KL mean 0.5681 av-bench 0.5681 | CLAP own text 0.3458 av-bench 0.3458
+tri_lora_m3e10 2010s KL mean 0.5792 av-bench 0.5792 | CLAP own text 0.0135 av-bench 0.0135
+tri_lora_m3e10 neutral KL mean 0.7705 av-bench 0.7705 | CLAP own text 0.165 av-bench 0.165
+tri_lora_m3e10 1960s {'delta_kl': [-0.0178, -0.1672, 0.1223], 'delta_clap': [0.074, 0.0401, 0.1077], 'kl_era': 0.7527, 'kl_neutral': 0.7705, 'clap_era': 0.2558, 'clap_neutral': 0.1818}
+tri_lora_m3e10 1980s {'delta_kl': [-0.2024, -0.3378, -0.0737], 'delta_clap': [0.2103, 0.1783, 0.242], 'kl_era': 0.5681, 'kl_neutral': 0.7705, 'clap_era': 0.3458, 'clap_neutral': 0.1355}
+tri_lora_m3e10 2010s {'delta_kl': [-0.1913, -0.3242, -0.0711], 'delta_clap': [0.0703, 0.0493, 0.0931], 'kl_era': 0.5792, 'kl_neutral': 0.7705, 'clap_era': 0.0135, 'clap_neutral': -0.0568}
+tri_lora_m3e15 1960s KL mean 0.66 av-bench 0.66 | CLAP own text 0.2529 av-bench 0.2529
+tri_lora_m3e15 1980s KL mean 0.5836 av-bench 0.5836 | CLAP own text 0.3657 av-bench 0.3657
+tri_lora_m3e15 2010s KL mean 0.5804 av-bench 0.5804 | CLAP own text 0.0449 av-bench 0.0449
+tri_lora_m3e15 neutral KL mean 0.7705 av-bench 0.7705 | CLAP own text 0.165 av-bench 0.165
+tri_lora_m3e15 1960s {'delta_kl': [-0.1105, -0.2472, 0.0097], 'delta_clap': [0.0711, 0.0346, 0.1057], 'kl_era': 0.66, 'kl_neutral': 0.7705, 'clap_era': 0.2529, 'clap_neutral': 0.1818}
+tri_lora_m3e15 1980s {'delta_kl': [-0.187, -0.3438, -0.0435], 'delta_clap': [0.2301, 0.2014, 0.2598], 'kl_era': 0.5836, 'kl_neutral': 0.7705, 'clap_era': 0.3657, 'clap_neutral': 0.1355}
+tri_lora_m3e15 2010s {'delta_kl': [-0.1901, -0.3407, -0.052], 'delta_clap': [0.1017, 0.0792, 0.1246], 'kl_era': 0.5804, 'kl_neutral': 0.7705, 'clap_era': 0.0449, 'clap_neutral': -0.0568}
+tri_lora_m3e20 1960s KL mean 0.6494 av-bench 0.6494 | CLAP own text 0.2589 av-bench 0.2589
+tri_lora_m3e20 1980s KL mean 0.6354 av-bench 0.6354 | CLAP own text 0.3648 av-bench 0.3648
+tri_lora_m3e20 2010s KL mean 0.5366 av-bench 0.5366 | CLAP own text 0.048 av-bench 0.048
+tri_lora_m3e20 neutral KL mean 0.7705 av-bench 0.7705 | CLAP own text 0.165 av-bench 0.165
+tri_lora_m3e20 1960s {'delta_kl': [-0.1212, -0.2816, 0.0124], 'delta_clap': [0.0771, 0.042, 0.114], 'kl_era': 0.6494, 'kl_neutral': 0.7705, 'clap_era': 0.2589, 'clap_neutral': 0.1818}
+tri_lora_m3e20 1980s {'delta_kl': [-0.1351, -0.2851, 0.0102], 'delta_clap': [0.2293, 0.1937, 0.2628], 'kl_era': 0.6354, 'kl_neutral': 0.7705, 'clap_era': 0.3648, 'clap_neutral': 0.1355}
+tri_lora_m3e20 2010s {'delta_kl': [-0.2339, -0.3622, -0.1162], 'delta_clap': [0.1048, 0.0836, 0.1263], 'kl_era': 0.5366, 'kl_neutral': 0.7705, 'clap_era': 0.048, 'clap_neutral': -0.0568}
+lorav1_neg_g3 1960s KL mean 0.7484 av-bench 0.7484 | CLAP own text 0.2586 av-bench 0.2586
+lorav1_neg_g3 1980s KL mean 0.7568 av-bench 0.7568 | CLAP own text 0.2901 av-bench 0.2901
+lorav1_neg_g3 2010s KL mean 0.8 av-bench 0.8 | CLAP own text 0.0979 av-bench 0.0979
+lorav1_neg_g3 neutral KL mean 0.7705 av-bench 0.7705 | CLAP own text 0.165 av-bench 0.165
+lorav1_neg_g3 1960s {'delta_kl': [-0.0221, -0.1987, 0.1364], 'delta_clap': [0.0768, 0.0384, 0.1094], 'kl_era': 0.7484, 'kl_neutral': 0.7705, 'clap_era': 0.2586, 'clap_neutral': 0.1818}
+lorav1_neg_g3 1980s {'delta_kl': [-0.0137, -0.1953, 0.176], 'delta_clap': [0.1545, 0.1232, 0.1881], 'kl_era': 0.7568, 'kl_neutral': 0.7705, 'clap_era': 0.2901, 'clap_neutral': 0.1355}
+lorav1_neg_g3 2010s {'delta_kl': [0.0295, -0.1619, 0.2359], 'delta_clap': [0.1547, 0.1246, 0.1851], 'kl_era': 0.8, 'kl_neutral': 0.7705, 'clap_era': 0.0979, 'clap_neutral': -0.0568}
+tri_lora_m3e7v1s1 1960s KL mean 0.7051 av-bench 0.7051 | CLAP own text 0.247 av-bench 0.247
+tri_lora_m3e7v1s1 1980s KL mean 0.5962 av-bench 0.5962 | CLAP own text 0.337 av-bench 0.337
+tri_lora_m3e7v1s1 2010s KL mean 0.5964 av-bench 0.5964 | CLAP own text 0.0024 av-bench 0.0024
+tri_lora_m3e7v1s1 neutral KL mean 0.9032 av-bench 0.9032 | CLAP own text 0.1713 av-bench 0.1713
+tri_lora_m3e7v1s1 1960s {'delta_kl': [-0.1981, -0.3383, -0.0584], 'delta_clap': [0.0762, 0.049, 0.1061], 'kl_era': 0.7051, 'kl_neutral': 0.9032, 'clap_era': 0.247, 'clap_neutral': 0.1708}
+tri_lora_m3e7v1s1 1980s {'delta_kl': [-0.307, -0.4738, -0.1238], 'delta_clap': [0.2147, 0.1816, 0.2489], 'kl_era': 0.5962, 'kl_neutral': 0.9032, 'clap_era': 0.337, 'clap_neutral': 0.1224}
+tri_lora_m3e7v1s1 2010s {'delta_kl': [-0.3068, -0.4854, -0.143], 'delta_clap': [0.0609, 0.0428, 0.0795], 'kl_era': 0.5964, 'kl_neutral': 0.9032, 'clap_era': 0.0024, 'clap_neutral': -0.0585}
+tri_lora_m3e7v1s2 1960s KL mean 0.7399 av-bench 0.7399 | CLAP own text 0.243 av-bench 0.243
+tri_lora_m3e7v1s2 1980s KL mean 0.5139 av-bench 0.5139 | CLAP own text 0.32 av-bench 0.32
+tri_lora_m3e7v1s2 2010s KL mean 0.6093 av-bench 0.6093 | CLAP own text -0.0071 av-bench -0.0071
+tri_lora_m3e7v1s2 neutral KL mean 0.931 av-bench 0.931 | CLAP own text 0.173 av-bench 0.173
+tri_lora_m3e7v1s2 1960s {'delta_kl': [-0.1911, -0.2828, -0.1026], 'delta_clap': [0.0685, 0.0408, 0.0934], 'kl_era': 0.7399, 'kl_neutral': 0.931, 'clap_era': 0.243, 'clap_neutral': 0.1745}
+tri_lora_m3e7v1s2 1980s {'delta_kl': [-0.4171, -0.5303, -0.3023], 'delta_clap': [0.2087, 0.1795, 0.2384], 'kl_era': 0.5139, 'kl_neutral': 0.931, 'clap_era': 0.32, 'clap_neutral': 0.1113}
+tri_lora_m3e7v1s2 2010s {'delta_kl': [-0.3217, -0.4655, -0.18], 'delta_clap': [0.0628, 0.0448, 0.0812], 'kl_era': 0.6093, 'kl_neutral': 0.931, 'clap_era': -0.0071, 'clap_neutral': -0.0698}

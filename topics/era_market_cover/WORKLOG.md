@@ -666,3 +666,18 @@ Delta FD-VGG = FD(era prompt) - FD(neutral of the same adapter) against real PA1
 | v1s2 gm3 ge7 | +0.06 | -1.64* | -1.91* |
 | v1s2 gm3 ge10 | +0.25 | -0.90* | -2.05* |
 Observations: the 1980s and 2010s FD gains replicate in both further seeds (CI excludes 0 in 7 of 8 cells), the 1960s FD does not improve in any of these four (CI includes 0), unlike the probes, which show the largest 1960s shift. As for seed 0, ge10 is not better than ge7 on FD (1980s -0.83/-0.90 vs -1.48/-1.64). Interpretation: FD-VGG favours ge 7 over 10, in agreement with the identity cost at ge 10 found in the same seeds.
+
+## 2026-10-31 E07 paired HW3 metrics: KL-PaSST to the original clip and LAION-CLAP text score (results/pair_<set>.json, pair_table.txt, pair_log.txt; src/run_avb_pair.sh, 85_pair_metrics.py)
+Config: av-benchmark (same install and patches as the FD-VGG entry; CLAP checkpoint music_audioset_epoch_15_esc_90.14). Pairing: each generated remix (24 validation songs x 3 seeds, first 10 s) is paired with ITS OWN original PA1 clip (the real mix, same song id), so KL-PaSST measures how differently PaSST classifies the generated clip and the original (KL(original || generated), lower = more similar); this is a content-preservation measure, not the HW3 retrieval-based protocol. CLAP text score: cosine of the CLAP audio embedding of the generated clip and the text embedding of the prompt it was generated from. Per-clip values were recomputed from the cached features (`85_pair_metrics.py`); the means equal the av-benchmark outputs in all 40 cells to 4 decimals. Statistics per set and era: Delta KL = KL(era prompt) - KL(neutral); Delta CLAP = cos(audio(era prompt), era text) - cos(audio(neutral), same era text); per song = mean of its 3 seeds, 95% CI by bootstrap over the 24 songs.
+Full table with CIs: results/pair_table.txt. Selected rows (Delta CLAP / Delta KL for 1960s, 1980s, 2010s):
+| set | Delta CLAP | Delta KL |
+|---|---|---|
+| base standard CFG 3 | +.130 / +.228 / +.224 | -.158* / -.135 / +.025 |
+| base 3-branch ge5 | +.160 / +.235 / +.226 | -.289* / -.170 / +.031 |
+| LoRA v1 alone | +.043 / +.070 / +.037 | +.054 / -.106 / -.073 |
+| LoRA v1 3-branch ge7 | +.063 / +.164 / +.071 | -.034 / -.210* / -.203* |
+| LoRA v1 3-branch ge10 | +.074 / +.210 / +.070 | -.018 / -.202* / -.191* |
+| LoRA v1 3-branch ge20 | +.077 / +.229 / +.105 | -.121 / -.135 / -.234* |
+| LoRA v1 + neg-prompt g3 | +.077 / +.155 / +.155 | -.022 / -.014 / +.030 |
+(CLAP CIs exclude 0 in every row; * = KL CI excludes 0.)
+Observations: (1) CLAP says the era-prompted audio matches the era text better than neutral audio does in every set and decade; the LoRA sets show smaller CLAP gains than the base model (+.04 to +.23 vs +.13 to +.23), and the gain grows with ge for the 1980s (+.164, +.210, +.229) and 2010s (+.071, +.070, +.105). (2) KL to the original clip: the three-branch LoRA rows for the 1980s and 2010s have a lower KL than neutral (CI excludes 0), i.e. the era-prompted clip is classified more like the original than the neutral LoRA clip is; for the base model and contrast-only guidance the KL change is not distinguishable from 0 for 2010s. No explanation tested; the original clips have vocals and real production while the neutral LoRA outputs may differ in genre distribution. (3) The seed-1/2 adapters' neutral KL is higher (.90, .93) than seed 0 (.77), so their larger Delta KL partly reflects a worse neutral baseline.
