@@ -641,3 +641,18 @@ Config as the three-branch entries (LoRA v1, gm 3, top-k 50, 24 songs, 3 seeds).
 | 15 | +.760 / +.784 / +.574 | +.740 / +.612 / +.587 | .851 | .556 / .639 / .653 | 7.51 | +.078 / +.044 / +.033 |
 | 20 | +.759 / +.826 / +.649 | +.761 / +.637 / +.650 | .840 | .569 / .597 / .542 | 7.52 | +.083 / +.046 / +.038 |
 Observations: probe shifts keep increasing with ge (MERT 2010s +.424 / +.574 / +.649), but 1960s saturates between 15 and 20 (+.760 / +.759); identity falls gradually (song-ID top-1 .875 -> .851 -> .840; VINet top-1 from about .68 to .54-.57, below the neutral .722); Audiobox PQ does not drop (7.50-7.52, neutral 7.31); the FD-VGG gain against real decade clips vanishes at ge 15-20 (CIs include 0, see the FD entry). So the probes and KAD keep rising while the independent distribution measure (FD-VGG) and identity do not: for reporting, ge 7-10 is the setting where all measures agree (interpretation, one adapter seed).
+
+## 2026-10-31 Three-branch guidance replicated on two more LoRA training seeds (results/tri_lora_m3e{7,10}v1s{1,2}_*, gens_summary_tri_seeds.txt, vinet_identity.json; src/run_tri_ad.sh)
+Config: as the three-branch entries, adapters `lora/v1s1` and `lora/v1s2` (training seeds 1 and 2 of the LoRA v1 recipe; neutral rows from the same adapter's own neutral generations), gm 3, ge 7 or 10, top-k 50, 24 songs, 3 generation seeds. Why: the earlier three-branch results used a single adapter seed.
+| adapter seed | set | MERT 1960s / 1980s / 2010s | MuQ | song-ID top-1 | VINet top-1 (neutral .667) |
+|---|---|---|---|---|---|
+| v1 (seed 0) | LoRA alone | +.396 / +.246 / +.171 | +.296 / +.220 / +.102 | .878 | .722 / .556 / .639 (neutral .722) |
+| v1 | gm3 ge7 | +.618 / +.517 / +.353 | +.478 / +.351 / +.286 | .875 | .764 / .597 / .569 |
+| v1 | gm3 ge10 | +.698 / +.648 / +.424 | +.588 / +.475 / +.370 | .875 | .681 / .681 / .667 |
+| v1s1 | LoRA alone | +.414 / +.270 / +.121 | +.264 / +.210 / +.081 | .882 | - |
+| v1s1 | gm3 ge7 | +.658 / +.635 / +.286 | +.534 / +.458 / +.203 | .847 | .681 / .667 / .681 |
+| v1s1 | gm3 ge10 | +.709 / +.708 / +.378 | +.676 / +.480 / +.320 | .809 | .583 / .694 / .611 |
+| v1s2 | LoRA alone | +.366 / +.243 / +.068 | +.205 / +.191 / +.048 | .858 | - |
+| v1s2 | gm3 ge7 | +.601 / +.614 / +.262 | +.482 / +.464 / +.248 | .868 | .708 / .667 / .597 |
+| v1s2 | gm3 ge10 | +.661 / +.746 / +.387 | +.552 / +.510 / +.386 | .851 | .611 / .625 / .681 |
+All three-branch rows: 22-24 of 24 songs positive, p<.001. Observations: (1) The three-branch gain over LoRA alone replicates in all three adapter seeds for all three decades and both probes (MERT 1960s +.20 to +.30 at ge7, up to +.34 at ge10; 1980s +.27 to +.50). (2) Raising ge from 7 to 10 raises the MERT shift in every seed and decade. (3) Song-ID top-1 stays .81-.88; the seed-1 adapter loses more at ge10 (.809) than seeds 0 and 2 (.875, .851), so the identity cost at ge10 is seed-dependent. (4) VINet top-1 for the guided sets is at or somewhat below the same adapter's neutral value in these seeds. FD-VGG for the two new seeds not computed. Interpretation: the effect is not a single-adapter artefact; the identity-cost spread at ge10 indicates ge 7 is the safer reporting setting.
