@@ -1,0 +1,18 @@
+base_g3: mean rolloff95 (Hz) / energy above 7 kHz (dB): neutral 970 / -36.5; 1960s 1386 / -27.9; 1980s 1342 / -24.7; 2010s 922 / -23.7
+  1960s - neutral: rolloff +416 Hz (p=0.0001), HF +8.58 dB (p=0.0000)
+  1980s - neutral: rolloff +371 Hz (p=0.0008), HF +11.80 dB (p=0.0000)
+  2010s - neutral: rolloff -48 Hz (p=0.4234), HF +12.81 dB (p=0.0000)
+  mert: Spearman(d P(target), d rolloff) -0.14 (p=0.245); (d P(target), d HF dB) +0.23 (p=0.052); n=72
+  muq: Spearman(d P(target), d rolloff) +0.06 (p=0.622); (d P(target), d HF dB) +0.11 (p=0.37); n=72
+lora: mean rolloff95 (Hz) / energy above 7 kHz (dB): neutral 1505 / -31.1; 1960s 1432 / -32.0; 1980s 1727 / -27.1; 2010s 1084 / -33.7
+  1960s - neutral: rolloff -73 Hz (p=0.7425), HF -0.96 dB (p=0.4061)
+  1980s - neutral: rolloff +222 Hz (p=0.0206), HF +4.02 dB (p=0.0002)
+  2010s - neutral: rolloff -421 Hz (p=0.0023), HF -2.67 dB (p=0.0105)
+  mert: Spearman(d P(target), d rolloff) +0.26 (p=0.0287); (d P(target), d HF dB) +0.17 (p=0.146); n=72
+  muq: Spearman(d P(target), d rolloff) +0.22 (p=0.0655); (d P(target), d HF dB) +0.23 (p=0.0505); n=72
+tri_lora_ge10: mean rolloff95 (Hz) / energy above 7 kHz (dB): neutral 1505 / -31.1; 1960s 1603 / -29.8; 1980s 2344 / -23.0; 2010s 878 / -33.7
+  1960s - neutral: rolloff +98 Hz (p=0.5838), HF +1.24 dB (p=0.4908)
+  1980s - neutral: rolloff +840 Hz (p=0.0000), HF +8.11 dB (p=0.0000)
+  2010s - neutral: rolloff -627 Hz (p=0.0001), HF -2.60 dB (p=0.0105)
+  mert: Spearman(d P(target), d rolloff) +0.44 (p=0.000101); (d P(target), d HF dB) +0.37 (p=0.00132); n=72
+  muq: Spearman(d P(target), d rolloff) +0.20 (p=0.0924); (d P(target), d HF dB) +0.14 (p=0.245); n=72
