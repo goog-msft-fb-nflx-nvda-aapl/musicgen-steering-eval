@@ -39,7 +39,7 @@ Open (GPU access ends 2026-10-31):
 
 ## Open after first generation pass
 - [ ] listening test / at least informal listening of gen/ remixes (audio is on the server, not in git)
-- [ ] DSP baseline sensitivity: why MuQ moves with filters and MERT does not
+- [x] DSP baseline sensitivity: band-limit + hiss drive the response (WORKLOG 2026-10-31)
 - [x] probe training-set robustness (raw / codec / union) — WORKLOG 2026-10-31; double-codec and generated-audio augmentation not run
 - [ ] more songs and prompt variants (2000s/1990s/1970s), guidance sweep; Discogs-VI cliques as real-reference targets
 - [x] upload embeddings/stats to private HF dataset (token on Mac and server)
