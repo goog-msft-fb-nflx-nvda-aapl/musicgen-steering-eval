@@ -1,0 +1,14 @@
+mert  bandlimit  d(expected decade) -0.296 [5/24] p=0.0008 | dP 1960s +0.017 1980s +0.007 2010s +0.015
+mert  clip       d(expected decade) -0.008 [12/24] p=0.8996 | dP 1960s +0.033 1980s -0.025 2010s +0.051
+mert  hiss       d(expected decade) -0.232 [5/24] p=0.0059 | dP 1960s -0.029 1980s -0.052 2010s -0.005
+mert  limiter    d(expected decade) -0.051 [14/24] p=0.8334 | dP 1960s +0.077 1980s -0.047 2010s +0.082
+mert  shelf      d(expected decade) -0.010 [7/24] p=0.4908 | dP 1960s -0.001 1980s +0.012 2010s -0.015
+mert  old        d(expected decade) -0.334 [7/24] p=0.0138 | dP 1960s +0.011 1980s -0.040 2010s +0.019
+mert  new        d(expected decade) -0.071 [14/24] p=0.7469 | dP 1960s +0.081 1980s -0.038 2010s +0.070
+muq   bandlimit  d(expected decade) -0.614 [0/24] p=0.0000 | dP 1960s +0.112 1980s +0.144 2010s +0.010
+muq   clip       d(expected decade) +0.026 [15/24] p=0.3449 | dP 1960s +0.001 1980s -0.009 2010s +0.027
+muq   hiss       d(expected decade) -0.141 [1/24] p=0.0000 | dP 1960s +0.028 1980s -0.034 2010s -0.010
+muq   limiter    d(expected decade) +0.045 [15/24] p=0.2405 | dP 1960s -0.002 1980s -0.024 2010s +0.044
+muq   shelf      d(expected decade) +0.010 [14/24] p=0.7257 | dP 1960s -0.003 1980s +0.010 2010s -0.010
+muq   old        d(expected decade) -0.606 [0/24] p=0.0000 | dP 1960s +0.120 1980s -0.009 2010s -0.018
+muq   new        d(expected decade) +0.044 [15/24] p=0.2643 | dP 1960s -0.004 1980s -0.016 2010s +0.027

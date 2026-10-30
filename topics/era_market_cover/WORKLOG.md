@@ -696,3 +696,16 @@ Delta, MERT (1960s / 1980s / 2010s), codec | raw | union:
 | three-branch LoRA ge20 | +.759 / +.826 / +.649 | +.585 / +.230 / +.637 | +.681 / +.815 / +.692 |
 MuQ shows the same pattern (for example ge10: codec +.588 / +.475 / +.370, raw +.519 / +.339 / +.458, union +.623 / +.473 / +.420); all sets, both encoders, and CIs are in `results/probe_augment.txt`.
 Observations: (1) the union probe gives the same sign and similar size as the codec probe in all 10 sets checked and both encoders (1980s and 2010s CIs exclude 0 in every row); the ordering ge7 < ge10 < ge20 holds under all three training sets in both encoders. (2) The raw-trained probe barely registers the 1980s shift of generated audio with MERT (+.01 to +.23 where the codec probe gives +.25 to +.83), while it still sees 1960s and 2010s; the 1960s effect of the LoRA does not depend on the training set. (3) Interpretation (not tested further): a probe trained on original stems misses the generated 1980s signal because generated audio carries codec artifacts the probe has not seen; this is the reason the main protocol is codec-matched. Double-codec or generated-audio augmentation were not run.
+
+## 2026-10-31 DSP baseline components (`src/74_dsp_components.py` -> `results/dsp_components.{json,txt}`; GPU 2)
+Why: earlier logs show the crude "old" filter lowers the decade-probe output (older-sounding) and the "new" filter does not; the open question was which part of the filter chain moves which encoder. Config: 24 validation songs of dataset A, original accompaniment stems; components applied alone and in the two chains (old = band-limit 60 Hz-7 kHz -> tanh clip drive 1.8 -> hiss -50 dB; new = peak-normalize -> tanh limiter drive 3 -> + 0.6 x 3 kHz high-passed copy); codec-matched probes (MERT L18, MuQ L9), loudness-normalized input; statistic = per-song change of expected decade index versus the unprocessed stem, Wilcoxon over songs (no multiplicity correction).
+| component | MERT d(expected decade) [songs > 0] p | MuQ d(expected decade) [songs > 0] p |
+|---|---|---|
+| band-limit | -0.296 [5/24] 0.0008 | -0.614 [0/24] <1e-4 |
+| clip | -0.008 [12/24] 0.90 | +0.026 [15/24] 0.34 |
+| hiss | -0.232 [5/24] 0.0059 | -0.141 [1/24] <1e-4 |
+| limiter | -0.051 [14/24] 0.83 | +0.045 [15/24] 0.24 |
+| shelf | -0.010 [7/24] 0.49 | +0.010 [14/24] 0.73 |
+| old chain | -0.334 [7/24] 0.014 | -0.606 [0/24] <1e-4 |
+| new chain | -0.071 [14/24] 0.75 | +0.044 [15/24] 0.26 |
+Observations: both encoders move toward earlier decades only for the band-limit and the added hiss; soft clipping, the limiter and the high shelf do not move either probe. The band-limit alone accounts for about the whole MuQ response to the old chain (-0.61 of -0.61), and the band-limit plus hiss for the MERT response (-0.30, -0.23 vs -0.33). The earlier "old vs new" difference is therefore a bandwidth/noise-floor effect. Interpretation (not tested): the probes use bandwidth and noise floor as an era cue, which the real-audio probes could learn from decade-correlated recording bandwidth. The generated-audio Deltas in this log are not explained by these two cues alone, since the 1980s and 2010s era prompts raise the probe output toward later decades (positive Delta) while the cues here lower it.
