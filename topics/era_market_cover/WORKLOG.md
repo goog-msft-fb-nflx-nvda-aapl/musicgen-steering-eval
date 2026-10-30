@@ -561,3 +561,16 @@ Per-song delta P(target decade), MERT 1960s/1980s/2010s (MuQ in the summary file
 | LoRA v1 + negative-prompt g3 | +.612 / +.324 / +.346 | .674 | .319 / .417 / .431 |
 | LoRA v1 + delta g3 | +.528 / +.215 / +.236 | .681 | .417 / .347 / .389 |
 All shifts p<.001, 21-24 of 24 songs positive. For comparison, base model + guidance g3 (no LoRA): negative-prompt +.236/+.584/+.122, delta +.153/+.566/+.131. Observations: adding guidance on top of LoRA raises 1960s and 2010s shifts over LoRA alone, but the 1980s shift is not above base-model guidance (+.584 vs +.324 / +.215), and identity falls to the same level as guidance without LoRA (top-1 .67-.68; VINet roughly halved). So in this grid the two do not combine into a larger shift at preserved identity; the identity cost comes from the guidance. (Interpretation, single seed of adapter and generation.)
+
+## 2026-10-30 LoRA v1 + contrast guidance, scale sweep g=1,2,3 (results/lorav1_{neg,delta}_g{1,2,3}_*, gens_summary_lorav1_{neg,delta}_sweep.txt, vinet_identity.json; src/run_lora_guid.sh, same config as the g=3 entry above)
+MERT shift 1960s / 1980s / 2010s (24 songs, 3 seeds; * = p>.05), song-ID top-1, VINet top-1 (neutral .722):
+| set | MERT | top-1 | VINet |
+|---|---|---|---|
+| LoRA v1 alone (standard CFG 3) | +.396 / +.246 / +.171 | .878 | .722 / .556 / .639 |
+| neg g1 | +.221 / +.039* / +.085 | .670 | .278 / .431 / .361 |
+| neg g2 | +.463 / +.119 / +.280 | .670 | .361 / .375 / .389 |
+| neg g3 | +.612 / +.324 / +.346 | .674 | .319 / .417 / .431 |
+| delta g1 | +.221 / +.039* / +.064* | .677 | .278 / .431 / .333 |
+| delta g2 | +.396 / +.112 / +.190 | .670 | .361 / .333 / .375 |
+| delta g3 | +.528 / +.215 / +.236 | .681 | .417 / .347 / .389 |
+Observations: (1) the shift grows with g for both contrasts (MuQ agrees in sign; 2010s MuQ at g1 n.s.). (2) Song-ID top-1 is .67-.68 at every g including g=1, i.e. identity does NOT trade off against g here; it is lower than LoRA alone (.878) already at g=1. (3) At g=1 the patched guidance returns the unmodified path (guidance_scale<=1 → no CFG branch at all), so g=1 is LoRA + era prompt WITHOUT any classifier-free guidance; neg and delta g1 coincide (identical 1960s/1980s numbers; the 2010s values differ slightly, cause not investigated, possibly GPU nondeterminism). Interpretation (not tested): the identity drop is due to losing the standard CFG (era+chroma vs. null) term, which amplifies melody adherence; the contrast branches keep chroma in both terms, so no amplification of the melody. Test planned: 3-branch guidance with the standard melody CFG kept plus the era contrast.
