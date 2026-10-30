@@ -632,3 +632,12 @@ Independent third evaluator (Essentia Discogs-EffNet embedding, logistic-regress
 | 3-branch LoRA gm3 ge7 | +.479 | +.358 | +.152 |
 | 3-branch LoRA gm3 ge10 | +.542 | +.419 | +.180 |
 Observations: the tagger reproduces the sign pattern of the MERT/MuQ probes (1980s strongest on the base model, 1960s only with LoRA or with prompt rewriting) with a third, genre-supervised encoder; the ordering ge10 > ge7 > LoRA alone holds here too. Tags moved by the 1980s prompt on the base model are Synthwave / Synth-pop; for the three-branch LoRA 1960s prompt Easy Listening / Space-Age / Swing; for the 2010s prompt Alternative Rock / Indie Rock (not electronic tags); neutral-prompt probability of the 1960s class under this probe was not inspected.
+
+## 2026-10-30 Three-branch guidance at ge 15 and 20 (results/tri_lora_m3e15*, tri_lora_m3e20*, quality_/kad_ files, gens_summary_tri3.txt, vinet_identity.json)
+Config as the three-branch entries (LoRA v1, gm 3, top-k 50, 24 songs, 3 seeds).
+| ge | MERT 1960s / 1980s / 2010s | MuQ | song-ID top-1 | VINet top-1 (neutral .722) | Audiobox PQ era (neutral 7.31) | KAD delta MERT |
+|---|---|---|---|---|---|---|
+| 10 | +.698 / +.648 / +.424 | +.588 / +.475 / +.370 | .875 | .681 / .681 / .667 | 7.50 | +.070 / +.036 / +.025 |
+| 15 | +.760 / +.784 / +.574 | +.740 / +.612 / +.587 | .851 | .556 / .639 / .653 | 7.51 | +.078 / +.044 / +.033 |
+| 20 | +.759 / +.826 / +.649 | +.761 / +.637 / +.650 | .840 | .569 / .597 / .542 | 7.52 | +.083 / +.046 / +.038 |
+Observations: probe shifts keep increasing with ge (MERT 2010s +.424 / +.574 / +.649), but 1960s saturates between 15 and 20 (+.760 / +.759); identity falls gradually (song-ID top-1 .875 -> .851 -> .840; VINet top-1 from about .68 to .54-.57, below the neutral .722); Audiobox PQ does not drop (7.50-7.52, neutral 7.31); the FD-VGG gain against real decade clips vanishes at ge 15-20 (CIs include 0, see the FD entry). So the probes and KAD keep rising while the independent distribution measure (FD-VGG) and identity do not: for reporting, ge 7-10 is the setting where all measures agree (interpretation, one adapter seed).
