@@ -6,7 +6,7 @@ SETS = {"hand-written CFG3 (seeds 0-2)": ("cfg3_s3", "cfg3_s3"), "delta g3": ("d
         "neg-prompt g3": ("neg_g3", "neg_g3"), "neg-prompt g3 + k250": ("neg_g3k250", "neg_g3k250"), "neg-prompt g5": ("neg_g5", "neg_g5"),
         "sampling T1.2 k250": ("sp_t12k250", "sp_t12k250"), "sampling T1.4 k250": ("sp_t14k250", "sp_t14k250"),
         "LoRA no-chroma s1": ("lora_nomels1", "lora_nomels1"), "LoRA no-chroma s2": ("lora_nomels2", "lora_nomels2"),
-        "LoRA dropout0.3 s1": ("lora_pd3s1", "lora_pd3s1"), "LoRA dropout0.3 s2": ("lora_pd3s2", "lora_pd3s2"), "LoRA lr3e-4 s2": ("lora_lr3e4s2", "lora_lr3e4s2")}
+        "LoRA dropout0.3 s1": ("lora_pd3s1", "lora_pd3s1"), "LoRA dropout0.3 s2": ("lora_pd3s2", "lora_pd3s2"), "LoRA lr3e-4 s2": ("lora_lr3e4s2", "lora_lr3e4s2"), "LoRA v1 + neg-prompt g3": ("lorav1_neg_g3", "lorav1_neg_g3"), "LoRA v1 + delta g3": ("lorav1_delta_g3", "lorav1_delta_g3"), "3-branch base gm3 ge3": ("tri_base_m3e3", "tri_base_m3e3"), "3-branch base gm3 ge5": ("tri_base_m3e5", "tri_base_m3e5"), "3-branch LoRA v1 gm3 ge5": ("tri_lora_m3e5", "tri_lora_m3e5"), "3-branch LoRA v1 gm3 ge7": ("tri_lora_m3e7", "tri_lora_m3e7")}
 args = []
 for label, (e, c) in SETS.items():
     ef = f"{R}/{e}_eval.json" if not e.startswith("gen_") else f"{R}/{e}.json"
