@@ -656,3 +656,13 @@ Config: as the three-branch entries, adapters `lora/v1s1` and `lora/v1s2` (train
 | v1s2 | gm3 ge7 | +.601 / +.614 / +.262 | +.482 / +.464 / +.248 | .868 | .708 / .667 / .597 |
 | v1s2 | gm3 ge10 | +.661 / +.746 / +.387 | +.552 / +.510 / +.386 | .851 | .611 / .625 / .681 |
 All three-branch rows: 22-24 of 24 songs positive, p<.001. Observations: (1) The three-branch gain over LoRA alone replicates in all three adapter seeds for all three decades and both probes (gain over the same adapter alone, MERT 1960s: +.22 to +.24 at ge7 and +.29 to +.30 at ge10; 1980s: +.27 to +.37 at ge7 and +.40 to +.50 at ge10). (2) Raising ge from 7 to 10 raises the MERT shift in every seed and decade. (3) Song-ID top-1 stays .81-.88; the seed-1 adapter loses more at ge10 (.809) than seeds 0 and 2 (.875, .851), so the identity cost at ge10 is seed-dependent. (4) VINet top-1 for the guided sets is at or somewhat below the same adapter's neutral value in these seeds. FD-VGG for the two new seeds not computed. Interpretation: the effect is not a single-adapter artefact; the identity-cost spread at ge10 indicates ge 7 is the safer reporting setting.
+
+## 2026-10-31 FD-VGG for the three-branch replicates on LoRA seeds 1 and 2 (results/fd_boot_tri_lora_m3e{7,10}v1s{1,2}.json, fd_vgg_table.txt; protocol as the 2026-10-30 FD-VGG entry)
+Delta FD-VGG = FD(era prompt) - FD(neutral of the same adapter) against real PA1 train clips of the decade; 95% CI by song bootstrap (* excludes 0). Neutral FD for these adapters, 1960s / 1980s / 2010s: v1s1 2.64 / 4.24 / 4.28, v1s2 2.57 / 4.29 / 4.44 (adapter seed 0: 2.67 / 3.45 / 3.58).
+| set | 1960s | 1980s | 2010s |
+|---|---|---|---|
+| v1s1 gm3 ge7 | -0.43 | -1.48* | -1.98* |
+| v1s1 gm3 ge10 | +0.02 | -0.83 | -1.88* |
+| v1s2 gm3 ge7 | +0.06 | -1.64* | -1.91* |
+| v1s2 gm3 ge10 | +0.25 | -0.90* | -2.05* |
+Observations: the 1980s and 2010s FD gains replicate in both further seeds (CI excludes 0 in 7 of 8 cells), the 1960s FD does not improve in any of these four (CI includes 0), unlike the probes, which show the largest 1960s shift. As for seed 0, ge10 is not better than ge7 on FD (1980s -0.83/-0.90 vs -1.48/-1.64). Interpretation: FD-VGG favours ge 7 over 10, in agreement with the identity cost at ge 10 found in the same seeds.
