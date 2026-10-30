@@ -597,3 +597,38 @@ Config as in the entry above (LoRA v1, 24 songs, 3 seeds, same probes); gm = mel
 | gm5 ge7 | +.502 / +.210 / +.237 | +.360 / +.123 / +.162 | .854 | .722 / .736 / .625 |
 | gm3 ge7 + top-k 250 | +.584 / +.521 / +.395 | +.503 / +.335 / +.364 | .899 | .681 / .653 / .597 |
 All shifts p<.001, 20-24 of 24 songs positive. Observations: (1) raising ge from 5 to 7 to 10 at gm=3 increases the shift for all three decades (MERT 1960s +.522/+.618/+.698; 1980s +.390/+.517/+.648; 2010s +.250/+.353/+.424) with song-ID top-1 unchanged (.875); VINet top-1 is lower at ge10 for 1960s (.681) than neutral, within the spread of the other sets. (2) A larger melody scale (gm5, ge7) gives smaller shifts than gm3, ge7 (the effective era term ge/gm shrinks relative to the melody term); song-ID top-1 .854. (3) top-k 250 at gm3 ge7 gives about the same shifts as top-k 50 (+.584/+.521/+.395 vs +.618/+.517/+.353) and the highest song-ID top-1 (.899) of this family. Interpretation: within this grid the era scale buys shift without an identity cost, no saturation reached at ge10; ge > 10 not tested (sound quality at high scales not yet scored: Audiobox/KAD for these sets are being computed).
+
+## 2026-10-30 E07 FD-VGG against real decade clips, with song-bootstrap CI (results/fd_boot_<set>.json, fd_vgg_table.txt, fd_boot_log.txt; src/run_avb.sh, 83_fd_bootstrap.py, 84_fd_table.py)
+Config: av-benchmark (checkout f351b9a with the CLAP/soundfile patches of the PA3 setup, conda env hw3_avbench, torchvggish hub cache copied to ~/era_market/torch_home so the trust prompt does not block) extracts VGGish features (10 s, 10 frames x 128-d per clip, first 10 s of each 30 s remix). Reference: PA1 dataset-A train clips of the decade (171 per decade, real mixes). Generated: the remix (original vocal + generated accompaniment) of the 24 validation songs x 3 seeds = 72 clips per condition (era prompt of the same decade, or neutral). FD recomputed from the cached features with the av-benchmark formula (`83_fd_bootstrap.py`); for every cell the recomputed value equals the av-benchmark json value to 3 decimals. Statistic: Delta = FD(era prompt, real decade) - FD(neutral, same real decade), negative = closer to the real decade; 95% CI by bootstrap over the 24 songs (all seeds of a song resampled together, 1000 resamples), reference fixed. FD-PANN (2048-d, one vector per clip) and FD-PaSST are not bootstrapped: 72 clips per condition are fewer than the feature dimension, so their covariances are rank-deficient (the av-benchmark values for them are in avb/out on the server, not reported). Why this metric: HW3 course metric (FD-VGG) and a distributional check that does not use the MERT/MuQ probes.
+Table (full: results/fd_vgg_table.txt; * = CI excludes 0):
+| set | neutral FD 1960s/1980s/2010s | Delta FD 1960s | 1980s | 2010s |
+|---|---|---|---|---|
+| base, standard CFG 3 (gen) | 3.26 / 4.95 / 5.23 | -0.10 | -0.78* | +2.16* |
+| LoRA v1 alone | 2.67 / 3.45 / 3.58 | -0.39* | -0.77* | -1.23* |
+| LoRA v1 + neg-prompt g3 | same | +1.26* | -0.42 | +1.69* |
+| 3-branch base ge5 | 3.26 / 4.95 / 5.23 | +0.01 | -0.26 | +2.64* |
+| 3-branch LoRA gm3 ge5 | 2.67 / 3.45 / 3.58 | -0.25 | -1.02* | -1.08* |
+| 3-branch LoRA gm3 ge7 | same | -0.34 | -0.99* | -1.16* |
+| 3-branch LoRA gm3 ge7 + k250 | same | -0.57* | -0.88* | -1.18* |
+| 3-branch LoRA gm3 ge10 | same | -0.14 | -0.52 | -1.13* |
+| 3-branch LoRA gm3 ge15 | same | +0.23 | +0.22 | -1.01 |
+| 3-branch LoRA gm3 ge20 | same | +0.44 | +0.09 | -0.92 |
+Observations (single adapter seed and generation seed; n small): (1) The LoRA lowers the neutral FD against all three decades (2.67-3.58 vs 3.26-5.23 for the base model), i.e. the adapter moves generated audio towards the PA1 distribution irrespective of prompt. (2) A 2010s prompt on the base model raises FD to real 2010s clips (+2.16, CI excludes 0), although the probes (MERT/MuQ) and CLAP register a 2010s shift for it; with the LoRA the 2010s prompt lowers FD (-1.2). So FD-VGG and the probes disagree for the base model on the 2010s; no explanation tested. (3) Contrast-only guidance on top of the LoRA (neg-prompt g3) worsens FD for 1960s and 2010s (+1.26, +1.69), while the three-branch variants keep FD gains of the LoRA alone; the benefit of larger ge on FD stops at about ge 10 and ge 15-20 give CIs that include 0 for all three decades. (4) The mean over song-bootstrap CIs is wide (about ±1 FD); differences between three-branch settings (ge 5/7/10) are not distinguishable.
+
+## 2026-10-30 Discogs-EffNet tagger on newer sets (results/discogs_<set>.json, discogs_table.txt; src/82_tagger_table.py, run_tagger3.sh, run_tagger4.sh)
+Independent third evaluator (Essentia Discogs-EffNet embedding, logistic-regression decade probe trained on EnCodec-resynthesized real accompaniment; validation accuracy .523 on 6 decades, chance .167; codec-matched like the MERT/MuQ probes). Statistic: per-song Delta P(target decade | era prompt) - P(target decade | neutral), 24 songs, 3 seeds, Wilcoxon. Selected rows (full table with top tags: results/discogs_table.txt):
+| set | 1960s | 1980s | 2010s |
+|---|---|---|---|
+| base standard CFG 3 (`eval`) | -.064 (9/24, p=.03) | +.282 (24/24) | +.138 (24/24) |
+| delta g5 | +.053 (18/24, p=.09) | +.381 | +.042 |
+| neg-prompt g5 | +.174 | +.458 | +.068 |
+| Qwen3-8B prompts (draw 1) | +.136 | +.287 | +.176 |
+| LoRA dropout 0.3 s2 | +.247 | +.187 | +.044 |
+| LoRA lr 3e-4 s2 | +.261 | +.197 | +.073 |
+| no-chroma LoRA s2 | +.185 | +.450 | +.036 |
+| LoRA v1 s1 | +.323 | +.250 | +.068 |
+| LoRA v1 + neg-prompt g3 | +.315 | +.190 | +.068 |
+| 3-branch base ge5 | -.056 (9/24, p=.13) | +.336 | +.138 |
+| 3-branch LoRA gm3 ge7 | +.479 | +.358 | +.152 |
+| 3-branch LoRA gm3 ge10 | +.542 | +.419 | +.180 |
+Observations: the tagger reproduces the sign pattern of the MERT/MuQ probes (1980s strongest on the base model, 1960s only with LoRA or with prompt rewriting) with a third, genre-supervised encoder; the ordering ge10 > ge7 > LoRA alone holds here too. Tags moved by the 1980s prompt on the base model are Synthwave / Synth-pop; for the three-branch LoRA 1960s prompt Easy Listening / Space-Age / Swing; for the 2010s prompt Alternative Rock / Indie Rock (not electronic tags); neutral-prompt probability of the 1960s class under this probe was not inspected.

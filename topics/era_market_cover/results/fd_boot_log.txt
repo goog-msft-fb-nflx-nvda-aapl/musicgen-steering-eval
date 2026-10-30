@@ -1,0 +1,60 @@
+66
+gen FD-VGG 1960s {'fd_1960s': 3.165, 'avbench_1960s': 3.165, 'fd_neutral': 3.262, 'avbench_neutral': 3.262, 'delta': -0.097} [-0.872, 0.324]
+gen FD-VGG 1980s {'fd_1980s': 4.176, 'avbench_1980s': 4.176, 'fd_neutral': 4.955, 'avbench_neutral': 4.955, 'delta': -0.778} [-1.908, -0.046]
+gen FD-VGG 2010s {'fd_2010s': 7.384, 'avbench_2010s': 7.384, 'fd_neutral': 5.228, 'avbench_neutral': 5.228, 'delta': 2.156} [1.078, 2.948]
+Traceback (most recent call last):
+  File "/home/jtan/era_market/src/83_fd_bootstrap.py", line 21, in <module>
+    G = {e: load(f"{W}/cache/pred_{s}_{e}", key) for e in (dec, "neutral")}; songs = sorted(G[dec]); r = {}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jtan/era_market/src/83_fd_bootstrap.py", line 21, in <dictcomp>
+    G = {e: load(f"{W}/cache/pred_{s}_{e}", key) for e in (dec, "neutral")}; songs = sorted(G[dec]); r = {}
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jtan/era_market/src/83_fd_bootstrap.py", line 13, in load
+    d = torch.load(f"{path}/{key}", weights_only=True); out = {}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jtan/miniconda3/envs/musicgen_steer/lib/python3.11/site-packages/torch/serialization.py", line 1319, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jtan/miniconda3/envs/musicgen_steer/lib/python3.11/site-packages/torch/serialization.py", line 659, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jtan/miniconda3/envs/musicgen_steer/lib/python3.11/site-packages/torch/serialization.py", line 640, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/jtan/era_market/avb/cache/pred_gen_lora_1960s/vggish_features.pth'
+tri_base_m3e3 FD-VGG 1960s {'fd_1960s': 3.062, 'avbench_1960s': 3.062, 'fd_neutral': 3.262, 'avbench_neutral': 3.262, 'delta': -0.2} [-0.88, 0.166]
+tri_base_m3e3 FD-VGG 1980s {'fd_1980s': 4.237, 'avbench_1980s': 4.237, 'fd_neutral': 4.955, 'avbench_neutral': 4.955, 'delta': -0.717} [-1.871, 0.003]
+tri_base_m3e3 FD-VGG 2010s {'fd_2010s': 7.378, 'avbench_2010s': 7.378, 'fd_neutral': 5.228, 'avbench_neutral': 5.228, 'delta': 2.15} [1.045, 2.957]
+tri_base_m3e5 FD-VGG 1960s {'fd_1960s': 3.273, 'avbench_1960s': 3.273, 'fd_neutral': 3.262, 'avbench_neutral': 3.262, 'delta': 0.011} [-0.863, 0.456]
+tri_base_m3e5 FD-VGG 1980s {'fd_1980s': 4.69, 'avbench_1980s': 4.69, 'fd_neutral': 4.955, 'avbench_neutral': 4.955, 'delta': -0.264} [-1.358, 0.466]
+tri_base_m3e5 FD-VGG 2010s {'fd_2010s': 7.873, 'avbench_2010s': 7.873, 'fd_neutral': 5.228, 'avbench_neutral': 5.228, 'delta': 2.645} [1.663, 3.306]
+tri_lora_m3e5 FD-VGG 1960s {'fd_1960s': 2.419, 'avbench_1960s': 2.419, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': -0.251} [-1.093, 0.421]
+tri_lora_m3e5 FD-VGG 1980s {'fd_1980s': 2.429, 'avbench_1980s': 2.429, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': -1.018} [-2.308, -0.141]
+tri_lora_m3e5 FD-VGG 2010s {'fd_2010s': 2.5, 'avbench_2010s': 2.5, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -1.084} [-2.39, -0.159]
+tri_lora_m3e7 FD-VGG 1960s {'fd_1960s': 2.325, 'avbench_1960s': 2.325, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': -0.345} [-1.199, 0.22]
+tri_lora_m3e7 FD-VGG 1980s {'fd_1980s': 2.456, 'avbench_1980s': 2.456, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': -0.992} [-2.621, -0.101]
+tri_lora_m3e7 FD-VGG 2010s {'fd_2010s': 2.422, 'avbench_2010s': 2.422, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -1.162} [-2.654, -0.26]
+tri_lora_m3e10 FD-VGG 1960s {'fd_1960s': 2.533, 'avbench_1960s': 2.533, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': -0.137} [-1.223, 0.425]
+tri_lora_m3e10 FD-VGG 1980s {'fd_1980s': 2.923, 'avbench_1980s': 2.923, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': -0.524} [-2.31, 0.352]
+tri_lora_m3e10 FD-VGG 2010s {'fd_2010s': 2.455, 'avbench_2010s': 2.455, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -1.129} [-2.854, -0.143]
+tri_lora_m3e15 FD-VGG 1960s {'fd_1960s': 2.898, 'avbench_1960s': 2.898, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': 0.228} [-0.789, 0.761]
+tri_lora_m3e15 FD-VGG 1980s {'fd_1980s': 3.667, 'avbench_1980s': 3.667, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': 0.219} [-1.427, 1.046]
+tri_lora_m3e15 FD-VGG 2010s {'fd_2010s': 2.57, 'avbench_2010s': 2.57, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -1.014} [-2.793, 0.139]
+tri_lora_m3e20 FD-VGG 1960s {'fd_1960s': 3.115, 'avbench_1960s': 3.115, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': 0.445} [-0.631, 1.068]
+tri_lora_m3e20 FD-VGG 1980s {'fd_1980s': 3.536, 'avbench_1980s': 3.536, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': 0.089} [-1.517, 0.939]
+tri_lora_m3e20 FD-VGG 2010s {'fd_2010s': 2.668, 'avbench_2010s': 2.668, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -0.915} [-2.779, 0.316]
+tri_lora_m5e7 FD-VGG 1960s {'fd_1960s': 2.336, 'avbench_1960s': 2.336, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': -0.334} [-1.138, 0.035]
+tri_lora_m5e7 FD-VGG 1980s {'fd_1980s': 2.822, 'avbench_1980s': 2.822, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': -0.625} [-2.114, 0.351]
+tri_lora_m5e7 FD-VGG 2010s {'fd_2010s': 2.819, 'avbench_2010s': 2.819, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -0.765} [-2.231, 0.011]
+tri_lora_m3e7k250 FD-VGG 1960s {'fd_1960s': 2.098, 'avbench_1960s': 2.098, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': -0.572} [-1.37, -0.136]
+tri_lora_m3e7k250 FD-VGG 1980s {'fd_1980s': 2.568, 'avbench_1980s': 2.568, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': -0.879} [-2.563, -0.044]
+tri_lora_m3e7k250 FD-VGG 2010s {'fd_2010s': 2.4, 'avbench_2010s': 2.4, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -1.184} [-3.014, -0.202]
+lorav1_neg_g3 FD-VGG 1960s {'fd_1960s': 3.927, 'avbench_1960s': 3.927, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': 1.257} [0.483, 1.819]
+lorav1_neg_g3 FD-VGG 1980s {'fd_1980s': 3.031, 'avbench_1980s': 3.031, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': -0.416} [-1.888, 0.494]
+lorav1_neg_g3 FD-VGG 2010s {'fd_2010s': 5.269, 'avbench_2010s': 5.269, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': 1.685} [0.137, 2.724]
+gen_lora_1960s
+gen_lora_1980s
+gen_lora_2010s
+lora FD-VGG 1960s {'fd_1960s': 2.28, 'avbench_1960s': 2.28, 'fd_neutral': 2.67, 'avbench_neutral': 2.67, 'delta': -0.39} [-1.002, -0.039]
+lora FD-VGG 1980s {'fd_1980s': 2.681, 'avbench_1980s': 2.681, 'fd_neutral': 3.447, 'avbench_neutral': 3.447, 'delta': -0.766} [-1.903, -0.036]
+lora FD-VGG 2010s {'fd_2010s': 2.353, 'avbench_2010s': 2.353, 'fd_neutral': 3.584, 'avbench_neutral': 3.584, 'delta': -1.231} [-2.793, -0.359]
