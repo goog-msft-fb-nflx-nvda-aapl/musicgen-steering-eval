@@ -7,6 +7,11 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 | 1. Steering evaluation | [`topics/musicgen_steering/`](topics/musicgen_steering/) | Independent, significance-tested evaluation of concept-direction steering in MusicGen (four direction methods, independent evaluators, layer selection). |
 | 2. Era and market cues, era-targeted covers | [`topics/era_market_cover/`](topics/era_market_cover/) | Stem-wise analysis of release-decade and release-market cues on Discogs-VI clips, and cover generation that keeps the original vocal and regenerates the accompaniment in a target decade. |
 
+## Team
+- James Christian: MS in AI, UT Austin
+- Angel Hsia: MS, [Graduate Institute of Communication Engineering (GICE), NTU](https://gice.ntu.edu.tw/en/)
+- TBD: Ph.D., GICE, NTU (open position)
+
 ## Shared
 - `docs/` GitHub Pages source (kept at the repository root because Pages serves from `/docs`): `index.html` for topic 1, `era_market/` for topic 2. Pages URL: https://goog-msft-fb-nflx-nvda-aapl.github.io/musicgen-steering-eval/
 - Topic 1 mid-progress video: https://youtu.be/aaZ89FoZe_U
