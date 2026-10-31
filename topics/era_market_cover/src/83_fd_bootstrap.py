@@ -16,7 +16,7 @@ def load(path, key):
 for s in sys.argv[1:]:
     res = {}
     for feat, key, fdname in (("vgg", "vggish_features.pth", "FD-VGG"),):   # FD-PANN (2048-d, one vector per clip) and FD-PaSST are not bootstrapped: 72 generated clips per condition < feature dimension, covariance rank-deficient
-        for dec in ("1960s", "1980s", "2010s"):
+        for dec in os.environ.get("DEC", "1960s,1980s,2010s").split(","):
             ref = np.concatenate([v.reshape(-1, v.shape[-1]) for v in torch.load(f"{W}/cache/gt_{dec}/{key}", weights_only=True).values()])
             G = {e: load(f"{W}/cache/pred_{s}_{e}", key) for e in (dec, "neutral")}; songs = sorted(G[dec]); r = {}
             for e in (dec, "neutral"):
