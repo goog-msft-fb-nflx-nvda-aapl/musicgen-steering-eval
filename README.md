@@ -10,7 +10,7 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 ## Team
 - James Christian: MS in AI, UT Austin
 - Angel Hsia: MS, [Graduate Institute of Communication Engineering (GICE), NTU](https://gice.ntu.edu.tw/en/)
-- TBD: Ph.D., GICE, NTU (open position)
+- Name to be announced: Ph.D., GICE, NTU
 
 ## Shared
 - `docs/` GitHub Pages source (kept at the repository root because Pages serves from `/docs`): `index.html` for topic 1, `era_market/` for topic 2. Pages URL: https://goog-msft-fb-nflx-nvda-aapl.github.io/musicgen-steering-eval/
