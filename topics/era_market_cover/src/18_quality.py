@@ -7,7 +7,7 @@ from common import ROOT, SR
 from audiobox_aesthetics.infer import initialize_predictor
 ap = argparse.ArgumentParser(); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--out", required=True); a = ap.parse_args()
 G = os.path.join(ROOT, os.environ.get("GENDIR", "gen")); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]
-ERAS = ["neutral", "1960s", "1980s", "2010s"]; rng = np.random.default_rng(0); tmp = tempfile.mkdtemp(dir=ROOT)
+ERAS = os.environ.get("ERAS", "neutral,1960s,1980s,2010s").split(","); rng = np.random.default_rng(0); tmp = tempfile.mkdtemp(dir=ROOT)
 def dsp_old(y):
     y = sosfilt(butter(4, [60, 7000], btype="band", fs=SR, output="sos"), y); y = np.tanh(1.8 * y) / 1.8; return (y + np.random.default_rng(0).normal(0, 10 ** (-50 / 20), len(y))).astype(np.float32)
 def dsp_new(y):
