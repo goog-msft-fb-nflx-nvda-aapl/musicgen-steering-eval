@@ -8,7 +8,7 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 | 2. Era and market cues, era-targeted covers | [`topics/era_market_cover/`](topics/era_market_cover/) | Stem-wise analysis of release-decade and release-market cues on Discogs-VI clips, and cover generation that keeps the original vocal and regenerates the accompaniment in a target decade. |
 
 ## Team
-- James Christian: MS in AI, UT Austin
+- James Christian: MS in AI, UT Austin (jameschristian@utexas.edu)
 - Angel Hsia: MS, [Graduate Institute of Communication Engineering (GICE), NTU](https://gice.ntu.edu.tw/en/)
 - Name to be announced: Ph.D., GICE, NTU
 
