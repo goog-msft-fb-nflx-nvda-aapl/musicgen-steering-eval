@@ -4,7 +4,7 @@ gm = ge gives the standard CFG with the era prompt (L(null) + g (L(era+chroma) -
 Implementation: the batch is duplicated to 2 rows, the encoder states of the 4 CFG rows are [era+chroma, neutral+chroma, null, null]; a logits processor (runs before HF's CFG processor) combines the three branches per codebook, draws ONE token (top-k, T=1, torch RNG seeded per clip) and returns a one-hot over it for both rows so that the rows stay identical.
 Same 24 validation songs, original-vocal remix protocol and RMS matching as 07_generate.py; neutral rows copied from NEUTRAL_SRC (default gen); LORA=<adapter> merges a LoRA as in 07_generate.py.
 usage: python 61_triple_guidance.py --gm 3 --ge 5 --outdir gen_tri_g3e5 --seeds 0 1 2"""
-import argparse, os, shutil, glob, numpy as np, torch, soundfile as sf, torchaudio.functional as AF
+import argparse, json, os, shutil, glob, numpy as np, torch, soundfile as sf, torchaudio.functional as AF
 from transformers import AutoProcessor, MusicgenMelodyForConditionalGeneration
 from common import ROOT, SR, manifest
 ERAS = {"1960s": "a 1960s pop and soul recording, mono tape sound, live drums, upright bass, brass and organ, warm analog saturation, limited bandwidth",
@@ -13,7 +13,7 @@ ERAS = {"1960s": "a 1960s pop and soul recording, mono tape sound, live drums, u
 NEG = {"1960s": "2010s", "1980s": "2010s", "2010s": "1960s"}
 ap = argparse.ArgumentParser(); ap.add_argument("--gm", type=float, default=3.0); ap.add_argument("--ge", type=float, default=5.0); ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--top_k", type=int, default=50); ap.add_argument("--eras", nargs="*", default=None, help="decade prompt keys from prompts_era.ERAS (default 1960s 1980s 2010s)"); a = ap.parse_args()
 if a.eras:
-    import prompts_era; ERAS = {k: prompts_era.ERAS[k] for k in a.eras}
+    import prompts_era; ERAS = {k: {**prompts_era.ERAS, **json.load(open(os.environ["EXTRA_PROMPTS"]))}[k] if os.environ.get("EXTRA_PROMPTS") else prompts_era.ERAS[k] for k in a.eras}
 G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; rows = {r["sample_id"]: r for r in manifest("A")}
 out = os.path.join(ROOT, a.outdir); os.makedirs(out, exist_ok=True); shutil.copy(os.path.join(G, "picked.txt"), os.path.join(out, "picked.txt"))
 NS = os.path.join(ROOT, os.environ.get("NEUTRAL_SRC", "gen"))   # LoRA runs: NEUTRAL_SRC=gen_lora (neutral rows of the same adapter)
