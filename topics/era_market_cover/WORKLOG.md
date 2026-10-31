@@ -818,3 +818,7 @@ Measured (MERT 2000s delta / E / top1):
 | seed2 | +0.362 / 4.03 / .92 | +0.353 / 4.06 / .92 | +0.347 / 4.03 / .90 |
 MuQ 2000s delta seed1 ge15/20 +0.380/+0.367, seed2 +0.405/+0.395.
 Observations: the 2000s decline and the drift toward 2010s do not appear in either seed adapter (delta flat to slightly rising, E about 4.03-4.08). Interpretation: the primary adapter's 2000s drop is not a general property of higher guidance. All four seed runs keep the monotone E order 1960s..2010s (E 0.07-0.12 ... 4.72-4.80 MERT at ge15/20) and all 24 delta CIs exclude 0 in both encoders. 1990s stays the weakest (MERT delta +0.41 to +0.46, top1 .64-.72). Song-ID top1 (`results/extra_content.txt`) for 1970s falls with ge in the primary adapter (.83 to .76) and seed1 (.81 to .74), less so seed2 (.86 to .82).
+
+## 2026-11-01 — Fresh-clone reproduction of all stored-result tables (R04)
+Config: `git clone` of the public repo at commit `299ab8d` (after the topic-folder reorganization) on the server, new venv from `~/miniconda3/bin/python -m venv` with only `pip install numpy scipy` (Python 3.14.6, numpy 2.5.4, scipy 1.18.1), `bash src/99_make_all_tables.sh` from `topics/era_market_cover`.
+Measured: script exit 0, "tables regenerated"; `git status --short` empty afterwards, i.e. every regenerated table is byte-identical to the committed one. Clone and venv deleted afterwards.
