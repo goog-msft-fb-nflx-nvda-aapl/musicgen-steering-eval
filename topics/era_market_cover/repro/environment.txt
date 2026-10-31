@@ -118,3 +118,5 @@ README.md.metadata
 4531d4b4d0ac16268ee118a203bed0d99c46ed3e0f052f842d859382e731b76d  /home/jtan/era_market/data/ex/dataset_B/manifest.csv
 ### VINet ckpt sha256
 9d0b1d5cdd459a22b1062f69f0ef12ff59d0681a5d90d338827598dc55e8bf13  /home/jtan/era_market/ext/Discogs-VINet/logs/checkpoints/Discogs-VINet/model_checkpoint.pth
+
+# Ollama (LLM prompt generation, src/69b_llm_prompts_ollama.py): client 0.40.3, models library/llama3.2:1b and library/qwen2.5:14b pulled from registry.ollama.ai; the 12 GB local copy on the server was deleted on 2026-10-31 after the prompts were generated (re-pull with `ollama pull <tag>` to rerun).
