@@ -5,3 +5,7 @@ trix_lora_m3e15v1 (n=288): neutral top1 0.944 chord 0.352 | 1970s top1 0.778 cho
 trix_lora_m3e20v1 (n=288): neutral top1 0.944 chord 0.352 | 1970s top1 0.764 chord 0.317 | 1990s top1 0.889 chord 0.332 | 2000s top1 0.792 chord 0.356
 trix_lora_m3e10v1s1 (n=288): neutral top1 0.833 chord 0.363 | 1970s top1 0.806 chord 0.325 | 1990s top1 0.875 chord 0.365 | 2000s top1 0.903 chord 0.363
 trix_lora_m3e10v1s2 (n=288): neutral top1 0.847 chord 0.364 | 1970s top1 0.861 chord 0.339 | 1990s top1 0.847 chord 0.357 | 2000s top1 0.875 chord 0.351
+trix_lora_m3e15v1s1 (n=288): neutral top1 0.833 chord 0.363 | 1970s top1 0.806 chord 0.321 | 1990s top1 0.819 chord 0.351 | 2000s top1 0.847 chord 0.353
+trix_lora_m3e15v1s2 (n=288): neutral top1 0.847 chord 0.364 | 1970s top1 0.819 chord 0.317 | 1990s top1 0.875 chord 0.337 | 2000s top1 0.861 chord 0.350
+trix_lora_m3e20v1s1 (n=288): neutral top1 0.833 chord 0.363 | 1970s top1 0.736 chord 0.309 | 1990s top1 0.819 chord 0.345 | 2000s top1 0.861 chord 0.349
+trix_lora_m3e20v1s2 (n=288): neutral top1 0.847 chord 0.364 | 1970s top1 0.819 chord 0.313 | 1990s top1 0.833 chord 0.335 | 2000s top1 0.931 chord 0.351

@@ -807,3 +807,14 @@ Why: the paired av-benchmark metrics (KL-PaSST to the clip's own original, LAION
 | LoRA ge20 (v1) | -.075 | -.220* | -.199* | +.030* | +.057* | +.092* |
 (* CI excludes 0; neutral KL base .955, LoRA .771; CLAP of the neutral clips against the era text: base .079 / .042 / .083, LoRA .099 / .017 / .046.)
 Observations: (1) the CLAP text score rises for the base model in all three decades (+.14 to +.23, CIs exclude 0) although the probes show it failing on the 1970s and 2000s prompts, so the text-audio score and the decade probes disagree for the base model (not explained). For the LoRA the CLAP gains are small (+.01 to +.09) and for the 1970s and 1990s at ge7 the CI includes 0. (2) KL to the original clip falls for the LoRA in all three decades at ge7 (CIs exclude 0) and for the 1990s and 2000s at ge10 and ge20 (the 1970s CI includes 0 at ge10 and ge20); for the base model only the 1970s changes (-.305). The original-clip KL is lower for era-prompted clips than neutral clips, as for the main decades; no cause tested.
+
+## 2026-10-31 — Seed adapters at ge15/ge20 on all six decades (MERT/MuQ probe, `results/six_decades.txt`, 11 configs)
+Config: LoRA seed adapters v1s1/v1s2, three-branch guidance, ge15 and ge20, same 24 songs x 3 seeds per decade as the other rows; main decades `tri_lora_m3e{15,20}v1s{1,2}`, extra decades `trix_lora_m3e{15,20}v1s{1,2}`. Tables regenerated via `src/99_make_all_tables.sh` (78 and 79 lists extended). Why: the primary adapter's 2000s delta falls from ge10 to ge15/ge20 and its E drifts toward 2010s; this checks whether that is adapter-specific.
+Measured (MERT 2000s delta / E / top1):
+| config | ge10 | ge15 | ge20 |
+|---|---|---|---|
+| primary adapter | +0.257 / 4.05 / .82 | +0.202 / 4.16 / .76 | +0.181 / 4.19 / .65 |
+| seed1 | +0.335 / 4.08 / .86 | +0.355 / 4.08 / .86 | +0.377 / 4.08 / .90 |
+| seed2 | +0.362 / 4.03 / .92 | +0.353 / 4.06 / .92 | +0.347 / 4.03 / .90 |
+MuQ 2000s delta seed1 ge15/20 +0.380/+0.367, seed2 +0.405/+0.395.
+Observations: the 2000s decline and the drift toward 2010s do not appear in either seed adapter (delta flat to slightly rising, E about 4.03-4.08). Interpretation: the primary adapter's 2000s drop is not a general property of higher guidance. All four seed runs keep the monotone E order 1960s..2010s (E 0.07-0.12 ... 4.72-4.80 MERT at ge15/20) and all 24 delta CIs exclude 0 in both encoders. 1990s stays the weakest (MERT delta +0.41 to +0.46, top1 .64-.72). Song-ID top1 (`results/extra_content.txt`) for 1970s falls with ge in the primary adapter (.83 to .76) and seed1 (.81 to .74), less so seed2 (.86 to .82).
