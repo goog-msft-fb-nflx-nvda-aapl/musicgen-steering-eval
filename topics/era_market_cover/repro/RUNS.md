@@ -93,13 +93,18 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `76_spectrum_match.py` | Long-term-spectrum-matched control for the generated-audio Deltas (follow-up to 75_bandwidth_check.py). | python 76_spectrum_match.py label=gendir:evaljson ... -> results/spectrum_match.{json,txt} |
 | `77_probe_doublecodec.py` | Probe augmentation with a second EnCodec pass (follow-up to 73_probe_augment.py). | python 77_probe_doublecodec.py set1 set2 ... -> results/probe_doublecodec.{json,txt}, emb/A_{,muq_}acc2codec_norm_L.npy |
 | `78_six_decades.py` | Six-decade controllability table: for each decade prompt (1960s ... 2010s) the per-song change of P(target decade / era prompt) - P(. / neutral) and the mean expected-decade index of the generated accompaniment, from the codec-mat | python 78_six_decades.py label=main_eval.json+extra_eval.json ... -> results/six_decades.{json,txt} |
+| `78b_prompt_variants_decade.py` | Prompt-wording variants of one decade (default 1990s, decade index 3): per-song Delta P(target decade / variant) - P(. / neutral), 95% song-bootstrap CI, mean expected decade E, top-1 = target share, and song-ID top-1 / chord agre | python 78b_prompt_variants_decade.py <decade_index> label=eval.json:content.json ... -> results/prompt_variants_decade.txt  (variant conditions are every cond e |
+| `79_extra_content_table.py` | Song-identification top-1 and chord agreement of the extra-decade (1970s/1990s/2000s) remixes vs the original mix, from results/trix_*_content.json (13_content_metrics.py). usage: python 79_extra_content_table.py tag ... -> result | python 79_extra_content_table.py tag ... -> results/extra_content.txt |
+| `79b_extra_quality_table.py` | Audiobox Aesthetics (PQ, PC, CE, CU) of the extra-decade generations: per-song change versus the neutral prompt of the same set (seed means), Wilcoxon over songs; neutral PQ for reference. usage: python 79b_extra_quality_table.py  | python 79b_extra_quality_table.py tag ... -> results/extra_quality.txt (inputs results/quality_<tag>.json from 18_quality.py with ERAS=neutral,1970s,1990s,2000s |
 | `80_make_tables.py` | R04: regenerate the main generation tables from results/*.json only (no GPU, no audio). Calls 56_summarize_gens.py for each (label, eval json, content json) triple that exists and writes results/tables_main.txt. |  |
 | `81_quality_kad_table.py` | One row per generation set: Audiobox Aesthetics (PQ, CE; mean over the 24 songs of the song-averaged score, era prompts pooled vs neutral) and KAD-style margin delta (MERT, per decade; delta = margin(era prompt) - margin(neutral), | python src/81_quality_kad_table.py |
 | `82_tagger_table.py` | Discogs-EffNet decade-probe Delta (same statistic as 56_summarize_gens.py: per-song P(target decade / era prompt) - P(target decade / neutral), mean over seeds; Wilcoxon over the 24 songs) and the three tags with the largest mean  | python 82_tagger_table.py |
+| `82b_tagger_six.py` | Discogs-EffNet decade probe on the six-decade sets: joins results/discogs_<main>.json (1960s/1980s/2010s) and results/discogs_<extra>.json (1970s/1990s/2000s) of the same configuration; per-song Delta P(target decade / era prompt) | python 82b_tagger_six.py label=main_tag+extra_tag ... -> results/discogs_six.txt |
 | `83_fd_bootstrap.py` | E07: Frechet distance of generated sets to real PA1 clips of the target decade, with a song-level bootstrap. Reads the av-benchmark feature caches written by run_avb.sh (avb/cache/pred_<set>_<era>/ and gt_<decade>/; VGGish frames  | python 83_fd_bootstrap.py set1 set2 ...   (run in ~/era_market with venv; writes results/fd_boot_<set>.json) |
 | `84_fd_table.py` | Table of results/fd_boot_<set>.json (src/83_fd_bootstrap.py): FD-VGG of generated sets to real PA1 train clips of the same decade; Delta = FD(era prompt) - FD(neutral prompt), 95% song-bootstrap CI; negative = closer to the real d |  |
 | `85_pair_metrics.py` | E07 paired metrics per clip with song-bootstrap CIs, from the av-benchmark caches written by run_avb_pair.sh (avbp/cache/{gt,pred}_<set>_<era>/). | python 85_pair_metrics.py set1 set2 ...   (run in ~/era_market, CPU) |
 | `90_make_runs_index.py` | Builds repro/RUNS.md: an index of every script in src/ with its first docstring/comment line and its usage line, and, for each WORKLOG.md entry, the scripts and result files cited in its heading. Everything is read from the files; | python src/90_make_runs_index.py |
+| `99_make_all_tables.sh` | R04: regenerate every table in results/ that is computed from stored results/*.json (no GPU, no audio). usage (from the topic folder): bash src/99_make_all_tables.sh |  |
 | `common.py` |  |  |
 | `diag_mert.py` | diagnostic: is MERT-v2-30s loading deterministic under transformers 5? loads the model N times, embeds one real clip, reports finiteness and max abs difference of the layer-18 mean embedding vs the first load, and parameters that  |  |
 | `diag_mert2.py` | diagnostic 2: nondeterminism within one load, non-persistent buffers, and scale of the effect relative to between-clip differences. |  |
@@ -113,8 +118,8 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_ace.sh` | server: ACE-Step 1.5 cover mode on the original accompaniment stem, three cover strengths, then the standard scoring |  |
 | `run_ace10.sh` |  |  |
 | `run_analysis.sh` | server: waits for stems_emb.done, then stats, language ID, probes (probes are CPU) |  |
-| `run_avb.sh` | E07: FD-VGG / FD-PANN / FD-PaSST (av-benchmark, unpaired) of generated sets against real PA1 train clips of the target decade. | run_avb.sh <gpu> <set,set,...>   sets are gen_<name> dirs (or `gen` for the standard base set); eras 1960s 1980s 2010s and neutral. References: dataset A train  |
-| `run_avb_pair.sh` | E07 paired metrics (av-benchmark): KL-PaSST / KL-PANN of each generated remix against ITS OWN ORIGINAL clip (real mix, same song id) and the LAION-CLAP (music_audioset_epoch_15_esc_90.14) text-audio score of the generated remix ag | run_avb_pair.sh <gpu> <set,set,...>   (sets as in run_avb.sh; eras 1960s 1980s 2010s neutral). Output: ~/era_market/avbp/out/<set>_<era>.json, flag avbp_<sets>. |
+| `run_avb.sh` | E07: FD-VGG / FD-PANN / FD-PaSST (av-benchmark, unpaired) of generated sets against real PA1 train clips of the target decade. | [EL="1970s 1990s 2000s"] run_avb.sh <gpu> <set,set,...>   sets are gen_<name> dirs (or `gen` for the standard base set); eras 1960s 1980s 2010s and neutral. Ref |
+| `run_avb_pair.sh` | E07 paired metrics (av-benchmark): KL-PaSST / KL-PANN of each generated remix against ITS OWN ORIGINAL clip (real mix, same song id) and the LAION-CLAP (music_audioset_epoch_15_esc_90.14) text-audio score of the generated remix ag | [EL="1970s 1990s 2000s"] run_avb_pair.sh <gpu> <set,set,...>   (sets as in run_avb.sh; eras 1960s 1980s 2010s neutral). Output: ~/era_market/avbp/out/<set>_<era |
 | `run_battery2.sh` | evaluator battery for the newer generators: VINet identity, then the LALM judge. usage: run_battery2.sh <gpu> |  |
 | `run_bon.sh` | server: best-of-N (G09): 8 candidates (seeds 10..17) for 1960s/1980s/2010s prompts on the 24 songs, then scoring. usage: run_bon.sh <gpu> |  |
 | `run_bsr.sh` | server: BS-RoFormer separation of dataset $1 on GPU $2, then MERT + MuQ embeddings of its stems and probes vs the Demucs stems |  |
@@ -157,6 +162,7 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_pv.sh` | server: prompt elaboration ablation (word, short, tags) then scoring. usage: run_pv.sh <gpu> |  |
 | `run_qk.sh` | Audiobox Aesthetics (18_quality.py) + KAD-style margin (20_kad.py) for generation sets that had neither. usage: run_qk.sh <gpu> <tag> <name:seeds,...>  (dir = gen_<name>; embeddings from results/<name>_eval_emb.npz) |  |
 | `run_quality_more.sh` | server: Audiobox Aesthetics + KAD-style margin for the guidance sweep, MuseControlLite and text-only generations. usage: bash run_quality_more.sh <gpu> |  |
+| `run_quality_x.sh` | Audiobox Aesthetics for the extra-decade sets. usage: bash run_quality_x.sh <gpu> |  |
 | `run_remix_level.sh` |  |  |
 | `run_rerun_all.sh` | server: recompute everything that used MERT after the inv_freq fix (mert_util.py). usage: bash run_rerun_all.sh probes / evalA <gpu> / evalB <gpu> |  |
 | `run_sp.sh` | server: sampling-parameter ablation (G07), seeds 0 1, then scoring. usage: run_sp.sh <gpu> |  |
@@ -164,10 +170,13 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_stems.sh` | server launcher: bash run_stems.sh <gpu>  (separation then MERT-v2 embeddings for A and B) |  |
 | `run_tagger3.sh` | Discogs-EffNet evaluator (CPU, venv_ess) for key newer generation sets, one process at a time (server CPU is shared) |  |
 | `run_tagger4.sh` | Discogs-EffNet evaluator (CPU, venv_ess) for three-branch and LoRA+guidance sets, one process at a time (server CPU is shared) |  |
+| `run_tagger5.sh` | Discogs-EffNet evaluator (CPU, venv_ess) for the extra-decade sets and the base ge7 main-decade set, one process at a time |  |
 | `run_tri.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
 | `run_tri_ad.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri_ad.sh <gpu> <base/lora> <gm> <ge> [top_k] [adapter dir name under lora/, default v1] |  |
 | `run_tri_k.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
+| `run_tri_p90.sh` | 1990s prompt-wording variants with the LoRA, three-branch guidance. usage: run_tri_p90.sh <gpu> <ge> |  |
 | `run_tri_x.sh` | three-branch guidance for the extra decades (1970s, 1990s, 2000s). usage: run_tri_x.sh <gpu> <base/lora> <gm> <ge> |  |
+| `run_tri_x2.sh` | three-branch guidance for the extra decades with adapter choice and content metrics. usage: run_tri_x2.sh <gpu> <gm> <ge> [adapter under lora/, default v1] |  |
 | `run_vaeid.sh` |  |  |
 | `run_validity.sh` | server: independent evaluators (Audiobox, KAD-style margin, CLAP zero-shot era, COCOLA) for LoRA v1/v2/v3 and ACE-Step c05/c10 generations; Discogs tagger for v1 and ACE c05 |  |
 | `run_vinet3.sh` | VINet identity for generation dirs not yet scored; single process writes vinet_identity.json |  |
@@ -298,3 +307,13 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
   scripts: 77_probe_doublecodec.py
 - 2026-10-31 six-decade controllability with three-branch guidance (`src/61_triple_guidance.py --eras`, `src/run_tri_x.sh`, `src/run_tri.sh`, `src/78_six_decades.py` -> `results/six_decades.{json,txt}`, `results/trix_*_eval.json`, `results/tri_base_m3e7_eval.json`; GPUs 0-3)  
   scripts: 61_triple_guidance.py, 78_six_decades.py, run_tri.sh, run_tri_x.sh
+- 2026-10-31 six-decade guidance sweep: ge15/ge20, LoRA training seeds, content (`src/run_tri_x2.sh`, `src/78_six_decades.py`, `src/79_extra_content_table.py` -> `results/six_decades.{json,txt}` (7 configurations), `results/extra_content.txt`, `results/trix_*_{eval,content}.json`; GPUs 0-3)  
+  scripts: 78_six_decades.py, 79_extra_content_table.py, run_tri_x2.sh
+- 2026-10-31 six-decade sets: Audiobox quality and independent-encoder (Discogs-EffNet) check (`src/run_quality_x.sh`, `src/79b_extra_quality_table.py` -> `results/extra_quality.txt`, `results/quality_trix_*.json`; `src/run_tagger5.sh`, `src/82b_tagger_six.py` -> `results/discogs_six.txt`, `results/di  
+  scripts: 79b_extra_quality_table.py, 82b_tagger_six.py, run_quality_x.sh, run_tagger5.sh
+- 2026-10-31 FD-VGG for the extra decades (`src/run_avb.sh` with `EL`, `src/83_fd_bootstrap.py` with `DEC` -> `results/fd_boot_trix_*.json`; GPUs 0-3)  
+  scripts: 83_fd_bootstrap.py, run_avb.sh
+- 2026-10-31 1990s prompt-wording variants with the LoRA (`src/61_triple_guidance.py` with `EXTRA_PROMPTS`, `src/prompts_1990s_variants.json`, `src/run_tri_p90.sh`, `src/78b_prompt_variants_decade.py` -> `results/prompt_variants_decade.txt`, `results/trp90_lora_m3e{10,15}_{eval,content}.json`; GPUs 0-  
+  scripts: 61_triple_guidance.py, 78b_prompt_variants_decade.py, run_tri_p90.sh
+- 2026-10-31 paired metrics for the extra decades (`src/run_avb_pair.sh` with `EL`, `src/85_pair_metrics.py` with `EL` -> `results/pair_trix_*.json`; GPUs 0-3)  
+  scripts: 85_pair_metrics.py, run_avb_pair.sh

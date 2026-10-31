@@ -7,7 +7,7 @@ TD = {"1960s": 0, "1980s": 2, "2010s": 5}
 L = ["set | decade probe val acc | Delta P(target decade) 1960s / 1980s / 2010s (songs positive, Wilcoxon p) | top tags vs neutral (1960s; 1980s; 2010s)"]
 for f in sorted(glob.glob("results/discogs_*.json")):
     name = os.path.basename(f)[8:-5]
-    if name == "vi_meta": continue
+    if name == "vi_meta" or name.startswith("trix_"): continue   # extra-decade sets: see 82b_tagger_six.py
     d = json.load(open(f)); R = d["rows"]; songs = sorted({r["clip"] for r in R}); cells = []
     for e, t in TD.items():
         P = lambda c: np.array([np.mean([r["probs"][t] for r in R if r["clip"] == x and r["cond"] == c]) for x in songs])

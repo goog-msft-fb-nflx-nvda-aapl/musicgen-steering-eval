@@ -2,7 +2,9 @@
 import glob, json, os, numpy as np
 rows = []
 for qf in sorted(glob.glob("results/quality_*.json")):
-    name = os.path.basename(qf)[8:-5]; q = json.load(open(qf)); songs = sorted({n.split("|")[0] for n in q if not n.startswith("noise")})
+    name = os.path.basename(qf)[8:-5]
+    if name.startswith("trix_"): continue   # extra-decade sets: see 79b_extra_quality_table.py
+    q = json.load(open(qf)); songs = sorted({n.split("|")[0] for n in q if not n.startswith("noise")})
     def m(cond, k): return float(np.mean([np.mean([v[k] for n, v in q.items() if n.startswith(s + "|" + c + "|")]) for s in songs for c in cond]))
     kf = f"results/kad_{name}.json"; kd = json.load(open(kf)) if os.path.exists(kf) else None
     kad = " / ".join(f"{kd['mert'][d]['delta']:+.3f}" for d in ("1960s", "1980s", "2010s")) if kd else "-"
