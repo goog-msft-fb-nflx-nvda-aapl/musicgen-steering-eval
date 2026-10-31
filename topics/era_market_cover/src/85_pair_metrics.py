@@ -11,7 +11,7 @@ W = os.path.expanduser("~/era_market/avbp"); rng = np.random.default_rng(0); B =
 def ld(p): return torch.load(p, weights_only=True)
 for s in sys.argv[1:]:
     per = {}; txt = {}
-    for e in ("1960s", "1980s", "2010s", "neutral"):
+    for e in tuple(os.environ.get("EL", "1960s 1980s 2010s").split()) + ("neutral",):
         g = ld(f"{W}/cache/gt_{s}_{e}/passt_logits.pth"); p = ld(f"{W}/cache/pred_{s}_{e}/passt_logits.pth"); a = ld(f"{W}/cache/pred_{s}_{e}/clap_laion_audio.pth"); t = ld(f"{W}/cache/gt_{s}_{e}/clap_laion_text.pth")
         txt[e] = next(iter(t.values())).float(); kl = {}; au = {}
         for k in p:
@@ -21,7 +21,7 @@ for s in sys.argv[1:]:
         if os.path.exists(j): print(s, e, "KL mean", round(np.mean(list(kl.values())), 4), "av-bench", round(json.load(open(j))["KL-PASST-softmax"], 4), "| CLAP own text", round(float(np.mean([torch.cosine_similarity(au[k], txt[e], dim=0) for k in au])), 4), "av-bench", round(json.load(open(j))["LAION-CLAP-Score"], 4))
     songs = sorted({k.split("_")[0] + "_" + k.split("_")[1] for k in per["neutral"][0]}); res = {}
     def song_mean(e, fn): return np.array([np.mean([fn(k) for k in per[e][0] if k.startswith(x + "_")]) for x in songs])
-    for e in ("1960s", "1980s", "2010s"):
+    for e in tuple(os.environ.get("EL", "1960s 1980s 2010s").split()):
         klE, klN = song_mean(e, lambda k: per[e][0][k]), song_mean("neutral", lambda k: per["neutral"][0][k])
         cE = song_mean(e, lambda k: float(torch.cosine_similarity(per[e][1][k], txt[e], dim=0))); cN = song_mean("neutral", lambda k: float(torch.cosine_similarity(per["neutral"][1][k], txt[e], dim=0)))
         r = {}
