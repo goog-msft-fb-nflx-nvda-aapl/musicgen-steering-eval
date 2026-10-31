@@ -87,9 +87,17 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `70_prompt_set_gen.py` | G06 step 2/3: generate with a given prompt set, same protocol as 07_generate.py (MusicGen-Melody g=3, chroma of the original mix, original-vocal remix). | python 70_prompt_set_gen.py --split train --prompts results/llm_prompts_x.json --cand 3 --outdir gen_g06_x_c3 |
 | `71_select_prompts.py` | G06 selection: for each decade pick the LLM candidate with the largest mean (MERT + MuQ)/2 delta P(target decade / candidate) - P(target decade / neutral) over the 24 TRAIN songs (seed 0). | python 71_select_prompts.py <tag> -> results/g06_<tag>_selected.json, results/g06_<tag>_selection.txt |
 | `72_entropy_match.py` | G07 (entropy matching, HW2 idea): teacher-forced predictive entropy of MusicGen-Melody on EnCodec codes of (a) the REAL accompaniment stem and (b) the generated accompaniment of each sampling configuration. | python 72_entropy_match.py real=gen:real  T1.0_k50=gen  T0.8=gen_sp_t08 ... (label=dir; dir holds *_neutral_s0_acc.wav; 'real' reads the stems)  -> results/entr |
+| `73_probe_augment.py` | Robustness of the codec-matched era probe to the choice of probe TRAINING data (CPU, stored embeddings). | python 73_probe_augment.py set1 set2 ... -> results/probe_augment.json, results/probe_augment.txt |
+| `74_dsp_components.py` | Which part of the crude DSP "old"/"new" baselines moves the decade probes (10_eval_gen.py baselines, split into components). | python 74_dsp_components.py -> results/dsp_components.json, results/dsp_components.txt |
+| `75_bandwidth_check.py` | Bandwidth/noise-floor check of generated accompaniment (follow-up to 74_dsp_components.py: band-limit and hiss move the probes). | python 75_bandwidth_check.py label=gendir:evaljson ... -> results/bandwidth_check.{json,txt} |
+| `76_spectrum_match.py` | Long-term-spectrum-matched control for the generated-audio Deltas (follow-up to 75_bandwidth_check.py). | python 76_spectrum_match.py label=gendir:evaljson ... -> results/spectrum_match.{json,txt} |
+| `77_probe_doublecodec.py` | Probe augmentation with a second EnCodec pass (follow-up to 73_probe_augment.py). | python 77_probe_doublecodec.py set1 set2 ... -> results/probe_doublecodec.{json,txt}, emb/A_{,muq_}acc2codec_norm_L.npy |
 | `80_make_tables.py` | R04: regenerate the main generation tables from results/*.json only (no GPU, no audio). Calls 56_summarize_gens.py for each (label, eval json, content json) triple that exists and writes results/tables_main.txt. |  |
 | `81_quality_kad_table.py` | One row per generation set: Audiobox Aesthetics (PQ, CE; mean over the 24 songs of the song-averaged score, era prompts pooled vs neutral) and KAD-style margin delta (MERT, per decade; delta = margin(era prompt) - margin(neutral), | python src/81_quality_kad_table.py |
 | `82_tagger_table.py` | Discogs-EffNet decade-probe Delta (same statistic as 56_summarize_gens.py: per-song P(target decade / era prompt) - P(target decade / neutral), mean over seeds; Wilcoxon over the 24 songs) and the three tags with the largest mean  | python 82_tagger_table.py |
+| `83_fd_bootstrap.py` | E07: Frechet distance of generated sets to real PA1 clips of the target decade, with a song-level bootstrap. Reads the av-benchmark feature caches written by run_avb.sh (avb/cache/pred_<set>_<era>/ and gt_<decade>/; VGGish frames  | python 83_fd_bootstrap.py set1 set2 ...   (run in ~/era_market with venv; writes results/fd_boot_<set>.json) |
+| `84_fd_table.py` | Table of results/fd_boot_<set>.json (src/83_fd_bootstrap.py): FD-VGG of generated sets to real PA1 train clips of the same decade; Delta = FD(era prompt) - FD(neutral prompt), 95% song-bootstrap CI; negative = closer to the real d |  |
+| `85_pair_metrics.py` | E07 paired metrics per clip with song-bootstrap CIs, from the av-benchmark caches written by run_avb_pair.sh (avbp/cache/{gt,pred}_<set>_<era>/). | python 85_pair_metrics.py set1 set2 ...   (run in ~/era_market, CPU) |
 | `90_make_runs_index.py` | Builds repro/RUNS.md: an index of every script in src/ with its first docstring/comment line and its usage line, and, for each WORKLOG.md entry, the scripts and result files cited in its heading. Everything is read from the files; | python src/90_make_runs_index.py |
 | `common.py` |  |  |
 | `diag_mert.py` | diagnostic: is MERT-v2-30s loading deterministic under transformers 5? loads the model N times, embeds one real clip, reports finiteness and max abs difference of the layer-18 mean embedding vs the first load, and parameters that  |  |
@@ -104,7 +112,8 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_ace.sh` | server: ACE-Step 1.5 cover mode on the original accompaniment stem, three cover strengths, then the standard scoring |  |
 | `run_ace10.sh` |  |  |
 | `run_analysis.sh` | server: waits for stems_emb.done, then stats, language ID, probes (probes are CPU) |  |
-| `run_avb.sh` | E07: FD-VGG / FD-PANN / FD-PaSST (av-benchmark, unpaired) of generated sets against real PA1 train clips of the target decade. | run_avb.sh <gpu> <set,set,...>   sets are gen_<name> dirs; eras 1960s 1980s 2010s and neutral. References: dataset A train clips per decade (171 each). |
+| `run_avb.sh` | E07: FD-VGG / FD-PANN / FD-PaSST (av-benchmark, unpaired) of generated sets against real PA1 train clips of the target decade. | run_avb.sh <gpu> <set,set,...>   sets are gen_<name> dirs (or `gen` for the standard base set); eras 1960s 1980s 2010s and neutral. References: dataset A train  |
+| `run_avb_pair.sh` | E07 paired metrics (av-benchmark): KL-PaSST / KL-PANN of each generated remix against ITS OWN ORIGINAL clip (real mix, same song id) and the LAION-CLAP (music_audioset_epoch_15_esc_90.14) text-audio score of the generated remix ag | run_avb_pair.sh <gpu> <set,set,...>   (sets as in run_avb.sh; eras 1960s 1980s 2010s neutral). Output: ~/era_market/avbp/out/<set>_<era>.json, flag avbp_<sets>. |
 | `run_battery2.sh` | evaluator battery for the newer generators: VINet identity, then the LALM judge. usage: run_battery2.sh <gpu> |  |
 | `run_bon.sh` | server: best-of-N (G09): 8 candidates (seeds 10..17) for 1960s/1980s/2010s prompts on the 24 songs, then scoring. usage: run_bon.sh <gpu> |  |
 | `run_bsr.sh` | server: BS-RoFormer separation of dataset $1 on GPU $2, then MERT + MuQ embeddings of its stems and probes vs the Demucs stems |  |
@@ -155,6 +164,7 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_tagger3.sh` | Discogs-EffNet evaluator (CPU, venv_ess) for key newer generation sets, one process at a time (server CPU is shared) |  |
 | `run_tagger4.sh` | Discogs-EffNet evaluator (CPU, venv_ess) for three-branch and LoRA+guidance sets, one process at a time (server CPU is shared) |  |
 | `run_tri.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
+| `run_tri_ad.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri_ad.sh <gpu> <base/lora> <gm> <ge> [top_k] [adapter dir name under lora/, default v1] |  |
 | `run_tri_k.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
 | `run_vaeid.sh` |  |  |
 | `run_validity.sh` | server: independent evaluators (Audiobox, KAD-style margin, CLAP zero-shot era, COCOLA) for LoRA v1/v2/v3 and ACE-Step c05/c10 generations; Discogs tagger for v1 and ACE c05 |  |
@@ -264,3 +274,23 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
   scripts: 61_triple_guidance.py, run_tri.sh
 - 2026-10-30 Three-branch guidance, extension: era scale, melody scale, top-k (results/tri_lora_m3e10*, tri_lora_m5e7*, tri_lora_m3e7k250*, gens_summary_tri2.txt; src/run_tri.sh, run_tri_k.sh)  
   scripts: run_tri.sh, run_tri_k.sh
+- 2026-10-30 E07 FD-VGG against real decade clips, with song-bootstrap CI (results/fd_boot_<set>.json, fd_vgg_table.txt, fd_boot_log.txt; src/run_avb.sh, 83_fd_bootstrap.py, 84_fd_table.py)  
+  scripts: 83_fd_bootstrap.py, 84_fd_table.py, run_avb.sh
+- 2026-10-30 Discogs-EffNet tagger on newer sets (results/discogs_<set>.json, discogs_table.txt; src/82_tagger_table.py, run_tagger3.sh, run_tagger4.sh)  
+  scripts: 82_tagger_table.py, run_tagger3.sh, run_tagger4.sh
+- 2026-10-30 Three-branch guidance at ge 15 and 20 (results/tri_lora_m3e15*, tri_lora_m3e20*, quality_/kad_ files, gens_summary_tri3.txt, vinet_identity.json)
+- 2026-10-31 Three-branch guidance replicated on two more LoRA training seeds (results/tri_lora_m3e{7,10}v1s{1,2}_*, gens_summary_tri_seeds.txt, vinet_identity.json; src/run_tri_ad.sh)  
+  scripts: run_tri_ad.sh
+- 2026-10-31 FD-VGG for the three-branch replicates on LoRA seeds 1 and 2 (results/fd_boot_tri_lora_m3e{7,10}v1s{1,2}.json, fd_vgg_table.txt; protocol as the 2026-10-30 FD-VGG entry)
+- 2026-10-31 E07 paired HW3 metrics: KL-PaSST to the original clip and LAION-CLAP text score (results/pair_<set>.json, pair_table.txt, pair_log.txt; src/run_avb_pair.sh, 85_pair_metrics.py)  
+  scripts: 85_pair_metrics.py, run_avb_pair.sh
+- 2026-10-31 probe training-set robustness (`src/73_probe_augment.py` -> `results/probe_augment.{json,txt}`; CPU, stored embeddings)  
+  scripts: 73_probe_augment.py
+- 2026-10-31 DSP baseline components (`src/74_dsp_components.py` -> `results/dsp_components.{json,txt}`; GPU 2)  
+  scripts: 74_dsp_components.py
+- 2026-10-31 bandwidth / noise-floor check of generated audio (`src/75_bandwidth_check.py` -> `results/bandwidth_check.{json,txt}`; CPU)  
+  scripts: 75_bandwidth_check.py
+- 2026-10-31 long-term-spectrum-matched control (`src/76_spectrum_match.py` -> `results/spectrum_match.{json,txt}`; GPU 2)  
+  scripts: 76_spectrum_match.py
+- 2026-10-31 double-codec probe augmentation (`src/77_probe_doublecodec.py` -> `results/probe_doublecodec.{json,txt}`; GPU 2)  
+  scripts: 77_probe_doublecodec.py
