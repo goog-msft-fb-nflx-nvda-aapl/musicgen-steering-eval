@@ -27,3 +27,6 @@ Generation and training need a GPU, `transformers`, the MusicRFM code base (gith
 
 ## Caveats
 Automatic evaluators (chroma, a MERT note probe, CLAP) are not a listening test, and no listening test has been run yet. One concept family (root notes) and one model family so far.
+
+## License
+Code and text in this repository are released under the Apache License 2.0 (`LICENSE`). Datasets, audio and third-party models used by the experiments keep their own licenses and terms (for example the Discogs-VI metadata CC BY-NC-SA 4.0, course-provided audio, and model weights from their authors); none of that audio is redistributed here except the generated demo clips under `topics/era_market_cover/`. Code under AGPL (Discogs-VINet) is used as an external checkout and is not included.
