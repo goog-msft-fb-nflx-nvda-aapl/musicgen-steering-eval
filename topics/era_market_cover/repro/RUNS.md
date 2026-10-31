@@ -92,6 +92,7 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `75_bandwidth_check.py` | Bandwidth/noise-floor check of generated accompaniment (follow-up to 74_dsp_components.py: band-limit and hiss move the probes). | python 75_bandwidth_check.py label=gendir:evaljson ... -> results/bandwidth_check.{json,txt} |
 | `76_spectrum_match.py` | Long-term-spectrum-matched control for the generated-audio Deltas (follow-up to 75_bandwidth_check.py). | python 76_spectrum_match.py label=gendir:evaljson ... -> results/spectrum_match.{json,txt} |
 | `77_probe_doublecodec.py` | Probe augmentation with a second EnCodec pass (follow-up to 73_probe_augment.py). | python 77_probe_doublecodec.py set1 set2 ... -> results/probe_doublecodec.{json,txt}, emb/A_{,muq_}acc2codec_norm_L.npy |
+| `78_six_decades.py` | Six-decade controllability table: for each decade prompt (1960s ... 2010s) the per-song change of P(target decade / era prompt) - P(. / neutral) and the mean expected-decade index of the generated accompaniment, from the codec-mat | python 78_six_decades.py label=main_eval.json+extra_eval.json ... -> results/six_decades.{json,txt} |
 | `80_make_tables.py` | R04: regenerate the main generation tables from results/*.json only (no GPU, no audio). Calls 56_summarize_gens.py for each (label, eval json, content json) triple that exists and writes results/tables_main.txt. |  |
 | `81_quality_kad_table.py` | One row per generation set: Audiobox Aesthetics (PQ, CE; mean over the 24 songs of the song-averaged score, era prompts pooled vs neutral) and KAD-style margin delta (MERT, per decade; delta = margin(era prompt) - margin(neutral), | python src/81_quality_kad_table.py |
 | `82_tagger_table.py` | Discogs-EffNet decade-probe Delta (same statistic as 56_summarize_gens.py: per-song P(target decade / era prompt) - P(target decade / neutral), mean over seeds; Wilcoxon over the 24 songs) and the three tags with the largest mean  | python 82_tagger_table.py |
@@ -166,6 +167,7 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_tri.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
 | `run_tri_ad.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri_ad.sh <gpu> <base/lora> <gm> <ge> [top_k] [adapter dir name under lora/, default v1] |  |
 | `run_tri_k.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
+| `run_tri_x.sh` | three-branch guidance for the extra decades (1970s, 1990s, 2000s). usage: run_tri_x.sh <gpu> <base/lora> <gm> <ge> |  |
 | `run_vaeid.sh` |  |  |
 | `run_validity.sh` | server: independent evaluators (Audiobox, KAD-style margin, CLAP zero-shot era, COCOLA) for LoRA v1/v2/v3 and ACE-Step c05/c10 generations; Discogs tagger for v1 and ACE c05 |  |
 | `run_vinet3.sh` | VINet identity for generation dirs not yet scored; single process writes vinet_identity.json |  |
@@ -294,3 +296,5 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
   scripts: 76_spectrum_match.py
 - 2026-10-31 double-codec probe augmentation (`src/77_probe_doublecodec.py` -> `results/probe_doublecodec.{json,txt}`; GPU 2)  
   scripts: 77_probe_doublecodec.py
+- 2026-10-31 six-decade controllability with three-branch guidance (`src/61_triple_guidance.py --eras`, `src/run_tri_x.sh`, `src/run_tri.sh`, `src/78_six_decades.py` -> `results/six_decades.{json,txt}`, `results/trix_*_eval.json`, `results/tri_base_m3e7_eval.json`; GPUs 0-3)  
+  scripts: 61_triple_guidance.py, 78_six_decades.py, run_tri.sh, run_tri_x.sh

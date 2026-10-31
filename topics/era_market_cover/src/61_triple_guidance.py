@@ -11,7 +11,9 @@ ERAS = {"1960s": "a 1960s pop and soul recording, mono tape sound, live drums, u
         "1980s": "a 1980s synth pop recording, gated reverb drums, drum machine, DX7 synthesizer, chorus guitar, glossy digital production",
         "2010s": "a 2010s modern pop production, heavy sub bass, punchy compressed drums, wide polished synths, loud streaming-era mastering"}
 NEG = {"1960s": "2010s", "1980s": "2010s", "2010s": "1960s"}
-ap = argparse.ArgumentParser(); ap.add_argument("--gm", type=float, default=3.0); ap.add_argument("--ge", type=float, default=5.0); ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--top_k", type=int, default=50); a = ap.parse_args()
+ap = argparse.ArgumentParser(); ap.add_argument("--gm", type=float, default=3.0); ap.add_argument("--ge", type=float, default=5.0); ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--top_k", type=int, default=50); ap.add_argument("--eras", nargs="*", default=None, help="decade prompt keys from prompts_era.ERAS (default 1960s 1980s 2010s)"); a = ap.parse_args()
+if a.eras:
+    import prompts_era; ERAS = {k: prompts_era.ERAS[k] for k in a.eras}
 G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; rows = {r["sample_id"]: r for r in manifest("A")}
 out = os.path.join(ROOT, a.outdir); os.makedirs(out, exist_ok=True); shutil.copy(os.path.join(G, "picked.txt"), os.path.join(out, "picked.txt"))
 NS = os.path.join(ROOT, os.environ.get("NEUTRAL_SRC", "gen"))   # LoRA runs: NEUTRAL_SRC=gen_lora (neutral rows of the same adapter)
